@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Madar LMS</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f4f4f5;
+      --text-primary: #000000;
+      --text-secondary: #52525b;
+      --border-color: #d4d4d8;
+      --black: #09090b;
+      --white: #ffffff;
+      --font-heading: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-secondary);
+      color: var(--text-primary);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image: 
+        linear-gradient(var(--bg-secondary) 1px, transparent 1px),
+        linear-gradient(90deg, var(--bg-secondary) 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+
+    .login-container {
+      background-color: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 40px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .brand-text {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: var(--text-secondary);
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      transition: border-color 0.2s;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--black);
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 12px;
+      background-color: var(--black);
+      color: var(--white);
+      border: none;
+      border-radius: 4px;
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      transition: opacity 0.2s;
+    }
+
+    .login-btn:hover {
+      opacity: 0.9;
+    }
+
+    .error-msg {
+      color: #dc2626;
+      font-size: 0.85rem;
+      margin-top: 12px;
+      text-align: center;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <div class="brand">
+      <i data-lucide="triangle" style="width: 32px; height: 32px; fill: var(--black);"></i>
+      <span class="brand-text">Madar LMS</span>
+    </div>
+
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" required autocomplete="username">
+      </div>
+      
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" required autocomplete="current-password">
+      </div>
+
+      <button type="submit" class="login-btn" id="submitBtn">
+        <span>Authenticate</span>
+        <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
+      </button>
+
+      <div id="errorMessage" class="error-msg">Invalid credentials. Please try again.</div>
+    </form>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    // Configuration
+    const MOODLE_URL = 'http://localhost:8000';
+    const SERVICE = 'moodle_mobile_app'; // Standard Moodle external auth service
+
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault(); // Prevent page reload
+      
+      const usernameInput = document.getElementById('username').value;
+      const passwordInput = document.getElementById('password').value;
+      const errorDiv = document.getElementById('errorMessage');
+      const submitBtn = document.getElementById('submitBtn');
+
+      // UI Loading State
+      errorDiv.style.display = 'none';
+      submitBtn.innerHTML = '<i data-lucide="loader-2" style="animation: spin 2s linear infinite;"></i> Connecting...';
+      lucide.createIcons();
+
+      try {
+        // Build the Moodle token request URL
+        const loginUrl = `${MOODLE_URL}/login/token.php?username=${encodeURIComponent(usernameInput)}&password=${encodeURIComponent(passwordInput)}&service=${SERVICE}`;
+        
+        const response = await fetch(loginUrl);
+        const data = await response.json();
+
+        if (data.error) {
+          throw new Error(data.error);
+        }
+
+        // SUCCESS! Store the token in the browser's localStorage
+        console.log("Authentication Successful! Token:", data.token);
+        localStorage.setItem('madar_user_token', data.token);
+        localStorage.setItem('madar_username', usernameInput);
+
+        // Redirect to the dashboard
+        window.location.href = 'index.html';
+
+      } catch (error) {
+        console.error('Login Error:', error);
+        errorDiv.style.display = 'block';
+        
+        // Reset Button UI
+        submitBtn.innerHTML = '<span>Authenticate</span><i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>';
+        lucide.createIcons();
+      }
+    });
+  </script>
+</body>
+</html>

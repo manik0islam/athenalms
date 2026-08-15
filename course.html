@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Madar LMS | Course Viewer</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f4f4f5;
+      --bg-tertiary: #e4e4e7;
+      --text-primary: #000000;
+      --text-secondary: #52525b;
+      --border-color: #d4d4d8;
+      --black: #09090b;
+      --white: #ffffff;
+      --font-heading: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-body); background-color: var(--bg-secondary); color: var(--text-primary); line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+
+    /* HEADER */
+    header { background-color: var(--bg-primary); border-bottom: 1px solid var(--border-color); position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
+    .nav-container { max-width: 1000px; margin: 0 auto; padding: 0 24px; height: 70px; display: flex; justify-content: space-between; align-items: center; }
+    .back-link { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.95rem; transition: opacity 0.2s; }
+    .back-link:hover { opacity: 0.7; }
+    
+    /* HERO */
+    .hero { margin-top: 70px; background-color: var(--bg-primary); padding: 60px 24px; border-bottom: 1px solid var(--border-color); background-image: linear-gradient(var(--bg-secondary) 1px, transparent 1px), linear-gradient(90deg, var(--bg-secondary) 1px, transparent 1px); background-size: 30px 30px; text-align: center; }
+    .hero-title { font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; max-width: 800px; margin: 0 auto; }
+
+    /* CONTENT LAYOUT */
+    .course-container { max-width: 800px; margin: 40px auto; padding: 0 24px; }
+    
+    .section-block { background-color: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 6px; margin-bottom: 24px; overflow: hidden; }
+    .section-header { background-color: var(--bg-secondary); padding: 16px 20px; border-bottom: 1px solid var(--border-color); font-family: var(--font-heading); font-weight: 600; font-size: 1.1rem; }
+    
+    .module-list { list-style: none; }
+    .module-item { display: flex; align-items: center; gap: 16px; padding: 16px 20px; border-bottom: 1px solid var(--border-color); transition: background-color 0.2s; }
+    .module-item:last-child { border-bottom: none; }
+    .module-item:hover { background-color: var(--bg-secondary); }
+    
+    .module-icon { width: 40px; height: 40px; background-color: var(--bg-tertiary); border-radius: 4px; display: flex; align-items: center; justify-content: center; }
+    .module-details h4 { font-size: 1rem; font-weight: 500; }
+    .module-details p { font-size: 0.85rem; color: var(--text-secondary); margin-top: 2px; }
+
+    .loading-state, .error-state { padding: 40px; text-align: center; background-color: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-secondary); }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="back-link">
+        <i data-lucide="arrow-left" style="width: 20px; height: 20px;"></i> Back to Dashboard
+      </a>
+      <div style="font-family: var(--font-heading); font-weight: 700; text-transform: uppercase;">Madar LMS</div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title" id="course-title">Loading Module...</h1>
+    </div>
+  </section>
+
+  <div class="course-container" id="syllabus-container">
+    <div class="loading-state">
+      <i data-lucide="loader-2" style="animation: spin 2s linear infinite; margin: 0 auto 10px; display: block;"></i>
+      Fetching curriculum data...
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+    
+    const MOODLE_URL = 'http://localhost:8000';
+    const userToken = localStorage.getItem('madar_user_token');
+    
+    if (!userToken) window.location.href = 'login.html';
+
+    // 1. Get the course ID from the URL (e.g., ?id=4)
+    const urlParams = new URLSearchParams(window.location.search);
+    const courseId = urlParams.get('id');
+
+    if (!courseId) {
+      window.location.href = 'index.html';
+    }
+
+    // Map Moodle module types to our Lucide icons
+    function getModuleIcon(modname) {
+      const icons = {
+        'resource': 'file-text', // PDF or file
+        'assign': 'upload-cloud', // Assignment upload
+        'quiz': 'help-circle', // Quiz
+        'url': 'link',
+        'page': 'layout-template',
+        'forum': 'message-square'
+      };
+      return icons[modname] || 'file';
+    }
+
+    async function loadCourseContent() {
+      const container = document.getElementById('syllabus-container');
+      const titleEl = document.getElementById('course-title');
+
+      try {
+        // We first need the course name (Moodle's get_contents doesn't return the course title, just the sections)
+        const infoRes = await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=core_webservice_get_site_info&moodlewsrestformat=json`);
+        const siteInfo = await infoRes.json();
+        
+        const coursesRes = await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=core_enrol_get_users_courses&userid=${siteInfo.userid}&moodlewsrestformat=json`);
+        const courses = await coursesRes.json();
+        const currentCourse = courses.find(c => c.id == courseId);
+        
+        if (currentCourse) {
+          titleEl.textContent = currentCourse.fullname;
+        }
+
+        // Fetch the actual syllabus sections and modules
+        const contentRes = await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=core_course_get_contents&courseid=${courseId}&moodlewsrestformat=json`);
+        const sections = await contentRes.json();
+
+        if (sections.exception) throw new Error(sections.message);
+
+        container.innerHTML = '';
+
+        sections.forEach(section => {
+          // Skip empty sections
+          if (section.modules.length === 0 && !section.summary) return;
+
+          let modulesHTML = section.modules.map(mod => {
+            const isAssign = mod.modname === 'assign';
+            
+            // If it's an assignment, link to our custom portal.
+            // If it's a file/quiz, keep the external link for now.
+            let hrefAttr = '';
+            let linkIcon = '';
+            
+            if (isAssign) {
+              // We pass the assignment ID and the course ID in the URL
+              hrefAttr = `href="assignment.html?assignid=${mod.instance}&courseid=${courseId}"`;
+              linkIcon = `<div style="margin-left: auto; color: var(--text-tertiary);"><i data-lucide="chevron-right" style="width: 18px; height: 18px;"></i></div>`;
+            } else if (mod.url) {
+              hrefAttr = `href="${mod.url}" target="_blank"`;
+              linkIcon = `<div style="margin-left: auto; color: var(--text-tertiary);"><i data-lucide="external-link" style="width: 18px; height: 18px;"></i></div>`;
+            }
+
+            const tag = (mod.url || isAssign) ? 'a' : 'div';
+            const interactiveStyle = (mod.url || isAssign) ? 'cursor: pointer; text-decoration: none; color: inherit;' : '';
+
+            return `
+              <${tag} ${hrefAttr} class="module-item" style="display: flex; ${interactiveStyle}">
+                <div class="module-icon"><i data-lucide="${getModuleIcon(mod.modname)}"></i></div>
+                <div class="module-details">
+                  <h4>${mod.name}</h4>
+                  <p>${mod.modplural}</p>
+                </div>
+                ${linkIcon}
+              </${tag}>
+            `;
+          }).join('');
+
+          container.innerHTML += `
+            <div class="section-block">
+              <div class="section-header">${section.name}</div>
+              <ul class="module-list">
+                ${modulesHTML}
+              </ul>
+            </div>
+          `;
+        });
+
+        lucide.createIcons();
+
+      } catch (error) {
+        console.error('API Error:', error);
+        container.innerHTML = `
+          <div class="error-state">
+            <h4 style="margin-bottom: 8px; color: var(--black); font-weight: 600;">Content Error</h4>
+            <p style="font-size: 0.9rem;">Could not load course syllabus.</p>
+          </div>
+        `;
+        titleEl.textContent = "Error Loading Course";
+      }
+    }
+
+    loadCourseContent();
+  </script>
+</body>
+</html>

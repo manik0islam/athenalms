@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Madar LMS | Student Profile</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f4f4f5;
+      --bg-tertiary: #e4e4e7;
+      --text-primary: #000000;
+      --text-secondary: #52525b;
+      --border-color: #d4d4d8;
+      --black: #09090b;
+      --white: #ffffff;
+      --font-heading: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-body); background-color: var(--bg-secondary); color: var(--text-primary); line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+
+    /* HEADER */
+    header { background-color: var(--bg-primary); border-bottom: 1px solid var(--border-color); position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
+    .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 70px; display: flex; justify-content: space-between; align-items: center; }
+    .back-link { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: opacity 0.2s; }
+    .back-link:hover { opacity: 0.7; }
+
+    /* LAYOUT */
+    .profile-container { max-width: 1200px; margin: 100px auto 40px; padding: 0 24px; display: grid; grid-template-columns: 350px 1fr; gap: 32px; }
+    @media (max-width: 900px) { .profile-container { grid-template-columns: 1fr; } }
+
+    /* USER CARD */
+    .user-card { background-color: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 6px; padding: 30px; text-align: center; height: fit-content; }
+    .avatar-large { width: 100px; height: 100px; background-color: var(--bg-secondary); border: 2px solid var(--border-color); border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); }
+    .user-name { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; margin-bottom: 4px; }
+    .user-role { font-size: 0.9rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 24px; display: block; }
+    
+    .logout-btn { width: 100%; padding: 12px; background-color: transparent; color: #dc2626; border: 1px solid #dc2626; border-radius: 4px; font-family: var(--font-heading); font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .logout-btn:hover { background-color: #dc2626; color: var(--white); }
+
+    /* GRADEBOOK */
+    .content-block { background-color: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 6px; overflow: hidden; }
+    .block-title { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 600; padding: 20px; border-bottom: 1px solid var(--border-color); background: var(--bg-secondary); display: flex; align-items: center; gap: 10px; }
+    
+    .grade-table { width: 100%; border-collapse: collapse; }
+    .grade-table th { text-align: left; padding: 16px 20px; font-size: 0.85rem; text-transform: uppercase; color: var(--text-secondary); border-bottom: 1px solid var(--border-color); }
+    .grade-table td { padding: 16px 20px; border-bottom: 1px solid var(--border-color); }
+    .grade-table tr:last-child td { border-bottom: none; }
+    .grade-table tbody tr:hover { background-color: #fafafa; }
+
+    .course-cell { font-weight: 500; }
+    .grade-cell { font-family: var(--font-heading); font-weight: 700; font-size: 1.1rem; }
+    .status-badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; background: var(--bg-tertiary); color: var(--text-secondary); }
+    .status-badge.high { background: #dcfce7; color: #166534; }
+
+    .empty-state { padding: 40px; text-align: center; color: var(--text-secondary); }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <div class="back-link" onclick="window.location.href='index.html'">
+        <i data-lucide="arrow-left" style="width: 20px; height: 20px;"></i> Back to Dashboard
+      </div>
+      <div style="font-family: var(--font-heading); font-weight: 700; text-transform: uppercase;">Student Hub</div>
+    </div>
+  </header>
+
+  <div class="profile-container">
+    
+    <aside class="user-card">
+      <div class="avatar-large">
+        <i data-lucide="user" style="width: 48px; height: 48px;"></i>
+      </div>
+      <h2 class="user-name" id="display-name">Loading...</h2>
+      <span class="user-role">Engineering Student</span>
+      
+      <button class="logout-btn" id="logout-btn">
+        <i data-lucide="log-out" style="width: 18px; height: 18px;"></i> Secure Logout
+      </button>
+    </aside>
+
+    <main class="content-block">
+      <div class="block-title">
+        <i data-lucide="bar-chart" style="width: 24px; height: 24px;"></i> Academic Telemetry
+      </div>
+      
+      <table class="grade-table" id="grade-table">
+        <thead>
+          <tr>
+            <th>Course Module</th>
+            <th>Current Grade</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="grade-body">
+          <tr>
+            <td colspan="3" class="empty-state">
+              <i data-lucide="loader-2" style="animation: spin 2s linear infinite; margin: 0 auto 10px; display: block;"></i>
+              Compiling grades...
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+
+  </div>
+
+  <script>
+    lucide.createIcons();
+    
+    const MOODLE_URL = 'http://localhost:8000';
+    const userToken = localStorage.getItem('madar_user_token');
+    const username = localStorage.getItem('madar_username');
+    
+    if (!userToken) window.location.href = 'login.html';
+
+    // UI Setup
+    document.getElementById('display-name').textContent = username || 'Student';
+    
+    document.getElementById('logout-btn').addEventListener('click', () => {
+      localStorage.clear();
+      window.location.href = 'login.html';
+    });
+
+    async function fetchGrades() {
+      const tbody = document.getElementById('grade-body');
+      
+      try {
+        // Step 1: Get User ID
+        const infoRes = await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=core_webservice_get_site_info&moodlewsrestformat=json`);
+        const siteInfo = await infoRes.json();
+
+        // Step 2: Fetch Grades for all courses
+        const gradesRes = await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=gradereport_overview_get_course_grades&userid=${siteInfo.userid}&moodlewsrestformat=json`);
+        const data = await gradesRes.json();
+
+        if (data.exception) throw new Error(data.message);
+        
+        if (!data.grades || data.grades.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="3" class="empty-state">No graded courses found in the database.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = '';
+        
+        data.grades.forEach(item => {
+          // Moodle sometimes returns grades as strings or objects, we handle null/empty
+          const rawGrade = item.rawgrade ? item.rawgrade : '-';
+          
+          // Determine styling based on grade (Assuming out of 100 for visual sake)
+          const gradeNum = parseFloat(rawGrade);
+          let badgeClass = '';
+          let badgeText = 'Pending';
+          
+          if (!isNaN(gradeNum)) {
+            if (gradeNum >= 85) { badgeClass = 'high'; badgeText = 'Excellent'; }
+            else if (gradeNum >= 50) { badgeText = 'Passing'; }
+            else { badgeText = 'Needs Work'; }
+          }
+
+          tbody.innerHTML += `
+            <tr>
+              <td class="course-cell">Course ID: ${item.courseid}</td>
+              <td class="grade-cell">${rawGrade === '-' ? rawGrade : gradeNum + '%'}</td>
+              <td><span class="status-badge ${badgeClass}">${badgeText}</span></td>
+            </tr>
+          `;
+        });
+
+      } catch (error) {
+        console.error(error);
+        tbody.innerHTML = `<tr><td colspan="3" class="empty-state" style="color: #dc2626;">Error loading telemetry: ${error.message}</td></tr>`;
+      }
+    }
+
+    fetchGrades();
+  </script>
+</body>
+</html>
