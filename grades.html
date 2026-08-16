@@ -993,18 +993,15 @@
      GET COURSE GRADES
   ========================================== */
 
-  async function getCourseGrades(
-    courseId
-  ) {
-
+ async function getCourseGrades(courseId, userId) {
     return await moodleRequest(
-      'gradereport_user_get_grade_items',
-      {
-        courseid: courseId
-      }
+        'gradereport_user_get_grade_items',
+        {
+            courseid: courseId,
+            userid: userId
+        }
     );
-
-  }
+}
 
 
   /* ==========================================
@@ -1707,9 +1704,15 @@
 
           const gradeData =
             await getCourseGrades(
-              course.id
+              course.id,
+              userId
             );
 
+           console.log(
+            'ATHENA GRADE RESPONSE:',
+            course.id,
+            gradeData
+           );
 
           const parsed =
             extractGradeData(
