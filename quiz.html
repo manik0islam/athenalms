@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
   <meta charset="UTF-8">
 
   <meta
@@ -20,9 +19,7 @@
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
-
     :root {
-
       --bg-primary: #ffffff;
       --bg-secondary: #f8fafc;
       --bg-tertiary: #f1f5f9;
@@ -50,9 +47,7 @@
 
       --font-heading: 'Space Grotesk', sans-serif;
       --font-body: 'Inter', sans-serif;
-
     }
-
 
     * {
       margin: 0;
@@ -60,24 +55,16 @@
       box-sizing: border-box;
     }
 
-
     html {
       scroll-behavior: smooth;
     }
 
-
     body {
-
       font-family: var(--font-body);
-
       background: var(--bg-secondary);
-
       color: var(--text-primary);
-
       line-height: 1.6;
-
     }
-
 
     button,
     input,
@@ -86,40 +73,31 @@
       font: inherit;
     }
 
-
     button {
       cursor: pointer;
     }
-
 
     /* =========================================
        HEADER
     ========================================== */
 
     header {
-
       height: 70px;
 
       position: fixed;
-
       inset: 0 0 auto 0;
 
       z-index: 100;
 
-      background:
-        rgba(255,255,255,0.96);
+      background: rgba(255,255,255,0.96);
 
       border-bottom:
         1px solid var(--border-color);
 
-      backdrop-filter:
-        blur(10px);
-
+      backdrop-filter: blur(10px);
     }
 
-
     .nav-container {
-
       max-width: 1100px;
 
       height: 70px;
@@ -135,12 +113,9 @@
       justify-content: space-between;
 
       gap: 20px;
-
     }
 
-
     .back-link {
-
       display: inline-flex;
 
       align-items: center;
@@ -154,292 +129,186 @@
       font-weight: 600;
 
       cursor: pointer;
-
-      transition:
-        color 0.2s ease;
-
     }
-
 
     .back-link:hover {
       color: var(--black);
     }
 
-
     .quiz-label {
+      font-family: var(--font-heading);
 
-      font-family:
-        var(--font-heading);
+      font-size: 1rem;
 
-      font-size:
-        1rem;
+      font-weight: 700;
 
-      font-weight:
-        700;
-
-      letter-spacing:
-        -0.3px;
-
+      letter-spacing: -0.3px;
     }
-
 
     /* =========================================
        PAGE
     ========================================== */
 
     .page {
+      max-width: 1100px;
 
-      max-width:
-        1100px;
+      margin: 0 auto;
 
-      margin:
-        0 auto;
-
-      padding:
-        100px 24px 60px;
-
+      padding: 100px 24px 60px;
     }
-
 
     /* =========================================
        QUIZ HEADER
     ========================================== */
 
     .quiz-header {
-
-      margin-bottom:
-        24px;
-
+      margin-bottom: 24px;
     }
-
 
     .course-name {
+      display: flex;
 
-      display:
-        flex;
+      align-items: center;
 
-      align-items:
-        center;
+      gap: 7px;
 
-      gap:
-        7px;
+      color: var(--text-secondary);
 
-      color:
-        var(--text-secondary);
+      font-size: 0.8rem;
 
-      font-size:
-        0.8rem;
+      font-weight: 700;
 
-      font-weight:
-        700;
+      text-transform: uppercase;
 
-      text-transform:
-        uppercase;
+      letter-spacing: 0.07em;
 
-      letter-spacing:
-        0.07em;
-
-      margin-bottom:
-        8px;
-
+      margin-bottom: 8px;
     }
 
-
     .quiz-title {
-
-      font-family:
-        var(--font-heading);
+      font-family: var(--font-heading);
 
       font-size:
         clamp(1.9rem, 4vw, 2.7rem);
 
-      line-height:
-        1.15;
+      line-height: 1.15;
 
-      letter-spacing:
-        -0.8px;
+      letter-spacing: -0.8px;
 
-      margin-bottom:
-        7px;
-
+      margin-bottom: 7px;
     }
-
 
     .quiz-subtitle {
+      color: var(--text-secondary);
 
-      color:
-        var(--text-secondary);
-
-      font-size:
-        0.9rem;
-
+      font-size: 0.9rem;
     }
-
 
     /* =========================================
        MESSAGE
     ========================================== */
 
     .message {
+      display: none;
 
-      display:
-        none;
+      padding: 13px 15px;
 
-      padding:
-        13px 15px;
+      margin-bottom: 20px;
 
-      margin-bottom:
-        20px;
+      border-radius: 8px;
 
-      border-radius:
-        8px;
-
-      font-size:
-        0.86rem;
-
+      font-size: 0.86rem;
     }
-
 
     .message.visible {
-      display:
-        block;
+      display: block;
     }
 
-
     .message.error {
+      color: var(--danger-text);
 
-      color:
-        var(--danger-text);
-
-      background:
-        var(--danger-bg);
+      background: var(--danger-bg);
 
       border:
         1px solid var(--danger-border);
-
     }
 
-
     .message.success {
+      color: var(--success-text);
 
-      color:
-        var(--success-text);
-
-      background:
-        var(--success-bg);
+      background: var(--success-bg);
 
       border:
         1px solid var(--success-border);
-
     }
-
 
     /* =========================================
        STATUS
     ========================================== */
 
     .status-bar {
-
-      display:
-        grid;
+      display: grid;
 
       grid-template-columns:
         repeat(3, minmax(0, 1fr));
 
-      gap:
-        12px;
+      gap: 12px;
 
-      margin-bottom:
-        24px;
-
+      margin-bottom: 24px;
     }
 
-
     .status-card {
-
-      background:
-        var(--white);
+      background: var(--white);
 
       border:
         1px solid var(--border-color);
 
-      border-radius:
-        9px;
+      border-radius: 9px;
 
-      padding:
-        15px 17px;
-
+      padding: 15px 17px;
     }
-
 
     .status-label {
+      color: var(--text-tertiary);
 
-      color:
-        var(--text-tertiary);
+      font-size: 0.7rem;
 
-      font-size:
-        0.7rem;
+      font-weight: 700;
 
-      font-weight:
-        700;
+      text-transform: uppercase;
 
-      text-transform:
-        uppercase;
+      letter-spacing: 0.05em;
 
-      letter-spacing:
-        0.05em;
-
-      margin-bottom:
-        3px;
-
+      margin-bottom: 3px;
     }
-
 
     .status-value {
+      font-family: var(--font-heading);
 
-      font-family:
-        var(--font-heading);
+      font-size: 1rem;
 
-      font-size:
-        1rem;
-
-      font-weight:
-        700;
-
+      font-weight: 700;
     }
-
 
     .save-status {
+      margin-top: 4px;
 
-      margin-top:
-        4px;
+      color: var(--text-tertiary);
 
-      color:
-        var(--text-tertiary);
-
-      font-size:
-        0.72rem;
-
+      font-size: 0.72rem;
     }
-
 
     .save-status.saving {
-      color:
-        var(--warning-text);
+      color: var(--warning-text);
     }
-
 
     .save-status.saved {
-      color:
-        var(--success-text);
+      color: var(--success-text);
     }
-
 
     .save-status.failed {
-      color:
-        var(--danger-text);
+      color: var(--danger-text);
     }
-
 
     /* =========================================
        START / HISTORY / RESULT
@@ -449,372 +318,322 @@
     .history-card,
     .result-card {
 
-      background:
-        var(--white);
+      background: var(--white);
 
       border:
         1px solid var(--border-color);
 
-      border-radius:
-        10px;
+      border-radius: 10px;
 
-      padding:
-        50px 30px;
+      padding: 40px 30px;
 
       box-shadow:
         0 2px 4px
         rgba(0,0,0,0.02);
-
     }
-
 
     .start-card {
-      text-align:
-        center;
+      text-align: center;
     }
 
-
     .big-icon {
+      width: 68px;
+      height: 68px;
 
-      width:
-        68px;
+      margin: 0 auto 20px;
 
-      height:
-        68px;
+      display: flex;
 
-      margin:
-        0 auto 20px;
+      align-items: center;
+      justify-content: center;
 
-      display:
-        flex;
-
-      align-items:
-        center;
-
-      justify-content:
-        center;
-
-      border-radius:
-        15px;
+      border-radius: 15px;
 
       background:
         var(--bg-tertiary);
-
     }
-
 
     .screen-title {
+      font-family: var(--font-heading);
 
-      font-family:
-        var(--font-heading);
+      font-size: 1.5rem;
 
-      font-size:
-        1.5rem;
-
-      margin-bottom:
-        8px;
-
+      margin-bottom: 8px;
     }
 
-
     .screen-text {
-
-      max-width:
-        600px;
+      max-width: 600px;
 
       margin:
         0 auto 24px;
 
-      color:
-        var(--text-secondary);
+      color: var(--text-secondary);
 
-      font-size:
-        0.9rem;
-
+      font-size: 0.9rem;
     }
 
+    /* =========================================
+       BEST SCORE
+    ========================================== */
+
+    .best-score-card {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, minmax(0,1fr));
+
+      gap: 12px;
+
+      margin-bottom: 24px;
+    }
+
+    .best-stat {
+      background: var(--white);
+
+      border:
+        1px solid var(--border-color);
+
+      border-radius: 9px;
+
+      padding: 18px;
+    }
+
+    .best-stat-label {
+      display: flex;
+
+      align-items: center;
+
+      gap: 7px;
+
+      color: var(--text-tertiary);
+
+      font-size: 0.72rem;
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.05em;
+
+      margin-bottom: 8px;
+    }
+
+    .best-stat-value {
+      font-family: var(--font-heading);
+
+      font-size: 1.7rem;
+
+      font-weight: 700;
+
+      line-height: 1.1;
+    }
+
+    .best-stat-detail {
+      margin-top: 4px;
+
+      color: var(--text-secondary);
+
+      font-size: 0.75rem;
+    }
 
     /* =========================================
        ATTEMPT HISTORY
     ========================================== */
 
     .history-card {
-      margin-bottom:
-        24px;
+      margin-bottom: 24px;
     }
-
 
     .history-title {
+      font-family: var(--font-heading);
 
-      font-family:
-        var(--font-heading);
+      font-size: 1.05rem;
 
-      font-size:
-        1.05rem;
+      font-weight: 700;
 
-      font-weight:
-        700;
-
-      margin-bottom:
-        6px;
-
+      margin-bottom: 6px;
     }
-
 
     .history-subtitle {
+      color: var(--text-secondary);
 
-      color:
-        var(--text-secondary);
+      font-size: 0.82rem;
 
-      font-size:
-        0.82rem;
-
-      margin-bottom:
-        18px;
-
+      margin-bottom: 18px;
     }
-
 
     .attempt-list {
+      display: flex;
 
-      display:
-        flex;
+      flex-direction: column;
 
-      flex-direction:
-        column;
-
-      gap:
-        10px;
-
+      gap: 10px;
     }
 
-
     .attempt-row {
+      display: grid;
 
-      display:
-        flex;
+      grid-template-columns:
+        minmax(0,1fr)
+        auto
+        auto;
 
-      align-items:
-        center;
+      align-items: center;
 
-      justify-content:
-        space-between;
+      gap: 20px;
 
-      gap:
-        20px;
-
-      padding:
-        14px 16px;
+      padding: 14px 16px;
 
       border:
         1px solid var(--border-color);
 
-      border-radius:
-        8px;
+      border-radius: 8px;
 
       background:
         var(--bg-primary);
-
     }
-
 
     .attempt-left {
-      min-width:
-        0;
+      min-width: 0;
     }
-
 
     .attempt-number {
+      font-family: var(--font-heading);
 
-      font-family:
-        var(--font-heading);
+      font-size: 0.9rem;
 
-      font-size:
-        0.9rem;
-
-      font-weight:
-        700;
-
+      font-weight: 700;
     }
-
 
     .attempt-date {
+      color: var(--text-tertiary);
 
-      color:
-        var(--text-tertiary);
+      font-size: 0.74rem;
 
-      font-size:
-        0.74rem;
-
-      margin-top:
-        2px;
-
+      margin-top: 2px;
     }
-
 
     .attempt-status {
+      display: inline-flex;
 
-      display:
-        inline-flex;
+      align-items: center;
 
-      align-items:
-        center;
+      gap: 5px;
 
-      gap:
-        5px;
+      padding: 4px 8px;
 
-      padding:
-        4px 8px;
+      border-radius: 5px;
 
-      border-radius:
-        5px;
+      font-size: 0.7rem;
 
-      font-size:
-        0.7rem;
+      font-weight: 700;
 
-      font-weight:
-        700;
-
+      white-space: nowrap;
     }
-
 
     .attempt-status.finished {
+      color: var(--success-text);
 
-      color:
-        var(--success-text);
-
-      background:
-        var(--success-bg);
-
+      background: var(--success-bg);
     }
-
 
     .attempt-status.progress {
+      color: var(--warning-text);
 
-      color:
-        var(--warning-text);
-
-      background:
-        var(--warning-bg);
-
+      background: var(--warning-bg);
     }
-
 
     .attempt-status.other {
+      color: var(--text-secondary);
 
-      color:
-        var(--text-secondary);
-
-      background:
-        var(--bg-tertiary);
-
+      background: var(--bg-tertiary);
     }
-
 
     .attempt-score {
+      text-align: right;
 
-      font-family:
-        var(--font-heading);
-
-      font-size:
-        0.95rem;
-
-      font-weight:
-        700;
-
-      text-align:
-        right;
-
-      white-space:
-        nowrap;
-
+      white-space: nowrap;
     }
 
+    .attempt-score-main {
+      font-family: var(--font-heading);
+
+      font-size: 0.95rem;
+
+      font-weight: 700;
+    }
+
+    .attempt-score-percent {
+      margin-top: 2px;
+
+      color: var(--text-secondary);
+
+      font-size: 0.72rem;
+    }
 
     /* =========================================
        PLAYER
     ========================================== */
 
     #quiz-player {
-      display:
-        none;
+      display: none;
     }
-
 
     .player-layout {
 
-      display:
-        grid;
+      display: grid;
 
       grid-template-columns:
-        minmax(0, 1fr)
+        minmax(0,1fr)
         250px;
 
       grid-template-areas:
         "question navigator";
 
-      gap:
-        20px;
+      gap: 20px;
 
-      align-items:
-        start;
-
+      align-items: start;
     }
-
 
     .question-card {
 
-      grid-area:
-        question;
+      grid-area: question;
 
-      background:
-        var(--white);
+      background: var(--white);
 
       border:
         1px solid var(--border-color);
 
-      border-radius:
-        10px;
+      border-radius: 10px;
 
-      overflow:
-        hidden;
+      overflow: hidden;
 
       box-shadow:
         0 2px 4px
         rgba(0,0,0,0.02);
-
     }
-
 
     .navigator-card {
 
-      grid-area:
-        navigator;
+      grid-area: navigator;
 
-      background:
-        var(--white);
+      background: var(--white);
 
       border:
         1px solid var(--border-color);
 
-      border-radius:
-        10px;
+      border-radius: 10px;
 
-      padding:
-        18px;
+      padding: 18px;
 
-      position:
-        sticky;
+      position: sticky;
 
-      top:
-        90px;
+      top: 90px;
 
       box-shadow:
         0 2px 4px
         rgba(0,0,0,0.02);
-
     }
-
 
     /* =========================================
        QUESTION
@@ -825,77 +644,52 @@
       padding:
         18px 22px;
 
-      display:
-        flex;
+      display: flex;
 
-      align-items:
-        center;
+      align-items: center;
 
-      justify-content:
-        space-between;
+      justify-content: space-between;
 
-      gap:
-        15px;
+      gap: 15px;
 
       border-bottom:
         1px solid var(--border-color);
-
     }
-
 
     .question-number {
 
-      font-family:
-        var(--font-heading);
+      font-family: var(--font-heading);
 
-      font-size:
-        0.95rem;
+      font-size: 0.95rem;
 
-      font-weight:
-        700;
-
+      font-weight: 700;
     }
-
 
     .question-mark {
 
-      color:
-        var(--text-tertiary);
+      color: var(--text-tertiary);
 
-      font-size:
-        0.78rem;
+      font-size: 0.78rem;
 
-      font-weight:
-        600;
-
+      font-weight: 600;
     }
-
 
     .question-content {
 
-      padding:
-        30px;
+      padding: 30px;
 
-      min-height:
-        300px;
+      min-height: 300px;
 
-      overflow-wrap:
-        anywhere;
-
+      overflow-wrap: anywhere;
     }
-
 
     .athena-question {
-      width:
-        100%;
+      width: 100%;
     }
-
 
     .moodle-question-body {
-      width:
-        100%;
+      width: 100%;
     }
-
 
     /* =========================================
        MOODLE QUESTION CLEANUP
@@ -903,29 +697,20 @@
 
     .moodle-question-body .que {
 
-      width:
-        100% !important;
+      width: 100% !important;
 
-      max-width:
-        100% !important;
+      max-width: 100% !important;
 
-      margin:
-        0 !important;
+      margin: 0 !important;
 
-      padding:
-        0 !important;
+      padding: 0 !important;
 
-      border:
-        0 !important;
+      border: 0 !important;
 
-      background:
-        transparent !important;
+      background: transparent !important;
 
-      box-shadow:
-        none !important;
-
+      box-shadow: none !important;
     }
-
 
     .moodle-question-body .que > .info,
     .moodle-question-body .questionflag,
@@ -939,12 +724,8 @@
     .moodle-question-body .im-controls,
     .moodle-question-body .history,
     .moodle-question-body .outcome {
-
-      display:
-        none !important;
-
+      display: none !important;
     }
-
 
     .moodle-question-body .qtext {
 
@@ -959,75 +740,54 @@
 
       line-height:
         1.7;
-
     }
 
-
     .moodle-question-body img {
-
       max-width:
         100% !important;
 
       height:
         auto !important;
-
     }
-
 
     .moodle-question-body .answer {
 
-      margin:
-        0 !important;
+      margin: 0 !important;
 
-      display:
-        flex;
+      display: flex;
 
-      flex-direction:
-        column;
+      flex-direction: column;
 
-      gap:
-        10px;
-
+      gap: 10px;
     }
-
 
     .moodle-question-body .answer > div {
-      margin:
-        0 !important;
+      margin: 0 !important;
     }
-
 
     .moodle-question-body .answer label {
 
-      display:
-        flex;
+      display: flex;
 
-      align-items:
-        center;
+      align-items: center;
 
-      gap:
-        10px;
+      gap: 10px;
 
-      width:
-        100%;
+      width: 100%;
 
-      padding:
-        13px 15px;
+      padding: 13px 15px;
 
       border:
         1px solid var(--border-color);
 
-      border-radius:
-        8px;
+      border-radius: 8px;
 
       background:
         var(--white);
 
       cursor:
         pointer;
-
     }
-
 
     .moodle-question-body .answer label:hover {
 
@@ -1036,29 +796,22 @@
 
       border-color:
         #cbd5e1;
-
     }
-
 
     .moodle-question-body
     input[type="radio"],
     .moodle-question-body
     input[type="checkbox"] {
 
-      width:
-        17px;
+      width: 17px;
 
-      height:
-        17px;
+      height: 17px;
 
-      flex-shrink:
-        0;
+      flex-shrink: 0;
 
       margin:
         0 8px 0 0;
-
     }
-
 
     .moodle-question-body
     input[type="text"],
@@ -1069,11 +822,9 @@
     .moodle-question-body
     select {
 
-      width:
-        100%;
+      width: 100%;
 
-      max-width:
-        650px;
+      max-width: 650px;
 
       padding:
         11px 13px;
@@ -1081,8 +832,7 @@
       border:
         1px solid var(--border-color);
 
-      border-radius:
-        7px;
+      border-radius: 7px;
 
       background:
         var(--white);
@@ -1092,9 +842,7 @@
 
       outline:
         none;
-
     }
-
 
     /* =========================================
        NAVIGATOR
@@ -1113,9 +861,7 @@
 
       margin-bottom:
         4px;
-
     }
-
 
     .navigator-subtitle {
 
@@ -1127,9 +873,7 @@
 
       margin-bottom:
         14px;
-
     }
-
 
     .navigator-grid {
 
@@ -1137,13 +881,11 @@
         grid;
 
       grid-template-columns:
-        repeat(5, minmax(0, 1fr));
+        repeat(5, minmax(0,1fr));
 
       gap:
         7px;
-
     }
-
 
     .nav-question {
 
@@ -1185,9 +927,7 @@
         color 0.15s ease,
         border-color 0.15s ease,
         opacity 0.15s ease;
-
     }
-
 
     .nav-question:hover:not(:disabled) {
 
@@ -1196,9 +936,7 @@
 
       background:
         var(--bg-secondary);
-
     }
-
 
     .nav-question.current {
 
@@ -1210,9 +948,7 @@
 
       border-color:
         var(--black);
-
     }
-
 
     .nav-question.current:hover:not(:disabled) {
 
@@ -1221,9 +957,7 @@
 
       color:
         var(--white);
-
     }
-
 
     .nav-question:disabled {
 
@@ -1232,9 +966,7 @@
 
       opacity:
         0.5;
-
     }
-
 
     /* =========================================
        ACTIONS
@@ -1259,9 +991,7 @@
 
       gap:
         10px;
-
     }
-
 
     .action-group {
 
@@ -1273,9 +1003,7 @@
 
       gap:
         10px;
-
     }
-
 
     .button {
 
@@ -1314,17 +1042,13 @@
 
       font-weight:
         600;
-
     }
-
 
     .button:hover:not(:disabled) {
 
       background:
         var(--bg-secondary);
-
     }
-
 
     .button:disabled {
 
@@ -1333,9 +1057,7 @@
 
       cursor:
         not-allowed;
-
     }
-
 
     .button.primary {
 
@@ -1347,9 +1069,7 @@
 
       border-color:
         var(--black);
-
     }
-
 
     .button.primary:hover:not(:disabled) {
 
@@ -1358,9 +1078,7 @@
 
       opacity:
         0.9;
-
     }
-
 
     .button.danger {
 
@@ -1372,9 +1090,7 @@
 
       border-color:
         var(--danger-border);
-
     }
-
 
     /* =========================================
        RESULT
@@ -1396,9 +1112,7 @@
 
       margin-bottom:
         4px;
-
     }
-
 
     .result-percentage {
 
@@ -1407,17 +1121,13 @@
 
       margin-bottom:
         25px;
-
     }
-
 
     .loading-icon {
 
       animation:
         spin 1s linear infinite;
-
     }
-
 
     @keyframes spin {
 
@@ -1433,7 +1143,6 @@
 
     }
 
-
     /* =========================================
        MOBILE
     ========================================== */
@@ -1448,88 +1157,90 @@
         grid-template-areas:
           "navigator"
           "question";
-
       }
-
 
       .navigator-card {
         position:
           static;
       }
 
-
       .navigator-grid {
 
         grid-template-columns:
-          repeat(10, minmax(0, 1fr));
-
+          repeat(
+            10,
+            minmax(0,1fr)
+          );
       }
-
     }
 
+    @media (max-width: 700px) {
 
-    @media (max-width: 600px) {
+      .best-score-card {
 
-      .nav-container {
-        padding:
-          0 16px;
+        grid-template-columns:
+          1fr;
       }
 
-
-      .quiz-label {
-        font-size:
-          0.85rem;
-      }
-
-
-      .back-link {
-        font-size:
-          0.82rem;
-      }
-
-
-      .page {
-
-        padding:
-          92px 14px 40px;
-
-      }
-
-
-      .status-bar {
+      .attempt-row {
 
         grid-template-columns:
           1fr;
 
-      }
-
-
-      .attempt-row {
-
         align-items:
           flex-start;
-
-        flex-direction:
-          column;
-
       }
-
 
       .attempt-score {
 
         text-align:
           left;
-
       }
 
+      .attempt-status {
+
+        justify-self:
+          start;
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      .nav-container {
+
+        padding:
+          0 16px;
+      }
+
+      .quiz-label {
+
+        font-size:
+          0.85rem;
+      }
+
+      .back-link {
+
+        font-size:
+          0.82rem;
+      }
+
+      .page {
+
+        padding:
+          92px 14px 40px;
+      }
+
+      .status-bar {
+
+        grid-template-columns:
+          1fr;
+      }
 
       .question-content {
 
         padding:
           20px;
-
       }
-
 
       .question-actions {
 
@@ -1538,50 +1249,41 @@
 
         align-items:
           stretch;
-
       }
-
 
       .action-group {
 
         width:
           100%;
-
       }
-
 
       .action-group .button {
 
         flex:
           1;
-
       }
-
 
       #submit-button {
 
         width:
           100%;
-
       }
-
 
       .navigator-grid {
 
         grid-template-columns:
-          repeat(5, minmax(0, 1fr));
-
+          repeat(
+            5,
+            minmax(0,1fr)
+          );
       }
-
     }
 
   </style>
 
 </head>
 
-
 <body>
-
 
 <header>
 
@@ -1594,13 +1296,15 @@
 
       <i
         data-lucide="arrow-left"
-        style="width:18px;height:18px;"
+        style="
+          width:18px;
+          height:18px;
+        "
       ></i>
 
       Back to Course
 
     </div>
-
 
     <div class="quiz-label">
       ATHENA QUIZ
@@ -1612,7 +1316,6 @@
 
 
 <main class="page">
-
 
   <!-- =========================================
        QUIZ HEADER
@@ -1656,8 +1359,6 @@
   </section>
 
 
-  <!-- MESSAGE -->
-
   <div
     class="message"
     id="message"
@@ -1670,13 +1371,11 @@
 
   <section class="status-bar">
 
-
     <div class="status-card">
 
       <div class="status-label">
         Attempt
       </div>
-
 
       <div
         class="status-value"
@@ -1684,7 +1383,6 @@
       >
         Not started
       </div>
-
 
       <div
         class="save-status"
@@ -1702,7 +1400,6 @@
         Progress
       </div>
 
-
       <div
         class="status-value"
         id="progress-status"
@@ -1718,7 +1415,6 @@
       <div class="status-label">
         Timer
       </div>
-
 
       <div
         class="status-value"
@@ -1793,29 +1489,133 @@
 
 
   <!-- =========================================
-       HISTORY
+       BEST SCORE + HISTORY
   ========================================== -->
 
   <section
-    id="history-card"
-    class="history-card"
+    id="attempt-summary-area"
     style="display:none;"
   >
 
-    <div class="history-title">
-      Your Previous Attempts
+    <div class="best-score-card">
+
+      <div class="best-stat">
+
+        <div class="best-stat-label">
+
+          <i
+            data-lucide="trophy"
+            style="
+              width:15px;
+              height:15px;
+            "
+          ></i>
+
+          Best Score
+
+        </div>
+
+        <div
+          class="best-stat-value"
+          id="best-score"
+        >
+          —
+        </div>
+
+        <div
+          class="best-stat-detail"
+          id="best-score-detail"
+        >
+          No completed attempts yet
+        </div>
+
+      </div>
+
+
+      <div class="best-stat">
+
+        <div class="best-stat-label">
+
+          <i
+            data-lucide="percent"
+            style="
+              width:15px;
+              height:15px;
+            "
+          ></i>
+
+          Best Percentage
+
+        </div>
+
+        <div
+          class="best-stat-value"
+          id="best-percentage"
+        >
+          —
+        </div>
+
+        <div class="best-stat-detail">
+          Highest recorded result
+        </div>
+
+      </div>
+
+
+      <div class="best-stat">
+
+        <div class="best-stat-label">
+
+          <i
+            data-lucide="layers"
+            style="
+              width:15px;
+              height:15px;
+            "
+          ></i>
+
+          Attempts
+
+        </div>
+
+        <div
+          class="best-stat-value"
+          id="attempt-count"
+        >
+          0
+        </div>
+
+        <div
+          class="best-stat-detail"
+          id="attempt-limit-detail"
+        >
+          Completed attempts
+        </div>
+
+      </div>
+
     </div>
 
 
-    <div class="history-subtitle">
-      Your completed attempts are kept in Moodle.
-    </div>
+    <section
+      id="history-card"
+      class="history-card"
+    >
 
+      <div class="history-title">
+        Your Previous Attempts
+      </div>
 
-    <div
-      class="attempt-list"
-      id="attempt-list"
-    ></div>
+      <div class="history-subtitle">
+        Your completed attempts are kept in Moodle.
+      </div>
+
+      <div
+        class="attempt-list"
+        id="attempt-list"
+      ></div>
+
+    </section>
 
   </section>
 
@@ -1845,7 +1645,6 @@
             Question
           </div>
 
-
           <div
             class="question-mark"
             id="question-mark"
@@ -1868,7 +1667,6 @@
 
 
           <div class="action-group">
-
 
             <button
               type="button"
@@ -1928,7 +1726,6 @@
 
           </button>
 
-
         </div>
 
       </section>
@@ -1938,25 +1735,20 @@
 
       <aside class="navigator-card">
 
-
         <div class="navigator-title">
           Question Navigator
         </div>
 
-
         <div class="navigator-subtitle">
           All questions
         </div>
-
 
         <div
           class="navigator-grid"
           id="navigator-grid"
         ></div>
 
-
       </aside>
-
 
     </div>
 
@@ -2035,9 +1827,7 @@
 
   </section>
 
-
 </main>
-
 
 <script>
 
@@ -2048,11 +1838,8 @@
   const MOODLE_URL =
     'http://localhost:8000';
 
-
   const userToken =
-    localStorage.getItem(
-      'madar_user_token'
-    );
+    localStorage.getItem('madar_user_token');
 
 
   /* =========================================================
@@ -2064,17 +1851,11 @@
       window.location.search
     );
 
-
   const quizId =
-    params.get(
-      'quizid'
-    );
-
+    params.get('quizid');
 
   const courseId =
-    params.get(
-      'courseid'
-    );
+    params.get('courseid');
 
 
   /* =========================================================
@@ -2082,18 +1863,11 @@
   ========================================================== */
 
   if (!userToken) {
-
-    window.location.href =
-      'login.html';
-
+    window.location.href = 'login.html';
   }
 
-
   if (!quizId || !courseId) {
-
-    window.location.href =
-      'index.html';
-
+    window.location.href = 'index.html';
   }
 
 
@@ -2101,48 +1875,33 @@
      STATE
   ========================================================== */
 
-  let currentAttempt =
-    null;
+  let currentAttempt = null;
 
+  let currentPage = 0;
 
-  let currentPage =
-    0;
+  let currentNextPage = null;
 
+  let isLastPage = false;
 
-  let currentNextPage =
-    null;
+  let isProcessing = false;
 
+  let quizNavigation = [];
 
-  let isLastPage =
-    false;
+  let allAttempts = [];
 
+  let maxAttempts = null;
 
-  let quizNavigation =
-    [];
+  let quizMaxPoints = null;
 
+  let quizMaxGrade = null;
 
-  let isProcessing =
-    false;
+  let quizTimeLimit = 0;
 
+  let saveInterval = null;
 
-  let saveInterval =
-    null;
+  let inputSaveTimer = null;
 
-
-  let inputSaveTimer =
-    null;
-
-
-  let timerInterval =
-    null;
-
-
-  let allAttempts =
-    [];
-
-
-  let maxAttempts =
-    null;
+  let timerInterval = null;
 
 
   /* =========================================================
@@ -2150,148 +1909,95 @@
   ========================================================== */
 
   const courseName =
-    document.getElementById(
-      'course-name'
-    );
-
+    document.getElementById('course-name');
 
   const quizTitle =
-    document.getElementById(
-      'quiz-title'
-    );
-
+    document.getElementById('quiz-title');
 
   const quizSubtitle =
-    document.getElementById(
-      'quiz-subtitle'
-    );
-
+    document.getElementById('quiz-subtitle');
 
   const message =
-    document.getElementById(
-      'message'
-    );
-
+    document.getElementById('message');
 
   const startScreen =
-    document.getElementById(
-      'start-screen'
-    );
-
+    document.getElementById('start-screen');
 
   const startTitle =
-    document.getElementById(
-      'start-title'
-    );
-
+    document.getElementById('start-title');
 
   const startDescription =
-    document.getElementById(
-      'start-description'
-    );
-
+    document.getElementById('start-description');
 
   const startButton =
-    document.getElementById(
-      'start-button'
-    );
+    document.getElementById('start-button');
 
-
-  const historyCard =
-    document.getElementById(
-      'history-card'
-    );
-
+  const attemptSummaryArea =
+    document.getElementById('attempt-summary-area');
 
   const attemptList =
-    document.getElementById(
-      'attempt-list'
-    );
+    document.getElementById('attempt-list');
 
+  const bestScore =
+    document.getElementById('best-score');
+
+  const bestScoreDetail =
+    document.getElementById('best-score-detail');
+
+  const bestPercentage =
+    document.getElementById('best-percentage');
+
+  const attemptCount =
+    document.getElementById('attempt-count');
+
+  const attemptLimitDetail =
+    document.getElementById('attempt-limit-detail');
 
   const quizPlayer =
-    document.getElementById(
-      'quiz-player'
-    );
-
+    document.getElementById('quiz-player');
 
   const resultScreen =
-    document.getElementById(
-      'result-screen'
-    );
-
+    document.getElementById('result-screen');
 
   const questionContent =
-    document.getElementById(
-      'question-content'
-    );
-
+    document.getElementById('question-content');
 
   const questionNumber =
-    document.getElementById(
-      'question-number'
-    );
-
+    document.getElementById('question-number');
 
   const questionMark =
-    document.getElementById(
-      'question-mark'
-    );
-
+    document.getElementById('question-mark');
 
   const previousButton =
-    document.getElementById(
-      'previous-button'
-    );
-
+    document.getElementById('previous-button');
 
   const nextButton =
-    document.getElementById(
-      'next-button'
-    );
-
+    document.getElementById('next-button');
 
   const submitButton =
-    document.getElementById(
-      'submit-button'
-    );
-
+    document.getElementById('submit-button');
 
   const navigatorGrid =
-    document.getElementById(
-      'navigator-grid'
-    );
-
+    document.getElementById('navigator-grid');
 
   const attemptStatus =
-    document.getElementById(
-      'attempt-status'
-    );
-
+    document.getElementById('attempt-status');
 
   const progressStatus =
-    document.getElementById(
-      'progress-status'
-    );
-
+    document.getElementById('progress-status');
 
   const timerStatus =
-    document.getElementById(
-      'timer-status'
-    );
-
+    document.getElementById('timer-status');
 
   const saveStatus =
-    document.getElementById(
-      'save-status'
-    );
+    document.getElementById('save-status');
 
 
   lucide.createIcons();
 
 
   /* =========================================================
-     HELPERS
+     UI HELPERS
   ========================================================== */
 
   function showMessage(
@@ -2299,9 +2005,7 @@
     type = 'error'
   ) {
 
-    message.textContent =
-      text;
-
+    message.textContent = text;
 
     message.className =
       `message visible ${type}`;
@@ -2311,9 +2015,7 @@
 
   function hideMessage() {
 
-    message.textContent =
-      '';
-
+    message.textContent = '';
 
     message.className =
       'message';
@@ -2329,47 +2031,46 @@
     saveStatus.textContent =
       text;
 
-
     saveStatus.className =
       `save-status ${state}`;
 
   }
 
 
-  function escapeHtml(
-    value
-  ) {
+  function escapeHtml(value) {
 
     return String(
       value ?? ''
     )
-      .replace(
-        /&/g,
-        '&amp;'
-      )
-      .replace(
-        /</g,
-        '&lt;'
-      )
-      .replace(
-        />/g,
-        '&gt;'
-      )
-      .replace(
-        /"/g,
-        '&quot;'
-      )
-      .replace(
-        /'/g,
-        '&#039;'
-      );
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
 
   }
 
 
-  function formatAttemptDate(
-    timestamp
+  function formatNumber(
+    value,
+    decimals = 2
   ) {
+
+    const number =
+      Number(value);
+
+    if (
+      !Number.isFinite(number)
+    ) {
+      return '—';
+    }
+
+    return number.toFixed(decimals);
+
+  }
+
+
+  function formatDate(timestamp) {
 
     if (
       !timestamp ||
@@ -2380,29 +2081,17 @@
 
     }
 
-
     return new Date(
       Number(timestamp) * 1000
     ).toLocaleString(
       'en-US',
       {
-        weekday:
-          'short',
-
-        month:
-          'short',
-
-        day:
-          'numeric',
-
-        year:
-          'numeric',
-
-        hour:
-          '2-digit',
-
-        minute:
-          '2-digit'
+        weekday: 'short',
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
       }
     );
 
@@ -2421,18 +2110,15 @@
     const body =
       new URLSearchParams();
 
-
     body.append(
       'wstoken',
       userToken
     );
 
-
     body.append(
       'wsfunction',
       wsfunction
     );
-
 
     body.append(
       'moodlewsrestformat',
@@ -2440,20 +2126,15 @@
     );
 
 
-    Object.entries(
-      params
-    ).forEach(
+    Object.entries(params).forEach(
       ([key, value]) => {
 
         if (
           value === undefined ||
           value === null
         ) {
-
           return;
-
         }
-
 
         body.append(
           key,
@@ -2468,8 +2149,7 @@
       await fetch(
         `${MOODLE_URL}/webservice/rest/server.php`,
         {
-          method:
-            'POST',
+          method: 'POST',
 
           headers: {
             'Content-Type':
@@ -2526,9 +2206,7 @@
 
 
     if (
-      !Array.isArray(
-        sections
-      )
+      !Array.isArray(sections)
     ) {
 
       throw new Error(
@@ -2538,13 +2216,11 @@
     }
 
 
-    let targetQuiz =
-      null;
+    let targetQuiz = null;
 
 
     for (
-      const section
-      of sections
+      const section of sections
     ) {
 
       if (
@@ -2552,9 +2228,7 @@
           section.modules
         )
       ) {
-
         continue;
-
       }
 
 
@@ -2596,15 +2270,10 @@
 
       <i
         data-lucide="book-open"
-        style="
-          width:15px;
-          height:15px;
-        "
+        style="width:15px;height:15px;"
       ></i>
 
-      Course ${escapeHtml(
-        courseId
-      )}
+      Course ${escapeHtml(courseId)}
 
     `;
 
@@ -2634,7 +2303,164 @@
 
 
   /* =========================================================
-     ATTEMPTS
+     QUIZ SETTINGS
+  ========================================================== */
+
+  async function getQuizSettings() {
+
+    try {
+
+      const data =
+        await moodleRequest(
+          'mod_quiz_get_quizzes_by_courses',
+          {
+            'courseids[0]':
+              courseId
+          }
+        );
+
+
+      if (
+        !Array.isArray(
+          data.quizzes
+        )
+      ) {
+
+        return null;
+
+      }
+
+
+      const quiz =
+        data.quizzes.find(
+          item =>
+            String(
+              item.id
+            ) ===
+            String(
+              quizId
+            )
+        );
+
+
+      if (!quiz) {
+        return null;
+      }
+
+
+      /*
+       * Raw quiz marks.
+       */
+
+      const rawPoints =
+        Number(
+          quiz.sumgrades
+        );
+
+
+      if (
+        Number.isFinite(rawPoints) &&
+        rawPoints > 0
+      ) {
+
+        quizMaxPoints =
+          rawPoints;
+
+      }
+
+
+      /*
+       * Configured quiz grade.
+       */
+
+      const configuredGrade =
+        Number(
+          quiz.grade
+        );
+
+
+      if (
+        Number.isFinite(
+          configuredGrade
+        ) &&
+        configuredGrade > 0
+      ) {
+
+        quizMaxGrade =
+          configuredGrade;
+
+      }
+
+
+      /*
+       * Attempts allowed.
+       */
+
+      if (
+        quiz.attempts !== undefined
+      ) {
+
+        maxAttempts =
+          Number(
+            quiz.attempts
+          );
+
+      }
+
+
+      /*
+       * Time limit in seconds.
+       */
+
+      if (
+        quiz.timelimit !== undefined
+      ) {
+
+        quizTimeLimit =
+          Number(
+            quiz.timelimit
+          );
+
+      }
+
+
+      console.log(
+        'ATHENA QUIZ SETTINGS:',
+        {
+          attempts:
+            maxAttempts,
+
+          sumgrades:
+            quizMaxPoints,
+
+          grade:
+            quizMaxGrade,
+
+          timelimit:
+            quizTimeLimit
+        }
+      );
+
+
+      return quiz;
+
+    }
+    catch (error) {
+
+      console.warn(
+        'Quiz settings unavailable:',
+        error
+      );
+
+      return null;
+
+    }
+
+  }
+
+
+  /* =========================================================
+     GET USER ATTEMPTS
   ========================================================== */
 
   async function getUserQuizAttempts() {
@@ -2652,7 +2478,7 @@
     if (!userId) {
 
       throw new Error(
-        'Could not determine the current Moodle user.'
+        'Could not determine current Moodle user.'
       );
 
     }
@@ -2691,56 +2517,37 @@
 
 
   /* =========================================================
-     QUIZ SETTINGS
+     GET FINAL REVIEW / GRADE
   ========================================================== */
 
-  async function getQuizSettings() {
+  async function getAttemptReview(
+    attemptId
+  ) {
 
     try {
 
-      const data =
+      const review =
         await moodleRequest(
-          'mod_quiz_get_quizzes_by_courses',
+          'mod_quiz_get_attempt_review',
           {
-            'courseids[0]':
-              courseId
+            attemptid:
+              attemptId,
+
+            page:
+              -1
           }
         );
 
 
-      if (
-        !Array.isArray(
-          data.quizzes
-        )
-      ) {
-
-        return null;
-
-      }
-
-
-      return (
-        data.quizzes.find(
-          item =>
-            String(
-              item.id
-            ) ===
-            String(
-              quizId
-            )
-        ) ||
-        null
-      );
+      return review;
 
     }
-
     catch (error) {
 
       console.warn(
-        'Could not load quiz settings:',
+        `Could not review attempt ${attemptId}:`,
         error
       );
-
 
       return null;
 
@@ -2750,18 +2557,298 @@
 
 
   /* =========================================================
-     ATTEMPT HISTORY
+     GET BEST GRADE
   ========================================================== */
 
-  function renderAttemptHistory(
+  async function getBestGrade() {
+
+    try {
+
+      const data =
+        await moodleRequest(
+          'mod_quiz_get_user_best_grade',
+          {
+            quizid:
+              quizId
+          }
+        );
+
+
+      /*
+       * Different Moodle versions can expose
+       * the grade with slightly different keys.
+       */
+
+      const value =
+        data?.grade ??
+        data?.bestgrade ??
+        data?.bestGrade;
+
+
+      const grade =
+        Number(value);
+
+
+      return Number.isFinite(
+        grade
+      )
+        ? grade
+        : null;
+
+    }
+    catch (error) {
+
+      console.warn(
+        'Best grade unavailable:',
+        error
+      );
+
+      return null;
+
+    }
+
+  }
+
+
+  /* =========================================================
+     SCORE HELPERS
+  ========================================================== */
+
+  function attemptState(
+    attempt
+  ) {
+
+    return String(
+      attempt?.state ||
+      ''
+    ).toLowerCase();
+
+  }
+
+
+  function isCompleted(
+    attempt
+  ) {
+
+    const state =
+      attemptState(
+        attempt
+      );
+
+
+    return (
+      state === 'finished' ||
+      state === 'submitted' ||
+      state === 'overdue'
+    );
+
+  }
+
+
+  function getRawAttemptScore(
+    attempt
+  ) {
+
+    const value =
+      Number(
+        attempt?.sumgrades
+      );
+
+
+    return Number.isFinite(
+      value
+    )
+      ? value
+      : null;
+
+  }
+
+
+  function getAttemptPercentage(
+    attempt,
+    review = null
+  ) {
+
+    /*
+     * Most accurate:
+     * use Moodle's rescaledgrade + configured grade.
+     */
+
+    const reviewGrade =
+      Number(
+        review?.rescaledgrade
+      );
+
+
+    if (
+      Number.isFinite(
+        reviewGrade
+      ) &&
+      Number.isFinite(
+        quizMaxGrade
+      ) &&
+      quizMaxGrade > 0
+    ) {
+
+      return (
+        reviewGrade /
+        quizMaxGrade
+      ) * 100;
+
+    }
+
+
+    /*
+     * Fallback to raw marks.
+     */
+
+    const raw =
+      getRawAttemptScore(
+        attempt
+      );
+
+
+    if (
+      raw === null ||
+      !Number.isFinite(
+        quizMaxPoints
+      ) ||
+      quizMaxPoints <= 0
+    ) {
+
+      return null;
+
+    }
+
+
+    return (
+      raw /
+      quizMaxPoints
+    ) * 100;
+
+  }
+
+
+  function getAttemptGrade(
+    attempt,
+    review = null
+  ) {
+
+    const reviewGrade =
+      Number(
+        review?.rescaledgrade
+      );
+
+
+    if (
+      Number.isFinite(
+        reviewGrade
+      )
+    ) {
+
+      return reviewGrade;
+
+    }
+
+
+    const percentage =
+      getAttemptPercentage(
+        attempt,
+        review
+      );
+
+
+    if (
+      percentage !== null &&
+      Number.isFinite(
+        quizMaxGrade
+      ) &&
+      quizMaxGrade > 0
+    ) {
+
+      return (
+        percentage /
+        100
+      ) *
+      quizMaxGrade;
+
+    }
+
+
+    return getRawAttemptScore(
+      attempt
+    );
+
+  }
+
+
+  /* =========================================================
+     HISTORY SCORE DATA
+  ========================================================== */
+
+  async function buildAttemptScoreMap(
     attempts
   ) {
 
-    if (
-      !attempts.length
+    const scoreMap =
+      new Map();
+
+
+    const completed =
+      attempts.filter(
+        isCompleted
+      );
+
+
+    /*
+     * Pull the authoritative review
+     * for each finished attempt.
+     */
+
+    for (
+      const attempt of completed
     ) {
 
-      historyCard.style.display =
+      const review =
+        await getAttemptReview(
+          attempt.id
+        );
+
+
+      scoreMap.set(
+        Number(
+          attempt.id
+        ),
+        review
+      );
+
+    }
+
+
+    return scoreMap;
+
+  }
+
+
+  /* =========================================================
+     RENDER HISTORY
+  ========================================================== */
+
+  async function renderAttemptHistory(
+    attempts
+  ) {
+
+    const completed =
+      attempts.filter(
+        isCompleted
+      );
+
+
+    if (
+      completed.length === 0
+    ) {
+
+      attemptSummaryArea.style.display =
         'none';
 
       return;
@@ -2769,8 +2856,14 @@
     }
 
 
-    historyCard.style.display =
+    attemptSummaryArea.style.display =
       'block';
+
+
+    const scoreMap =
+      await buildAttemptScoreMap(
+        attempts
+      );
 
 
     const sorted =
@@ -2795,10 +2888,9 @@
           attempt => {
 
             const state =
-              String(
-                attempt.state ||
-                ''
-              ).toLowerCase();
+              attemptState(
+                attempt
+              );
 
 
             let stateClass =
@@ -2830,7 +2922,6 @@
                 'check-circle';
 
             }
-
             else if (
               state === 'inprogress'
             ) {
@@ -2845,7 +2936,6 @@
                 'clock';
 
             }
-
             else if (
               state === 'overdue'
             ) {
@@ -2857,7 +2947,6 @@
                 'alert-circle';
 
             }
-
             else if (
               state === 'abandoned'
             ) {
@@ -2868,15 +2957,69 @@
             }
 
 
-            const score =
-              attempt.sumgrades !== undefined &&
-              attempt.sumgrades !== null
+            const review =
+              scoreMap.get(
+                Number(
+                  attempt.id
+                )
+              ) ||
+              null;
 
-                ? Number(
-                    attempt.sumgrades
-                  ).toFixed(2)
 
-                : '—';
+            const grade =
+              getAttemptGrade(
+                attempt,
+                review
+              );
+
+
+            const percentage =
+              getAttemptPercentage(
+                attempt,
+                review
+              );
+
+
+            const scoreMaximum =
+              Number.isFinite(
+                quizMaxGrade
+              ) &&
+              quizMaxGrade > 0
+                ? quizMaxGrade
+                : null;
+
+
+            const scoreText =
+              grade !== null &&
+              scoreMaximum !== null
+
+                ? `${formatNumber(
+                    grade
+                  )} / ${formatNumber(
+                    scoreMaximum
+                  )}`
+
+                : grade !== null
+
+                  ? formatNumber(
+                      grade
+                    )
+
+                  : '—';
+
+
+            const percentageText =
+              percentage !== null
+
+                ? `${Math.max(
+                    0,
+                    Math.min(
+                      100,
+                      percentage
+                    )
+                  ).toFixed(1)}%`
+
+                : '';
 
 
             return `
@@ -2896,18 +3039,15 @@
 
                   </div>
 
-
                   <div class="attempt-date">
 
-                    ${
-                      escapeHtml(
-                        formatAttemptDate(
-                          attempt.timemodified ||
-                          attempt.timefinish ||
-                          attempt.timestart
-                        )
+                    ${escapeHtml(
+                      formatDate(
+                        attempt.timemodified ||
+                        attempt.timefinish ||
+                        attempt.timestart
                       )
-                    }
+                    )}
 
                   </div>
 
@@ -2938,9 +3078,32 @@
 
                 <div class="attempt-score">
 
-                  ${escapeHtml(
-                    score
-                  )}
+                  <div
+                    class="attempt-score-main"
+                  >
+
+                    ${escapeHtml(
+                      scoreText
+                    )}
+
+                  </div>
+
+
+                  ${
+                    percentageText
+                      ? `
+                        <div
+                          class="
+                            attempt-score-percent
+                          "
+                        >
+                          ${escapeHtml(
+                            percentageText
+                          )}
+                        </div>
+                      `
+                      : ''
+                  }
 
                 </div>
 
@@ -2953,64 +3116,262 @@
         .join('');
 
 
+    await renderBestSummary(
+      attempts,
+      scoreMap
+    );
+
+
     lucide.createIcons();
 
   }
 
 
   /* =========================================================
-     PREPARE START SCREEN
+     BEST SUMMARY
+  ========================================================== */
+
+  async function renderBestSummary(
+    attempts,
+    scoreMap
+  ) {
+
+    const completed =
+      attempts.filter(
+        isCompleted
+      );
+
+
+    attemptCount.textContent =
+      completed.length;
+
+
+    if (
+      maxAttempts !== null &&
+      maxAttempts > 0
+    ) {
+
+      attemptLimitDetail.textContent =
+        `${completed.length} of ${maxAttempts} used`;
+
+    }
+    else {
+
+      attemptLimitDetail.textContent =
+        'Completed attempts';
+
+    }
+
+
+    let best = null;
+
+    let bestReview = null;
+
+    let bestGradeValue = null;
+
+    let bestPercentageValue = null;
+
+
+    for (
+      const attempt of completed
+    ) {
+
+      const review =
+        scoreMap.get(
+          Number(
+            attempt.id
+          )
+        ) ||
+        null;
+
+
+      const grade =
+        getAttemptGrade(
+          attempt,
+          review
+        );
+
+
+      const percentage =
+        getAttemptPercentage(
+          attempt,
+          review
+        );
+
+
+      if (
+        percentage === null
+      ) {
+
+        continue;
+
+      }
+
+
+      if (
+        bestPercentageValue === null ||
+        percentage >
+          bestPercentageValue
+      ) {
+
+        best =
+          attempt;
+
+        bestReview =
+          review;
+
+        bestGradeValue =
+          grade;
+
+        bestPercentageValue =
+          percentage;
+
+      }
+
+    }
+
+
+    /*
+     * Fallback to Moodle's own best-grade
+     * endpoint if per-attempt reviews are
+     * unavailable.
+     */
+
+    if (
+      best === null
+    ) {
+
+      const bestGradeFromMoodle =
+        await getBestGrade();
+
+
+      if (
+        bestGradeFromMoodle !== null
+      ) {
+
+        bestGradeValue =
+          bestGradeFromMoodle;
+
+
+        if (
+          Number.isFinite(
+            quizMaxGrade
+          ) &&
+          quizMaxGrade > 0
+        ) {
+
+          bestPercentageValue =
+            (
+              bestGradeFromMoodle /
+              quizMaxGrade
+            ) * 100;
+
+        }
+
+      }
+
+    }
+
+
+    if (
+      bestGradeValue === null
+    ) {
+
+      bestScore.textContent =
+        '—';
+
+      bestPercentage.textContent =
+        '—';
+
+      bestScoreDetail.textContent =
+        'No scored attempts yet';
+
+      return;
+
+    }
+
+
+    bestScore.textContent =
+      Number.isFinite(
+        quizMaxGrade
+      ) &&
+      quizMaxGrade > 0
+
+        ? `${formatNumber(
+            bestGradeValue
+          )} / ${formatNumber(
+            quizMaxGrade
+          )}`
+
+        : formatNumber(
+            bestGradeValue
+          );
+
+
+    bestPercentage.textContent =
+      bestPercentageValue !== null
+
+        ? `${Math.max(
+            0,
+            Math.min(
+              100,
+              bestPercentageValue
+            )
+          ).toFixed(1)}%`
+
+        : '—';
+
+
+    bestScoreDetail.textContent =
+      best
+        ? `Attempt ${best.attempt ?? '—'}`
+        : 'Highest recorded result';
+
+  }
+
+
+  /* =========================================================
+     PREPARE SCREEN
   ========================================================== */
 
   async function prepareQuizScreen() {
 
-    const [
-      attempts,
-      quizSettings
-    ] =
-      await Promise.all([
-        getUserQuizAttempts(),
-        getQuizSettings()
-      ]);
+    await getQuizSettings();
 
 
-    renderAttemptHistory(
+    const attempts =
+      await getUserQuizAttempts();
+
+
+    allAttempts =
+      attempts;
+
+
+    /*
+     * Render attempt history asynchronously.
+     */
+
+    await renderAttemptHistory(
       attempts
     );
 
 
-    if (
-      quizSettings &&
-      quizSettings.attempts !== undefined
-    ) {
-
-      maxAttempts =
-        Number(
-          quizSettings.attempts
-        );
-
-    }
-
-    else {
-
-      maxAttempts =
-        null;
-
-    }
-
+    /*
+     * Find unfinished attempt.
+     */
 
     const unfinished =
       attempts.find(
         attempt =>
-          String(
-            attempt.state ||
-            ''
-          ).toLowerCase() ===
-          'inprogress'
+          attemptState(
+            attempt
+          ) === 'inprogress'
       );
 
 
-    if (unfinished) {
+    if (
+      unfinished
+    ) {
 
       startTitle.textContent =
         'Continue Quiz';
@@ -3035,43 +3396,29 @@
       `;
 
 
-      attemptStatus.textContent =
-        'In progress';
+      updatePreStartStatus(
+        attempts.length,
+        unfinished
+      );
 
 
       lucide.createIcons();
-
 
       return;
 
     }
 
 
-    const completedAttempts =
+    const completed =
       attempts.filter(
-        attempt => {
-
-          const state =
-            String(
-              attempt.state ||
-              ''
-            ).toLowerCase();
-
-
-          return (
-            state === 'finished' ||
-            state === 'submitted' ||
-            state === 'overdue'
-          );
-
-        }
+        isCompleted
       );
 
 
     if (
       maxAttempts !== null &&
       maxAttempts > 0 &&
-      completedAttempts.length >=
+      completed.length >=
         maxAttempts
     ) {
 
@@ -3089,10 +3436,10 @@
         'none';
 
 
-      attemptStatus.textContent =
-        `${completedAttempts.length} / ${
-          maxAttempts
-        } used`;
+      updatePreStartStatus(
+        completed.length,
+        null
+      );
 
 
       return;
@@ -3100,14 +3447,18 @@
     }
 
 
+    startButton.style.display =
+      'inline-flex';
+
+
     startTitle.textContent =
-      completedAttempts.length
+      completed.length
         ? 'Start Another Attempt'
         : 'Ready to Begin?';
 
 
     startDescription.textContent =
-      completedAttempts.length
+      completed.length
         ? 'You have completed an earlier attempt. Start another attempt if you still have attempts available.'
         : 'Start your quiz attempt. Your answers will be saved to Moodle automatically.';
 
@@ -3123,12 +3474,18 @@
       ></i>
 
       ${
-        completedAttempts.length
+        completed.length
           ? 'Start New Attempt'
           : 'Start Quiz'
       }
 
     `;
+
+
+    updatePreStartStatus(
+      completed.length,
+      null
+    );
 
 
     lucide.createIcons();
@@ -3137,7 +3494,274 @@
 
 
   /* =========================================================
-     BUILD COMPLETE NAVIGATION
+     PRE-START TOP BAR
+  ========================================================== */
+
+  function updatePreStartStatus(
+    usedAttempts,
+    unfinished
+  ) {
+
+    if (
+      maxAttempts !== null &&
+      maxAttempts > 0
+    ) {
+
+      const nextAttempt =
+        unfinished
+          ? Number(
+              unfinished.attempt
+            )
+          : Number(
+              usedAttempts
+            ) + 1;
+
+
+      attemptStatus.textContent =
+        `${nextAttempt} / ${maxAttempts}`;
+
+    }
+    else {
+
+      const nextAttempt =
+        unfinished
+          ? Number(
+              unfinished.attempt
+            )
+          : Number(
+              usedAttempts
+            ) + 1;
+
+
+      attemptStatus.textContent =
+        `Attempt ${nextAttempt}`;
+
+    }
+
+
+    progressStatus.textContent =
+      'Ready';
+
+
+    timerStatus.textContent =
+      '00:00';
+
+  }
+
+
+  /* =========================================================
+     START / RESUME
+  ========================================================== */
+
+  async function startOrResumeQuiz() {
+
+    hideMessage();
+
+
+    startButton.disabled =
+      true;
+
+
+    startButton.innerHTML = `
+
+      <i
+        data-lucide="loader-2"
+        class="loading-icon"
+        style="
+          width:17px;
+          height:17px;
+        "
+      ></i>
+
+      Opening...
+
+    `;
+
+
+    lucide.createIcons();
+
+
+    try {
+
+      const attempts =
+        await getUserQuizAttempts();
+
+
+      const unfinished =
+        attempts.find(
+          attempt =>
+            attemptState(
+              attempt
+            ) === 'inprogress'
+        );
+
+
+      if (
+        unfinished
+      ) {
+
+        currentAttempt =
+          unfinished;
+
+
+        currentPage =
+          Number(
+            unfinished.currentpage ||
+            0
+          );
+
+
+        await openPlayer();
+
+        return;
+
+      }
+
+
+      const completed =
+        attempts.filter(
+          isCompleted
+        );
+
+
+      if (
+        maxAttempts !== null &&
+        maxAttempts > 0 &&
+        completed.length >=
+          maxAttempts
+      ) {
+
+        throw new Error(
+          'You have used all available quiz attempts.'
+        );
+
+      }
+
+
+      const data =
+        await moodleRequest(
+          'mod_quiz_start_attempt',
+          {
+            quizid:
+              quizId,
+
+            forcenew:
+              0
+          }
+        );
+
+
+      if (
+        !data.attempt ||
+        !data.attempt.id
+      ) {
+
+        throw new Error(
+          'Moodle did not return a valid attempt.'
+        );
+
+      }
+
+
+      currentAttempt =
+        data.attempt;
+
+
+      currentPage =
+        Number(
+          currentAttempt.currentpage ||
+          0
+        );
+
+
+      await openPlayer();
+
+    }
+
+    catch (error) {
+
+      console.error(
+        'Quiz start error:',
+        error
+      );
+
+
+      showMessage(
+        `Could not open the quiz: ${error.message}`
+      );
+
+
+      startButton.disabled =
+        false;
+
+
+      startButton.innerHTML = `
+
+        <i
+          data-lucide="play"
+          style="
+            width:17px;
+            height:17px;
+          "
+        ></i>
+
+        Start Quiz
+
+      `;
+
+
+      lucide.createIcons();
+
+    }
+
+  }
+
+
+  /* =========================================================
+     OPEN PLAYER
+  ========================================================== */
+
+  async function openPlayer() {
+
+    startScreen.style.display =
+      'none';
+
+    attemptSummaryArea.style.display =
+      'none';
+
+    quizPlayer.style.display =
+      'block';
+
+    resultScreen.style.display =
+      'none';
+
+
+    attemptStatus.textContent =
+      `Attempt ${
+        currentAttempt.attempt ||
+        ''
+      }`;
+
+
+    buildQuizNavigation(
+      currentAttempt.layout
+    );
+
+
+    await loadAttemptPage(
+      currentPage
+    );
+
+
+    startAutosave();
+
+    startTimer();
+
+  }
+
+
+  /* =========================================================
+     BUILD NAVIGATION
   ========================================================== */
 
   function buildQuizNavigation(
@@ -3145,13 +3769,11 @@
     currentQuestions = []
   ) {
 
-    quizNavigation =
-      [];
+    quizNavigation = [];
 
 
     if (
-      typeof layout ===
-        'string' &&
+      typeof layout === 'string' &&
       layout.trim()
     ) {
 
@@ -3164,12 +3786,9 @@
           );
 
 
-      let page =
-        0;
+      let page = 0;
 
-
-      let questionNumber =
-        0;
+      let questionNumber = 0;
 
 
       tokens.forEach(
@@ -3191,10 +3810,6 @@
 
           }
 
-
-          /*
-           * Moodle uses 0 as a page break.
-           */
 
           if (
             slot === 0
@@ -3238,13 +3853,8 @@
     }
 
 
-    /*
-     * Fallback.
-     */
-
     if (
-      quizNavigation.length ===
-        0
+      !quizNavigation.length
     ) {
 
       currentQuestions.forEach(
@@ -3274,250 +3884,11 @@
 
     }
 
-
-    console.log(
-      'ATHENA QUIZ NAVIGATION:',
-      quizNavigation
-    );
-
   }
 
 
   /* =========================================================
-     START / RESUME QUIZ
-  ========================================================== */
-
-  async function startOrResumeQuiz() {
-
-    hideMessage();
-
-
-    startButton.disabled =
-      true;
-
-
-    startButton.innerHTML = `
-
-      <i
-        data-lucide="loader-2"
-        class="loading-icon"
-        style="
-          width:17px;
-          height:17px;
-        "
-      ></i>
-
-      Opening...
-
-    `;
-
-
-    lucide.createIcons();
-
-
-    try {
-
-      const attempts =
-        await getUserQuizAttempts();
-
-
-      renderAttemptHistory(
-        attempts
-      );
-
-
-      const unfinished =
-        attempts.find(
-          attempt =>
-            String(
-              attempt.state ||
-              ''
-            ).toLowerCase() ===
-            'inprogress'
-        );
-
-
-      if (unfinished) {
-
-        currentAttempt =
-          unfinished;
-
-
-        currentPage =
-          Number(
-            unfinished.currentpage ||
-            0
-          );
-
-
-        await openPlayer();
-
-        return;
-
-      }
-
-
-      const completedAttempts =
-        attempts.filter(
-          attempt => {
-
-            const state =
-              String(
-                attempt.state ||
-                ''
-              ).toLowerCase();
-
-
-            return (
-              state === 'finished' ||
-              state === 'submitted' ||
-              state === 'overdue'
-            );
-
-          }
-        );
-
-
-      if (
-        maxAttempts !== null &&
-        maxAttempts > 0 &&
-        completedAttempts.length >=
-          maxAttempts
-      ) {
-
-        throw new Error(
-          'You have used all available quiz attempts.'
-        );
-
-      }
-
-
-      const data =
-        await moodleRequest(
-          'mod_quiz_start_attempt',
-          {
-            quizid:
-              quizId,
-
-            forcenew:
-              0
-          }
-        );
-
-
-      if (
-        !data.attempt ||
-        !data.attempt.id
-      ) {
-
-        throw new Error(
-          'Moodle did not return a valid new attempt.'
-        );
-
-      }
-
-
-      currentAttempt =
-        data.attempt;
-
-
-      currentPage =
-        Number(
-          currentAttempt.currentpage ||
-          0
-        );
-
-
-      await openPlayer();
-
-    }
-
-    catch (error) {
-
-      console.error(
-        'Quiz open error:',
-        error
-      );
-
-
-      showMessage(
-        `Could not open the quiz: ${
-          error.message
-        }`
-      );
-
-
-      startButton.disabled =
-        false;
-
-
-      startButton.innerHTML = `
-
-        <i
-          data-lucide="play"
-          style="
-            width:17px;
-            height:17px;
-          "
-        ></i>
-
-        Start Quiz
-
-      `;
-
-
-      lucide.createIcons();
-
-    }
-
-  }
-
-
-  /* =========================================================
-     OPEN PLAYER
-  ========================================================== */
-
-  async function openPlayer() {
-
-    startScreen.style.display =
-      'none';
-
-
-    historyCard.style.display =
-      'none';
-
-
-    quizPlayer.style.display =
-      'block';
-
-
-    resultScreen.style.display =
-      'none';
-
-
-    attemptStatus.textContent =
-      'In progress';
-
-
-    buildQuizNavigation(
-      currentAttempt.layout
-    );
-
-
-    await loadAttemptPage(
-      currentPage
-    );
-
-
-    startAutosave();
-
-    startTimer();
-
-  }
-
-
-  /* =========================================================
-     LOAD ATTEMPT PAGE
+     LOAD ATTEMPT DATA
   ========================================================== */
 
   async function loadAttemptPage(
@@ -3563,14 +3934,8 @@
       );
 
 
-    /*
-     * Keep the complete navigation.
-     * Only rebuild it if we don't have it yet.
-     */
-
     if (
-      quizNavigation.length ===
-        0
+      !quizNavigation.length
     ) {
 
       buildQuizNavigation(
@@ -3581,33 +3946,21 @@
     }
 
 
-    if (
+    currentNextPage =
       data.nextpage !== undefined &&
       data.nextpage !== null
-    ) {
 
-      currentNextPage =
-        Number(
-          data.nextpage
-        );
+        ? Number(
+            data.nextpage
+          )
 
-    }
-
-    else {
-
-      currentNextPage =
-        null;
-
-    }
+        : null;
 
 
     isLastPage =
-      currentNextPage === null
-        ? false
-        : (
-            currentNextPage <=
-            currentPage
-          );
+      currentNextPage !== null &&
+      currentNextPage <=
+        currentPage;
 
 
     const questions =
@@ -3637,21 +3990,11 @@
       'saved'
     );
 
-
-    console.log(
-      'ATHENA PAGE:',
-      {
-        currentPage,
-        currentNextPage,
-        isLastPage
-      }
-    );
-
   }
 
 
   /* =========================================================
-     CLEAN QUESTION HTML
+     QUESTION HTML
   ========================================================== */
 
   function cleanQuestionHtml(
@@ -3670,7 +4013,6 @@
 
 
     [
-
       '.info',
       '.questionflag',
       '.questionflagimage',
@@ -3683,7 +4025,6 @@
       '.im-controls',
       '.history',
       '.outcome'
-
     ].forEach(
       selector => {
 
@@ -3706,7 +4047,9 @@
       );
 
 
-    if (formulation) {
+    if (
+      formulation
+    ) {
 
       return formulation.innerHTML;
 
@@ -3719,7 +4062,7 @@
 
 
   /* =========================================================
-     RENDER QUESTION
+     RENDER QUESTIONS
   ========================================================== */
 
   function renderQuestions(
@@ -3739,9 +4082,7 @@
             color:var(--text-secondary);
           "
         >
-
           No questions were returned.
-
         </div>
 
       `;
@@ -3797,10 +4138,7 @@
             )
         )
         .filter(
-          value =>
-            Number.isFinite(
-              value
-            )
+          Number.isFinite
         );
 
 
@@ -3824,8 +4162,8 @@
       marks.length
 
         ? `${marks.reduce(
-            (sum, value) =>
-              sum + value,
+            (a, b) =>
+              a + b,
             0
           )} marks`
 
@@ -3838,7 +4176,7 @@
 
 
   /* =========================================================
-     ANSWERS
+     ANSWER LISTENERS
   ========================================================== */
 
   function attachAnswerListeners() {
@@ -3887,7 +4225,7 @@
 
 
   /* =========================================================
-     COLLECT ANSWERS
+     COLLECT RESPONSE DATA
   ========================================================== */
 
   function collectResponseData() {
@@ -3962,17 +4300,16 @@
 
 
   /* =========================================================
-     SAVE
+     AUTOSAVE
   ========================================================== */
 
   async function saveAttempt() {
 
     if (
-      !currentAttempt ||
-      isProcessing
+      !currentAttempt
     ) {
 
-      return;
+      return null;
 
     }
 
@@ -4007,42 +4344,80 @@
     );
 
 
-    const result =
-      await moodleRequest(
-        'mod_quiz_save_attempt',
-        params
-      );
-
-
-    if (
-      result.status !== undefined &&
-      Number(
-        result.status
-      ) !== 1
-    ) {
-
-      throw new Error(
-        'Moodle did not confirm the save.'
-      );
-
-    }
-
-
-    return result;
+    return await moodleRequest(
+      'mod_quiz_save_attempt',
+      params
+    );
 
   }
 
 
-  /* =========================================================
-     AUTOSAVE
-  ========================================================== */
+  function scheduleQuickAutosave() {
+
+    clearTimeout(
+      inputSaveTimer
+    );
+
+
+    setSaveStatus(
+      'Changes pending...'
+    );
+
+
+    inputSaveTimer =
+      setTimeout(
+        async () => {
+
+          if (
+            isProcessing
+          ) {
+            return;
+          }
+
+
+          try {
+
+            setSaveStatus(
+              'Saving...',
+              'saving'
+            );
+
+
+            await saveAttempt();
+
+
+            setSaveStatus(
+              'Saved',
+              'saved'
+            );
+
+          }
+          catch (error) {
+
+            console.warn(
+              'Autosave failed:',
+              error
+            );
+
+
+            setSaveStatus(
+              'Save failed',
+              'failed'
+            );
+
+          }
+
+        },
+        700
+      );
+
+  }
+
 
   async function autoSave() {
 
     if (
       !currentAttempt ||
-      currentAttempt.state !==
-        'inprogress' ||
       isProcessing
     ) {
 
@@ -4068,7 +4443,6 @@
       );
 
     }
-
     catch (error) {
 
       console.warn(
@@ -4083,27 +4457,6 @@
       );
 
     }
-
-  }
-
-
-  function scheduleQuickAutosave() {
-
-    clearTimeout(
-      inputSaveTimer
-    );
-
-
-    setSaveStatus(
-      'Changes pending...'
-    );
-
-
-    inputSaveTimer =
-      setTimeout(
-        autoSave,
-        1000
-      );
 
   }
 
@@ -4130,7 +4483,6 @@
       saveInterval
     );
 
-
     saveInterval =
       null;
 
@@ -4138,135 +4490,154 @@
 
 
   /* =========================================================
-     NAVIGATOR NAVIGATION
+     PROCESS CURRENT PAGE
+     IMPORTANT:
+     Use process_attempt when changing pages.
   ========================================================== */
 
-  async function navigateToQuestion(
-    navigationItem
+  async function processCurrentPage(
+    targetPage
   ) {
 
-    if (
-      isProcessing ||
-      !currentAttempt
-    ) {
-
-      return;
-
-    }
+    const responseData =
+      collectResponseData();
 
 
-    /*
-     * We don't need an API request if the
-     * clicked question is already on this page.
-     */
+    const params = {
 
-    if (
-      navigationItem.page ===
-      currentPage
-    ) {
+      attemptid:
+        currentAttempt.id,
 
-      highlightNavigator(
-        currentPage
-      );
+      finishattempt:
+        0,
 
-      return;
+      timeup:
+        0
 
-    }
+    };
 
 
-    isProcessing =
-      true;
+    responseData.forEach(
+      (item, index) => {
+
+        params[
+          `data[${index}][name]`
+        ] =
+          item.name;
 
 
-    /*
-     * Disable only while navigation is
-     * actually happening.
-     */
+        params[
+          `data[${index}][value]`
+        ] =
+          item.value;
 
-    updateNavigation();
-
-    setNavigatorDisabled(
-      true
+      }
     );
 
 
-    try {
+    console.log(
+      'ATHENA PROCESS PAGE:',
+      {
+        from:
+          currentPage,
 
-      setSaveStatus(
-        'Saving...',
-        'saving'
+        to:
+          targetPage,
+
+        data:
+          responseData
+      }
+    );
+
+
+    const result =
+      await moodleRequest(
+        'mod_quiz_process_attempt',
+        params
       );
 
 
-      await saveAttempt();
+    if (
+      result?.state &&
+      String(
+        result.state
+      ).toLowerCase() !==
+      'inprogress'
+    ) {
 
-
-      await loadAttemptPage(
-        navigationItem.page
+      console.warn(
+        'Unexpected attempt state:',
+        result.state
       );
 
     }
 
-    catch (error) {
 
-      console.error(
-        'Navigator navigation error:',
-        error
-      );
-
-
-      showMessage(
-        `Could not open Question ${
-          navigationItem.questionNumber
-        }: ${
-          error.message
-        }`
-      );
-
-    }
-
-    finally {
-
-      isProcessing =
-        false;
-
-
-      /*
-       * VERY IMPORTANT:
-       *
-       * Re-enable navigator buttons
-       * after navigation completes.
-       */
-
-      setNavigatorDisabled(
-        false
-      );
-
-
-      updateNavigation();
-
-    }
+    return result;
 
   }
 
 
   /* =========================================================
-     RENDER NAVIGATOR
+     NAVIGATOR
   ========================================================== */
+
+  function setNavigatorDisabled(
+    disabled
+  ) {
+
+    navigatorGrid
+      .querySelectorAll(
+        '.nav-question'
+      )
+      .forEach(
+        button => {
+
+          button.disabled =
+            disabled;
+
+        }
+      );
+
+  }
+
+
+  function highlightNavigator(
+    page
+  ) {
+
+    navigatorGrid
+      .querySelectorAll(
+        '.nav-question'
+      )
+      .forEach(
+        (button, index) => {
+
+          const item =
+            quizNavigation[index];
+
+
+          if (!item) {
+            return;
+          }
+
+
+          button.classList.toggle(
+            'current',
+            item.page ===
+              page
+          );
+
+        }
+      );
+
+  }
+
 
   function renderNavigator() {
 
     navigatorGrid.innerHTML =
       '';
-
-
-    if (
-      !quizNavigation.length
-    ) {
-
-      return;
-
-    }
 
 
     quizNavigation.forEach(
@@ -4318,136 +4689,109 @@
     );
 
 
-    /*
-     * Never leave buttons disabled simply
-     * because the navigator was rebuilt.
-     */
-
-    setNavigatorDisabled(
-      false
-    );
-
-  }
-
-
-  /* =========================================================
-     NAVIGATOR DISABLED STATE
-  ========================================================== */
-
-  function setNavigatorDisabled(
-    disabled
-  ) {
-
-    navigatorGrid
-      .querySelectorAll(
-        '.nav-question'
-      )
-      .forEach(
-        button => {
-
-          button.disabled =
-            disabled;
-
-        }
-      );
-
-  }
-
-
-  /* =========================================================
-     HIGHLIGHT CURRENT PAGE
-  ========================================================== */
-
-  function highlightNavigator(
-    page
-  ) {
-
-    navigatorGrid
-      .querySelectorAll(
-        '.nav-question'
-      )
-      .forEach(
-        (button, index) => {
-
-          const item =
-            quizNavigation[index];
-
-
-          if (!item) {
-            return;
-          }
-
-
-          button.classList.toggle(
-            'current',
-            item.page === page
-          );
-
-        }
-      );
-
-  }
-
-
-  /* =========================================================
-     NAVIGATION BUTTONS
-  ========================================================== */
-
-  function updateNavigation() {
-
-    previousButton.disabled =
-      currentPage <= 0 ||
-      isProcessing;
-
-
-    nextButton.disabled =
-      isProcessing;
-
-
-    submitButton.disabled =
-      isProcessing;
-
-
-    if (
-      isLastPage
-    ) {
-
-      nextButton.style.display =
-        'none';
-
-      submitButton.style.display =
-        'inline-flex';
-
-    }
-
-    else {
-
-      nextButton.style.display =
-        'inline-flex';
-
-      submitButton.style.display =
-        'inline-flex';
-
-    }
-
-
-    highlightNavigator(
-      currentPage
-    );
-
-
-    /*
-     * The navigator follows the processing
-     * state but does not stay permanently
-     * disabled after rendering.
-     */
-
     setNavigatorDisabled(
       isProcessing
     );
 
+  }
 
-    lucide.createIcons();
+
+  /* =========================================================
+     NAVIGATE TO QUESTION
+  ========================================================== */
+
+  async function navigateToQuestion(
+    item
+  ) {
+
+    if (
+      isProcessing ||
+      !currentAttempt
+    ) {
+
+      return;
+
+    }
+
+
+    if (
+      item.page ===
+        currentPage
+    ) {
+
+      highlightNavigator(
+        currentPage
+      );
+
+      return;
+
+    }
+
+
+    isProcessing =
+      true;
+
+
+    updateNavigation();
+
+
+    try {
+
+      setSaveStatus(
+        'Saving answer...',
+        'saving'
+      );
+
+
+      /*
+       * IMPORTANT:
+       *
+       * Page navigation uses process_attempt.
+       * This is how Moodle's quiz system
+       * processes submitted responses.
+       */
+
+      await processCurrentPage(
+        item.page
+      );
+
+
+      setSaveStatus(
+        'Loading question...',
+        'saving'
+      );
+
+
+      await loadAttemptPage(
+        item.page
+      );
+
+
+    }
+    catch (error) {
+
+      console.error(
+        'Navigator error:',
+        error
+      );
+
+
+      showMessage(
+        `Could not open Question ${
+          item.questionNumber
+        }: ${error.message}`
+      );
+
+    }
+    finally {
+
+      isProcessing =
+        false;
+
+
+      updateNavigation();
+
+    }
 
   }
 
@@ -4510,7 +4854,21 @@
 
     try {
 
-      await saveAttempt();
+      setSaveStatus(
+        'Saving answer...',
+        'saving'
+      );
+
+
+      await processCurrentPage(
+        targetPage
+      );
+
+
+      setSaveStatus(
+        'Loading next question...',
+        'saving'
+      );
 
 
       await loadAttemptPage(
@@ -4518,11 +4876,10 @@
       );
 
     }
-
     catch (error) {
 
       console.error(
-        'Next question error:',
+        'Next error:',
         error
       );
 
@@ -4534,7 +4891,6 @@
       );
 
     }
-
     finally {
 
       isProcessing =
@@ -4565,6 +4921,10 @@
     }
 
 
+    const targetPage =
+      currentPage - 1;
+
+
     isProcessing =
       true;
 
@@ -4574,16 +4934,35 @@
 
     try {
 
-      await saveAttempt();
+      setSaveStatus(
+        'Saving answer...',
+        'saving'
+      );
+
+
+      await processCurrentPage(
+        targetPage
+      );
+
+
+      setSaveStatus(
+        'Loading previous question...',
+        'saving'
+      );
 
 
       await loadAttemptPage(
-        currentPage - 1
+        targetPage
       );
 
     }
-
     catch (error) {
+
+      console.error(
+        'Previous error:',
+        error
+      );
+
 
       showMessage(
         `Could not load the previous question: ${
@@ -4592,7 +4971,6 @@
       );
 
     }
-
     finally {
 
       isProcessing =
@@ -4610,9 +4988,7 @@
      FINAL SUBMISSION
   ========================================================== */
 
-  async function processFinalAttempt(
-    timeUp = 0
-  ) {
+  async function processFinalAttempt() {
 
     const responseData =
       collectResponseData();
@@ -4627,7 +5003,7 @@
         1,
 
       timeup:
-        timeUp
+        0
 
     };
 
@@ -4651,32 +5027,140 @@
 
 
     console.log(
-      'FINAL PROCESS PARAMETERS:',
+      'ATHENA FINAL SUBMISSION:',
       params
     );
 
 
-    const result =
-      await moodleRequest(
-        'mod_quiz_process_attempt',
-        params
-      );
-
-
-    console.log(
-      'FINAL PROCESS RESPONSE:',
-      result
+    return await moodleRequest(
+      'mod_quiz_process_attempt',
+      params
     );
-
-
-    return result;
 
   }
 
 
-  async function submitQuiz(
-    timeUp = 0
+  /* =========================================================
+     WAIT FOR FINAL GRADING
+  ========================================================== */
+
+  async function waitForFinalGrade(
+    attemptId,
+    tries = 8,
+    delayMs = 1000
   ) {
+
+    for (
+      let i = 0;
+      i < tries;
+      i++
+    ) {
+
+      const attempts =
+        await getUserQuizAttempts();
+
+
+      const attempt =
+        attempts.find(
+          item =>
+            Number(
+              item.id
+            ) ===
+            Number(
+              attemptId
+            )
+        );
+
+
+      const review =
+        await getAttemptReview(
+          attemptId
+        );
+
+
+      const grade =
+        Number(
+          review?.rescaledgrade
+        );
+
+
+      if (
+        Number.isFinite(
+          grade
+        )
+      ) {
+
+        return {
+
+          attempt:
+            attempt ||
+            null,
+
+          review:
+            review ||
+            null
+
+        };
+
+      }
+
+
+      /*
+       * Moodle 5 can expose submitted before
+       * automated grading finishes.
+       */
+
+      if (
+        attempt &&
+        attemptState(
+          attempt
+        ) ===
+        'finished'
+      ) {
+
+        return {
+
+          attempt:
+            attempt,
+
+          review:
+            review ||
+            null
+
+        };
+
+      }
+
+
+      await new Promise(
+        resolve =>
+          setTimeout(
+            resolve,
+            delayMs
+          )
+      );
+
+    }
+
+
+    return {
+
+      attempt:
+        null,
+
+      review:
+        null
+
+    };
+
+  }
+
+
+  /* =========================================================
+     SUBMIT QUIZ
+  ========================================================== */
+
+  async function submitQuiz() {
 
     if (
       isProcessing ||
@@ -4689,17 +5173,13 @@
 
 
     const confirmed =
-      timeUp === 1
-        ? true
-        : window.confirm(
-            'Submit your quiz? You will not be able to continue this attempt.'
-          );
+      window.confirm(
+        'Submit your quiz? You will not be able to continue this attempt.'
+      );
 
 
     if (!confirmed) {
-
       return;
-
     }
 
 
@@ -4716,61 +5196,132 @@
     try {
 
       setSaveStatus(
-        'Saving final answers...',
-        'saving'
-      );
-
-
-      await saveAttempt();
-
-
-      setSaveStatus(
         'Submitting...',
         'saving'
       );
 
 
+      /*
+       * IMPORTANT:
+       *
+       * We do NOT call save_attempt here.
+       * process_attempt is responsible for
+       * processing the final response and
+       * finishing the attempt.
+       */
+
       const result =
-        await processFinalAttempt(
-          timeUp
+        await processFinalAttempt();
+
+
+      console.log(
+        'ATHENA SUBMISSION RESPONSE:',
+        result
+      );
+
+
+      if (
+        !result ||
+        !result.state
+      ) {
+
+        throw new Error(
+          'Moodle did not return the final attempt state.'
         );
+
+      }
 
 
       const state =
         String(
-          result.state ||
-          ''
+          result.state
         ).toLowerCase();
 
 
       if (
         state !== 'finished' &&
+        state !== 'submitted' &&
         state !== 'overdue'
       ) {
 
         throw new Error(
-          `Moodle returned attempt state: ${
-            result.state ||
-            'unknown'
+          `Moodle returned unexpected state: ${
+            result.state
           }`
         );
 
       }
 
 
-      currentAttempt.state =
-        state;
+      const submittedAttemptId =
+        currentAttempt.id;
+
+
+      setSaveStatus(
+        state === 'finished'
+          ? 'Graded'
+          : 'Submitted — grading...',
+        state === 'finished'
+          ? 'saved'
+          : 'saving'
+      );
 
 
       stopAutosave();
+
+
+      /*
+       * Wait for Moodle's grading pipeline.
+       */
+
+      const graded =
+        await waitForFinalGrade(
+          submittedAttemptId
+        );
+
+
+      const finalAttempt =
+        graded.attempt ||
+        currentAttempt;
+
+
+      const finalReview =
+        graded.review ||
+        null;
+
+
+      if (
+        finalAttempt
+      ) {
+
+        currentAttempt =
+          finalAttempt;
+
+      }
+
+
+      const finalGrade =
+        getAttemptGrade(
+          finalAttempt,
+          finalReview
+        );
+
+
+      const finalPercentage =
+        getAttemptPercentage(
+          finalAttempt,
+          finalReview
+        );
+
 
       stopTimer();
 
 
       attemptStatus.textContent =
-        state === 'finished'
-          ? 'Finished'
-          : 'Time expired';
+        `Attempt ${
+          finalAttempt.attempt ||
+          ''
+        } — Finished`;
 
 
       setSaveStatus(
@@ -4787,7 +5338,7 @@
         'none';
 
 
-      historyCard.style.display =
+      attemptSummaryArea.style.display =
         'none';
 
 
@@ -4795,32 +5346,93 @@
         'block';
 
 
-      document.getElementById(
-        'result-score'
-      ).textContent =
-        'Submitted';
+      const resultScore =
+        document.getElementById(
+          'result-score'
+        );
 
 
-      document.getElementById(
-        'result-percentage'
-      ).textContent =
-        'Attempt submitted successfully';
+      const resultPercentage =
+        document.getElementById(
+          'result-percentage'
+        );
 
 
-      document.getElementById(
-        'result-description'
-      ).textContent =
-        'Your attempt is now stored in Moodle.';
+      const resultDescription =
+        document.getElementById(
+          'result-description'
+        );
+
+
+      if (
+        finalGrade !== null &&
+        Number.isFinite(
+          quizMaxGrade
+        ) &&
+        quizMaxGrade > 0
+      ) {
+
+        resultScore.textContent =
+          `${formatNumber(
+            finalGrade
+          )} / ${formatNumber(
+            quizMaxGrade
+          )}`;
+
+      }
+      else if (
+        finalGrade !== null
+      ) {
+
+        resultScore.textContent =
+          formatNumber(
+            finalGrade
+          );
+
+      }
+      else {
+
+        resultScore.textContent =
+          'Submitted';
+
+      }
+
+
+      if (
+        finalPercentage !== null
+      ) {
+
+        resultPercentage.textContent =
+          `${Math.max(
+            0,
+            Math.min(
+              100,
+              finalPercentage
+            )
+          ).toFixed(1)}%`;
+
+      }
+      else {
+
+        resultPercentage.textContent =
+          'Submitted successfully';
+
+      }
+
+
+      resultDescription.textContent =
+        finalPercentage !== null
+          ? 'Your quiz has been submitted and graded by Moodle.'
+          : 'Your quiz has been submitted. Moodle is still processing the final grade.';
 
 
       lucide.createIcons();
 
     }
-
     catch (error) {
 
       console.error(
-        'Submit quiz error:',
+        'Submission error:',
         error
       );
 
@@ -4838,7 +5450,6 @@
       );
 
     }
-
     finally {
 
       isProcessing =
@@ -4853,44 +5464,257 @@
 
 
   /* =========================================================
+     NAVIGATION UI
+  ========================================================== */
+
+  function updateNavigation() {
+
+    previousButton.disabled =
+      currentPage <= 0 ||
+      isProcessing;
+
+
+    nextButton.disabled =
+      isProcessing;
+
+
+    submitButton.disabled =
+      isProcessing;
+
+
+    if (
+      isLastPage
+    ) {
+
+      nextButton.style.display =
+        'none';
+
+      submitButton.style.display =
+        'inline-flex';
+
+    }
+    else {
+
+      nextButton.style.display =
+        'inline-flex';
+
+      submitButton.style.display =
+        'inline-flex';
+
+    }
+
+
+    highlightNavigator(
+      currentPage
+    );
+
+
+    setNavigatorDisabled(
+      isProcessing
+    );
+
+
+    lucide.createIcons();
+
+  }
+
+
+  /* =========================================================
      STATUS
   ========================================================== */
 
   function updateStatus() {
 
-    attemptStatus.textContent =
-      currentAttempt?.state ||
-      'In progress';
+    const currentAttemptNumber =
+      Number(
+        currentAttempt?.attempt
+      );
+
+
+    if (
+      Number.isFinite(
+        currentAttemptNumber
+      )
+    ) {
+
+      if (
+        maxAttempts !== null &&
+        maxAttempts > 0
+      ) {
+
+        attemptStatus.textContent =
+          `${currentAttemptNumber} / ${maxAttempts}`;
+
+      }
+      else {
+
+        attemptStatus.textContent =
+          `Attempt ${currentAttemptNumber}`;
+
+      }
+
+    }
+    else {
+
+      attemptStatus.textContent =
+        'In progress';
+
+    }
 
 
     progressStatus.textContent =
-      `Page ${
-        currentPage + 1
+      `Question ${
+        getCurrentQuestionNumber()
       } / ${
-        getTotalPages()
+        quizNavigation.length ||
+        '?'
       }`;
 
   }
 
 
-  function getTotalPages() {
+  function getCurrentQuestionNumber() {
+
+    const current =
+      quizNavigation.find(
+        item =>
+          item.page ===
+          currentPage
+      );
+
 
     if (
-      !quizNavigation.length
+      current
     ) {
 
-      return 1;
+      /*
+       * If multiple questions are on the
+       * same page, use the first question.
+       */
+
+      return current.questionNumber;
 
     }
 
 
-    return (
-      Math.max(
-        ...quizNavigation.map(
-          item =>
-            item.page
-        )
-      ) + 1
+    return currentPage + 1;
+
+  }
+
+
+  /* =========================================================
+     NAVIGATOR
+  ========================================================== */
+
+  function highlightNavigator(
+    page
+  ) {
+
+    navigatorGrid
+      .querySelectorAll(
+        '.nav-question'
+      )
+      .forEach(
+        (button, index) => {
+
+          const item =
+            quizNavigation[index];
+
+
+          if (!item) {
+            return;
+          }
+
+
+          button.classList.toggle(
+            'current',
+            item.page ===
+              page
+          );
+
+        }
+      );
+
+  }
+
+
+  function setNavigatorDisabled(
+    disabled
+  ) {
+
+    navigatorGrid
+      .querySelectorAll(
+        '.nav-question'
+      )
+      .forEach(
+        button => {
+
+          button.disabled =
+            disabled;
+
+        }
+      );
+
+  }
+
+
+  function renderNavigator() {
+
+    navigatorGrid.innerHTML =
+      '';
+
+
+    quizNavigation.forEach(
+      item => {
+
+        const button =
+          document.createElement(
+            'button'
+          );
+
+
+        button.type =
+          'button';
+
+
+        button.className =
+          'nav-question';
+
+
+        button.textContent =
+          item.questionNumber;
+
+
+        button.title =
+          `Question ${
+            item.questionNumber
+          }`;
+
+
+        button.addEventListener(
+          'click',
+          () =>
+            navigateToQuestion(
+              item
+            )
+        );
+
+
+        navigatorGrid.appendChild(
+          button
+        );
+
+      }
+    );
+
+
+    highlightNavigator(
+      currentPage
+    );
+
+
+    setNavigatorDisabled(
+      isProcessing
     );
 
   }
@@ -4940,7 +5764,7 @@
     ) {
 
       timerStatus.textContent =
-        '—';
+        '00:00';
 
       return;
 
@@ -4958,6 +5782,89 @@
         )
       );
 
+
+    /*
+     * If the quiz has a time limit,
+     * show countdown.
+     */
+
+    if (
+      quizTimeLimit > 0
+    ) {
+
+      const remaining =
+        Math.max(
+          0,
+          quizTimeLimit -
+          elapsed
+        );
+
+
+      const hours =
+        Math.floor(
+          remaining / 3600
+        );
+
+
+      const minutes =
+        Math.floor(
+          (
+            remaining % 3600
+          ) / 60
+        );
+
+
+      const seconds =
+        remaining % 60;
+
+
+      timerStatus.textContent =
+        hours > 0
+
+          ? `${String(
+              hours
+            ).padStart(2,'0')}:${
+              String(
+                minutes
+              ).padStart(2,'0')
+            }:${String(
+              seconds
+            ).padStart(2,'0')}`
+
+          : `${String(
+              minutes
+            ).padStart(2,'0')}:${
+              String(
+                seconds
+              ).padStart(2,'0')
+            }`;
+
+
+      /*
+       * Time expired.
+       */
+
+      if (
+        remaining <= 0 &&
+        !isProcessing &&
+        currentAttempt.state ===
+          'inprogress'
+      ) {
+
+        submitQuiz();
+
+      }
+
+
+      return;
+
+    }
+
+
+    /*
+     * No time limit:
+     * show elapsed time.
+     */
 
     const hours =
       Math.floor(
@@ -4980,12 +5887,22 @@
     timerStatus.textContent =
       hours > 0
 
-        ? `${String(hours).padStart(2,'0')}:${
-            String(minutes).padStart(2,'0')
-          }:${String(seconds).padStart(2,'0')}`
+        ? `${String(
+            hours
+          ).padStart(2,'0')}:${
+            String(
+              minutes
+            ).padStart(2,'0')
+          }:${String(
+            seconds
+          ).padStart(2,'0')}`
 
-        : `${String(minutes).padStart(2,'0')}:${
-            String(seconds).padStart(2,'0')}`;
+        : `${String(
+            minutes
+          ).padStart(2,'0')}:${
+            String(
+              seconds
+            ).padStart(2,'0')}`;
 
   }
 
@@ -5014,8 +5931,7 @@
 
   submitButton.addEventListener(
     'click',
-    () =>
-      submitQuiz(0)
+    submitQuiz
   );
 
 
@@ -5033,7 +5949,7 @@
 
         const confirmed =
           window.confirm(
-            'You have an active quiz attempt. Leave this page? Your latest autosaved answers will remain in Moodle.'
+            'You have an active quiz attempt. Leave this page? Your answers have been automatically saved.'
           );
 
 
@@ -5082,11 +5998,9 @@
 
       await loadQuizInfo();
 
-
       await prepareQuizScreen();
 
     }
-
     catch (error) {
 
       console.error(
@@ -5127,11 +6041,9 @@
         inputSaveTimer
       );
 
-
       clearInterval(
         saveInterval
       );
-
 
       clearInterval(
         timerInterval
