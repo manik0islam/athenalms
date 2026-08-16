@@ -438,14 +438,18 @@
     
     // Auth Check
     const userToken = localStorage.getItem('madar_user_token');
+    const username = localStorage.getItem('madar_username');
     if (!userToken) window.location.href = 'login.html';
 
-    // Profile Routing
+    // UI Personalization & Logout
+    const userDisplay = document.querySelector('.user-profile span');
+    if (userDisplay && username) userDisplay.textContent = username;
+
     document.querySelector('.user-profile').addEventListener('click', () => {
       window.location.href = 'profile.html';
     });
 
-    // Helper for icons based on course name
+    // Helper for icons
     function getCourseMetadata(courseName) {
       const lowerName = courseName.toLowerCase();
       if (lowerName.includes('math') || lowerName.includes('calc')) return { category: 'Mathematics', icon: 'calculator' };
@@ -454,13 +458,14 @@
       return { category: 'General Foundation', icon: 'book-open' };
     }
 
+    // Dynamic Fetch for Workspace
     async function fetchAthenaWorkspace() {
       const courseGrid = document.getElementById('course-grid');
       const timelineList = document.querySelector('.timeline-list');
-      const userDisplay = document.querySelector('.user-profile span');
+      const announcementList = document.querySelector('.announcement-list');
 
       try {
-        // STEP 1: Get User Info & Update Header
+        // STEP 1: Ask Moodle for the logged-in user's ID
         const infoEndpoint = `${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=core_webservice_get_site_info&moodlewsrestformat=json`;
         const infoResponse = await fetch(infoEndpoint);
         const siteInfo = await infoResponse.json();
@@ -522,12 +527,13 @@
           courseGrid.appendChild(card);
         });
 
-        // STEP 3: Fetch Assignments for Timeline
         const courseIds = validCourses.map(c => c.id);
+        const assignParams = courseIds.map((id, idx) => `courseids[${idx}]=${id}`).join('&');
+
+        // STEP 3: Fetch Assignments for Timeline
         if (courseIds.length > 0) {
           timelineList.innerHTML = `<li style="text-align: center; color: var(--text-secondary); font-size: 0.85rem;">Checking deadlines...</li>`;
           
-          const assignParams = courseIds.map((id, idx) => `courseids[${idx}]=${id}`).join('&');
           const assignRes = await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=mod_assign_get_assignments&${assignParams}&moodlewsrestformat=json`);
           const assignData = await assignRes.json();
           
@@ -570,7 +576,49 @@
              });
           }
         }
-        
+
+        // STEP 4: Fetch Live Announcements
+        if (courseIds.length > 0) {
+          announcementList.innerHTML = `<li style="text-align: center; color: var(--text-secondary); font-size: 0.85rem;">Connecting to comms channel...</li>`;
+          
+          try {
+            const forumRes = await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=mod_forum_get_forums_by_courses&${assignParams}&moodlewsrestformat=json`);
+            const forums = await forumRes.json();
+            
+            let allDiscussions = [];
+            // Limit to the first 2 courses to prevent API overload
+            const targetForums = forums.slice(0, 2); 
+            
+            for (const forum of targetForums) {
+              const discRes = await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=mod_forum_get_forum_discussions&forumid=${forum.id}&moodlewsrestformat=json`);
+              const discData = await discRes.json();
+              if (discData.discussions) {
+                 allDiscussions = allDiscussions.concat(discData.discussions);
+              }
+            }
+
+            // Sort by newest first
+            allDiscussions.sort((a, b) => b.created - a.created);
+
+            if (allDiscussions.length === 0) {
+              announcementList.innerHTML = `<li style="font-size: 0.85rem; color: var(--text-secondary); text-align: center;">No new announcements.</li>`;
+            } else {
+              announcementList.innerHTML = '';
+              allDiscussions.slice(0, 3).forEach(post => {
+                const dateStr = new Date(post.created * 1000).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+                announcementList.innerHTML += `
+                  <li class="announcement-item">
+                    <div class="announcement-meta">${dateStr} • ${post.userfullname}</div>
+                    <a href="forum.html?forumid=${post.forum}&courseid=${courseIds[0]}" class="announcement-title">${post.subject}</a>
+                  </li>
+                `;
+              });
+            }
+          } catch (e) {
+            announcementList.innerHTML = `<li style="font-size: 0.85rem; color: #dc2626; text-align: center;">Unable to load announcements.</li>`;
+          }
+        }
+
         lucide.createIcons();
 
       } catch (error) {
