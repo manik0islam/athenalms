@@ -3,93 +3,1350 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Madar LMS | File Resource</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <title>Madar LMS | Resource Viewer</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
   <script src="https://unpkg.com/lucide@latest"></script>
+
   <style>
     :root {
-      --bg-primary: #ffffff; --bg-secondary: #f8fafc; --bg-tertiary: #f1f5f9;
-      --text-primary: #09090b; --text-secondary: #52525b;
-      --border-color: #e2e8f0; --brand-black: #000000; --white: #ffffff;
-      --font-heading: 'Space Grotesk', sans-serif; --font-body: 'Inter', sans-serif;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: var(--font-body); background-color: var(--bg-secondary); color: var(--text-primary); }
-    
-    header { background-color: rgba(255, 255, 255, 0.95); border-bottom: 1px solid var(--border-color); position: fixed; top: 0; left: 0; right: 0; z-index: 100; backdrop-filter: blur(8px); }
-    .nav-container { max-width: 1000px; margin: 0 auto; padding: 0 24px; height: 70px; display: flex; justify-content: space-between; align-items: center; }
-    .back-link { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.95rem; color: var(--text-secondary); cursor: pointer; transition: color 0.2s; }
-    .back-link:hover { color: var(--brand-black); }
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-tertiary: #f1f5f9;
 
-    .portal-container { max-width: 800px; margin: 140px auto 60px; padding: 0 24px; display: flex; justify-content: center; }
-    
-    .file-card { background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 12px; padding: 48px 40px; text-align: center; width: 100%; max-width: 480px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.02); }
-    .file-icon { width: 72px; height: 72px; margin: 0 auto 24px; color: var(--brand-black); background: var(--bg-tertiary); border-radius: 16px; display: flex; align-items: center; justify-content: center; }
-    .file-name { font-family: var(--font-heading); font-size: 1.35rem; font-weight: 600; margin-bottom: 8px; word-break: break-all; }
-    .file-meta { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 32px; display: flex; align-items: center; justify-content: center; gap: 8px; }
-    
-    .download-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 16px; background-color: var(--brand-black); color: var(--white); border-radius: 8px; font-family: var(--font-heading); font-weight: 600; font-size: 1rem; text-decoration: none; transition: transform 0.1s, opacity 0.2s; }
-    .download-btn:hover { opacity: 0.9; }
-    .download-btn:active { transform: scale(0.99); }
+      --text-primary: #09090b;
+      --text-secondary: #52525b;
+      --text-tertiary: #71717a;
+
+      --border-color: #e2e8f0;
+      --brand-black: #000000;
+      --white: #ffffff;
+
+      --danger: #dc2626;
+
+      --font-heading: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    /* ================================
+       HEADER
+    ================================= */
+
+    header {
+      background: rgba(255, 255, 255, 0.96);
+      border-bottom: 1px solid var(--border-color);
+
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+
+      z-index: 100;
+
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+
+      padding: 0 24px;
+
+      height: 70px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      gap: 20px;
+    }
+
+    .back-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      font-weight: 600;
+      font-size: 0.95rem;
+
+      color: var(--text-secondary);
+
+      cursor: pointer;
+
+      transition: color 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: var(--brand-black);
+    }
+
+    .header-label {
+      font-family: var(--font-heading);
+
+      font-weight: 700;
+      font-size: 1.05rem;
+
+      letter-spacing: -0.4px;
+
+      white-space: nowrap;
+    }
+
+    /* ================================
+       MAIN
+    ================================= */
+
+    .page {
+      max-width: 1200px;
+
+      margin: 0 auto;
+
+      padding:
+        110px
+        24px
+        60px;
+    }
+
+    /* ================================
+       RESOURCE HEADER
+    ================================= */
+
+    .resource-header {
+      margin-bottom: 24px;
+    }
+
+    .resource-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+
+      font-size: 0.78rem;
+      font-weight: 700;
+
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+
+      color: var(--text-secondary);
+
+      margin-bottom: 10px;
+    }
+
+    .resource-title {
+      font-family: var(--font-heading);
+
+      font-size: clamp(1.7rem, 4vw, 2.5rem);
+
+      line-height: 1.15;
+
+      letter-spacing: -0.7px;
+
+      margin-bottom: 12px;
+
+      word-break: break-word;
+    }
+
+    .resource-description {
+      max-width: 800px;
+
+      color: var(--text-secondary);
+
+      font-size: 0.95rem;
+    }
+
+    .resource-description img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* ================================
+       META
+    ================================= */
+
+    .resource-meta {
+      display: flex;
+      flex-wrap: wrap;
+
+      gap: 8px;
+
+      margin-top: 18px;
+    }
+
+    .meta-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+
+      padding: 7px 11px;
+
+      background: var(--white);
+
+      border: 1px solid var(--border-color);
+
+      border-radius: 6px;
+
+      font-size: 0.82rem;
+
+      color: var(--text-secondary);
+    }
+
+    .meta-item strong {
+      color: var(--text-primary);
+    }
+
+    /* ================================
+       VIEWER
+    ================================= */
+
+    .viewer-card {
+      background: var(--white);
+
+      border: 1px solid var(--border-color);
+
+      border-radius: 10px;
+
+      overflow: hidden;
+
+      box-shadow:
+        0 4px 6px -1px rgba(0, 0, 0, 0.04),
+        0 2px 4px -2px rgba(0, 0, 0, 0.02);
+    }
+
+    .viewer-toolbar {
+      min-height: 58px;
+
+      padding: 10px 16px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 12px;
+
+      border-bottom: 1px solid var(--border-color);
+
+      background: var(--bg-primary);
+    }
+
+    .viewer-type {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+
+      font-family: var(--font-heading);
+
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .viewer-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .toolbar-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+
+      padding: 8px 12px;
+
+      border-radius: 6px;
+
+      border: 1px solid var(--border-color);
+
+      background: var(--white);
+
+      color: var(--text-primary);
+
+      font-family: var(--font-body);
+
+      font-size: 0.82rem;
+
+      font-weight: 600;
+
+      text-decoration: none;
+
+      cursor: pointer;
+
+      transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+    }
+
+    .toolbar-btn:hover {
+      background: var(--bg-secondary);
+
+      border-color: #cbd5e1;
+    }
+
+    .toolbar-btn.primary {
+      background: var(--brand-black);
+
+      color: var(--white);
+
+      border-color: var(--brand-black);
+    }
+
+    .toolbar-btn.primary:hover {
+      opacity: 0.9;
+    }
+
+    /* ================================
+       PDF VIEWER
+    ================================= */
+
+    .pdf-container {
+      width: 100%;
+
+      height: min(75vh, 900px);
+
+      background: #52525b;
+    }
+
+    .pdf-container iframe {
+      width: 100%;
+      height: 100%;
+
+      border: 0;
+
+      display: block;
+    }
+
+    /* ================================
+       IMAGE VIEWER
+    ================================= */
+
+    .image-container {
+      padding: 40px;
+
+      min-height: 400px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      background:
+        linear-gradient(
+          45deg,
+          #f1f5f9 25%,
+          transparent 25%
+        ),
+        linear-gradient(
+          -45deg,
+          #f1f5f9 25%,
+          transparent 25%
+        ),
+        linear-gradient(
+          45deg,
+          transparent 75%,
+          #f1f5f9 75%
+        ),
+        linear-gradient(
+          -45deg,
+          transparent 75%,
+          #f1f5f9 75%
+        );
+
+      background-size: 32px 32px;
+
+      background-position:
+        0 0,
+        0 16px,
+        16px -16px,
+        -16px 0;
+    }
+
+    .image-container img {
+      max-width: 100%;
+
+      max-height: 75vh;
+
+      object-fit: contain;
+
+      border: 1px solid var(--border-color);
+
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    }
+
+    /* ================================
+       GENERIC FILE
+    ================================= */
+
+    .file-fallback {
+      padding: 80px 30px;
+
+      text-align: center;
+    }
+
+    .fallback-icon {
+      width: 80px;
+      height: 80px;
+
+      margin: 0 auto 20px;
+
+      border-radius: 16px;
+
+      background: var(--bg-tertiary);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .fallback-title {
+      font-family: var(--font-heading);
+
+      font-size: 1.25rem;
+
+      margin-bottom: 8px;
+    }
+
+    .fallback-text {
+      color: var(--text-secondary);
+
+      font-size: 0.9rem;
+
+      max-width: 500px;
+
+      margin: 0 auto 24px;
+    }
+
+    .fallback-download {
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 8px;
+
+      padding: 13px 20px;
+
+      background: var(--brand-black);
+
+      color: var(--white);
+
+      border-radius: 7px;
+
+      text-decoration: none;
+
+      font-family: var(--font-heading);
+
+      font-weight: 600;
+
+      font-size: 0.9rem;
+    }
+
+    /* ================================
+       LOADING
+    ================================= */
+
+    .loading {
+      min-height: 400px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      justify-content: center;
+
+      color: var(--text-secondary);
+    }
+
+    .loading-icon {
+      animation: spin 1s linear infinite;
+
+      margin-bottom: 14px;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* ================================
+       ERROR
+    ================================= */
+
+    .error {
+      padding: 70px 30px;
+
+      text-align: center;
+    }
+
+    .error-icon {
+      color: var(--danger);
+
+      margin-bottom: 14px;
+    }
+
+    .error-title {
+      font-family: var(--font-heading);
+
+      font-size: 1.25rem;
+
+      margin-bottom: 8px;
+    }
+
+    .error-text {
+      color: var(--text-secondary);
+
+      font-size: 0.9rem;
+    }
+
+    /* ================================
+       MOBILE
+    ================================= */
+
+    @media (max-width: 700px) {
+
+      .nav-container {
+        padding: 0 16px;
+      }
+
+      .header-label {
+        font-size: 0.9rem;
+      }
+
+      .back-link {
+        font-size: 0.85rem;
+      }
+
+      .page {
+        padding:
+          100px
+          14px
+          40px;
+      }
+
+      .resource-title {
+        font-size: 1.7rem;
+      }
+
+      .viewer-toolbar {
+        align-items: flex-start;
+
+        flex-direction: column;
+      }
+
+      .viewer-actions {
+        width: 100%;
+      }
+
+      .toolbar-btn {
+        flex: 1;
+      }
+
+      .pdf-container {
+        height: 70vh;
+      }
+
+      .image-container {
+        padding: 20px 12px;
+      }
+
+      .fallback-download {
+        width: 100%;
+      }
+    }
   </style>
 </head>
+
 <body>
+
   <header>
     <div class="nav-container">
-      <div class="back-link" onclick="history.back()"><i data-lucide="arrow-left" style="width: 18px; height: 18px;"></i> Back to Modules</div>
-      <div style="font-family: var(--font-heading); font-weight: 700; font-size: 1.1rem; letter-spacing: -0.5px; color: var(--brand-black);">RESOURCE VIEWER</div>
+
+      <div
+        class="back-link"
+        onclick="history.back()"
+      >
+        <i
+          data-lucide="arrow-left"
+          style="width:18px;height:18px;"
+        ></i>
+
+        Back to Modules
+      </div>
+
+      <div class="header-label">
+        RESOURCE VIEWER
+      </div>
+
     </div>
   </header>
 
-  <div class="portal-container" id="main-container">
-    <div class="file-card" style="padding: 60px;">
-      <i data-lucide="loader-2" style="animation: spin 2s linear infinite; margin: 0 auto 12px; display: block; width: 32px; height: 32px; color: var(--brand-black);"></i>
-      <div style="color: var(--text-secondary);">Locating file...</div>
-    </div>
-  </div>
+
+  <main class="page">
+
+    <section class="resource-header">
+
+      <div class="resource-kicker">
+        <i
+          data-lucide="file"
+          style="width:15px;height:15px;"
+        ></i>
+
+        Learning Resource
+      </div>
+
+      <h1
+        class="resource-title"
+        id="resource-title"
+      >
+        Loading Resource...
+      </h1>
+
+      <div
+        class="resource-description"
+        id="resource-description"
+      ></div>
+
+      <div
+        class="resource-meta"
+        id="resource-meta"
+      ></div>
+
+    </section>
+
+
+    <section
+      class="viewer-card"
+      id="viewer"
+    >
+
+      <div class="loading">
+
+        <i
+          data-lucide="loader-2"
+          class="loading-icon"
+          style="width:32px;height:32px;"
+        ></i>
+
+        <div>
+          Loading resource...
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
 
   <script>
+
     lucide.createIcons();
+
+
+    /* ==========================================
+       CONFIGURATION
+    ========================================== */
+
     const MOODLE_URL = 'http://localhost:8000';
-    const userToken = localStorage.getItem('madar_user_token');
-    const urlParams = new URLSearchParams(window.location.search);
-    const resourceId = urlParams.get('resourceid');
-    const courseId = urlParams.get('courseid');
+
+    const userToken =
+      localStorage.getItem('madar_user_token');
+
+    const urlParams =
+      new URLSearchParams(window.location.search);
+
+    const resourceId =
+      urlParams.get('resourceid');
+
+    const courseId =
+      urlParams.get('courseid');
+
+
+    /* ==========================================
+       AUTH CHECK
+    ========================================== */
+
+    if (!userToken) {
+
+      window.location.href = 'login.html';
+
+    }
+
+
+    /* ==========================================
+       HTML ESCAPE
+       Prevents Moodle text from becoming HTML.
+    ========================================== */
+
+    function escapeHtml(value) {
+
+      if (!value) return '';
+
+      return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+
+    }
+
+
+    /* ==========================================
+       FORMAT FILE SIZE
+    ========================================== */
+
+    function formatFileSize(bytes) {
+
+      if (!bytes) return 'Unknown size';
+
+      if (bytes < 1024) {
+
+        return `${bytes} B`;
+
+      }
+
+      if (bytes < 1024 * 1024) {
+
+        return `${(bytes / 1024).toFixed(1)} KB`;
+
+      }
+
+      if (bytes < 1024 * 1024 * 1024) {
+
+        return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+
+      }
+
+      return `${(bytes / (1024 * 1024 * 1024)).toFixed(2)} GB`;
+
+    }
+
+
+    /* ==========================================
+       GET FILE EXTENSION
+    ========================================== */
+
+    function getExtension(filename) {
+
+      if (!filename) return '';
+
+      const parts =
+        filename.split('.');
+
+      if (parts.length < 2) return '';
+
+      return parts.pop().toLowerCase();
+
+    }
+
+
+    /* ==========================================
+       GET FILE TYPE
+    ========================================== */
+
+    function getFileType(filename) {
+
+      const extension =
+        getExtension(filename);
+
+      const types = {
+
+        pdf: 'PDF Document',
+
+        doc: 'Word Document',
+        docx: 'Word Document',
+
+        ppt: 'PowerPoint',
+        pptx: 'PowerPoint',
+
+        xls: 'Spreadsheet',
+        xlsx: 'Spreadsheet',
+
+        txt: 'Text File',
+
+        csv: 'CSV File',
+
+        zip: 'ZIP Archive',
+
+        rar: 'Archive',
+
+        jpg: 'Image',
+        jpeg: 'Image',
+        png: 'Image',
+        gif: 'Image',
+        webp: 'Image',
+
+        mp4: 'Video',
+        webm: 'Video',
+
+        mp3: 'Audio'
+
+      };
+
+      return types[extension] || 'File';
+
+    }
+
+
+    /* ==========================================
+       GET MOODLE FILE URL
+    ========================================== */
+
+    function getFileUrl(file) {
+
+      return file.fileurl +
+        (
+          file.fileurl.includes('?')
+            ? '&'
+            : '?'
+        ) +
+        'token=' +
+        encodeURIComponent(userToken);
+
+    }
+
+
+    /* ==========================================
+       RENDER META
+    ========================================== */
+
+    function renderMeta(file) {
+
+      const extension =
+        getExtension(file.filename);
+
+      const type =
+        getFileType(file.filename);
+
+      document.getElementById(
+        'resource-meta'
+      ).innerHTML = `
+
+        <div class="meta-item">
+
+          <i
+            data-lucide="file-type"
+            style="width:15px;height:15px;"
+          ></i>
+
+          <strong>${escapeHtml(type)}</strong>
+
+        </div>
+
+
+        ${
+          extension
+            ? `
+              <div class="meta-item">
+                <strong>
+                  .${escapeHtml(extension)}
+                </strong>
+              </div>
+            `
+            : ''
+        }
+
+
+        <div class="meta-item">
+
+          <i
+            data-lucide="hard-drive"
+            style="width:15px;height:15px;"
+          ></i>
+
+          ${formatFileSize(file.filesize)}
+
+        </div>
+
+      `;
+
+      lucide.createIcons();
+
+    }
+
+
+    /* ==========================================
+       RENDER PDF
+    ========================================== */
+
+    function renderPdf(file) {
+
+      const fileUrl =
+        getFileUrl(file);
+
+      const viewer =
+        document.getElementById('viewer');
+
+      viewer.innerHTML = `
+
+        <div class="viewer-toolbar">
+
+          <div class="viewer-type">
+
+            <i
+              data-lucide="file-text"
+              style="width:18px;height:18px;"
+            ></i>
+
+            PDF Preview
+
+          </div>
+
+
+          <div class="viewer-actions">
+
+            <a
+              href="${fileUrl}"
+              target="_blank"
+              rel="noopener"
+              class="toolbar-btn"
+            >
+
+              <i
+                data-lucide="external-link"
+                style="width:15px;height:15px;"
+              ></i>
+
+              Open
+
+            </a>
+
+
+            <a
+              href="${fileUrl}"
+              download
+              class="toolbar-btn primary"
+            >
+
+              <i
+                data-lucide="download"
+                style="width:15px;height:15px;"
+              ></i>
+
+              Download
+
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <div class="pdf-container">
+
+          <iframe
+            src="${fileUrl}"
+            title="PDF Resource"
+          ></iframe>
+
+        </div>
+
+      `;
+
+      lucide.createIcons();
+
+    }
+
+
+    /* ==========================================
+       RENDER IMAGE
+    ========================================== */
+
+    function renderImage(file) {
+
+      const fileUrl =
+        getFileUrl(file);
+
+      const viewer =
+        document.getElementById('viewer');
+
+      viewer.innerHTML = `
+
+        <div class="viewer-toolbar">
+
+          <div class="viewer-type">
+
+            <i
+              data-lucide="image"
+              style="width:18px;height:18px;"
+            ></i>
+
+            Image Preview
+
+          </div>
+
+
+          <div class="viewer-actions">
+
+            <a
+              href="${fileUrl}"
+              target="_blank"
+              rel="noopener"
+              class="toolbar-btn"
+            >
+
+              <i
+                data-lucide="external-link"
+                style="width:15px;height:15px;"
+              ></i>
+
+              Open
+
+            </a>
+
+
+            <a
+              href="${fileUrl}"
+              download
+              class="toolbar-btn primary"
+            >
+
+              <i
+                data-lucide="download"
+                style="width:15px;height:15px;"
+              ></i>
+
+              Download
+
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <div class="image-container">
+
+          <img
+            src="${fileUrl}"
+            alt="${escapeHtml(file.filename)}"
+          >
+
+        </div>
+
+      `;
+
+      lucide.createIcons();
+
+    }
+
+
+    /* ==========================================
+       RENDER GENERIC FILE
+    ========================================== */
+
+    function renderGeneric(file) {
+
+      const fileUrl =
+        getFileUrl(file);
+
+      const type =
+        getFileType(file.filename);
+
+      const viewer =
+        document.getElementById('viewer');
+
+      viewer.innerHTML = `
+
+        <div class="file-fallback">
+
+          <div class="fallback-icon">
+
+            <i
+              data-lucide="file"
+              style="width:38px;height:38px;"
+            ></i>
+
+          </div>
+
+
+          <h2 class="fallback-title">
+
+            ${escapeHtml(type)}
+
+          </h2>
+
+
+          <p class="fallback-text">
+
+            This file type cannot be previewed
+            directly inside Athena.
+
+            Open the file in a new tab or
+            download it to your device.
+
+          </p>
+
+
+          <a
+            href="${fileUrl}"
+            target="_blank"
+            rel="noopener"
+            class="fallback-download"
+          >
+
+            <i
+              data-lucide="download"
+              style="width:18px;height:18px;"
+            ></i>
+
+            Open / Download File
+
+          </a>
+
+        </div>
+
+      `;
+
+      lucide.createIcons();
+
+    }
+
+
+    /* ==========================================
+       RENDER RESOURCE
+    ========================================== */
+
+    function renderResource(file) {
+
+      const extension =
+        getExtension(file.filename);
+
+
+      renderMeta(file);
+
+
+      if (extension === 'pdf') {
+
+        renderPdf(file);
+
+        return;
+
+      }
+
+
+      if (
+        [
+          'jpg',
+          'jpeg',
+          'png',
+          'gif',
+          'webp'
+        ].includes(extension)
+      ) {
+
+        renderImage(file);
+
+        return;
+
+      }
+
+
+      renderGeneric(file);
+
+    }
+
+
+    /* ==========================================
+       LOAD RESOURCE
+    ========================================== */
 
     async function loadResource() {
-      const container = document.getElementById('main-container');
+
+      const viewer =
+        document.getElementById('viewer');
+
       try {
-        const res = await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=mod_resource_get_resources_by_courses&courseids[0]=${courseId}&moodlewsrestformat=json`);
-        const data = await res.json();
-        
-        const fileData = data.resources.find(r => r.id == resourceId);
-        if (!fileData || !fileData.contentfiles || fileData.contentfiles.length === 0) throw new Error("File not found");
 
-        const targetFile = fileData.contentfiles[0];
-        const downloadUrl = targetFile.fileurl + (targetFile.fileurl.includes('?') ? '&' : '?') + 'token=' + userToken;
-        
-        const sizeKB = (targetFile.filesize / 1024).toFixed(1);
-        const sizeStr = sizeKB > 1024 ? (sizeKB / 1024).toFixed(2) + ' MB' : sizeKB + ' KB';
+        if (!resourceId || !courseId) {
 
-        container.innerHTML = `
-          <div class="file-card">
-            <div class="file-icon"><i data-lucide="file-text" style="width: 36px; height: 36px;"></i></div>
-            <h2 class="file-name">${targetFile.filename}</h2>
-            <div class="file-meta">
-              <span style="background: var(--bg-tertiary); padding: 2px 8px; border-radius: 4px; font-weight: 500; font-size: 0.8rem; color: var(--text-primary);">Document</span> 
-              &bull; ${sizeStr}
-            </div>
-            <a href="${downloadUrl}" target="_blank" class="download-btn">
-              <i data-lucide="download" style="width: 18px; height: 18px;"></i> Download File
-            </a>
+          throw new Error(
+            'Missing resource or course ID.'
+          );
+
+        }
+
+
+        const url =
+          `${MOODLE_URL}/webservice/rest/server.php` +
+          `?wstoken=${encodeURIComponent(userToken)}` +
+          `&wsfunction=mod_resource_get_resources_by_courses` +
+          `&courseids[0]=${encodeURIComponent(courseId)}` +
+          `&moodlewsrestformat=json`;
+
+
+        const response =
+          await fetch(url);
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            `HTTP ${response.status}`
+          );
+
+        }
+
+
+        const data =
+          await response.json();
+
+
+        if (data.exception) {
+
+          throw new Error(
+            data.message || 'Moodle API error.'
+          );
+
+        }
+
+
+        if (
+          !data.resources ||
+          !Array.isArray(data.resources)
+        ) {
+
+          throw new Error(
+            'Moodle returned no resources.'
+          );
+
+        }
+
+
+        const resource =
+          data.resources.find(
+            resource =>
+              String(resource.id) ===
+              String(resourceId)
+          );
+
+
+        if (!resource) {
+
+          throw new Error(
+            'Resource not found.'
+          );
+
+        }
+
+
+        if (
+          !resource.contentfiles ||
+          !resource.contentfiles.length
+        ) {
+
+          throw new Error(
+            'This resource does not contain a file.'
+          );
+
+        }
+
+
+        const file =
+          resource.contentfiles[0];
+
+
+        document.getElementById(
+          'resource-title'
+        ).textContent =
+          file.filename || resource.name;
+
+
+        document.getElementById(
+          'resource-description'
+        ).innerHTML =
+          resource.intro || '';
+
+
+        renderResource(file);
+
+
+      } catch (error) {
+
+        console.error(
+          'Resource loading error:',
+          error
+        );
+
+
+        document.getElementById(
+          'resource-title'
+        ).textContent =
+          'Unable to Load Resource';
+
+
+        document.getElementById(
+          'resource-description'
+        ).textContent =
+          'Moodle could not provide this resource.';
+
+
+        viewer.innerHTML = `
+
+          <div class="error">
+
+            <i
+              data-lucide="alert-circle"
+              class="error-icon"
+              style="width:42px;height:42px;"
+            ></i>
+
+
+            <h2 class="error-title">
+
+              Resource Unavailable
+
+            </h2>
+
+
+            <p class="error-text">
+
+              ${escapeHtml(error.message)}
+
+            </p>
+
           </div>
+
         `;
+
         lucide.createIcons();
-      } catch (e) {
-        container.innerHTML = `<div class="file-card" style="color: #dc2626;">Error: Could not locate the requested resource.</div>`;
+
       }
+
     }
+
+
+    /* ==========================================
+       START
+    ========================================== */
+
     loadResource();
+
   </script>
+
 </body>
 </html>

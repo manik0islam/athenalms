@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>athena | Profile</title>
+  <title>Athena LMS | User Profile</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,128 +26,103 @@
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    
     body { font-family: var(--font-body); background-color: var(--bg-secondary); color: var(--text-primary); line-height: 1.6; }
-    a { color: var(--text-primary); text-decoration: none; }
-
-    /* HEADER */
+    
     header { background-color: var(--bg-primary); border-bottom: 1px solid var(--border-color); position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
-    .nav-container { max-width: 1400px; margin: 0 auto; padding: 0 24px; height: 70px; display: flex; justify-content: space-between; align-items: center; }
-    .brand { display: flex; align-items: center; gap: 12px; }
-    .brand-icon { color: var(--black); display: flex; }
-    .brand-text { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; letter-spacing: -0.5px; text-transform: uppercase; }
-    
-    .user-controls { display: flex; align-items: center; gap: 20px; }
-    .icon-btn { background: none; border: none; color: var(--text-secondary); cursor: pointer; display: flex; position: relative; transition: color 0.2s; }
-    .icon-btn:hover { color: var(--black); }
-    .user-profile { display: flex; align-items: center; gap: 10px; padding-left: 20px; border-left: 1px solid var(--border-color); cursor: pointer; }
-    .avatar { width: 36px; height: 36px; background-color: var(--bg-tertiary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); }
+    .nav-container { max-width: 1000px; margin: 0 auto; padding: 0 24px; height: 70px; display: flex; justify-content: space-between; align-items: center; }
+    .back-link { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.95rem; color: var(--text-secondary); cursor: pointer; text-decoration: none; transition: color 0.2s; }
+    .back-link:hover { color: var(--black); }
 
-    /* PROFILE HERO */
-    .hero { margin-top: 70px; background-color: var(--bg-primary); border-bottom: 1px solid var(--border-color); position: relative; }
-    .hero-banner { height: 160px; background-image: repeating-linear-gradient(45deg, var(--bg-secondary), var(--bg-secondary) 10px, var(--bg-primary) 10px, var(--bg-primary) 20px); border-bottom: 1px solid var(--border-color); }
-    .hero-content { max-width: 1000px; margin: 0 auto; padding: 0 24px; display: flex; align-items: flex-end; padding-bottom: 30px; margin-top: -50px; }
-    .profile-avatar-large { width: 100px; height: 100px; background-color: var(--bg-primary); border: 2px solid var(--border-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-family: var(--font-heading); font-weight: 700; box-shadow: 0 4px 12px rgba(0,0,0,0.05); z-index: 10; margin-right: 24px; }
-    .profile-title-block { padding-top: 60px; }
-    .profile-name { font-family: var(--font-heading); font-size: 2rem; font-weight: 700; line-height: 1.1; margin-bottom: 4px; }
-    .profile-role { color: var(--text-secondary); font-size: 1.05rem; font-weight: 500; }
-
-    /* PROFILE LAYOUT */
-    .profile-container { max-width: 1000px; margin: 40px auto 60px; padding: 0 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    .profile-container { max-width: 1000px; margin: 110px auto 60px; padding: 0 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
     @media (max-width: 768px) { .profile-container { grid-template-columns: 1fr; } }
+    
+    .moodle-block { background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 6px; padding: 32px; margin-bottom: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .block-title { font-family: var(--font-heading); font-size: 1.15rem; font-weight: 600; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; gap: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+    
+    .hero-section { display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 32px; }
+    .avatar-large { width: 100px; height: 100px; border-radius: 50%; background: var(--bg-tertiary); display: flex; align-items: center; justify-content: center; font-family: var(--font-heading); font-size: 2rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 16px; overflow: hidden; border: 1px solid var(--border-color); }
+    .hero-name { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; letter-spacing: -0.5px; }
+    
+    .info-list { list-style: none; }
+    .info-item { margin-bottom: 16px; }
+    .info-label { display: block; font-size: 0.75rem; text-transform: uppercase; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px; letter-spacing: 0.5px; }
+    .info-value { display: flex; align-items: center; gap: 8px; font-size: 0.95rem; color: var(--text-primary); }
 
-    .moodle-block { background-color: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 6px; padding: 24px; }
-    .block-title { font-family: var(--font-heading); font-size: 1.1rem; font-weight: 600; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; gap: 8px; }
+    .action-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 14px; background-color: var(--bg-secondary); color: var(--black); border: 1px solid var(--border-color); border-radius: 4px; font-family: var(--font-heading); font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: all 0.2s; margin-bottom: 12px; }
+    .action-btn:hover { border-color: var(--black); background: var(--bg-tertiary); }
+    .logout-btn-alt { background-color: transparent; }
     
-    .info-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
-    .info-item { display: flex; flex-direction: column; }
-    .info-label { font-size: 0.75rem; text-transform: uppercase; font-weight: 600; color: var(--text-secondary); margin-bottom: 4px; letter-spacing: 0.5px; }
-    .info-value { font-size: 0.95rem; font-weight: 500; color: var(--black); display: flex; align-items: center; gap: 8px; }
-    
-    .action-btn { width: 100%; padding: 12px; background-color: var(--black); color: var(--white); border: none; border-radius: 4px; font-family: var(--font-body); font-weight: 500; font-size: 0.9rem; cursor: pointer; transition: opacity 0.2s; margin-top: 24px; display: flex; justify-content: center; align-items: center; gap: 8px; }
-    .action-btn:hover { opacity: 0.9; }
-    .logout-btn-alt { background-color: var(--bg-primary); color: var(--text-primary); border: 1px solid var(--border-color); margin-top: 12px; }
-    .logout-btn-alt:hover { border-color: var(--black); background-color: var(--bg-secondary); }
+    @keyframes spin { to { transform: rotate(360deg); } }
   </style>
 </head>
 <body>
-
   <header>
     <div class="nav-container">
-      <a href="index.html" class="brand">
-        <div class="brand-icon"><i data-lucide="triangle" style="width: 28px; height: 28px; fill: var(--black);"></i></div>
-        <span class="brand-text">athena</span>
-      </a>
-      
-      <div class="user-controls">
-        <button class="icon-btn" onclick="window.location.href='index.html'" title="Back to Dashboard"><i data-lucide="layout-dashboard" style="width: 20px; height: 20px;"></i></button>
-        <div class="user-profile">
-          <span style="font-size: 0.9rem; font-weight: 500;" id="nav-username">Loading...</span>
-          <div class="avatar"><i data-lucide="user" style="width: 20px; height: 20px;"></i></div>
-        </div>
-      </div>
+      <a href="index.html" class="back-link"><i data-lucide="arrow-left" style="width: 18px; height: 18px;"></i> Back to Dashboard</a>
+      <div style="font-family: var(--font-heading); font-weight: 700; font-size: 1.1rem; text-transform: uppercase;">USER PROFILE</div>
     </div>
   </header>
 
-  <section class="hero">
-    <div class="hero-banner"></div>
-    <div class="hero-content">
-      <div class="profile-avatar-large" id="profile-initial">MI</div>
-      <div class="profile-title-block">
-        <h1 class="profile-name" id="main-username">Manik Islam</h1>
-        <div class="profile-role">Mechatronics Engineering Student</div>
-      </div>
-    </div>
-  </section>
-
   <div class="profile-container">
-    
-    <!-- LEFT COLUMN: Contact & System Data -->
-    <div class="moodle-block">
-      <h3 class="block-title"><i data-lucide="contact" style="width: 18px; height: 18px;"></i> System Identity</h3>
-      <ul class="info-list">
-        <li class="info-item">
-          <span class="info-label">Primary Email</span>
-          <span class="info-value" id="profile-email"><i data-lucide="mail" style="width: 16px; height: 16px; color: var(--text-tertiary);"></i> Loading...</span>
-        </li>
-        <li class="info-item">
-          <span class="info-label">Phone Number</span>
-          <span class="info-value" id="profile-phone"><i data-lucide="phone" style="width: 16px; height: 16px; color: var(--text-tertiary);"></i> 01150775909</span>
-        </li>
-        <li class="info-item">
-          <span class="info-label">Age</span>
-          <span class="info-value"><i data-lucide="calendar" style="width: 16px; height: 16px; color: var(--text-tertiary);"></i> 21 Years Old</span>
-        </li>
-        <li class="info-item">
-          <span class="info-label">Location Base</span>
-          <span class="info-value" id="profile-location"><i data-lucide="map-pin" style="width: 16px; height: 16px; color: var(--text-tertiary);"></i> Giza, Egypt</span>
-        </li>
-      </ul>
+    <!-- LEFT COLUMN: Identity -->
+    <div>
+      <div class="moodle-block">
+        <div class="hero-section">
+          <div class="avatar-large" id="profile-initial">...</div>
+          <h1 class="hero-name" id="main-username">Loading...</h1>
+          <p style="color: var(--text-secondary); font-size: 0.9rem;" id="nav-username">Student</p>
+        </div>
+        
+        <h3 class="block-title"><i data-lucide="user" style="width: 18px; height: 18px;"></i> System Identity</h3>
+        <ul class="info-list">
+          <li class="info-item">
+            <span class="info-label">Primary Email</span>
+            <span class="info-value" id="profile-email"><i data-lucide="mail" style="width: 16px; height: 16px; color: var(--text-tertiary);"></i> Loading...</span>
+          </li>
+          <li class="info-item">
+            <span class="info-label">Phone Number</span>
+            <span class="info-value" id="profile-phone"><i data-lucide="phone" style="width: 16px; height: 16px; color: var(--text-tertiary);"></i> Loading...</span>
+          </li>
+          <li class="info-item">
+            <span class="info-label">Location Base</span>
+            <span class="info-value" id="profile-location"><i data-lucide="map-pin" style="width: 16px; height: 16px; color: var(--text-tertiary);"></i> Loading...</span>
+          </li>
+        </ul>
+      </div>
     </div>
 
     <!-- RIGHT COLUMN: Academic & Actions -->
-    <div class="moodle-block">
-      <h3 class="block-title"><i data-lucide="graduation-cap" style="width: 18px; height: 18px;"></i> Academic Profile</h3>
-      <ul class="info-list">
-        <li class="info-item">
-          <span class="info-label">Institution</span>
-          <span class="info-value">Misr University for Science and Technology (MUST)</span>
-        </li>
-        <li class="info-item">
-          <span class="info-label">Language Competency</span>
-          <span class="info-value">Bengali, Arabic, English, German</span>
-        </li>
-      </ul>
+    <div>
+      <div class="moodle-block">
+        <h3 class="block-title"><i data-lucide="graduation-cap" style="width: 18px; height: 18px;"></i> Academic Profile</h3>
+        <ul class="info-list">
+          <li class="info-item">
+            <span class="info-label">Institution</span>
+            <span class="info-value" id="profile-institution">Loading...</span>
+          </li>
+          <li class="info-item">
+            <span class="info-label">Department</span>
+            <span class="info-value" id="profile-department">Loading...</span>
+          </li>
+        </ul>
 
-      <div style="margin-top: 40px;">
-        <button class="action-btn" onclick="syncWithMoodle()">
-          <i data-lucide="refresh-cw" id="sync-icon" style="width: 16px; height: 16px;"></i> Sync Moodle Data
-        </button>
-        <button class="action-btn logout-btn-alt" onclick="logout()">
-          <i data-lucide="log-out" style="width: 16px; height: 16px;"></i> Disconnect Session
-        </button>
+        <div style="margin-top: 40px;">
+          <!-- NEW GRADEBOOK BUTTON -->
+          <button class="action-btn" onclick="window.location.href='grades.html'" style="background-color: var(--black); color: var(--white); border-color: var(--black);">
+            <i data-lucide="bar-chart-2" style="width: 16px; height: 16px;"></i> View Academic Gradebook
+          </button>
+
+          <button class="action-btn logout-btn-alt" onclick="syncWithMoodle()">
+            <i data-lucide="refresh-cw" id="sync-icon" style="width: 16px; height: 16px;"></i> Sync Moodle Data
+          </button>
+          
+          <button class="action-btn logout-btn-alt" onclick="logout()">
+            <i data-lucide="log-out" style="width: 16px; height: 16px;"></i> Disconnect Session
+          </button>
+        </div>
       </div>
     </div>
-
   </div>
 
   <script>
@@ -168,40 +143,27 @@
       syncIcon.style.animation = 'spin 1s linear infinite';
       
       try {
-        // 1. Fetch Core Site Info (Includes Avatar URL)
         const infoEndpoint = `${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=core_webservice_get_site_info&moodlewsrestformat=json`;
         const response = await fetch(infoEndpoint);
         const siteInfo = await response.json();
         
         if (siteInfo.exception) throw new Error(siteInfo.message);
 
-        // Update Names
         if (siteInfo.fullname) {
           document.getElementById('main-username').textContent = siteInfo.fullname;
           document.getElementById('nav-username').textContent = siteInfo.firstname;
           localStorage.setItem('madar_username', siteInfo.firstname);
         }
 
-        // Fetch & Inject Moodle Profile Picture (Bypassing token restrictions)
         if (siteInfo.userpictureurl) {
           const imgUrl = siteInfo.userpictureurl + (siteInfo.userpictureurl.includes('?') ? '&' : '?') + `token=${userToken}`;
-          
-          // Large Hero Avatar
           document.getElementById('profile-initial').innerHTML = `<img src="${imgUrl}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
           document.getElementById('profile-initial').style.border = "none";
-          
-          // Small Nav Avatar
-          const navAvatar = document.querySelector('.user-profile .avatar');
-          if(navAvatar) {
-            navAvatar.innerHTML = `<img src="${imgUrl}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
-            navAvatar.style.background = 'transparent';
-          }
         } else {
-          // Fallback to initials if no picture exists
           document.getElementById('profile-initial').textContent = siteInfo.firstname.charAt(0) + (siteInfo.lastname ? siteInfo.lastname.charAt(0) : '');
         }
 
-        // 2. Fetch Detailed Identity Data (Email, Phone, City)
+        // Detailed Data Sync
         try {
           const userEndpoint = `${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=core_user_get_users_by_field&field=id&values[0]=${siteInfo.userid}&moodlewsrestformat=json`;
           const userRes = await fetch(userEndpoint);
@@ -210,26 +172,33 @@
           if (Array.isArray(userData) && userData.length > 0) {
             const user = userData[0];
             
-            if (user.email) {
-              document.getElementById('profile-email').innerHTML = `<i data-lucide="mail" style="width: 16px; height: 16px; color: var(--text-tertiary);"></i> ${user.email}`;
-            }
-            if (user.phone1 || user.phone2) {
-              document.getElementById('profile-phone').innerHTML = `<i data-lucide="phone" style="width: 16px; height: 16px; color: var(--text-tertiary);"></i> ${user.phone1 || user.phone2}`;
-            }
-            if (user.city || user.country) {
-              document.getElementById('profile-location').innerHTML = `<i data-lucide="map-pin" style="width: 16px; height: 16px; color: var(--text-tertiary);"></i> ${user.city || ''} ${user.country || ''}`;
-            }
+            // Email
+            document.getElementById('profile-email').innerHTML = user.email 
+              ? `<i data-lucide="mail" style="width: 16px; height: 16px; color: var(--text-tertiary);"></i> ${user.email}` 
+              : `<i data-lucide="mail" style="width: 16px; height: 16px; color: var(--text-tertiary);"></i> Not set in Moodle`;
+
+            // Phone
+            document.getElementById('profile-phone').innerHTML = (user.phone1 || user.phone2) 
+              ? `<i data-lucide="phone" style="width: 16px; height: 16px; color: var(--text-tertiary);"></i> ${user.phone1 || user.phone2}` 
+              : `<i data-lucide="phone" style="width: 16px; height: 16px; color: var(--text-tertiary);"></i> Not set in Moodle`;
+
+            // Location
+            document.getElementById('profile-location').innerHTML = (user.city || user.country) 
+              ? `<i data-lucide="map-pin" style="width: 16px; height: 16px; color: var(--text-tertiary);"></i> ${user.city || ''} ${user.country || ''}` 
+              : `<i data-lucide="map-pin" style="width: 16px; height: 16px; color: var(--text-tertiary);"></i> Not set in Moodle`;
+
+            // Institution
+            document.getElementById('profile-institution').innerHTML = user.institution || `<span style="color: var(--text-tertiary);">Not set in Moodle</span>`;
+            
+            // Department
+            document.getElementById('profile-department').innerHTML = user.department || `<span style="color: var(--text-tertiary);">Not set in Moodle</span>`;
           }
         } catch (detailError) {
-          console.warn("Detailed profile data restricted by Moodle permissions. Keeping defaults.");
+          console.warn("Detailed profile data restricted by Moodle permissions.");
         }
         
         lucide.createIcons();
-
-        // Stop the spinning sync icon after 1 second
-        setTimeout(() => {
-          syncIcon.style.animation = 'none';
-        }, 1000);
+        setTimeout(() => { syncIcon.style.animation = 'none'; }, 1000);
 
       } catch (error) {
         console.error('Moodle Sync Error:', error);
@@ -237,7 +206,6 @@
       }
     }
 
-    // Initialize sync on page load
     syncWithMoodle();
   </script>
 </body>

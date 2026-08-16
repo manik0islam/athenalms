@@ -1,0 +1,1725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Athena LMS | Grades</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-tertiary: #f1f5f9;
+
+      --text-primary: #09090b;
+      --text-secondary: #52525b;
+      --text-tertiary: #71717a;
+
+      --border-color: #e2e8f0;
+
+      --black: #000000;
+      --white: #ffffff;
+
+      --success: #166534;
+      --success-bg: #f0fdf4;
+
+      --warning: #854d0e;
+      --warning-bg: #fefce8;
+
+      --danger: #991b1b;
+      --danger-bg: #fef2f2;
+
+      --font-heading: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    /* =========================================
+       HEADER
+    ========================================= */
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+
+      height: 70px;
+
+      background: rgba(255,255,255,0.96);
+
+      border-bottom: 1px solid var(--border-color);
+
+      backdrop-filter: blur(10px);
+
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      height: 70px;
+
+      margin: 0 auto;
+
+      padding: 0 24px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 20px;
+    }
+
+    .back-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      color: var(--text-secondary);
+
+      font-size: 0.9rem;
+      font-weight: 600;
+
+      cursor: pointer;
+
+      transition: color 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: var(--black);
+    }
+
+    .page-label {
+      font-family: var(--font-heading);
+
+      font-size: 1.05rem;
+      font-weight: 700;
+
+      letter-spacing: -0.4px;
+    }
+
+    /* =========================================
+       PAGE
+    ========================================= */
+
+    .page {
+      max-width: 1200px;
+
+      margin: 0 auto;
+
+      padding: 110px 24px 70px;
+    }
+
+    /* =========================================
+       PAGE HEADER
+    ========================================= */
+
+    .page-header {
+      margin-bottom: 30px;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+
+      margin-bottom: 10px;
+
+      color: var(--text-secondary);
+
+      font-size: 0.78rem;
+      font-weight: 700;
+
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .page-title {
+      font-family: var(--font-heading);
+
+      font-size: clamp(2rem, 5vw, 3rem);
+
+      line-height: 1.1;
+
+      letter-spacing: -1px;
+
+      margin-bottom: 10px;
+    }
+
+    .page-subtitle {
+      color: var(--text-secondary);
+
+      font-size: 0.95rem;
+
+      max-width: 700px;
+    }
+
+    /* =========================================
+       SUMMARY CARDS
+    ========================================= */
+
+    .summary-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+      gap: 16px;
+
+      margin-bottom: 32px;
+    }
+
+    .summary-card {
+      background: var(--white);
+
+      border: 1px solid var(--border-color);
+
+      border-radius: 10px;
+
+      padding: 24px;
+
+      min-height: 145px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      box-shadow:
+        0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    .summary-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      color: var(--text-secondary);
+
+      font-size: 0.8rem;
+      font-weight: 600;
+
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .summary-value {
+      font-family: var(--font-heading);
+
+      font-size: 2rem;
+
+      font-weight: 700;
+
+      letter-spacing: -0.7px;
+    }
+
+    .summary-detail {
+      color: var(--text-tertiary);
+
+      font-size: 0.78rem;
+    }
+
+    /* =========================================
+       COURSE SECTION
+    ========================================= */
+
+    .courses-container {
+      display: flex;
+      flex-direction: column;
+
+      gap: 18px;
+    }
+
+    .course-card {
+      background: var(--white);
+
+      border: 1px solid var(--border-color);
+
+      border-radius: 10px;
+
+      overflow: hidden;
+
+      box-shadow:
+        0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    .course-header {
+      padding: 20px 24px;
+
+      border-bottom: 1px solid var(--border-color);
+
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 20px;
+    }
+
+    .course-name {
+      font-family: var(--font-heading);
+
+      font-size: 1.15rem;
+
+      font-weight: 700;
+    }
+
+    .course-id {
+      color: var(--text-tertiary);
+
+      font-size: 0.75rem;
+
+      margin-top: 3px;
+    }
+
+    .course-average {
+      text-align: right;
+
+      white-space: nowrap;
+    }
+
+    .course-average-value {
+      font-family: var(--font-heading);
+
+      font-size: 1.4rem;
+
+      font-weight: 700;
+    }
+
+    .course-average-label {
+      color: var(--text-tertiary);
+
+      font-size: 0.7rem;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.05em;
+    }
+
+    /* =========================================
+       TABLE
+    ========================================= */
+
+    .table-wrapper {
+      width: 100%;
+
+      overflow-x: auto;
+    }
+
+    .grades-table {
+      width: 100%;
+
+      border-collapse: collapse;
+
+      min-width: 650px;
+    }
+
+    .grades-table th {
+      padding: 13px 24px;
+
+      background: var(--bg-secondary);
+
+      border-bottom: 1px solid var(--border-color);
+
+      color: var(--text-tertiary);
+
+      font-size: 0.72rem;
+
+      text-align: left;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.06em;
+
+      font-weight: 700;
+    }
+
+    .grades-table td {
+      padding: 16px 24px;
+
+      border-bottom: 1px solid var(--bg-tertiary);
+
+      font-size: 0.88rem;
+
+      vertical-align: middle;
+    }
+
+    .grades-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .item-name {
+      font-weight: 600;
+    }
+
+    .item-type {
+      color: var(--text-tertiary);
+
+      font-size: 0.76rem;
+
+      margin-top: 2px;
+    }
+
+    .grade-points {
+      font-family: var(--font-heading);
+
+      font-weight: 700;
+    }
+
+    .grade-percentage {
+      font-family: var(--font-heading);
+
+      font-weight: 700;
+    }
+
+    .status {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 5px;
+
+      padding: 4px 8px;
+
+      border-radius: 5px;
+
+      font-size: 0.72rem;
+
+      font-weight: 700;
+    }
+
+    .status.pass {
+      color: var(--success);
+
+      background: var(--success-bg);
+    }
+
+    .status.warning {
+      color: var(--warning);
+
+      background: var(--warning-bg);
+    }
+
+    .status.fail {
+      color: var(--danger);
+
+      background: var(--danger-bg);
+    }
+
+    .status.neutral {
+      color: var(--text-secondary);
+
+      background: var(--bg-tertiary);
+    }
+
+    /* =========================================
+       PROGRESS
+    ========================================= */
+
+    .progress-container {
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      min-width: 130px;
+    }
+
+    .progress-bar {
+      width: 90px;
+
+      height: 6px;
+
+      border-radius: 10px;
+
+      background: var(--bg-tertiary);
+
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+
+      background: var(--black);
+
+      border-radius: inherit;
+    }
+
+    .progress-value {
+      font-size: 0.75rem;
+
+      color: var(--text-secondary);
+
+      min-width: 38px;
+    }
+
+    /* =========================================
+       EMPTY / LOADING / ERROR
+    ========================================= */
+
+    .state-card {
+      background: var(--white);
+
+      border: 1px solid var(--border-color);
+
+      border-radius: 10px;
+
+      padding: 70px 30px;
+
+      text-align: center;
+    }
+
+    .state-icon {
+      margin-bottom: 15px;
+    }
+
+    .state-title {
+      font-family: var(--font-heading);
+
+      font-size: 1.2rem;
+
+      margin-bottom: 7px;
+    }
+
+    .state-text {
+      color: var(--text-secondary);
+
+      font-size: 0.9rem;
+
+      max-width: 550px;
+
+      margin: 0 auto;
+    }
+
+    .loading-icon {
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* =========================================
+       MOBILE
+    ========================================= */
+
+    @media (max-width: 760px) {
+
+      .nav-container {
+        padding: 0 16px;
+      }
+
+      .page-label {
+        font-size: 0.9rem;
+      }
+
+      .back-link {
+        font-size: 0.82rem;
+      }
+
+      .page {
+        padding:
+          100px
+          14px
+          50px;
+      }
+
+      .summary-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .summary-card {
+        min-height: 120px;
+      }
+
+      .course-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        padding: 18px;
+      }
+
+      .course-average {
+        text-align: left;
+      }
+
+      .grades-table th,
+      .grades-table td {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="nav-container">
+
+    <div
+      class="back-link"
+      onclick="history.back()"
+    >
+
+      <i
+        data-lucide="arrow-left"
+        style="width:18px;height:18px;"
+      ></i>
+
+      Back to Dashboard
+
+    </div>
+
+    <div class="page-label">
+      GRADEBOOK
+    </div>
+
+  </div>
+
+</header>
+
+
+<main class="page">
+
+  <!-- =========================================
+       HEADER
+  ========================================== -->
+
+  <section class="page-header">
+
+    <div class="eyebrow">
+
+      <i
+        data-lucide="graduation-cap"
+        style="width:15px;height:15px;"
+      ></i>
+
+      Academic Performance
+
+    </div>
+
+    <h1 class="page-title">
+      Your Grades
+    </h1>
+
+    <p class="page-subtitle">
+      Review your academic performance across
+      all enrolled courses and individual
+      assessment activities.
+    </p>
+
+  </section>
+
+
+  <!-- =========================================
+       SUMMARY
+  ========================================== -->
+
+  <section
+    class="summary-grid"
+    id="summary-grid"
+  >
+
+    <div class="summary-card">
+
+      <div class="summary-label">
+
+        <i
+          data-lucide="layers"
+          style="width:16px;height:16px;"
+        ></i>
+
+        Courses
+
+      </div>
+
+      <div
+        class="summary-value"
+        id="course-count"
+      >
+        —
+      </div>
+
+      <div class="summary-detail">
+        Enrolled courses with grade data
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-label">
+
+        <i
+          data-lucide="chart-no-axes-combined"
+          style="width:16px;height:16px;"
+        ></i>
+
+        Overall Average
+
+      </div>
+
+      <div
+        class="summary-value"
+        id="overall-average"
+      >
+        —
+      </div>
+
+      <div class="summary-detail">
+        Based on available graded items
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-label">
+
+        <i
+          data-lucide="clipboard-check"
+          style="width:16px;height:16px;"
+        ></i>
+
+        Assessments
+
+      </div>
+
+      <div
+        class="summary-value"
+        id="assessment-count"
+      >
+        —
+      </div>
+
+      <div class="summary-detail">
+        Graded assessment items
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================
+       COURSES
+  ========================================== -->
+
+  <section
+    class="courses-container"
+    id="courses-container"
+  >
+
+    <div class="state-card">
+
+      <i
+        data-lucide="loader-2"
+        class="state-icon loading-icon"
+        style="width:34px;height:34px;"
+      ></i>
+
+      <h2 class="state-title">
+        Loading Gradebook
+      </h2>
+
+      <p class="state-text">
+        Retrieving your grades from Moodle...
+      </p>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<script>
+
+  lucide.createIcons();
+
+
+  /* ==========================================
+     CONFIGURATION
+  ========================================== */
+
+  const MOODLE_URL =
+    'http://localhost:8000';
+
+  const userToken =
+    localStorage.getItem('madar_user_token');
+
+
+  /* ==========================================
+     AUTHENTICATION
+  ========================================== */
+
+  if (!userToken) {
+
+    window.location.href =
+      'login.html';
+
+  }
+
+
+  /* ==========================================
+     ESCAPE HTML
+  ========================================== */
+
+  function escapeHtml(value) {
+
+    if (
+      value === null ||
+      value === undefined
+    ) {
+      return '';
+    }
+
+    return String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+
+  }
+
+
+  /* ==========================================
+     MOODLE REQUEST
+  ========================================== */
+
+  async function moodleRequest(
+    functionName,
+    params = {}
+  ) {
+
+    const body =
+      new URLSearchParams();
+
+    body.append(
+      'wstoken',
+      userToken
+    );
+
+    body.append(
+      'wsfunction',
+      functionName
+    );
+
+    body.append(
+      'moodlewsrestformat',
+      'json'
+    );
+
+
+    Object.entries(params).forEach(
+      ([key, value]) => {
+
+        body.append(
+          key,
+          value
+        );
+
+      }
+    );
+
+
+    const response =
+      await fetch(
+        `${MOODLE_URL}/webservice/rest/server.php`,
+        {
+          method: 'POST',
+
+          headers: {
+            'Content-Type':
+              'application/x-www-form-urlencoded'
+          },
+
+          body
+        }
+      );
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        `HTTP ${response.status}`
+      );
+
+    }
+
+
+    const data =
+      await response.json();
+
+
+    if (data.exception) {
+
+      throw new Error(
+        data.message ||
+        'Moodle API request failed.'
+      );
+
+    }
+
+
+    return data;
+
+  }
+
+
+  /* ==========================================
+     FORMAT PERCENTAGE
+  ========================================== */
+
+  function formatPercentage(value) {
+
+    if (
+      value === null ||
+      value === undefined ||
+      value === ''
+    ) {
+      return '—';
+    }
+
+    const number =
+      Number(value);
+
+    if (!Number.isFinite(number)) {
+      return '—';
+    }
+
+    return `${number.toFixed(1)}%`;
+
+  }
+
+
+  /* ==========================================
+     STATUS
+  ========================================== */
+
+  function getStatus(
+    percentage
+  ) {
+
+    if (
+      percentage === null ||
+      percentage === undefined ||
+      !Number.isFinite(
+        Number(percentage)
+      )
+    ) {
+
+      return {
+        className: 'neutral',
+        label: 'Not graded',
+        icon: 'minus-circle'
+      };
+
+    }
+
+
+    const value =
+      Number(percentage);
+
+
+    if (value >= 70) {
+
+      return {
+        className: 'pass',
+        label: 'Strong',
+        icon: 'check-circle'
+      };
+
+    }
+
+
+    if (value >= 50) {
+
+      return {
+        className: 'warning',
+        label: 'Review',
+        icon: 'alert-circle'
+      };
+
+    }
+
+
+    return {
+      className: 'fail',
+      label: 'At risk',
+      icon: 'alert-triangle'
+    };
+
+  }
+
+
+  /* ==========================================
+     COURSE GRADE DATA
+  ========================================== */
+
+  async function getCourseGrades(
+    courseId
+  ) {
+
+    return await moodleRequest(
+      'gradereport_user_get_grade_items',
+      {
+        courseid: courseId
+      }
+    );
+
+  }
+
+
+  /* ==========================================
+     EXTRACT GRADE ITEMS
+  ========================================== */
+
+  function extractItems(data) {
+
+    if (
+      !data ||
+      !Array.isArray(
+        data.usergrades
+      )
+    ) {
+
+      return [];
+
+    }
+
+
+    const items = [];
+
+
+    data.usergrades.forEach(
+      user => {
+
+        if (
+          !Array.isArray(
+            user.gradeitems
+          )
+        ) {
+
+          return;
+
+        }
+
+
+        user.gradeitems.forEach(
+          item => {
+
+            /*
+             * Moodle can return course-level
+             * summary items. We keep them out
+             * of the individual assessment table.
+             */
+
+            if (
+              item.itemtype === 'course'
+            ) {
+
+              return;
+
+            }
+
+
+            items.push(item);
+
+          }
+        );
+
+      }
+    );
+
+
+    return items;
+
+  }
+
+
+  /* ==========================================
+     GET PERCENTAGE
+  ========================================== */
+
+  function getPercentage(item) {
+
+    if (
+      item.percentage !== undefined &&
+      item.percentage !== null &&
+      item.percentage !== ''
+    ) {
+
+      const value =
+        Number(item.percentage);
+
+      if (Number.isFinite(value)) {
+        return value;
+      }
+
+    }
+
+
+    if (
+      item.grademax !== undefined &&
+      item.grademax !== null &&
+      Number(item.grademax) > 0 &&
+      item.grade !== undefined &&
+      item.grade !== null
+    ) {
+
+      return (
+        Number(item.grade) /
+        Number(item.grademax)
+      ) * 100;
+
+    }
+
+
+    return null;
+
+  }
+
+
+  /* ==========================================
+     COURSE AVERAGE
+  ========================================== */
+
+  function getCourseAverage(items) {
+
+    const graded =
+      items.filter(
+        item => {
+
+          const percentage =
+            getPercentage(item);
+
+          return (
+            percentage !== null &&
+            Number.isFinite(percentage)
+          );
+
+        }
+      );
+
+
+    if (!graded.length) {
+      return null;
+    }
+
+
+    const total =
+      graded.reduce(
+        (sum, item) =>
+          sum + getPercentage(item),
+        0
+      );
+
+
+    return total /
+      graded.length;
+
+  }
+
+
+  /* ==========================================
+     RENDER COURSE
+  ========================================== */
+
+  function renderCourse(
+    course,
+    items
+  ) {
+
+    const average =
+      getCourseAverage(items);
+
+    const averageText =
+      average === null
+        ? '—'
+        : `${average.toFixed(1)}%`;
+
+
+    const rows =
+      items.length
+        ? items.map(
+            item => {
+
+              const percentage =
+                getPercentage(item);
+
+              const status =
+                getStatus(
+                  percentage
+                );
+
+
+              const grade =
+                item.gradeformatted ||
+                (
+                  item.grade !== undefined &&
+                  item.grade !== null
+                    ? Number(item.grade)
+                        .toFixed(2)
+                    : '—'
+                );
+
+
+              const max =
+                item.grademax !== undefined &&
+                item.grademax !== null
+                  ? Number(item.grademax)
+                      .toFixed(2)
+                  : '—';
+
+
+              const progress =
+                percentage !== null
+                  ? Math.max(
+                      0,
+                      Math.min(
+                        100,
+                        percentage
+                      )
+                    )
+                  : 0;
+
+
+              return `
+
+                <tr>
+
+                  <td>
+
+                    <div class="item-name">
+                      ${escapeHtml(
+                        item.itemname ||
+                        'Assessment'
+                      )}
+                    </div>
+
+                    <div class="item-type">
+                      ${escapeHtml(
+                        item.itemmodule ||
+                        item.itemtype ||
+                        'Grade item'
+                      )}
+                    </div>
+
+                  </td>
+
+
+                  <td>
+
+                    <span class="grade-points">
+
+                      ${escapeHtml(
+                        grade
+                      )}
+
+                    </span>
+
+                    ${
+                      max !== '—'
+                        ? `
+                          <span
+                            style="
+                              color:var(--text-tertiary);
+                              font-size:.75rem;
+                            "
+                          >
+                            / ${escapeHtml(max)}
+                          </span>
+                        `
+                        : ''
+                    }
+
+                  </td>
+
+
+                  <td>
+
+                    <span class="grade-percentage">
+
+                      ${formatPercentage(
+                        percentage
+                      )}
+
+                    </span>
+
+                  </td>
+
+
+                  <td>
+
+                    <div class="progress-container">
+
+                      <div class="progress-bar">
+
+                        <div
+                          class="progress-fill"
+                          style="
+                            width:${progress}%;
+                          "
+                        ></div>
+
+                      </div>
+
+                      <span class="progress-value">
+                        ${percentage === null
+                          ? '—'
+                          : `${Math.round(
+                              percentage
+                            )}%`}
+                      </span>
+
+                    </div>
+
+                  </td>
+
+
+                  <td>
+
+                    <span
+                      class="status ${status.className}"
+                    >
+
+                      <i
+                        data-lucide="${status.icon}"
+                        style="
+                          width:13px;
+                          height:13px;
+                        "
+                      ></i>
+
+                      ${status.label}
+
+                    </span>
+
+                  </td>
+
+                </tr>
+
+              `;
+
+            }
+          ).join('')
+        : `
+
+          <tr>
+
+            <td
+              colspan="5"
+              style="
+                text-align:center;
+                color:var(--text-secondary);
+                padding:30px;
+              "
+            >
+
+              No individual grade items
+              are currently available.
+
+            </td>
+
+          </tr>
+
+        `;
+
+
+    return `
+
+      <article class="course-card">
+
+        <div class="course-header">
+
+          <div>
+
+            <div class="course-name">
+
+              ${escapeHtml(
+                course.fullname ||
+                course.shortname ||
+                'Course'
+              )}
+
+            </div>
+
+            <div class="course-id">
+
+              Course ID:
+              ${escapeHtml(course.id)}
+
+            </div>
+
+          </div>
+
+
+          <div class="course-average">
+
+            <div
+              class="course-average-value"
+            >
+              ${averageText}
+            </div>
+
+            <div
+              class="course-average-label"
+            >
+              Course Average
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+          <table class="grades-table">
+
+            <thead>
+
+              <tr>
+
+                <th>
+                  Assessment
+                </th>
+
+                <th>
+                  Grade
+                </th>
+
+                <th>
+                  Percentage
+                </th>
+
+                <th>
+                  Progress
+                </th>
+
+                <th>
+                  Status
+                </th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody>
+
+              ${rows}
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </article>
+
+    `;
+
+  }
+
+
+  /* ==========================================
+     LOAD GRADES
+  ========================================== */
+
+  async function loadGrades() {
+
+    const container =
+      document.getElementById(
+        'courses-container'
+      );
+
+
+    try {
+      /*
+       * 1. First, get the actual User ID of the logged-in student
+       */
+      const siteInfo = await moodleRequest('core_webservice_get_site_info');
+      const userId = siteInfo.userid;
+
+      /*
+       * 2. Retrieve the student's enrolled courses using their real ID
+       */
+      const courses = await moodleRequest('core_enrol_get_users_courses', {
+          userid: userId
+      });
+
+
+      if (
+        !Array.isArray(courses) ||
+        courses.length === 0
+      ) {
+
+        throw new Error(
+          'No enrolled courses were found.'
+        );
+
+      }
+
+
+      const courseResults = [];
+
+
+      /*
+       * Request gradebook data
+       * for every enrolled course.
+       */
+
+      for (
+        const course of courses
+      ) {
+
+        try {
+
+          const gradeData =
+            await getCourseGrades(
+              course.id
+            );
+
+
+          const items =
+            extractItems(
+              gradeData
+            );
+
+
+          courseResults.push({
+            course,
+            items
+          });
+
+
+        } catch (error) {
+
+          /*
+           * A course without gradebook
+           * permission/data should not
+           * prevent other courses from
+           * appearing.
+           */
+
+          console.warn(
+            `Could not load grades for course ${course.id}:`,
+            error
+          );
+
+
+          courseResults.push({
+            course,
+            items: []
+          });
+
+        }
+
+      }
+
+
+      /*
+       * Summary calculations
+       */
+
+      const allItems =
+        courseResults.flatMap(
+          result => result.items
+        );
+
+
+      const gradedItems =
+        allItems.filter(
+          item =>
+            getPercentage(item) !== null
+        );
+
+
+      const averages =
+        courseResults
+          .map(
+            result =>
+              getCourseAverage(
+                result.items
+              )
+          )
+          .filter(
+            value =>
+              value !== null
+          );
+
+
+      const overallAverage =
+        averages.length
+          ? averages.reduce(
+              (a, b) => a + b,
+              0
+            ) / averages.length
+          : null;
+
+
+      document.getElementById(
+        'course-count'
+      ).textContent =
+        courseResults.length;
+
+
+      document.getElementById(
+        'assessment-count'
+      ).textContent =
+        gradedItems.length;
+
+
+      document.getElementById(
+        'overall-average'
+      ).textContent =
+        overallAverage === null
+          ? '—'
+          : `${overallAverage.toFixed(1)}%`;
+
+
+      /*
+       * Render courses
+       */
+
+      const visibleCourses =
+        courseResults.filter(
+          result =>
+            result.items.length > 0
+        );
+
+
+      if (!visibleCourses.length) {
+
+        container.innerHTML = `
+
+          <div class="state-card">
+
+            <i
+              data-lucide="inbox"
+              class="state-icon"
+              style="
+                width:40px;
+                height:40px;
+              "
+            ></i>
+
+            <h2 class="state-title">
+              No Grades Available
+            </h2>
+
+            <p class="state-text">
+              Your enrolled courses were found,
+              but Moodle has not returned any
+              grade items yet.
+            </p>
+
+          </div>
+
+        `;
+
+        lucide.createIcons();
+
+        return;
+
+      }
+
+
+      container.innerHTML =
+        visibleCourses
+          .map(
+            result =>
+              renderCourse(
+                result.course,
+                result.items
+              )
+          )
+          .join('');
+
+
+      lucide.createIcons();
+
+
+    } catch (error) {
+
+      console.error(
+        'Gradebook error:',
+        error
+      );
+
+
+      container.innerHTML = `
+
+        <div class="state-card">
+
+          <i
+            data-lucide="alert-circle"
+            class="state-icon"
+            style="
+              width:40px;
+              height:40px;
+              color:#991b1b;
+            "
+          ></i>
+
+          <h2 class="state-title">
+            Unable to Load Grades
+          </h2>
+
+          <p class="state-text">
+            ${escapeHtml(
+              error.message
+            )}
+          </p>
+
+        </div>
+
+      `;
+
+      lucide.createIcons();
+
+    }
+
+  }
+
+
+  /* ==========================================
+     START
+  ========================================== */
+
+  loadGrades();
+
+</script>
+
+</body>
+</html>
