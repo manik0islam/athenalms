@@ -13,13 +13,12 @@
   <style>
     :root {
       --bg-primary: #ffffff;
-      --bg-secondary: #f4f4f5;
-      --bg-tertiary: #e4e4e7;
-      --text-primary: #000000;
-      --text-secondary: #52525b;
-      --border-color: #d4d4d8;
-      --black: #09090b;
-      --white: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-tertiary: #f1f5f9;
+      --text-primary: #0f172a;
+      --text-secondary: #64748b;
+      --border-color: #e2e8f0;
+      --brand-accent: #0f172a;
       --font-heading: 'Space Grotesk', sans-serif;
       --font-body: 'Inter', sans-serif;
     }
@@ -29,31 +28,39 @@
     a { color: inherit; text-decoration: none; }
 
     /* HEADER */
-    header { background-color: var(--bg-primary); border-bottom: 1px solid var(--border-color); position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
+    header { background-color: rgba(255, 255, 255, 0.9); border-bottom: 1px solid var(--border-color); position: fixed; top: 0; left: 0; right: 0; z-index: 100; backdrop-filter: blur(8px); }
     .nav-container { max-width: 1000px; margin: 0 auto; padding: 0 24px; height: 70px; display: flex; justify-content: space-between; align-items: center; }
-    .back-link { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.95rem; transition: opacity 0.2s; cursor: pointer; }
-    .back-link:hover { opacity: 0.7; }
+    .back-link { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.95rem; color: var(--text-secondary); transition: color 0.2s; cursor: pointer; }
+    .back-link:hover { color: var(--text-primary); }
     
-    /* HERO */
-    .hero { margin-top: 70px; background-color: var(--bg-primary); padding: 60px 24px; border-bottom: 1px solid var(--border-color); background-image: linear-gradient(var(--bg-secondary) 1px, transparent 1px), linear-gradient(90deg, var(--bg-secondary) 1px, transparent 1px); background-size: 30px 30px; text-align: center; }
-    .hero-title { font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; max-width: 800px; margin: 0 auto; }
+    /* HERO WITH METADATA */
+    .hero { margin-top: 70px; background-color: var(--bg-primary); padding: 80px 24px 60px; border-bottom: 1px solid var(--border-color); background-image: radial-gradient(var(--border-color) 1px, transparent 1px); background-size: 24px 24px; text-align: center; }
+    .course-badge { display: inline-flex; align-items: center; gap: 6px; background-color: var(--bg-tertiary); color: var(--text-secondary); padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 16px; letter-spacing: 0.5px; }
+    .hero-title { font-family: var(--font-heading); font-size: 2.75rem; font-weight: 700; max-width: 800px; margin: 0 auto; letter-spacing: -0.5px; }
 
     /* CONTENT LAYOUT */
-    .course-container { max-width: 800px; margin: 40px auto; padding: 0 24px; }
+    .course-container { max-width: 800px; margin: -20px auto 60px; padding: 0 24px; position: relative; z-index: 10; }
     
-    .section-block { background-color: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 6px; margin-bottom: 24px; overflow: hidden; }
-    .section-header { background-color: var(--bg-secondary); padding: 16px 20px; border-bottom: 1px solid var(--border-color); font-family: var(--font-heading); font-weight: 600; font-size: 1.1rem; }
-    
-    .module-list { list-style: none; }
-    .module-item { display: flex; align-items: center; gap: 16px; padding: 16px 20px; border-bottom: 1px solid var(--border-color); transition: background-color 0.2s; }
-    .module-item:last-child { border-bottom: none; }
-    .module-item:hover { background-color: var(--bg-secondary); }
-    
-    .module-icon { width: 40px; height: 40px; background-color: var(--bg-tertiary); border-radius: 4px; display: flex; align-items: center; justify-content: center; }
-    .module-details h4 { font-size: 1rem; font-weight: 500; margin-bottom: 2px; }
-    .module-details p { font-size: 0.85rem; color: var(--text-secondary); }
+    .section-block { background-color: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 12px; margin-bottom: 32px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05); }
+    .section-header { background-color: var(--bg-primary); padding: 20px 24px; border-bottom: 1px solid var(--border-color); font-family: var(--font-heading); font-weight: 600; font-size: 1.15rem; display: flex; justify-content: space-between; align-items: center; }
+    .section-count { font-family: var(--font-body); font-size: 0.85rem; font-weight: 500; color: var(--text-secondary); background: var(--bg-tertiary); padding: 4px 10px; border-radius: 12px; }
 
-    .loading-state, .error-state { padding: 40px; text-align: center; background-color: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-secondary); }
+    .module-list { list-style: none; }
+    .module-item { display: flex; align-items: center; gap: 18px; padding: 20px 24px; border-bottom: 1px solid var(--border-color); transition: all 0.2s ease; }
+    .module-item:last-child { border-bottom: none; }
+    .module-item:hover { background-color: var(--bg-secondary); padding-left: 28px; }
+    
+    .module-icon { width: 44px; height: 44px; background-color: var(--bg-tertiary); color: var(--brand-accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; transition: transform 0.2s; }
+    .module-item:hover .module-icon { transform: scale(1.05); }
+    
+    .module-details { flex: 1; }
+    .module-details h4 { font-size: 1.05rem; font-weight: 600; margin-bottom: 4px; color: var(--text-primary); }
+    .module-details p { font-size: 0.85rem; color: var(--text-secondary); text-transform: capitalize; }
+
+    .action-arrow { color: var(--border-color); transition: all 0.2s; }
+    .module-item:hover .action-arrow { color: var(--brand-accent); transform: translateX(4px); }
+
+    .loading-state, .error-state { padding: 60px; text-align: center; background-color: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-secondary); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
   </style>
 </head>
 <body>
@@ -61,21 +68,24 @@
   <header>
     <div class="nav-container">
       <a href="index.html" class="back-link">
-        <i data-lucide="arrow-left" style="width: 20px; height: 20px;"></i> Back to Dashboard
+        <i data-lucide="arrow-left" style="width: 18px; height: 18px;"></i> Dashboard
       </a>
-      <div style="font-family: var(--font-heading); font-weight: 700; text-transform: uppercase;">Madar LMS</div>
+      <div style="font-family: var(--font-heading); font-weight: 700; font-size: 1.1rem; letter-spacing: -0.5px;">MADAR LMS</div>
     </div>
   </header>
 
   <section class="hero">
     <div class="hero-content">
+      <div class="course-badge" id="course-meta">
+        <i data-lucide="book-open" style="width: 14px; height: 14px;"></i> Initializing
+      </div>
       <h1 class="hero-title" id="course-title">Loading Module...</h1>
     </div>
   </section>
 
   <div class="course-container" id="syllabus-container">
     <div class="loading-state">
-      <i data-lucide="loader-2" style="animation: spin 2s linear infinite; margin: 0 auto 10px; display: block;"></i>
+      <i data-lucide="loader-2" style="animation: spin 2s linear infinite; margin: 0 auto 12px; display: block; width: 32px; height: 32px; color: var(--brand-accent);"></i>
       Fetching curriculum data...
     </div>
   </div>
@@ -88,23 +98,15 @@
     
     if (!userToken) window.location.href = 'login.html';
 
-    // 1. Get the course ID from the URL (e.g., ?id=4)
     const urlParams = new URLSearchParams(window.location.search);
     const courseId = urlParams.get('id');
 
-    if (!courseId) {
-      window.location.href = 'index.html';
-    }
+    if (!courseId) window.location.href = 'index.html';
 
-    // Map Moodle module types to our Lucide icons
     function getModuleIcon(modname) {
       const icons = {
-        'resource': 'file-text', // PDF or file
-        'assign': 'upload-cloud', // Assignment upload
-        'quiz': 'help-circle', // Quiz
-        'url': 'link',
-        'page': 'layout-template',
-        'forum': 'message-square'
+        'resource': 'file-text', 'assign': 'upload-cloud', 
+        'quiz': 'help-circle', 'url': 'link', 'page': 'layout-template', 'forum': 'message-square'
       };
       return icons[modname] || 'file';
     }
@@ -112,9 +114,9 @@
     async function loadCourseContent() {
       const container = document.getElementById('syllabus-container');
       const titleEl = document.getElementById('course-title');
+      const metaEl = document.getElementById('course-meta');
 
       try {
-        // We first need the course name
         const infoRes = await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=core_webservice_get_site_info&moodlewsrestformat=json`);
         const siteInfo = await infoRes.json();
         
@@ -124,9 +126,9 @@
         
         if (currentCourse) {
           titleEl.textContent = currentCourse.fullname;
+          metaEl.innerHTML = `<i data-lucide="hash" style="width: 14px; height: 14px;"></i> Course ID: ${currentCourse.id}`;
         }
 
-        // Fetch the actual syllabus sections and modules
         const contentRes = await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=core_course_get_contents&courseid=${courseId}&moodlewsrestformat=json`);
         const sections = await contentRes.json();
 
@@ -135,7 +137,6 @@
         container.innerHTML = '';
 
         sections.forEach(section => {
-          // Skip empty sections
           if (section.modules.length === 0 && !section.summary) return;
 
           let modulesHTML = section.modules.map(mod => {
@@ -143,33 +144,25 @@
             const isForum = mod.modname === 'forum';
             const isResource = mod.modname === 'resource';
             
-            let hrefAttr = '';
-            let linkIcon = '';
+            let hrefAttr = ''; let linkIcon = '';
             
-            if (isAssign) {
-              hrefAttr = `href="assignment.html?assignid=${mod.instance}&courseid=${courseId}"`;
-              linkIcon = `<div style="margin-left: auto; color: var(--text-tertiary);"><i data-lucide="chevron-right" style="width: 18px; height: 18px;"></i></div>`;
-            } else if (isForum) {
-              hrefAttr = `href="forum.html?forumid=${mod.instance}&courseid=${courseId}"`;
-              linkIcon = `<div style="margin-left: auto; color: var(--text-tertiary);"><i data-lucide="chevron-right" style="width: 18px; height: 18px;"></i></div>`;
-            } else if (isResource) {
-              hrefAttr = `href="resource.html?resourceid=${mod.instance}&courseid=${courseId}"`;
-              linkIcon = `<div style="margin-left: auto; color: var(--text-tertiary);"><i data-lucide="chevron-right" style="width: 18px; height: 18px;"></i></div>`;
-            } else if (mod.url) {
-              hrefAttr = `href="${mod.url}" target="_blank"`;
-              linkIcon = `<div style="margin-left: auto; color: var(--text-tertiary);"><i data-lucide="external-link" style="width: 18px; height: 18px;"></i></div>`;
-            }
+            if (isAssign) hrefAttr = `href="assignment.html?assignid=${mod.instance}&courseid=${courseId}"`;
+            else if (isForum) hrefAttr = `href="forum.html?forumid=${mod.instance}&courseid=${courseId}"`;
+            else if (isResource) hrefAttr = `href="resource.html?resourceid=${mod.instance}&courseid=${courseId}"`;
+            else if (mod.url) hrefAttr = `href="${mod.url}" target="_blank"`;
 
             const isInteractive = isAssign || isForum || isResource || mod.url;
             const tag = isInteractive ? 'a' : 'div';
             const interactiveStyle = isInteractive ? 'cursor: pointer; text-decoration: none; color: inherit;' : '';
+            
+            linkIcon = isInteractive ? `<div class="action-arrow"><i data-lucide="chevron-right" style="width: 20px; height: 20px;"></i></div>` : '';
 
             return `
-              <${tag} ${hrefAttr} class="module-item" style="display: flex; ${interactiveStyle}">
+              <${tag} ${hrefAttr} class="module-item" style="${interactiveStyle}">
                 <div class="module-icon"><i data-lucide="${getModuleIcon(mod.modname)}"></i></div>
                 <div class="module-details">
                   <h4>${mod.name}</h4>
-                  <p>${mod.modplural}</p>
+                  <p>${mod.modname === 'assign' ? 'Assignment' : mod.modname === 'resource' ? 'Document' : mod.modplural}</p>
                 </div>
                 ${linkIcon}
               </${tag}>
@@ -178,7 +171,10 @@
 
           container.innerHTML += `
             <div class="section-block">
-              <div class="section-header">${section.name}</div>
+              <div class="section-header">
+                <span>${section.name}</span>
+                <span class="section-count">${section.modules.length} Items</span>
+              </div>
               <ul class="module-list">
                 ${modulesHTML}
               </ul>
@@ -189,14 +185,16 @@
         lucide.createIcons();
 
       } catch (error) {
-        console.error('API Error:', error);
         container.innerHTML = `
           <div class="error-state">
-            <h4 style="margin-bottom: 8px; color: var(--black); font-weight: 600;">Content Error</h4>
-            <p style="font-size: 0.9rem;">Could not load course syllabus.</p>
+            <i data-lucide="alert-circle" style="width: 32px; height: 32px; color: #ef4444; margin-bottom: 12px;"></i>
+            <h4 style="margin-bottom: 8px; color: var(--text-primary); font-weight: 600;">Content Error</h4>
+            <p style="font-size: 0.95rem;">Could not load course syllabus.</p>
           </div>
         `;
         titleEl.textContent = "Error Loading Course";
+        metaEl.innerHTML = `<i data-lucide="x-circle" style="width: 14px; height: 14px;"></i> Disconnected`;
+        lucide.createIcons();
       }
     }
 
