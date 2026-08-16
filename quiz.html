@@ -55,12 +55,14 @@
 
 
     * {
-
       margin: 0;
       padding: 0;
-
       box-sizing: border-box;
+    }
 
+
+    html {
+      scroll-behavior: smooth;
     }
 
 
@@ -77,40 +79,38 @@
     }
 
 
-    a {
-
-      color: inherit;
-
-      text-decoration: none;
-
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
     }
 
 
     button {
-
-      font: inherit;
-
+      cursor: pointer;
     }
 
 
     /* =========================================
        HEADER
-    ========================================= */
+    ========================================== */
 
     header {
 
-      background: rgba(255,255,255,0.96);
-
-      border-bottom:
-        1px solid var(--border-color);
+      height: 70px;
 
       position: fixed;
 
-      top: 0;
-      left: 0;
-      right: 0;
+      inset: 0 0 auto 0;
 
       z-index: 100;
+
+      background:
+        rgba(255,255,255,0.96);
+
+      border-bottom:
+        1px solid var(--border-color);
 
       backdrop-filter:
         blur(10px);
@@ -120,19 +120,19 @@
 
     .nav-container {
 
-      max-width: 1000px;
+      max-width: 1100px;
+
+      height: 70px;
 
       margin: 0 auto;
 
       padding: 0 24px;
 
-      height: 70px;
-
       display: flex;
 
-      justify-content: space-between;
-
       align-items: center;
+
+      justify-content: space-between;
 
       gap: 20px;
 
@@ -141,7 +141,7 @@
 
     .back-link {
 
-      display: flex;
+      display: inline-flex;
 
       align-items: center;
 
@@ -162,20 +162,20 @@
 
 
     .back-link:hover {
-
       color: var(--black);
-
     }
 
 
-    .portal-label {
+    .quiz-label {
 
       font-family:
         var(--font-heading);
 
-      font-size: 1rem;
+      font-size:
+        1rem;
 
-      font-weight: 700;
+      font-weight:
+        700;
 
       letter-spacing:
         -0.3px;
@@ -184,65 +184,63 @@
 
 
     /* =========================================
-       HERO
-    ========================================= */
+       PAGE
+    ========================================== */
 
-    .hero {
+    .page {
 
-      margin-top: 70px;
+      max-width:
+        1100px;
 
-      background:
-        var(--bg-primary);
+      margin:
+        0 auto;
 
       padding:
-        75px 24px 45px;
-
-      border-bottom:
-        1px solid var(--border-color);
-
-      background-image:
-
-        linear-gradient(
-          var(--bg-tertiary) 1px,
-          transparent 1px
-        ),
-
-        linear-gradient(
-          90deg,
-          var(--bg-tertiary) 1px,
-          transparent 1px
-        );
-
-      background-size:
-        30px 30px;
+        100px 24px 60px;
 
     }
 
 
-    .hero-content {
+    /* =========================================
+       QUIZ HEADER
+    ========================================== */
 
-      max-width: 800px;
+    .quiz-header {
 
-      margin: 0 auto;
+      margin-bottom:
+        24px;
 
     }
 
 
-    .course-label {
+    .course-name {
 
-      display: flex;
+      display:
+        flex;
 
-      align-items: center;
+      align-items:
+        center;
 
-      gap: 7px;
+      gap:
+        7px;
 
-      color: var(--text-secondary);
+      color:
+        var(--text-secondary);
 
-      font-size: 0.8rem;
+      font-size:
+        0.8rem;
 
-      font-weight: 600;
+      font-weight:
+        700;
 
-      margin-bottom: 10px;
+      text-transform:
+        uppercase;
+
+      letter-spacing:
+        0.07em;
+
+      margin-bottom:
+        8px;
 
     }
 
@@ -253,98 +251,111 @@
         var(--font-heading);
 
       font-size:
-        clamp(1.9rem, 5vw, 2.6rem);
+        clamp(1.9rem, 4vw, 2.7rem);
 
-      line-height: 1.15;
+      line-height:
+        1.15;
 
-      font-weight: 700;
+      letter-spacing:
+        -0.8px;
 
-      letter-spacing: -0.7px;
-
-      margin-bottom: 18px;
-
-    }
-
-
-    .meta-tags {
-
-      display: flex;
-
-      gap: 8px;
-
-      flex-wrap: wrap;
+      margin-bottom:
+        7px;
 
     }
 
 
-    .meta-tag {
-
-      display: inline-flex;
-
-      align-items: center;
-
-      gap: 6px;
-
-      background:
-        var(--black);
+    .quiz-subtitle {
 
       color:
-        var(--white);
+        var(--text-secondary);
 
-      padding:
-        7px 12px;
-
-      border-radius: 5px;
-
-      font-size: 0.78rem;
-
-      font-weight: 600;
-
-    }
-
-
-    .meta-tag.light {
-
-      background:
-        var(--white);
-
-      color:
-        var(--text-primary);
-
-      border:
-        1px solid var(--border-color);
+      font-size:
+        0.9rem;
 
     }
 
 
     /* =========================================
-       CONTAINER
-    ========================================= */
+       MESSAGE
+    ========================================== */
 
-    .portal-container {
+    .message {
 
-      max-width: 800px;
-
-      margin:
-        30px auto 60px;
+      display:
+        none;
 
       padding:
-        0 24px;
+        13px 15px;
 
-      display: flex;
+      margin-bottom:
+        20px;
 
-      flex-direction: column;
+      border-radius:
+        8px;
 
-      gap: 20px;
+      font-size:
+        0.86rem;
+
+    }
+
+
+    .message.visible {
+      display:
+        block;
+    }
+
+
+    .message.error {
+
+      color:
+        var(--danger-text);
+
+      background:
+        var(--danger-bg);
+
+      border:
+        1px solid var(--danger-border);
+
+    }
+
+
+    .message.success {
+
+      color:
+        var(--success-text);
+
+      background:
+        var(--success-bg);
+
+      border:
+        1px solid var(--success-border);
 
     }
 
 
     /* =========================================
-       PANEL
-    ========================================= */
+       STATUS
+    ========================================== */
 
-    .panel {
+    .status-bar {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+      gap:
+        12px;
+
+      margin-bottom:
+        24px;
+
+    }
+
+
+    .status-card {
 
       background:
         var(--white);
@@ -352,9 +363,103 @@
       border:
         1px solid var(--border-color);
 
-      border-radius: 10px;
+      border-radius:
+        9px;
 
-      padding: 28px;
+      padding:
+        15px 17px;
+
+    }
+
+
+    .status-label {
+
+      color:
+        var(--text-tertiary);
+
+      font-size:
+        0.7rem;
+
+      font-weight:
+        700;
+
+      text-transform:
+        uppercase;
+
+      letter-spacing:
+        0.05em;
+
+      margin-bottom:
+        3px;
+
+    }
+
+
+    .status-value {
+
+      font-family:
+        var(--font-heading);
+
+      font-size:
+        1rem;
+
+      font-weight:
+        700;
+
+    }
+
+
+    .save-status {
+
+      margin-top:
+        4px;
+
+      color:
+        var(--text-tertiary);
+
+      font-size:
+        0.72rem;
+
+    }
+
+
+    .save-status.saving {
+      color:
+        var(--warning-text);
+    }
+
+
+    .save-status.saved {
+      color:
+        var(--success-text);
+    }
+
+
+    .save-status.failed {
+      color:
+        var(--danger-text);
+    }
+
+
+    /* =========================================
+       START / HISTORY / RESULT
+    ========================================== */
+
+    .start-card,
+    .history-card,
+    .result-card {
+
+      background:
+        var(--white);
+
+      border:
+        1px solid var(--border-color);
+
+      border-radius:
+        10px;
+
+      padding:
+        50px 30px;
 
       box-shadow:
         0 2px 4px
@@ -363,262 +468,149 @@
     }
 
 
-    .panel-title {
+    .start-card {
+      text-align:
+        center;
+    }
+
+
+    .big-icon {
+
+      width:
+        68px;
+
+      height:
+        68px;
+
+      margin:
+        0 auto 20px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      border-radius:
+        15px;
+
+      background:
+        var(--bg-tertiary);
+
+    }
+
+
+    .screen-title {
 
       font-family:
         var(--font-heading);
 
-      font-size: 1.1rem;
+      font-size:
+        1.5rem;
 
-      font-weight: 600;
-
-      margin-bottom: 16px;
-
-      padding-bottom: 14px;
-
-      border-bottom:
-        1px solid var(--border-color);
+      margin-bottom:
+        8px;
 
     }
 
 
-    /* =========================================
-       STATUS
-    ========================================= */
+    .screen-text {
 
-    .status-box {
+      max-width:
+        600px;
 
-      display: flex;
-
-      align-items: flex-start;
-
-      gap: 13px;
-
-      padding: 16px;
-
-      border:
-        1px solid var(--border-color);
-
-      border-radius: 8px;
-
-    }
-
-
-    .status-box.success {
-
-      background:
-        var(--success-bg);
-
-      border-color:
-        var(--success-border);
-
-      color:
-        var(--success-text);
-
-    }
-
-
-    .status-box.warning {
-
-      background:
-        var(--warning-bg);
-
-      border-color:
-        var(--warning-border);
-
-      color:
-        var(--warning-text);
-
-    }
-
-
-    .status-box.danger {
-
-      background:
-        var(--danger-bg);
-
-      border-color:
-        var(--danger-border);
-
-      color:
-        var(--danger-text);
-
-    }
-
-
-    .status-box.neutral {
-
-      background:
-        var(--bg-secondary);
-
-    }
-
-
-    .status-icon {
-
-      flex-shrink: 0;
-
-      margin-top: 2px;
-
-    }
-
-
-    .status-content {
-
-      flex: 1;
-
-    }
-
-
-    .status-title {
-
-      font-weight: 700;
-
-      margin-bottom: 2px;
-
-    }
-
-
-    .status-description {
-
-      font-size: 0.83rem;
-
-      opacity: 0.9;
-
-    }
-
-
-    /* =========================================
-       QUIZ INFO GRID
-    ========================================= */
-
-    .info-grid {
-
-      display: grid;
-
-      grid-template-columns:
-        repeat(2, minmax(0,1fr));
-
-      gap: 12px;
-
-    }
-
-
-    .info-card {
-
-      border:
-        1px solid var(--border-color);
-
-      border-radius: 8px;
-
-      padding: 16px;
-
-      background:
-        var(--bg-secondary);
-
-    }
-
-
-    .info-label {
-
-      color:
-        var(--text-tertiary);
-
-      font-size: 0.72rem;
-
-      font-weight: 700;
-
-      text-transform:
-        uppercase;
-
-      letter-spacing:
-        0.05em;
-
-      margin-bottom: 5px;
-
-    }
-
-
-    .info-value {
-
-      font-family:
-        var(--font-heading);
-
-      font-size: 1rem;
-
-      font-weight: 600;
-
-    }
-
-
-    /* =========================================
-       INSTRUCTIONS
-    ========================================= */
-
-    .instructions-content {
+      margin:
+        0 auto 24px;
 
       color:
         var(--text-secondary);
 
       font-size:
-        0.92rem;
-
-      overflow-wrap:
-        anywhere;
-
-    }
-
-
-    .instructions-content img {
-
-      max-width: 100%;
-
-      height: auto;
-
-    }
-
-
-    .instructions-content table {
-
-      max-width: 100%;
-
-      overflow-x: auto;
+        0.9rem;
 
     }
 
 
     /* =========================================
-       ATTEMPTS
-    ========================================= */
+       ATTEMPT HISTORY
+    ========================================== */
+
+    .history-card {
+      margin-bottom:
+        24px;
+    }
+
+
+    .history-title {
+
+      font-family:
+        var(--font-heading);
+
+      font-size:
+        1.05rem;
+
+      font-weight:
+        700;
+
+      margin-bottom:
+        6px;
+
+    }
+
+
+    .history-subtitle {
+
+      color:
+        var(--text-secondary);
+
+      font-size:
+        0.82rem;
+
+      margin-bottom:
+        18px;
+
+    }
+
 
     .attempt-list {
 
-      display: flex;
+      display:
+        flex;
 
-      flex-direction: column;
+      flex-direction:
+        column;
 
-      gap: 10px;
+      gap:
+        10px;
 
     }
 
 
     .attempt-row {
 
-      display: flex;
+      display:
+        flex;
 
-      align-items: center;
+      align-items:
+        center;
 
       justify-content:
         space-between;
 
-      gap: 15px;
+      gap:
+        20px;
 
-      padding: 14px;
+      padding:
+        14px 16px;
 
       border:
         1px solid var(--border-color);
 
-      border-radius: 8px;
+      border-radius:
+        8px;
 
       background:
         var(--bg-primary);
@@ -626,18 +618,22 @@
     }
 
 
-    .attempt-main {
-
-      min-width: 0;
-
+    .attempt-left {
+      min-width:
+        0;
     }
 
 
     .attempt-number {
 
-      font-weight: 700;
+      font-family:
+        var(--font-heading);
 
-      margin-bottom: 2px;
+      font-size:
+        0.9rem;
+
+      font-weight:
+        700;
 
     }
 
@@ -648,214 +644,774 @@
         var(--text-tertiary);
 
       font-size:
-        0.76rem;
+        0.74rem;
+
+      margin-top:
+        2px;
 
     }
 
 
-    .attempt-grade {
+    .attempt-status {
 
-      text-align: right;
+      display:
+        inline-flex;
 
-      flex-shrink: 0;
+      align-items:
+        center;
+
+      gap:
+        5px;
+
+      padding:
+        4px 8px;
+
+      border-radius:
+        5px;
+
+      font-size:
+        0.7rem;
+
+      font-weight:
+        700;
 
     }
 
 
-    .attempt-grade-value {
+    .attempt-status.finished {
+
+      color:
+        var(--success-text);
+
+      background:
+        var(--success-bg);
+
+    }
+
+
+    .attempt-status.progress {
+
+      color:
+        var(--warning-text);
+
+      background:
+        var(--warning-bg);
+
+    }
+
+
+    .attempt-status.other {
+
+      color:
+        var(--text-secondary);
+
+      background:
+        var(--bg-tertiary);
+
+    }
+
+
+    .attempt-score {
 
       font-family:
         var(--font-heading);
 
       font-size:
-        1rem;
+        0.95rem;
 
-      font-weight: 700;
+      font-weight:
+        700;
 
-    }
+      text-align:
+        right;
 
-
-    .attempt-grade-label {
-
-      color:
-        var(--text-tertiary);
-
-      font-size:
-        0.7rem;
+      white-space:
+        nowrap;
 
     }
 
 
     /* =========================================
-       CTA
-    ========================================= */
+       PLAYER
+    ========================================== */
 
-    .launch-panel {
+    #quiz-player {
+      display:
+        none;
+    }
+
+
+    .player-layout {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        minmax(0, 1fr)
+        250px;
+
+      grid-template-areas:
+        "question navigator";
+
+      gap:
+        20px;
+
+      align-items:
+        start;
+
+    }
+
+
+    .question-card {
+
+      grid-area:
+        question;
 
       background:
-        var(--black);
-
-      color:
         var(--white);
 
       border:
-        1px solid var(--black);
+        1px solid var(--border-color);
+
+      border-radius:
+        10px;
+
+      overflow:
+        hidden;
+
+      box-shadow:
+        0 2px 4px
+        rgba(0,0,0,0.02);
 
     }
 
 
-    .launch-panel .panel-title {
+    .navigator-card {
 
-      border-color:
-        rgba(255,255,255,0.2);
-
-    }
-
-
-    .launch-description {
-
-      color:
-        rgba(255,255,255,0.72);
-
-      font-size:
-        0.88rem;
-
-      margin-bottom:
-        20px;
-
-    }
-
-
-    .action-btn {
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      gap: 9px;
-
-      width: 100%;
-
-      padding: 16px;
+      grid-area:
+        navigator;
 
       background:
         var(--white);
 
-      color:
-        var(--black);
+      border:
+        1px solid var(--border-color);
 
-      border: none;
+      border-radius:
+        10px;
 
-      border-radius: 6px;
+      padding:
+        18px;
+
+      position:
+        sticky;
+
+      top:
+        90px;
+
+      box-shadow:
+        0 2px 4px
+        rgba(0,0,0,0.02);
+
+    }
+
+
+    /* =========================================
+       QUESTION
+    ========================================== */
+
+    .question-header {
+
+      padding:
+        18px 22px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      gap:
+        15px;
+
+      border-bottom:
+        1px solid var(--border-color);
+
+    }
+
+
+    .question-number {
 
       font-family:
         var(--font-heading);
 
-      font-weight: 700;
+      font-size:
+        0.95rem;
 
-      font-size: 1rem;
-
-      cursor: pointer;
-
-      text-decoration: none;
-
-      transition:
-        transform 0.1s ease,
-        opacity 0.2s ease;
+      font-weight:
+        700;
 
     }
 
 
-    .action-btn:hover {
+    .question-mark {
 
-      opacity:
-        0.92;
+      color:
+        var(--text-tertiary);
 
-    }
+      font-size:
+        0.78rem;
 
-
-    .action-btn:active {
-
-      transform:
-        scale(0.99);
+      font-weight:
+        600;
 
     }
 
 
-    .action-btn.disabled {
+    .question-content {
 
-      opacity:
-        0.45;
+      padding:
+        30px;
 
-      pointer-events:
+      min-height:
+        300px;
+
+      overflow-wrap:
+        anywhere;
+
+    }
+
+
+    .athena-question {
+      width:
+        100%;
+    }
+
+
+    .moodle-question-body {
+      width:
+        100%;
+    }
+
+
+    /* =========================================
+       MOODLE QUESTION CLEANUP
+    ========================================== */
+
+    .moodle-question-body .que {
+
+      width:
+        100% !important;
+
+      max-width:
+        100% !important;
+
+      margin:
+        0 !important;
+
+      padding:
+        0 !important;
+
+      border:
+        0 !important;
+
+      background:
+        transparent !important;
+
+      box-shadow:
+        none !important;
+
+    }
+
+
+    .moodle-question-body .que > .info,
+    .moodle-question-body .questionflag,
+    .moodle-question-body .questionflagimage,
+    .moodle-question-body .flagstate,
+    .moodle-question-body .state,
+    .moodle-question-body .grade,
+    .moodle-question-body .status,
+    .moodle-question-body .comment,
+    .moodle-question-body .rightanswer,
+    .moodle-question-body .im-controls,
+    .moodle-question-body .history,
+    .moodle-question-body .outcome {
+
+      display:
+        none !important;
+
+    }
+
+
+    .moodle-question-body .qtext {
+
+      margin-bottom:
+        24px !important;
+
+      color:
+        var(--text-primary);
+
+      font-size:
+        1.08rem;
+
+      line-height:
+        1.7;
+
+    }
+
+
+    .moodle-question-body img {
+
+      max-width:
+        100% !important;
+
+      height:
+        auto !important;
+
+    }
+
+
+    .moodle-question-body .answer {
+
+      margin:
+        0 !important;
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      gap:
+        10px;
+
+    }
+
+
+    .moodle-question-body .answer > div {
+      margin:
+        0 !important;
+    }
+
+
+    .moodle-question-body .answer label {
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        10px;
+
+      width:
+        100%;
+
+      padding:
+        13px 15px;
+
+      border:
+        1px solid var(--border-color);
+
+      border-radius:
+        8px;
+
+      background:
+        var(--white);
+
+      cursor:
+        pointer;
+
+    }
+
+
+    .moodle-question-body .answer label:hover {
+
+      background:
+        var(--bg-secondary);
+
+      border-color:
+        #cbd5e1;
+
+    }
+
+
+    .moodle-question-body
+    input[type="radio"],
+    .moodle-question-body
+    input[type="checkbox"] {
+
+      width:
+        17px;
+
+      height:
+        17px;
+
+      flex-shrink:
+        0;
+
+      margin:
+        0 8px 0 0;
+
+    }
+
+
+    .moodle-question-body
+    input[type="text"],
+    .moodle-question-body
+    input[type="number"],
+    .moodle-question-body
+    textarea,
+    .moodle-question-body
+    select {
+
+      width:
+        100%;
+
+      max-width:
+        650px;
+
+      padding:
+        11px 13px;
+
+      border:
+        1px solid var(--border-color);
+
+      border-radius:
+        7px;
+
+      background:
+        var(--white);
+
+      color:
+        var(--text-primary);
+
+      outline:
         none;
 
     }
 
 
     /* =========================================
-       MESSAGE
-    ========================================= */
+       NAVIGATOR
+    ========================================== */
 
-    .message {
+    .navigator-title {
 
-      display: none;
-
-      padding:
-        13px 15px;
-
-      border-radius:
-        7px;
+      font-family:
+        var(--font-heading);
 
       font-size:
-        0.85rem;
+        0.9rem;
+
+      font-weight:
+        700;
+
+      margin-bottom:
+        4px;
 
     }
 
 
-    .message.visible {
-
-      display:
-        block;
-
-    }
-
-
-    .message.error {
-
-      background:
-        var(--danger-bg);
-
-      border:
-        1px solid var(--danger-border);
+    .navigator-subtitle {
 
       color:
-        var(--danger-text);
+        var(--text-tertiary);
+
+      font-size:
+        0.72rem;
+
+      margin-bottom:
+        14px;
+
+    }
+
+
+    .navigator-grid {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+      gap:
+        7px;
+
+    }
+
+
+    .nav-question {
+
+      width:
+        100%;
+
+      aspect-ratio:
+        1;
+
+      border:
+        1px solid var(--border-color);
+
+      border-radius:
+        6px;
+
+      background:
+        var(--white);
+
+      color:
+        var(--text-primary);
+
+      font-size:
+        0.75rem;
+
+      font-weight:
+        700;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      transition:
+        background 0.15s ease,
+        color 0.15s ease,
+        border-color 0.15s ease,
+        opacity 0.15s ease;
+
+    }
+
+
+    .nav-question:hover:not(:disabled) {
+
+      border-color:
+        var(--black);
+
+      background:
+        var(--bg-secondary);
+
+    }
+
+
+    .nav-question.current {
+
+      background:
+        var(--black);
+
+      color:
+        var(--white);
+
+      border-color:
+        var(--black);
+
+    }
+
+
+    .nav-question.current:hover:not(:disabled) {
+
+      background:
+        var(--black);
+
+      color:
+        var(--white);
+
+    }
+
+
+    .nav-question:disabled {
+
+      cursor:
+        not-allowed;
+
+      opacity:
+        0.5;
 
     }
 
 
     /* =========================================
-       LOADING
-    ========================================= */
+       ACTIONS
+    ========================================== */
 
-    .loading {
-
-      text-align:
-        center;
+    .question-actions {
 
       padding:
-        55px 20px;
+        16px 22px;
 
-      color:
-        var(--text-secondary);
+      border-top:
+        1px solid var(--border-color);
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      gap:
+        10px;
 
     }
 
 
-    .spinner {
+    .action-group {
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        10px;
+
+    }
+
+
+    .button {
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      gap:
+        8px;
+
+      min-height:
+        44px;
+
+      padding:
+        10px 16px;
+
+      border:
+        1px solid var(--border-color);
+
+      border-radius:
+        7px;
+
+      background:
+        var(--white);
+
+      color:
+        var(--text-primary);
+
+      font-family:
+        var(--font-heading);
+
+      font-weight:
+        600;
+
+    }
+
+
+    .button:hover:not(:disabled) {
+
+      background:
+        var(--bg-secondary);
+
+    }
+
+
+    .button:disabled {
+
+      opacity:
+        0.4;
+
+      cursor:
+        not-allowed;
+
+    }
+
+
+    .button.primary {
+
+      background:
+        var(--black);
+
+      color:
+        var(--white);
+
+      border-color:
+        var(--black);
+
+    }
+
+
+    .button.primary:hover:not(:disabled) {
+
+      background:
+        var(--black);
+
+      opacity:
+        0.9;
+
+    }
+
+
+    .button.danger {
+
+      background:
+        var(--danger-bg);
+
+      color:
+        var(--danger-text);
+
+      border-color:
+        var(--danger-border);
+
+    }
+
+
+    /* =========================================
+       RESULT
+    ========================================== */
+
+    .result-score {
+
+      font-family:
+        var(--font-heading);
+
+      font-size:
+        clamp(2.8rem, 8vw, 4rem);
+
+      font-weight:
+        700;
+
+      letter-spacing:
+        -1.5px;
+
+      margin-bottom:
+        4px;
+
+    }
+
+
+    .result-percentage {
+
+      color:
+        var(--text-secondary);
+
+      margin-bottom:
+        25px;
+
+    }
+
+
+    .loading-icon {
 
       animation:
         spin 1s linear infinite;
@@ -880,59 +1436,67 @@
 
     /* =========================================
        MOBILE
-    ========================================= */
+    ========================================== */
 
-    @media (max-width: 650px) {
+    @media (max-width: 850px) {
 
-      .nav-container {
+      .player-layout {
 
-        padding:
-          0 16px;
+        grid-template-columns:
+          1fr;
+
+        grid-template-areas:
+          "navigator"
+          "question";
 
       }
 
 
-      .portal-label {
+      .navigator-card {
+        position:
+          static;
+      }
 
+
+      .navigator-grid {
+
+        grid-template-columns:
+          repeat(10, minmax(0, 1fr));
+
+      }
+
+    }
+
+
+    @media (max-width: 600px) {
+
+      .nav-container {
+        padding:
+          0 16px;
+      }
+
+
+      .quiz-label {
         font-size:
           0.85rem;
-
       }
 
 
       .back-link {
-
         font-size:
           0.82rem;
-
       }
 
 
-      .hero {
+      .page {
 
         padding:
-          55px 18px 35px;
+          92px 14px 40px;
 
       }
 
 
-      .portal-container {
-
-        padding:
-          0 16px;
-
-      }
-
-
-      .panel {
-
-        padding:
-          22px;
-
-      }
-
-
-      .info-grid {
+      .status-bar {
 
         grid-template-columns:
           1fr;
@@ -951,10 +1515,61 @@
       }
 
 
-      .attempt-grade {
+      .attempt-score {
 
         text-align:
           left;
+
+      }
+
+
+      .question-content {
+
+        padding:
+          20px;
+
+      }
+
+
+      .question-actions {
+
+        flex-direction:
+          column;
+
+        align-items:
+          stretch;
+
+      }
+
+
+      .action-group {
+
+        width:
+          100%;
+
+      }
+
+
+      .action-group .button {
+
+        flex:
+          1;
+
+      }
+
+
+      #submit-button {
+
+        width:
+          100%;
+
+      }
+
+
+      .navigator-grid {
+
+        grid-template-columns:
+          repeat(5, minmax(0, 1fr));
 
       }
 
@@ -968,86 +1583,148 @@
 <body>
 
 
+<header>
+
+  <div class="nav-container">
+
+    <div
+      class="back-link"
+      id="back-link"
+    >
+
+      <i
+        data-lucide="arrow-left"
+        style="width:18px;height:18px;"
+      ></i>
+
+      Back to Course
+
+    </div>
+
+
+    <div class="quiz-label">
+      ATHENA QUIZ
+    </div>
+
+  </div>
+
+</header>
+
+
+<main class="page">
+
+
   <!-- =========================================
-       HEADER
+       QUIZ HEADER
   ========================================== -->
 
-  <header>
+  <section class="quiz-header">
 
-    <div class="nav-container">
+    <div
+      class="course-name"
+      id="course-name"
+    >
 
-      <div
-        class="back-link"
-        onclick="history.back()"
-      >
+      <i
+        data-lucide="book-open"
+        style="
+          width:15px;
+          height:15px;
+        "
+      ></i>
 
-        <i
-          data-lucide="arrow-left"
-          style="width:18px;height:18px;"
-        ></i>
+      Loading...
 
-        Back to Course
+    </div>
 
+
+    <h1
+      class="quiz-title"
+      id="quiz-title"
+    >
+      Loading Quiz...
+    </h1>
+
+
+    <div
+      class="quiz-subtitle"
+      id="quiz-subtitle"
+    >
+      Preparing assessment...
+    </div>
+
+  </section>
+
+
+  <!-- MESSAGE -->
+
+  <div
+    class="message"
+    id="message"
+  ></div>
+
+
+  <!-- =========================================
+       STATUS
+  ========================================== -->
+
+  <section class="status-bar">
+
+
+    <div class="status-card">
+
+      <div class="status-label">
+        Attempt
       </div>
 
 
-      <div class="portal-label">
-        QUIZ PORTAL
+      <div
+        class="status-value"
+        id="attempt-status"
+      >
+        Not started
+      </div>
+
+
+      <div
+        class="save-status"
+        id="save-status"
+      >
+        —
       </div>
 
     </div>
 
-  </header>
 
+    <div class="status-card">
 
-  <!-- =========================================
-       HERO
-  ========================================== -->
-
-  <section class="hero">
-
-    <div class="hero-content">
-
-      <div
-        class="course-label"
-        id="course-label"
-      >
-
-        <i
-          data-lucide="book-open"
-          style="width:15px;height:15px;"
-        ></i>
-
-        Loading course...
-
+      <div class="status-label">
+        Progress
       </div>
 
 
-      <h1
-        class="quiz-title"
-        id="quiz-title"
+      <div
+        class="status-value"
+        id="progress-status"
       >
-        Loading Quiz...
-      </h1>
+        —
+      </div>
+
+    </div>
+
+
+    <div class="status-card">
+
+      <div class="status-label">
+        Timer
+      </div>
 
 
       <div
-        class="meta-tags"
-        id="quiz-meta"
+        class="status-value"
+        id="timer-status"
       >
-
-        <div class="meta-tag light">
-
-          <i
-            data-lucide="loader-2"
-            class="spinner"
-            style="width:14px;height:14px;"
-          ></i>
-
-          Loading...
-
-        </div>
-
+        —
       </div>
 
     </div>
@@ -1056,826 +1733,934 @@
 
 
   <!-- =========================================
-       MAIN
+       START
   ========================================== -->
 
-  <main class="portal-container">
+  <section
+    id="start-screen"
+    class="start-card"
+  >
+
+    <div class="big-icon">
+
+      <i
+        data-lucide="clipboard-check"
+        style="
+          width:34px;
+          height:34px;
+        "
+      ></i>
+
+    </div>
 
 
-    <!-- MESSAGE -->
-
-    <div
-      class="message"
-      id="message"
-    ></div>
-
-
-    <!-- STATUS -->
-
-    <section class="panel">
-
-      <h2 class="panel-title">
-        Assessment Status
-      </h2>
+    <h2
+      class="screen-title"
+      id="start-title"
+    >
+      Ready to Begin?
+    </h2>
 
 
-      <div
-        class="status-box neutral"
-        id="status-box"
-      >
-
-        <i
-          data-lucide="loader-2"
-          class="status-icon spinner"
-          style="width:20px;height:20px;"
-        ></i>
+    <p
+      class="screen-text"
+      id="start-description"
+    >
+      Start your quiz attempt. Your answers
+      will be saved to Moodle automatically.
+    </p>
 
 
-        <div class="status-content">
-
-          <div
-            class="status-title"
-            id="status-title"
-          >
-            Checking quiz status...
-          </div>
-
-
-          <div
-            class="status-description"
-            id="status-description"
-          >
-            Connecting to Moodle.
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- QUIZ INFORMATION -->
-
-    <section class="panel">
-
-      <h2 class="panel-title">
-        Quiz Information
-      </h2>
-
-
-      <div class="info-grid">
-
-        <div class="info-card">
-
-          <div class="info-label">
-            Attempts
-          </div>
-
-          <div
-            class="info-value"
-            id="attempt-info"
-          >
-            —
-
-          </div>
-
-        </div>
-
-
-        <div class="info-card">
-
-          <div class="info-label">
-            Best Grade
-          </div>
-
-          <div
-            class="info-value"
-            id="best-grade"
-          >
-            —
-
-          </div>
-
-        </div>
-
-
-        <div class="info-card">
-
-          <div class="info-label">
-            Time Limit
-          </div>
-
-          <div
-            class="info-value"
-            id="time-limit"
-          >
-            —
-
-          </div>
-
-        </div>
-
-
-        <div class="info-card">
-
-          <div class="info-label">
-            Maximum Grade
-          </div>
-
-          <div
-            class="info-value"
-            id="max-grade"
-          >
-            —
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- INSTRUCTIONS -->
-
-    <section class="panel">
-
-      <h2 class="panel-title">
-        Quiz Instructions
-      </h2>
-
-
-      <div
-        class="instructions-content"
-        id="quiz-instructions"
-      >
-
-        Loading quiz instructions...
-
-      </div>
-
-    </section>
-
-
-    <!-- ATTEMPTS -->
-
-    <section
-      class="panel"
-      id="attempts-panel"
-      style="display:none;"
+    <button
+      type="button"
+      id="start-button"
+      class="button primary"
     >
 
-      <h2 class="panel-title">
-        Your Attempts
-      </h2>
+      <i
+        data-lucide="play"
+        style="
+          width:17px;
+          height:17px;
+        "
+      ></i>
+
+      Start Quiz
+
+    </button>
+
+  </section>
 
 
-      <div
-        class="attempt-list"
-        id="attempt-list"
-      ></div>
+  <!-- =========================================
+       HISTORY
+  ========================================== -->
 
-    </section>
+  <section
+    id="history-card"
+    class="history-card"
+    style="display:none;"
+  >
 
-
-    <!-- LAUNCH -->
-
-    <section class="panel launch-panel">
-
-      <h2 class="panel-title">
-        Take Assessment
-      </h2>
+    <div class="history-title">
+      Your Previous Attempts
+    </div>
 
 
-      <div
-        class="launch-description"
-        id="launch-description"
-      >
-
-        Your actual quiz attempt will open in
-        Moodle. Make sure you have a stable
-        connection before starting.
-
-      </div>
+    <div class="history-subtitle">
+      Your completed attempts are kept in Moodle.
+    </div>
 
 
-      <a
-        href="#"
-        id="launch-btn"
-        class="action-btn disabled"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+    <div
+      class="attempt-list"
+      id="attempt-list"
+    ></div>
 
-        <i
-          data-lucide="play-circle"
-          style="width:19px;height:19px;"
-        ></i>
-
-        Start Quiz
-
-      </a>
-
-    </section>
+  </section>
 
 
-  </main>
+  <!-- =========================================
+       PLAYER
+  ========================================== -->
+
+  <section
+    id="quiz-player"
+  >
+
+    <div class="player-layout">
 
 
-  <script>
+      <!-- QUESTION -->
 
-    /* ==========================================================
-       CONFIGURATION
-    ========================================================== */
-
-    const MOODLE_URL =
-      'http://localhost:8000';
+      <section class="question-card">
 
 
-    const userToken =
-      localStorage.getItem(
-        'madar_user_token'
+        <div class="question-header">
+
+          <div
+            class="question-number"
+            id="question-number"
+          >
+            Question
+          </div>
+
+
+          <div
+            class="question-mark"
+            id="question-mark"
+          >
+            —
+          </div>
+
+        </div>
+
+
+        <div
+          class="question-content"
+          id="question-content"
+        >
+          Loading question...
+        </div>
+
+
+        <div class="question-actions">
+
+
+          <div class="action-group">
+
+
+            <button
+              type="button"
+              class="button"
+              id="previous-button"
+            >
+
+              <i
+                data-lucide="chevron-left"
+                style="
+                  width:17px;
+                  height:17px;
+                "
+              ></i>
+
+              Previous
+
+            </button>
+
+
+            <button
+              type="button"
+              class="button primary"
+              id="next-button"
+            >
+
+              Next
+
+              <i
+                data-lucide="chevron-right"
+                style="
+                  width:17px;
+                  height:17px;
+                "
+              ></i>
+
+            </button>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="button danger"
+            id="submit-button"
+          >
+
+            <i
+              data-lucide="send"
+              style="
+                width:17px;
+                height:17px;
+              "
+            ></i>
+
+            Submit Quiz
+
+          </button>
+
+
+        </div>
+
+      </section>
+
+
+      <!-- NAVIGATOR -->
+
+      <aside class="navigator-card">
+
+
+        <div class="navigator-title">
+          Question Navigator
+        </div>
+
+
+        <div class="navigator-subtitle">
+          All questions
+        </div>
+
+
+        <div
+          class="navigator-grid"
+          id="navigator-grid"
+        ></div>
+
+
+      </aside>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================
+       RESULT
+  ========================================== -->
+
+  <section
+    id="result-screen"
+    class="result-card"
+    style="display:none;"
+  >
+
+    <div class="big-icon">
+
+      <i
+        data-lucide="check-circle"
+        style="
+          width:34px;
+          height:34px;
+        "
+      ></i>
+
+    </div>
+
+
+    <h2 class="screen-title">
+      Quiz Complete
+    </h2>
+
+
+    <div
+      class="result-score"
+      id="result-score"
+    >
+      Submitted
+    </div>
+
+
+    <div
+      class="result-percentage"
+      id="result-percentage"
+    >
+      Attempt submitted successfully
+    </div>
+
+
+    <p
+      class="screen-text"
+      id="result-description"
+    >
+      Moodle has received your quiz attempt.
+    </p>
+
+
+    <button
+      type="button"
+      class="button primary"
+      id="result-back-button"
+    >
+
+      <i
+        data-lucide="arrow-left"
+        style="
+          width:17px;
+          height:17px;
+        "
+      ></i>
+
+      Back to Course
+
+    </button>
+
+  </section>
+
+
+</main>
+
+
+<script>
+
+  /* =========================================================
+     CONFIG
+  ========================================================== */
+
+  const MOODLE_URL =
+    'http://localhost:8000';
+
+
+  const userToken =
+    localStorage.getItem(
+      'madar_user_token'
+    );
+
+
+  /* =========================================================
+     URL
+  ========================================================== */
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+
+  const quizId =
+    params.get(
+      'quizid'
+    );
+
+
+  const courseId =
+    params.get(
+      'courseid'
+    );
+
+
+  /* =========================================================
+     AUTH
+  ========================================================== */
+
+  if (!userToken) {
+
+    window.location.href =
+      'login.html';
+
+  }
+
+
+  if (!quizId || !courseId) {
+
+    window.location.href =
+      'index.html';
+
+  }
+
+
+  /* =========================================================
+     STATE
+  ========================================================== */
+
+  let currentAttempt =
+    null;
+
+
+  let currentPage =
+    0;
+
+
+  let currentNextPage =
+    null;
+
+
+  let isLastPage =
+    false;
+
+
+  let quizNavigation =
+    [];
+
+
+  let isProcessing =
+    false;
+
+
+  let saveInterval =
+    null;
+
+
+  let inputSaveTimer =
+    null;
+
+
+  let timerInterval =
+    null;
+
+
+  let allAttempts =
+    [];
+
+
+  let maxAttempts =
+    null;
+
+
+  /* =========================================================
+     DOM
+  ========================================================== */
+
+  const courseName =
+    document.getElementById(
+      'course-name'
+    );
+
+
+  const quizTitle =
+    document.getElementById(
+      'quiz-title'
+    );
+
+
+  const quizSubtitle =
+    document.getElementById(
+      'quiz-subtitle'
+    );
+
+
+  const message =
+    document.getElementById(
+      'message'
+    );
+
+
+  const startScreen =
+    document.getElementById(
+      'start-screen'
+    );
+
+
+  const startTitle =
+    document.getElementById(
+      'start-title'
+    );
+
+
+  const startDescription =
+    document.getElementById(
+      'start-description'
+    );
+
+
+  const startButton =
+    document.getElementById(
+      'start-button'
+    );
+
+
+  const historyCard =
+    document.getElementById(
+      'history-card'
+    );
+
+
+  const attemptList =
+    document.getElementById(
+      'attempt-list'
+    );
+
+
+  const quizPlayer =
+    document.getElementById(
+      'quiz-player'
+    );
+
+
+  const resultScreen =
+    document.getElementById(
+      'result-screen'
+    );
+
+
+  const questionContent =
+    document.getElementById(
+      'question-content'
+    );
+
+
+  const questionNumber =
+    document.getElementById(
+      'question-number'
+    );
+
+
+  const questionMark =
+    document.getElementById(
+      'question-mark'
+    );
+
+
+  const previousButton =
+    document.getElementById(
+      'previous-button'
+    );
+
+
+  const nextButton =
+    document.getElementById(
+      'next-button'
+    );
+
+
+  const submitButton =
+    document.getElementById(
+      'submit-button'
+    );
+
+
+  const navigatorGrid =
+    document.getElementById(
+      'navigator-grid'
+    );
+
+
+  const attemptStatus =
+    document.getElementById(
+      'attempt-status'
+    );
+
+
+  const progressStatus =
+    document.getElementById(
+      'progress-status'
+    );
+
+
+  const timerStatus =
+    document.getElementById(
+      'timer-status'
+    );
+
+
+  const saveStatus =
+    document.getElementById(
+      'save-status'
+    );
+
+
+  lucide.createIcons();
+
+
+  /* =========================================================
+     HELPERS
+  ========================================================== */
+
+  function showMessage(
+    text,
+    type = 'error'
+  ) {
+
+    message.textContent =
+      text;
+
+
+    message.className =
+      `message visible ${type}`;
+
+  }
+
+
+  function hideMessage() {
+
+    message.textContent =
+      '';
+
+
+    message.className =
+      'message';
+
+  }
+
+
+  function setSaveStatus(
+    text,
+    state = ''
+  ) {
+
+    saveStatus.textContent =
+      text;
+
+
+    saveStatus.className =
+      `save-status ${state}`;
+
+  }
+
+
+  function escapeHtml(
+    value
+  ) {
+
+    return String(
+      value ?? ''
+    )
+      .replace(
+        /&/g,
+        '&amp;'
+      )
+      .replace(
+        /</g,
+        '&lt;'
+      )
+      .replace(
+        />/g,
+        '&gt;'
+      )
+      .replace(
+        /"/g,
+        '&quot;'
+      )
+      .replace(
+        /'/g,
+        '&#039;'
       );
 
-
-    /* ==========================================================
-       URL
-    ========================================================== */
-
-    const urlParams =
-      new URLSearchParams(
-        window.location.search
-      );
+  }
 
 
-    const quizId =
-      urlParams.get(
-        'quizid'
-      );
+  function formatAttemptDate(
+    timestamp
+  ) {
 
+    if (
+      !timestamp ||
+      Number(timestamp) <= 0
+    ) {
 
-    const courseId =
-      urlParams.get(
-        'courseid'
-      );
-
-
-    /* ==========================================================
-       AUTH
-    ========================================================== */
-
-    if (!userToken) {
-
-      window.location.href =
-        'login.html';
+      return 'Date unavailable';
 
     }
 
 
-    if (!quizId || !courseId) {
+    return new Date(
+      Number(timestamp) * 1000
+    ).toLocaleString(
+      'en-US',
+      {
+        weekday:
+          'short',
 
-      window.location.href =
-        'index.html';
+        month:
+          'short',
+
+        day:
+          'numeric',
+
+        year:
+          'numeric',
+
+        hour:
+          '2-digit',
+
+        minute:
+          '2-digit'
+      }
+    );
+
+  }
+
+
+  /* =========================================================
+     MOODLE REQUEST
+  ========================================================== */
+
+  async function moodleRequest(
+    wsfunction,
+    params = {}
+  ) {
+
+    const body =
+      new URLSearchParams();
+
+
+    body.append(
+      'wstoken',
+      userToken
+    );
+
+
+    body.append(
+      'wsfunction',
+      wsfunction
+    );
+
+
+    body.append(
+      'moodlewsrestformat',
+      'json'
+    );
+
+
+    Object.entries(
+      params
+    ).forEach(
+      ([key, value]) => {
+
+        if (
+          value === undefined ||
+          value === null
+        ) {
+
+          return;
+
+        }
+
+
+        body.append(
+          key,
+          value
+        );
+
+      }
+    );
+
+
+    const response =
+      await fetch(
+        `${MOODLE_URL}/webservice/rest/server.php`,
+        {
+          method:
+            'POST',
+
+          headers: {
+            'Content-Type':
+              'application/x-www-form-urlencoded'
+          },
+
+          body
+        }
+      );
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        `Moodle returned HTTP ${response.status}.`
+      );
 
     }
 
 
-    /* ==========================================================
-       DOM
-    ========================================================== */
+    const data =
+      await response.json();
 
-    const courseLabel =
-      document.getElementById(
-        'course-label'
+
+    if (data.exception) {
+
+      throw new Error(
+        data.message ||
+        'Moodle API error.'
+      );
+
+    }
+
+
+    return data;
+
+  }
+
+
+  /* =========================================================
+     LOAD QUIZ INFO
+  ========================================================== */
+
+  async function loadQuizInfo() {
+
+    const sections =
+      await moodleRequest(
+        'core_course_get_contents',
+        {
+          courseid:
+            courseId
+        }
       );
 
 
-    const quizTitle =
-      document.getElementById(
-        'quiz-title'
+    if (
+      !Array.isArray(
+        sections
+      )
+    ) {
+
+      throw new Error(
+        'Moodle returned invalid course contents.'
       );
 
+    }
 
-    const quizMeta =
-      document.getElementById(
-        'quiz-meta'
+
+    let targetQuiz =
+      null;
+
+
+    for (
+      const section
+      of sections
+    ) {
+
+      if (
+        !Array.isArray(
+          section.modules
+        )
+      ) {
+
+        continue;
+
+      }
+
+
+      const found =
+        section.modules.find(
+          module =>
+            module.modname === 'quiz' &&
+            String(
+              module.instance
+            ) ===
+            String(
+              quizId
+            )
+        );
+
+
+      if (found) {
+
+        targetQuiz =
+          found;
+
+        break;
+
+      }
+
+    }
+
+
+    if (!targetQuiz) {
+
+      throw new Error(
+        'Quiz was not found in this course.'
       );
 
-
-    const statusBox =
-      document.getElementById(
-        'status-box'
-      );
+    }
 
 
-    const statusTitle =
-      document.getElementById(
-        'status-title'
-      );
+    courseName.innerHTML = `
+
+      <i
+        data-lucide="book-open"
+        style="
+          width:15px;
+          height:15px;
+        "
+      ></i>
+
+      Course ${escapeHtml(
+        courseId
+      )}
+
+    `;
 
 
-    const statusDescription =
-      document.getElementById(
-        'status-description'
-      );
+    quizTitle.textContent =
+      targetQuiz.name ||
+      'Quiz';
 
 
-    const quizInstructions =
-      document.getElementById(
-        'quiz-instructions'
-      );
+    quizSubtitle.textContent =
+      'Complete the assessment inside Athena.';
 
 
-    const attemptInfo =
-      document.getElementById(
-        'attempt-info'
-      );
+    if (
+      targetQuiz.description
+    ) {
 
+      startDescription.innerHTML =
+        targetQuiz.description;
 
-    const bestGrade =
-      document.getElementById(
-        'best-grade'
-      );
-
-
-    const timeLimit =
-      document.getElementById(
-        'time-limit'
-      );
-
-
-    const maxGrade =
-      document.getElementById(
-        'max-grade'
-      );
-
-
-    const attemptsPanel =
-      document.getElementById(
-        'attempts-panel'
-      );
-
-
-    const attemptList =
-      document.getElementById(
-        'attempt-list'
-      );
-
-
-    const launchBtn =
-      document.getElementById(
-        'launch-btn'
-      );
-
-
-    const launchDescription =
-      document.getElementById(
-        'launch-description'
-      );
-
-
-    const message =
-      document.getElementById(
-        'message'
-      );
+    }
 
 
     lucide.createIcons();
 
+  }
 
-    /* ==========================================================
-       HELPERS
-    ========================================================== */
 
-    function escapeHtml(value) {
+  /* =========================================================
+     ATTEMPTS
+  ========================================================== */
 
-      return String(
-        value ?? ''
-      )
+  async function getUserQuizAttempts() {
 
-        .replace(
-          /&/g,
-          '&amp;'
-        )
-
-        .replace(
-          /</g,
-          '&lt;'
-        )
-
-        .replace(
-          />/g,
-          '&gt;'
-        )
-
-        .replace(
-          /"/g,
-          '&quot;'
-        )
-
-        .replace(
-          /'/g,
-          '&#039;'
-        );
-
-    }
-
-
-    function formatDate(
-      timestamp
-    ) {
-
-      if (
-        !timestamp ||
-        Number(timestamp) <= 0
-      ) {
-
-        return '—';
-
-      }
-
-
-      return new Date(
-        Number(timestamp) * 1000
-      ).toLocaleString(
-        'en-US',
-        {
-          weekday: 'short',
-          month: 'short',
-          day: 'numeric',
-          year: 'numeric',
-          hour: '2-digit',
-          minute: '2-digit'
-        }
-      );
-
-    }
-
-
-    function formatDuration(
-      seconds
-    ) {
-
-      const value =
-        Number(seconds);
-
-
-      if (
-        !Number.isFinite(value) ||
-        value <= 0
-      ) {
-
-        return 'No time limit';
-
-      }
-
-
-      const minutes =
-        Math.floor(
-          value / 60
-        );
-
-
-      const hours =
-        Math.floor(
-          minutes / 60
-        );
-
-
-      const remainingMinutes =
-        minutes % 60;
-
-
-      if (hours > 0) {
-
-        return remainingMinutes > 0
-
-          ? `${hours}h ${remainingMinutes}m`
-
-          : `${hours}h`;
-
-      }
-
-
-      return `${minutes} min`;
-
-    }
-
-
-    function formatGrade(
-      grade,
-      max
-    ) {
-
-      const numericGrade =
-        Number(grade);
-
-      const numericMax =
-        Number(max);
-
-
-      if (
-        !Number.isFinite(
-          numericGrade
-        )
-      ) {
-
-        return 'Not graded';
-
-      }
-
-
-      if (
-        Number.isFinite(
-          numericMax
-        ) &&
-        numericMax > 0
-      ) {
-
-        return `${numericGrade.toFixed(1)} / ${numericMax}`;
-
-      }
-
-
-      return numericGrade.toFixed(1);
-
-    }
-
-
-    function showMessage(
-      text
-    ) {
-
-      message.textContent =
-        text;
-
-      message.className =
-        'message visible error';
-
-    }
-
-
-    /* ==========================================================
-       MOODLE REQUEST
-    ========================================================== */
-
-    async function moodleRequest(
-      wsfunction,
-      params = {}
-    ) {
-
-      const body =
-        new URLSearchParams();
-
-
-      body.append(
-        'wstoken',
-        userToken
-      );
-
-
-      body.append(
-        'wsfunction',
-        wsfunction
-      );
-
-
-      body.append(
-        'moodlewsrestformat',
-        'json'
-      );
-
-
-      Object.entries(
-        params
-      ).forEach(
-        ([key, value]) => {
-
-          if (
-            value !== undefined &&
-            value !== null
-          ) {
-
-            body.append(
-              key,
-              value
-            );
-
-          }
-
-        }
-      );
-
-
-      const response =
-        await fetch(
-          `${MOODLE_URL}/webservice/rest/server.php`,
-          {
-            method: 'POST',
-
-            headers: {
-              'Content-Type':
-                'application/x-www-form-urlencoded'
-            },
-
-            body
-          }
-        );
-
-
-      if (!response.ok) {
-
-        throw new Error(
-          `Moodle returned HTTP ${response.status}.`
-        );
-
-      }
-
-
-      const data =
-        await response.json();
-
-
-      if (data.exception) {
-
-        throw new Error(
-          data.message ||
-          'Moodle API error.'
-        );
-
-      }
-
-
-      return data;
-
-    }
-
-
-    /* ==========================================================
-       LOAD COURSE QUIZ MODULE
-    ========================================================== */
-
-    async function getCourseQuiz() {
-
-      const response =
-        await moodleRequest(
-          'core_course_get_contents',
-          {
-            courseid:
-              courseId
-          }
-        );
-
-
-      let targetQuiz = null;
-
-
-      if (
-        !Array.isArray(response)
-      ) {
-
-        throw new Error(
-          'Moodle returned an invalid course response.'
-        );
-
-      }
-
-
-      for (
-        const section
-        of response
-      ) {
-
-        if (
-          !Array.isArray(
-            section.modules
-          )
-        ) {
-
-          continue;
-
-        }
-
-
-        const found =
-          section.modules.find(
-            module =>
-              module.modname === 'quiz' &&
-              String(module.instance) ===
-              String(quizId)
-          );
-
-
-        if (found) {
-
-          targetQuiz =
-            found;
-
-          break;
-
-        }
-
-      }
-
-
-      if (!targetQuiz) {
-
-        throw new Error(
-          'Quiz module not found in this course.'
-        );
-
-      }
-
-
-      return targetQuiz;
-
-    }
-
-
-    /* ==========================================================
-       LOAD QUIZ DETAILS
-    ========================================================== */
-
-    async function getQuizDetails() {
-
-      const data =
-        await moodleRequest(
-          'mod_quiz_get_quizzes_by_courses',
-          {
-            'courseids[0]':
-              courseId
-          }
-        );
-
-
-      if (
-        !data.quizzes ||
-        !Array.isArray(
-          data.quizzes
-        )
-      ) {
-
-        throw new Error(
-          'Moodle did not return quiz details.'
-        );
-
-      }
-
-
-      const quiz =
-        data.quizzes.find(
-          item =>
-            String(item.id) ===
-            String(quizId)
-        );
-
-
-      if (!quiz) {
-
-        throw new Error(
-          'Quiz details were not found.'
-        );
-
-      }
-
-
-      return quiz;
-
-    }
-
-
-    /* ==========================================================
-       LOAD USER
-    ========================================================== */
-
-    async function getCurrentUser() {
-
-      return await moodleRequest(
+    const siteInfo =
+      await moodleRequest(
         'core_webservice_get_site_info'
       );
 
+
+    const userId =
+      siteInfo.userid;
+
+
+    if (!userId) {
+
+      throw new Error(
+        'Could not determine the current Moodle user.'
+      );
+
     }
 
 
-    /* ==========================================================
-       LOAD ATTEMPTS
-    ========================================================== */
-
-    async function getUserAttempts(
-      userId
-    ) {
-
-      /*
-       * Moodle 5.x supports get_user_attempts
-       * with quizid, userid, status and
-       * includepreviews.
-       */
-
-      return await moodleRequest(
-        'mod_quiz_get_user_attempts',
+    const data =
+      await moodleRequest(
+        'mod_quiz_get_user_quiz_attempts',
         {
           quizid:
             quizId,
@@ -1891,313 +2676,271 @@
         }
       );
 
-    }
+
+    allAttempts =
+      Array.isArray(
+        data.attempts
+      )
+        ? data.attempts
+        : [];
 
 
-    /* ==========================================================
-       LOAD BEST GRADE
-    ========================================================== */
+    return allAttempts;
 
-    async function getBestGrade(
-      userId
-    ) {
-
-      return await moodleRequest(
-        'mod_quiz_get_user_best_grade',
-        {
-          quizid:
-            quizId,
-
-          userid:
-            userId
-        }
-      );
-
-    }
+  }
 
 
-    /* ==========================================================
-       RENDER STATUS
-    ========================================================== */
+  /* =========================================================
+     QUIZ SETTINGS
+  ========================================================== */
 
-    function setStatus(
-      title,
-      description,
-      type,
-      icon
-    ) {
+  async function getQuizSettings() {
 
-      statusBox.className =
-        `status-box ${type}`;
+    try {
 
-
-      statusBox.innerHTML = `
-
-        <i
-          data-lucide="${icon}"
-          class="status-icon"
-          style="width:20px;height:20px;"
-        ></i>
-
-
-        <div class="status-content">
-
-          <div class="status-title">
-
-            ${escapeHtml(title)}
-
-          </div>
-
-
-          <div class="status-description">
-
-            ${escapeHtml(
-              description
-            )}
-
-          </div>
-
-        </div>
-
-      `;
-
-
-      lucide.createIcons();
-
-    }
-
-
-    /* ==========================================================
-       RENDER ATTEMPTS
-    ========================================================== */
-
-    function renderAttempts(
-      data
-    ) {
-
-      const attempts =
-        Array.isArray(
-          data.attempts
-        )
-          ? data.attempts
-          : [];
+      const data =
+        await moodleRequest(
+          'mod_quiz_get_quizzes_by_courses',
+          {
+            'courseids[0]':
+              courseId
+          }
+        );
 
 
       if (
-        attempts.length === 0
+        !Array.isArray(
+          data.quizzes
+        )
       ) {
 
-        attemptsPanel.style.display =
-          'none';
-
-        attemptInfo.textContent =
-          '0 attempts';
-
-        return;
+        return null;
 
       }
 
 
-      attemptsPanel.style.display =
-        'block';
-
-
-      const finished =
-        attempts.filter(
-          attempt =>
+      return (
+        data.quizzes.find(
+          item =>
             String(
-              attempt.state ||
-              attempt.status ||
-              ''
-            ).toLowerCase() ===
-            'finished'
-        );
+              item.id
+            ) ===
+            String(
+              quizId
+            )
+        ) ||
+        null
+      );
+
+    }
+
+    catch (error) {
+
+      console.warn(
+        'Could not load quiz settings:',
+        error
+      );
 
 
-      const unfinished =
-        attempts.find(
+      return null;
+
+    }
+
+  }
+
+
+  /* =========================================================
+     ATTEMPT HISTORY
+  ========================================================== */
+
+  function renderAttemptHistory(
+    attempts
+  ) {
+
+    if (
+      !attempts.length
+    ) {
+
+      historyCard.style.display =
+        'none';
+
+      return;
+
+    }
+
+
+    historyCard.style.display =
+      'block';
+
+
+    const sorted =
+      [...attempts].sort(
+        (a, b) =>
+          Number(
+            b.timestart ||
+            b.timefinish ||
+            0
+          ) -
+          Number(
+            a.timestart ||
+            a.timefinish ||
+            0
+          )
+      );
+
+
+    attemptList.innerHTML =
+      sorted
+        .map(
           attempt => {
 
             const state =
               String(
                 attempt.state ||
-                attempt.status ||
                 ''
               ).toLowerCase();
 
-            return (
-              state === 'inprogress' ||
-              state === 'inprogress' ||
-              state === 'unfinished'
-            );
 
-          }
-        );
-
-
-      attemptInfo.textContent =
-        `${attempts.length} attempt${
-          attempts.length === 1 ? '' : 's'
-        }`;
-
-
-      /*
-       * Render newest attempts first.
-       */
-
-      const sorted =
-        [...attempts].sort(
-          (a, b) => {
-
-            return (
-              Number(
-                b.timestart ||
-                b.timefinish ||
-                0
-              ) -
-
-              Number(
-                a.timestart ||
-                a.timefinish ||
-                0
-              )
-            );
-
-          }
-        );
-
-
-      attemptList.innerHTML =
-        sorted.map(
-          (attempt, index) => {
-
-            const state =
-              String(
-                attempt.state ||
-                attempt.status ||
-                'unknown'
-              ).toLowerCase();
-
-
-            const attemptNumber =
-              attempt.attempt !== undefined
-                ? attempt.attempt
-                : index + 1;
-
-
-            const startTime =
-              attempt.timestart ||
-              attempt.timefinish;
-
-
-            const grade =
-              attempt.sumgrades !== undefined &&
-              attempt.sumgrades !== null
-                ? attempt.sumgrades
-                : (
-                    attempt.grade !== undefined
-                      ? attempt.grade
-                      : null
-                  );
+            let stateClass =
+              'other';
 
 
             let stateLabel =
               'Attempt';
 
 
+            let icon =
+              'info';
+
+
             if (
-              state ===
-              'finished'
+              state === 'finished' ||
+              state === 'submitted'
             ) {
+
+              stateClass =
+                'finished';
 
               stateLabel =
-                'Finished';
+                state === 'submitted'
+                  ? 'Submitted'
+                  : 'Finished';
 
-            } else if (
-              state === 'inprogress' ||
-              state === 'unfinished'
+              icon =
+                'check-circle';
+
+            }
+
+            else if (
+              state === 'inprogress'
             ) {
+
+              stateClass =
+                'progress';
 
               stateLabel =
                 'In progress';
 
+              icon =
+                'clock';
+
             }
+
+            else if (
+              state === 'overdue'
+            ) {
+
+              stateLabel =
+                'Overdue';
+
+              icon =
+                'alert-circle';
+
+            }
+
+            else if (
+              state === 'abandoned'
+            ) {
+
+              stateLabel =
+                'Abandoned';
+
+            }
+
+
+            const score =
+              attempt.sumgrades !== undefined &&
+              attempt.sumgrades !== null
+
+                ? Number(
+                    attempt.sumgrades
+                  ).toFixed(2)
+
+                : '—';
 
 
             return `
 
               <div class="attempt-row">
 
-                <div class="attempt-main">
+                <div class="attempt-left">
 
                   <div class="attempt-number">
 
-                    Attempt
-                    ${escapeHtml(
-                      attemptNumber
-                    )}
-
-                    <span
-                      style="
-                        color:var(--text-tertiary);
-                        font-size:.75rem;
-                        font-weight:500;
-                        margin-left:6px;
-                      "
-                    >
-
-                      ${escapeHtml(
-                        stateLabel
-                      )}
-
-                    </span>
+                    Attempt ${
+                      escapeHtml(
+                        attempt.attempt ??
+                        '—'
+                      )
+                    }
 
                   </div>
 
 
                   <div class="attempt-date">
 
-                    ${formatDate(
-                      startTime
-                    )}
+                    ${
+                      escapeHtml(
+                        formatAttemptDate(
+                          attempt.timemodified ||
+                          attempt.timefinish ||
+                          attempt.timestart
+                        )
+                      )
+                    }
 
                   </div>
 
                 </div>
 
 
-                <div class="attempt-grade">
+                <div
+                  class="
+                    attempt-status
+                    ${stateClass}
+                  "
+                >
 
-                  <div
-                    class="attempt-grade-value"
-                  >
+                  <i
+                    data-lucide="${icon}"
+                    style="
+                      width:12px;
+                      height:12px;
+                    "
+                  ></i>
 
-                    ${
-                      grade !== null &&
-                      grade !== undefined &&
-                      grade !== ''
-                        ? escapeHtml(
-                            Number(grade)
-                              .toFixed(1)
-                          )
-                        : '—'
-                    }
+                  ${escapeHtml(
+                    stateLabel
+                  )}
 
-                  </div>
+                </div>
 
 
-                  <div
-                    class="attempt-grade-label"
-                  >
+                <div class="attempt-score">
 
-                    ${
-                      grade !== null &&
-                      grade !== undefined
-                        ? 'Score'
-                        : stateLabel
-                    }
-
-                  </div>
+                  ${escapeHtml(
+                    score
+                  )}
 
                 </div>
 
@@ -2206,410 +2949,2198 @@
             `;
 
           }
-        ).join('');
+        )
+        .join('');
 
 
-      /*
-       * Inform the user about an unfinished
-       * attempt if one exists.
-       */
+    lucide.createIcons();
+
+  }
+
+
+  /* =========================================================
+     PREPARE START SCREEN
+  ========================================================== */
+
+  async function prepareQuizScreen() {
+
+    const [
+      attempts,
+      quizSettings
+    ] =
+      await Promise.all([
+        getUserQuizAttempts(),
+        getQuizSettings()
+      ]);
+
+
+    renderAttemptHistory(
+      attempts
+    );
+
+
+    if (
+      quizSettings &&
+      quizSettings.attempts !== undefined
+    ) {
+
+      maxAttempts =
+        Number(
+          quizSettings.attempts
+        );
+
+    }
+
+    else {
+
+      maxAttempts =
+        null;
+
+    }
+
+
+    const unfinished =
+      attempts.find(
+        attempt =>
+          String(
+            attempt.state ||
+            ''
+          ).toLowerCase() ===
+          'inprogress'
+      );
+
+
+    if (unfinished) {
+
+      startTitle.textContent =
+        'Continue Quiz';
+
+
+      startDescription.textContent =
+        'You have an unfinished attempt. Continue where you left off.';
+
+
+      startButton.innerHTML = `
+
+        <i
+          data-lucide="play-circle"
+          style="
+            width:17px;
+            height:17px;
+          "
+        ></i>
+
+        Continue Quiz
+
+      `;
+
+
+      attemptStatus.textContent =
+        'In progress';
+
+
+      lucide.createIcons();
+
+
+      return;
+
+    }
+
+
+    const completedAttempts =
+      attempts.filter(
+        attempt => {
+
+          const state =
+            String(
+              attempt.state ||
+              ''
+            ).toLowerCase();
+
+
+          return (
+            state === 'finished' ||
+            state === 'submitted' ||
+            state === 'overdue'
+          );
+
+        }
+      );
+
+
+    if (
+      maxAttempts !== null &&
+      maxAttempts > 0 &&
+      completedAttempts.length >=
+        maxAttempts
+    ) {
+
+      startTitle.textContent =
+        'No Attempts Remaining';
+
+
+      startDescription.textContent =
+        `You have used all ${
+          maxAttempts
+        } allowed attempts.`;
+
+
+      startButton.style.display =
+        'none';
+
+
+      attemptStatus.textContent =
+        `${completedAttempts.length} / ${
+          maxAttempts
+        } used`;
+
+
+      return;
+
+    }
+
+
+    startTitle.textContent =
+      completedAttempts.length
+        ? 'Start Another Attempt'
+        : 'Ready to Begin?';
+
+
+    startDescription.textContent =
+      completedAttempts.length
+        ? 'You have completed an earlier attempt. Start another attempt if you still have attempts available.'
+        : 'Start your quiz attempt. Your answers will be saved to Moodle automatically.';
+
+
+    startButton.innerHTML = `
+
+      <i
+        data-lucide="play"
+        style="
+          width:17px;
+          height:17px;
+        "
+      ></i>
+
+      ${
+        completedAttempts.length
+          ? 'Start New Attempt'
+          : 'Start Quiz'
+      }
+
+    `;
+
+
+    lucide.createIcons();
+
+  }
+
+
+  /* =========================================================
+     BUILD COMPLETE NAVIGATION
+  ========================================================== */
+
+  function buildQuizNavigation(
+    layout,
+    currentQuestions = []
+  ) {
+
+    quizNavigation =
+      [];
+
+
+    if (
+      typeof layout ===
+        'string' &&
+      layout.trim()
+    ) {
+
+      const tokens =
+        layout
+          .split(',')
+          .map(
+            token =>
+              token.trim()
+          );
+
+
+      let page =
+        0;
+
+
+      let questionNumber =
+        0;
+
+
+      tokens.forEach(
+        token => {
+
+          const slot =
+            Number(
+              token
+            );
+
+
+          if (
+            !Number.isFinite(
+              slot
+            )
+          ) {
+
+            return;
+
+          }
+
+
+          /*
+           * Moodle uses 0 as a page break.
+           */
+
+          if (
+            slot === 0
+          ) {
+
+            page++;
+
+            return;
+
+          }
+
+
+          if (
+            slot < 1
+          ) {
+
+            return;
+
+          }
+
+
+          questionNumber++;
+
+
+          quizNavigation.push({
+
+            slot:
+              slot,
+
+            questionNumber:
+              questionNumber,
+
+            page:
+              page
+
+          });
+
+        }
+      );
+
+    }
+
+
+    /*
+     * Fallback.
+     */
+
+    if (
+      quizNavigation.length ===
+        0
+    ) {
+
+      currentQuestions.forEach(
+        (question, index) => {
+
+          quizNavigation.push({
+
+            slot:
+              Number(
+                question.slot ||
+                index + 1
+              ),
+
+            questionNumber:
+              Number(
+                question.questionnumber ||
+                index + 1
+              ),
+
+            page:
+              currentPage
+
+          });
+
+        }
+      );
+
+    }
+
+
+    console.log(
+      'ATHENA QUIZ NAVIGATION:',
+      quizNavigation
+    );
+
+  }
+
+
+  /* =========================================================
+     START / RESUME QUIZ
+  ========================================================== */
+
+  async function startOrResumeQuiz() {
+
+    hideMessage();
+
+
+    startButton.disabled =
+      true;
+
+
+    startButton.innerHTML = `
+
+      <i
+        data-lucide="loader-2"
+        class="loading-icon"
+        style="
+          width:17px;
+          height:17px;
+        "
+      ></i>
+
+      Opening...
+
+    `;
+
+
+    lucide.createIcons();
+
+
+    try {
+
+      const attempts =
+        await getUserQuizAttempts();
+
+
+      renderAttemptHistory(
+        attempts
+      );
+
+
+      const unfinished =
+        attempts.find(
+          attempt =>
+            String(
+              attempt.state ||
+              ''
+            ).toLowerCase() ===
+            'inprogress'
+        );
+
 
       if (unfinished) {
 
-        setStatus(
-          'Attempt in progress',
-          'You already have an unfinished quiz attempt. Continue it rather than starting another one.',
-          'warning',
-          'play-circle'
-        );
-
-        launchBtn.textContent =
-          'Continue Quiz';
+        currentAttempt =
+          unfinished;
 
 
-        launchDescription.textContent =
-          'You have an unfinished attempt. Continue it in Moodle to preserve your current progress.';
+        currentPage =
+          Number(
+            unfinished.currentpage ||
+            0
+          );
 
+
+        await openPlayer();
 
         return;
 
       }
 
 
-      if (finished.length > 0) {
+      const completedAttempts =
+        attempts.filter(
+          attempt => {
 
-        setStatus(
-          'Previous attempt found',
-          'You have completed at least one attempt. You can start another attempt if Moodle allows it.',
-          'success',
-          'check-circle'
+            const state =
+              String(
+                attempt.state ||
+                ''
+              ).toLowerCase();
+
+
+            return (
+              state === 'finished' ||
+              state === 'submitted' ||
+              state === 'overdue'
+            );
+
+          }
         );
 
-      } else {
 
-        setStatus(
-          'Ready to begin',
-          'No previous attempts were found for this quiz.',
-          'neutral',
-          'play-circle'
+      if (
+        maxAttempts !== null &&
+        maxAttempts > 0 &&
+        completedAttempts.length >=
+          maxAttempts
+      ) {
+
+        throw new Error(
+          'You have used all available quiz attempts.'
         );
 
       }
 
+
+      const data =
+        await moodleRequest(
+          'mod_quiz_start_attempt',
+          {
+            quizid:
+              quizId,
+
+            forcenew:
+              0
+          }
+        );
+
+
+      if (
+        !data.attempt ||
+        !data.attempt.id
+      ) {
+
+        throw new Error(
+          'Moodle did not return a valid new attempt.'
+        );
+
+      }
+
+
+      currentAttempt =
+        data.attempt;
+
+
+      currentPage =
+        Number(
+          currentAttempt.currentpage ||
+          0
+        );
+
+
+      await openPlayer();
+
     }
 
+    catch (error) {
 
-    /* ==========================================================
-       RENDER BEST GRADE
-    ========================================================== */
+      console.error(
+        'Quiz open error:',
+        error
+      );
 
-    function renderBestGrade(
-      data,
-      quiz
+
+      showMessage(
+        `Could not open the quiz: ${
+          error.message
+        }`
+      );
+
+
+      startButton.disabled =
+        false;
+
+
+      startButton.innerHTML = `
+
+        <i
+          data-lucide="play"
+          style="
+            width:17px;
+            height:17px;
+          "
+        ></i>
+
+        Start Quiz
+
+      `;
+
+
+      lucide.createIcons();
+
+    }
+
+  }
+
+
+  /* =========================================================
+     OPEN PLAYER
+  ========================================================== */
+
+  async function openPlayer() {
+
+    startScreen.style.display =
+      'none';
+
+
+    historyCard.style.display =
+      'none';
+
+
+    quizPlayer.style.display =
+      'block';
+
+
+    resultScreen.style.display =
+      'none';
+
+
+    attemptStatus.textContent =
+      'In progress';
+
+
+    buildQuizNavigation(
+      currentAttempt.layout
+    );
+
+
+    await loadAttemptPage(
+      currentPage
+    );
+
+
+    startAutosave();
+
+    startTimer();
+
+  }
+
+
+  /* =========================================================
+     LOAD ATTEMPT PAGE
+  ========================================================== */
+
+  async function loadAttemptPage(
+    page
+  ) {
+
+    setSaveStatus(
+      'Loading...'
+    );
+
+
+    const data =
+      await moodleRequest(
+        'mod_quiz_get_attempt_data',
+        {
+          attemptid:
+            currentAttempt.id,
+
+          page:
+            page
+        }
+      );
+
+
+    if (
+      !data.attempt
     ) {
 
+      throw new Error(
+        'Moodle did not return attempt information.'
+      );
+
+    }
+
+
+    currentAttempt =
+      data.attempt;
+
+
+    currentPage =
+      Number(
+        page
+      );
+
+
+    /*
+     * Keep the complete navigation.
+     * Only rebuild it if we don't have it yet.
+     */
+
+    if (
+      quizNavigation.length ===
+        0
+    ) {
+
+      buildQuizNavigation(
+        currentAttempt.layout,
+        data.questions || []
+      );
+
+    }
+
+
+    if (
+      data.nextpage !== undefined &&
+      data.nextpage !== null
+    ) {
+
+      currentNextPage =
+        Number(
+          data.nextpage
+        );
+
+    }
+
+    else {
+
+      currentNextPage =
+        null;
+
+    }
+
+
+    isLastPage =
+      currentNextPage === null
+        ? false
+        : (
+            currentNextPage <=
+            currentPage
+          );
+
+
+    const questions =
+      Array.isArray(
+        data.questions
+      )
+        ? data.questions
+        : [];
+
+
+    renderQuestions(
+      questions
+    );
+
+
+    renderNavigator();
+
+
+    updateNavigation();
+
+
+    updateStatus();
+
+
+    setSaveStatus(
+      'Saved',
+      'saved'
+    );
+
+
+    console.log(
+      'ATHENA PAGE:',
+      {
+        currentPage,
+        currentNextPage,
+        isLastPage
+      }
+    );
+
+  }
+
+
+  /* =========================================================
+     CLEAN QUESTION HTML
+  ========================================================== */
+
+  function cleanQuestionHtml(
+    html
+  ) {
+
+    const parser =
+      new DOMParser();
+
+
+    const doc =
+      parser.parseFromString(
+        html || '',
+        'text/html'
+      );
+
+
+    [
+
+      '.info',
+      '.questionflag',
+      '.questionflagimage',
+      '.flagstate',
+      '.state',
+      '.grade',
+      '.status',
+      '.comment',
+      '.rightanswer',
+      '.im-controls',
+      '.history',
+      '.outcome'
+
+    ].forEach(
+      selector => {
+
+        doc
+          .querySelectorAll(
+            selector
+          )
+          .forEach(
+            element =>
+              element.remove()
+          );
+
+      }
+    );
+
+
+    const formulation =
+      doc.querySelector(
+        '.formulation'
+      );
+
+
+    if (formulation) {
+
+      return formulation.innerHTML;
+
+    }
+
+
+    return doc.body.innerHTML;
+
+  }
+
+
+  /* =========================================================
+     RENDER QUESTION
+  ========================================================== */
+
+  function renderQuestions(
+    questions
+  ) {
+
+    if (
+      !questions.length
+    ) {
+
+      questionContent.innerHTML = `
+
+        <div
+          style="
+            padding:60px 20px;
+            text-align:center;
+            color:var(--text-secondary);
+          "
+        >
+
+          No questions were returned.
+
+        </div>
+
+      `;
+
+
+      questionNumber.textContent =
+        `Page ${
+          currentPage + 1
+        }`;
+
+
+      questionMark.textContent =
+        '';
+
+
+      return;
+
+    }
+
+
+    questionContent.innerHTML =
+      questions
+        .map(
+          question => `
+
+            <article
+              class="athena-question"
+            >
+
+              <div
+                class="moodle-question-body"
+              >
+
+                ${cleanQuestionHtml(
+                  question.html
+                )}
+
+              </div>
+
+            </article>
+
+          `
+        )
+        .join('');
+
+
+    const marks =
+      questions
+        .map(
+          question =>
+            Number(
+              question.maxmark
+            )
+        )
+        .filter(
+          value =>
+            Number.isFinite(
+              value
+            )
+        );
+
+
+    questionNumber.textContent =
+      questions.length === 1
+
+        ? `Question ${
+            questions[0].questionnumber
+          }`
+
+        : `Questions ${
+            questions[0].questionnumber
+          }–${
+            questions[
+              questions.length - 1
+            ].questionnumber
+          }`;
+
+
+    questionMark.textContent =
+      marks.length
+
+        ? `${marks.reduce(
+            (sum, value) =>
+              sum + value,
+            0
+          )} marks`
+
+        : '';
+
+
+    attachAnswerListeners();
+
+  }
+
+
+  /* =========================================================
+     ANSWERS
+  ========================================================== */
+
+  function attachAnswerListeners() {
+
+    questionContent
+      .querySelectorAll(
+        'input, select, textarea'
+      )
+      .forEach(
+        field => {
+
+          field.addEventListener(
+            'change',
+            scheduleQuickAutosave
+          );
+
+
+          if (
+            field.tagName ===
+              'TEXTAREA' ||
+            (
+              field.tagName ===
+                'INPUT' &&
+              (
+                field.type ===
+                  'text' ||
+                field.type ===
+                  'number' ||
+                field.type ===
+                  'search'
+              )
+            )
+          ) {
+
+            field.addEventListener(
+              'input',
+              scheduleQuickAutosave
+            );
+
+          }
+
+        }
+      );
+
+  }
+
+
+  /* =========================================================
+     COLLECT ANSWERS
+  ========================================================== */
+
+  function collectResponseData() {
+
+    const data = [];
+
+
+    questionContent
+      .querySelectorAll(
+        'input, textarea, select'
+      )
+      .forEach(
+        field => {
+
+          if (
+            field.disabled ||
+            !field.name
+          ) {
+
+            return;
+
+          }
+
+
+          if (
+            field.type ===
+              'button' ||
+            field.type ===
+              'submit' ||
+            field.type ===
+              'reset'
+          ) {
+
+            return;
+
+          }
+
+
+          if (
+            (
+              field.type ===
+                'radio' ||
+              field.type ===
+                'checkbox'
+            ) &&
+            !field.checked
+          ) {
+
+            return;
+
+          }
+
+
+          data.push({
+
+            name:
+              field.name,
+
+            value:
+              field.value ??
+              ''
+
+          });
+
+        }
+      );
+
+
+    return data;
+
+  }
+
+
+  /* =========================================================
+     SAVE
+  ========================================================== */
+
+  async function saveAttempt() {
+
+    if (
+      !currentAttempt ||
+      isProcessing
+    ) {
+
+      return;
+
+    }
+
+
+    const responseData =
+      collectResponseData();
+
+
+    const params = {
+
+      attemptid:
+        currentAttempt.id
+
+    };
+
+
+    responseData.forEach(
+      (item, index) => {
+
+        params[
+          `data[${index}][name]`
+        ] =
+          item.name;
+
+
+        params[
+          `data[${index}][value]`
+        ] =
+          item.value;
+
+      }
+    );
+
+
+    const result =
+      await moodleRequest(
+        'mod_quiz_save_attempt',
+        params
+      );
+
+
+    if (
+      result.status !== undefined &&
+      Number(
+        result.status
+      ) !== 1
+    ) {
+
+      throw new Error(
+        'Moodle did not confirm the save.'
+      );
+
+    }
+
+
+    return result;
+
+  }
+
+
+  /* =========================================================
+     AUTOSAVE
+  ========================================================== */
+
+  async function autoSave() {
+
+    if (
+      !currentAttempt ||
+      currentAttempt.state !==
+        'inprogress' ||
+      isProcessing
+    ) {
+
+      return;
+
+    }
+
+
+    try {
+
+      setSaveStatus(
+        'Saving...',
+        'saving'
+      );
+
+
+      await saveAttempt();
+
+
+      setSaveStatus(
+        'Saved',
+        'saved'
+      );
+
+    }
+
+    catch (error) {
+
+      console.warn(
+        'Autosave failed:',
+        error
+      );
+
+
+      setSaveStatus(
+        'Save failed',
+        'failed'
+      );
+
+    }
+
+  }
+
+
+  function scheduleQuickAutosave() {
+
+    clearTimeout(
+      inputSaveTimer
+    );
+
+
+    setSaveStatus(
+      'Changes pending...'
+    );
+
+
+    inputSaveTimer =
+      setTimeout(
+        autoSave,
+        1000
+      );
+
+  }
+
+
+  function startAutosave() {
+
+    clearInterval(
+      saveInterval
+    );
+
+
+    saveInterval =
+      setInterval(
+        autoSave,
+        10000
+      );
+
+  }
+
+
+  function stopAutosave() {
+
+    clearInterval(
+      saveInterval
+    );
+
+
+    saveInterval =
+      null;
+
+  }
+
+
+  /* =========================================================
+     NAVIGATOR NAVIGATION
+  ========================================================== */
+
+  async function navigateToQuestion(
+    navigationItem
+  ) {
+
+    if (
+      isProcessing ||
+      !currentAttempt
+    ) {
+
+      return;
+
+    }
+
+
+    /*
+     * We don't need an API request if the
+     * clicked question is already on this page.
+     */
+
+    if (
+      navigationItem.page ===
+      currentPage
+    ) {
+
+      highlightNavigator(
+        currentPage
+      );
+
+      return;
+
+    }
+
+
+    isProcessing =
+      true;
+
+
+    /*
+     * Disable only while navigation is
+     * actually happening.
+     */
+
+    updateNavigation();
+
+    setNavigatorDisabled(
+      true
+    );
+
+
+    try {
+
+      setSaveStatus(
+        'Saving...',
+        'saving'
+      );
+
+
+      await saveAttempt();
+
+
+      await loadAttemptPage(
+        navigationItem.page
+      );
+
+    }
+
+    catch (error) {
+
+      console.error(
+        'Navigator navigation error:',
+        error
+      );
+
+
+      showMessage(
+        `Could not open Question ${
+          navigationItem.questionNumber
+        }: ${
+          error.message
+        }`
+      );
+
+    }
+
+    finally {
+
+      isProcessing =
+        false;
+
+
       /*
-       * Moodle returns a grade structure.
-       * Keep the parser defensive because
-       * grade field naming can vary.
+       * VERY IMPORTANT:
+       *
+       * Re-enable navigator buttons
+       * after navigation completes.
        */
 
-      const grade =
-        data?.grade ??
-        data?.bestgrade ??
-        data?.bestgradeformatted ??
-        null;
+      setNavigatorDisabled(
+        false
+      );
 
 
-      const max =
-        quiz?.grade ??
-        quiz?.sumgrades ??
-        null;
+      updateNavigation();
+
+    }
+
+  }
 
 
-      if (
-        grade === null ||
-        grade === undefined ||
-        grade === ''
-      ) {
+  /* =========================================================
+     RENDER NAVIGATOR
+  ========================================================== */
 
-        bestGrade.textContent =
-          'Not graded';
+  function renderNavigator() {
 
-        return;
-
-      }
+    navigatorGrid.innerHTML =
+      '';
 
 
-      if (
-        Number.isFinite(
-          Number(max)
-        )
-      ) {
+    if (
+      !quizNavigation.length
+    ) {
 
-        bestGrade.textContent =
-          formatGrade(
-            grade,
-            max
-          );
-
-      } else {
-
-        bestGrade.textContent =
-          Number(grade).toFixed(1);
-
-      }
+      return;
 
     }
 
 
-    /* ==========================================================
-       INITIALIZE
-    ========================================================== */
+    quizNavigation.forEach(
+      navigationItem => {
 
-    async function loadQuiz() {
-
-      try {
-
-        /*
-         * 1. Load the module URL and description.
-         */
-
-        const targetQuiz =
-          await getCourseQuiz();
-
-
-        /*
-         * 2. Load detailed quiz metadata.
-         */
-
-        let quizDetails =
-          null;
-
-
-        try {
-
-          quizDetails =
-            await getQuizDetails();
-
-        }
-
-        catch (error) {
-
-          console.warn(
-            'Could not load detailed quiz metadata:',
-            error
-          );
-
-        }
-
-
-        /*
-         * 3. Get current user.
-         */
-
-        const siteInfo =
-          await getCurrentUser();
-
-
-        const userId =
-          siteInfo.userid;
-
-
-        /*
-         * 4. Render basic course/module info.
-         */
-
-        courseLabel.innerHTML = `
-
-          <i
-            data-lucide="book-open"
-            style="width:15px;height:15px;"
-          ></i>
-
-          Course ID:
-          ${escapeHtml(courseId)}
-
-        `;
-
-
-        quizTitle.textContent =
-          targetQuiz.name ||
-          quizDetails?.name ||
-          'Quiz';
-
-
-        quizInstructions.innerHTML =
-          targetQuiz.description ||
-          quizDetails?.intro ||
-          'Read all instructions carefully before starting your assessment.';
-
-
-        /*
-         * 5. Set launch URL.
-         */
-
-        if (
-          targetQuiz.url
-        ) {
-
-          launchBtn.href =
-            targetQuiz.url;
-
-          launchBtn.classList.remove(
-            'disabled'
-          );
-
-        } else {
-
-          launchBtn.classList.add(
-            'disabled'
-          );
-
-          showMessage(
-            'Moodle did not provide a quiz launch URL.'
-          );
-
-        }
-
-
-        /*
-         * 6. Render quiz metadata.
-         */
-
-        const timeLimitValue =
-          quizDetails?.timelimit;
-
-
-        const maxGradeValue =
-          quizDetails?.grade;
-
-
-        timeLimit.textContent =
-          formatDuration(
-            timeLimitValue
+        const button =
+          document.createElement(
+            'button'
           );
 
 
-        maxGrade.textContent =
-          Number.isFinite(
-            Number(maxGradeValue)
-          )
-
-            ? Number(
-                maxGradeValue
-              ).toFixed(1)
-
-            : '—';
+        button.type =
+          'button';
 
 
-        quizMeta.innerHTML = `
-
-          <div class="meta-tag">
-
-            <i
-              data-lucide="check-circle"
-              style="width:14px;height:14px;"
-            ></i>
-
-            Assessment
-
-          </div>
+        button.className =
+          'nav-question';
 
 
-          <div class="meta-tag light">
-
-            <i
-              data-lucide="hash"
-              style="width:14px;height:14px;"
-            ></i>
-
-            Quiz ID:
-            ${escapeHtml(quizId)}
-
-          </div>
-
-        `;
+        button.textContent =
+          navigationItem.questionNumber;
 
 
-        /*
-         * 7. Attempts and best grade.
-         */
-
-        try {
-
-          const attemptsData =
-            await getUserAttempts(
-              userId
-            );
+        button.title =
+          `Question ${
+            navigationItem.questionNumber
+          }`;
 
 
-          renderAttempts(
-            attemptsData
-          );
-
-        }
-
-        catch (error) {
-
-          console.warn(
-            'Could not load quiz attempts:',
-            error
-          );
+        button.addEventListener(
+          'click',
+          () =>
+            navigateToQuestion(
+              navigationItem
+            )
+        );
 
 
-          setStatus(
-            'Ready',
-            'The quiz is available. Moodle did not provide attempt history to Athena.',
-            'neutral',
-            'play-circle'
-          );
-
-        }
-
-
-        /*
-         * 8. Best grade.
-         */
-
-        try {
-
-          const bestGradeData =
-            await getBestGrade(
-              userId
-            );
-
-
-          renderBestGrade(
-            bestGradeData,
-            quizDetails
-          );
-
-        }
-
-        catch (error) {
-
-          console.warn(
-            'Could not load best grade:',
-            error
-          );
-
-
-          bestGrade.textContent =
-            'Not graded';
-
-        }
-
-
-        /*
-         * Finish rendering.
-         */
-
-        lucide.createIcons();
+        navigatorGrid.appendChild(
+          button
+        );
 
       }
-
-      catch (error) {
-
-        console.error(
-          'Quiz loading error:',
-          error
-        );
+    );
 
 
-        quizTitle.textContent =
-          'Unable to Load Quiz';
+    highlightNavigator(
+      currentPage
+    );
 
 
-        courseLabel.textContent =
-          'Moodle connection error';
+    /*
+     * Never leave buttons disabled simply
+     * because the navigator was rebuilt.
+     */
+
+    setNavigatorDisabled(
+      false
+    );
+
+  }
 
 
-        quizInstructions.textContent =
-          'Could not retrieve the quiz information.';
+  /* =========================================================
+     NAVIGATOR DISABLED STATE
+  ========================================================== */
+
+  function setNavigatorDisabled(
+    disabled
+  ) {
+
+    navigatorGrid
+      .querySelectorAll(
+        '.nav-question'
+      )
+      .forEach(
+        button => {
+
+          button.disabled =
+            disabled;
+
+        }
+      );
+
+  }
 
 
-        launchBtn.classList.add(
-          'disabled'
-        );
+  /* =========================================================
+     HIGHLIGHT CURRENT PAGE
+  ========================================================== */
+
+  function highlightNavigator(
+    page
+  ) {
+
+    navigatorGrid
+      .querySelectorAll(
+        '.nav-question'
+      )
+      .forEach(
+        (button, index) => {
+
+          const item =
+            quizNavigation[index];
 
 
-        showMessage(
+          if (!item) {
+            return;
+          }
+
+
+          button.classList.toggle(
+            'current',
+            item.page === page
+          );
+
+        }
+      );
+
+  }
+
+
+  /* =========================================================
+     NAVIGATION BUTTONS
+  ========================================================== */
+
+  function updateNavigation() {
+
+    previousButton.disabled =
+      currentPage <= 0 ||
+      isProcessing;
+
+
+    nextButton.disabled =
+      isProcessing;
+
+
+    submitButton.disabled =
+      isProcessing;
+
+
+    if (
+      isLastPage
+    ) {
+
+      nextButton.style.display =
+        'none';
+
+      submitButton.style.display =
+        'inline-flex';
+
+    }
+
+    else {
+
+      nextButton.style.display =
+        'inline-flex';
+
+      submitButton.style.display =
+        'inline-flex';
+
+    }
+
+
+    highlightNavigator(
+      currentPage
+    );
+
+
+    /*
+     * The navigator follows the processing
+     * state but does not stay permanently
+     * disabled after rendering.
+     */
+
+    setNavigatorDisabled(
+      isProcessing
+    );
+
+
+    lucide.createIcons();
+
+  }
+
+
+  /* =========================================================
+     NEXT
+  ========================================================== */
+
+  async function goNext() {
+
+    if (
+      isProcessing ||
+      !currentAttempt
+    ) {
+
+      return;
+
+    }
+
+
+    if (
+      isLastPage
+    ) {
+
+      await submitQuiz(
+        0
+      );
+
+      return;
+
+    }
+
+
+    const targetPage =
+      currentNextPage !== null
+        ? currentNextPage
+        : currentPage + 1;
+
+
+    if (
+      targetPage <=
+      currentPage
+    ) {
+
+      await submitQuiz(
+        0
+      );
+
+      return;
+
+    }
+
+
+    isProcessing =
+      true;
+
+
+    updateNavigation();
+
+
+    try {
+
+      await saveAttempt();
+
+
+      await loadAttemptPage(
+        targetPage
+      );
+
+    }
+
+    catch (error) {
+
+      console.error(
+        'Next question error:',
+        error
+      );
+
+
+      showMessage(
+        `Could not load the next question: ${
           error.message
-        );
+        }`
+      );
 
-      }
+    }
+
+    finally {
+
+      isProcessing =
+        false;
+
+
+      updateNavigation();
+
+    }
+
+  }
+
+
+  /* =========================================================
+     PREVIOUS
+  ========================================================== */
+
+  async function goPrevious() {
+
+    if (
+      isProcessing ||
+      !currentAttempt ||
+      currentPage <= 0
+    ) {
+
+      return;
 
     }
 
 
-    /* ==========================================================
-       START
-    ========================================================== */
+    isProcessing =
+      true;
 
-    loadQuiz();
 
-  </script>
+    updateNavigation();
+
+
+    try {
+
+      await saveAttempt();
+
+
+      await loadAttemptPage(
+        currentPage - 1
+      );
+
+    }
+
+    catch (error) {
+
+      showMessage(
+        `Could not load the previous question: ${
+          error.message
+        }`
+      );
+
+    }
+
+    finally {
+
+      isProcessing =
+        false;
+
+
+      updateNavigation();
+
+    }
+
+  }
+
+
+  /* =========================================================
+     FINAL SUBMISSION
+  ========================================================== */
+
+  async function processFinalAttempt(
+    timeUp = 0
+  ) {
+
+    const responseData =
+      collectResponseData();
+
+
+    const params = {
+
+      attemptid:
+        currentAttempt.id,
+
+      finishattempt:
+        1,
+
+      timeup:
+        timeUp
+
+    };
+
+
+    responseData.forEach(
+      (item, index) => {
+
+        params[
+          `data[${index}][name]`
+        ] =
+          item.name;
+
+
+        params[
+          `data[${index}][value]`
+        ] =
+          item.value;
+
+      }
+    );
+
+
+    console.log(
+      'FINAL PROCESS PARAMETERS:',
+      params
+    );
+
+
+    const result =
+      await moodleRequest(
+        'mod_quiz_process_attempt',
+        params
+      );
+
+
+    console.log(
+      'FINAL PROCESS RESPONSE:',
+      result
+    );
+
+
+    return result;
+
+  }
+
+
+  async function submitQuiz(
+    timeUp = 0
+  ) {
+
+    if (
+      isProcessing ||
+      !currentAttempt
+    ) {
+
+      return;
+
+    }
+
+
+    const confirmed =
+      timeUp === 1
+        ? true
+        : window.confirm(
+            'Submit your quiz? You will not be able to continue this attempt.'
+          );
+
+
+    if (!confirmed) {
+
+      return;
+
+    }
+
+
+    isProcessing =
+      true;
+
+
+    updateNavigation();
+
+
+    hideMessage();
+
+
+    try {
+
+      setSaveStatus(
+        'Saving final answers...',
+        'saving'
+      );
+
+
+      await saveAttempt();
+
+
+      setSaveStatus(
+        'Submitting...',
+        'saving'
+      );
+
+
+      const result =
+        await processFinalAttempt(
+          timeUp
+        );
+
+
+      const state =
+        String(
+          result.state ||
+          ''
+        ).toLowerCase();
+
+
+      if (
+        state !== 'finished' &&
+        state !== 'overdue'
+      ) {
+
+        throw new Error(
+          `Moodle returned attempt state: ${
+            result.state ||
+            'unknown'
+          }`
+        );
+
+      }
+
+
+      currentAttempt.state =
+        state;
+
+
+      stopAutosave();
+
+      stopTimer();
+
+
+      attemptStatus.textContent =
+        state === 'finished'
+          ? 'Finished'
+          : 'Time expired';
+
+
+      setSaveStatus(
+        'Submitted',
+        'saved'
+      );
+
+
+      quizPlayer.style.display =
+        'none';
+
+
+      startScreen.style.display =
+        'none';
+
+
+      historyCard.style.display =
+        'none';
+
+
+      resultScreen.style.display =
+        'block';
+
+
+      document.getElementById(
+        'result-score'
+      ).textContent =
+        'Submitted';
+
+
+      document.getElementById(
+        'result-percentage'
+      ).textContent =
+        'Attempt submitted successfully';
+
+
+      document.getElementById(
+        'result-description'
+      ).textContent =
+        'Your attempt is now stored in Moodle.';
+
+
+      lucide.createIcons();
+
+    }
+
+    catch (error) {
+
+      console.error(
+        'Submit quiz error:',
+        error
+      );
+
+
+      showMessage(
+        `Could not submit the quiz: ${
+          error.message
+        }`
+      );
+
+
+      setSaveStatus(
+        'Submission failed',
+        'failed'
+      );
+
+    }
+
+    finally {
+
+      isProcessing =
+        false;
+
+
+      updateNavigation();
+
+    }
+
+  }
+
+
+  /* =========================================================
+     STATUS
+  ========================================================== */
+
+  function updateStatus() {
+
+    attemptStatus.textContent =
+      currentAttempt?.state ||
+      'In progress';
+
+
+    progressStatus.textContent =
+      `Page ${
+        currentPage + 1
+      } / ${
+        getTotalPages()
+      }`;
+
+  }
+
+
+  function getTotalPages() {
+
+    if (
+      !quizNavigation.length
+    ) {
+
+      return 1;
+
+    }
+
+
+    return (
+      Math.max(
+        ...quizNavigation.map(
+          item =>
+            item.page
+        )
+      ) + 1
+    );
+
+  }
+
+
+  /* =========================================================
+     TIMER
+  ========================================================== */
+
+  function startTimer() {
+
+    clearInterval(
+      timerInterval
+    );
+
+
+    updateTimer();
+
+
+    timerInterval =
+      setInterval(
+        updateTimer,
+        1000
+      );
+
+  }
+
+
+  function stopTimer() {
+
+    clearInterval(
+      timerInterval
+    );
+
+
+    timerInterval =
+      null;
+
+  }
+
+
+  function updateTimer() {
+
+    if (
+      !currentAttempt ||
+      !currentAttempt.timestart
+    ) {
+
+      timerStatus.textContent =
+        '—';
+
+      return;
+
+    }
+
+
+    const elapsed =
+      Math.max(
+        0,
+        Math.floor(
+          Date.now() / 1000 -
+          Number(
+            currentAttempt.timestart
+          )
+        )
+      );
+
+
+    const hours =
+      Math.floor(
+        elapsed / 3600
+      );
+
+
+    const minutes =
+      Math.floor(
+        (
+          elapsed % 3600
+        ) / 60
+      );
+
+
+    const seconds =
+      elapsed % 60;
+
+
+    timerStatus.textContent =
+      hours > 0
+
+        ? `${String(hours).padStart(2,'0')}:${
+            String(minutes).padStart(2,'0')
+          }:${String(seconds).padStart(2,'0')}`
+
+        : `${String(minutes).padStart(2,'0')}:${
+            String(seconds).padStart(2,'0')}`;
+
+  }
+
+
+  /* =========================================================
+     EVENTS
+  ========================================================== */
+
+  startButton.addEventListener(
+    'click',
+    startOrResumeQuiz
+  );
+
+
+  previousButton.addEventListener(
+    'click',
+    goPrevious
+  );
+
+
+  nextButton.addEventListener(
+    'click',
+    goNext
+  );
+
+
+  submitButton.addEventListener(
+    'click',
+    () =>
+      submitQuiz(0)
+  );
+
+
+  document.getElementById(
+    'back-link'
+  ).addEventListener(
+    'click',
+    () => {
+
+      if (
+        currentAttempt &&
+        currentAttempt.state ===
+          'inprogress'
+      ) {
+
+        const confirmed =
+          window.confirm(
+            'You have an active quiz attempt. Leave this page? Your latest autosaved answers will remain in Moodle.'
+          );
+
+
+        if (!confirmed) {
+          return;
+        }
+
+      }
+
+
+      window.location.href =
+        `course.html?id=${
+          encodeURIComponent(
+            courseId
+          )
+        }`;
+
+    }
+  );
+
+
+  document.getElementById(
+    'result-back-button'
+  ).addEventListener(
+    'click',
+    () => {
+
+      window.location.href =
+        `course.html?id=${
+          encodeURIComponent(
+            courseId
+          )
+        }`;
+
+    }
+  );
+
+
+  /* =========================================================
+     INITIALIZE
+  ========================================================== */
+
+  async function initialize() {
+
+    try {
+
+      await loadQuizInfo();
+
+
+      await prepareQuizScreen();
+
+    }
+
+    catch (error) {
+
+      console.error(
+        'Quiz initialization error:',
+        error
+      );
+
+
+      quizTitle.textContent =
+        'Unable to Load Quiz';
+
+
+      showMessage(
+        error.message
+      );
+
+
+      startButton.disabled =
+        true;
+
+    }
+
+  }
+
+
+  initialize();
+
+
+  /* =========================================================
+     CLEANUP
+  ========================================================== */
+
+  window.addEventListener(
+    'beforeunload',
+    () => {
+
+      clearTimeout(
+        inputSaveTimer
+      );
+
+
+      clearInterval(
+        saveInterval
+      );
+
+
+      clearInterval(
+        timerInterval
+      );
+
+    }
+  );
+
+</script>
 
 </body>
 
