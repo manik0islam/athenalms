@@ -3,253 +3,116 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Madar LMS | Assignment Portal</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <title>Madar LMS | Submission Portal</title>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
-
   <style>
     :root {
-      --bg-primary: #ffffff;
-      --bg-secondary: #f4f4f5;
-      --bg-tertiary: #e4e4e7;
-      --text-primary: #000000;
-      --text-secondary: #52525b;
-      --border-color: #d4d4d8;
-      --black: #09090b;
-      --white: #ffffff;
-      --font-heading: 'Space Grotesk', sans-serif;
-      --font-body: 'Inter', sans-serif;
+      --bg-primary: #ffffff; --bg-secondary: #f8fafc; --bg-tertiary: #f1f5f9;
+      --text-primary: #09090b; --text-secondary: #52525b;
+      --border-color: #e2e8f0; --brand-black: #000000; --white: #ffffff;
+      --font-heading: 'Space Grotesk', sans-serif; --font-body: 'Inter', sans-serif;
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: var(--font-body); background-color: var(--bg-secondary); color: var(--text-primary); line-height: 1.6; }
-    a { color: inherit; text-decoration: none; }
-
-    /* HEADER */
-    header { background-color: var(--bg-primary); border-bottom: 1px solid var(--border-color); position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
+    
+    header { background-color: rgba(255, 255, 255, 0.95); border-bottom: 1px solid var(--border-color); position: fixed; top: 0; left: 0; right: 0; z-index: 100; backdrop-filter: blur(8px); }
     .nav-container { max-width: 1000px; margin: 0 auto; padding: 0 24px; height: 70px; display: flex; justify-content: space-between; align-items: center; }
-    .back-link { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: opacity 0.2s; }
-    .back-link:hover { opacity: 0.7; }
+    .back-link { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.95rem; color: var(--text-secondary); cursor: pointer; transition: color 0.2s; }
+    .back-link:hover { color: var(--brand-black); }
 
-    /* LAYOUT */
-    .portal-container { max-width: 800px; margin: 100px auto 40px; padding: 0 24px; }
+    .hero { margin-top: 70px; background-color: var(--bg-primary); padding: 80px 24px 40px; border-bottom: 1px solid var(--border-color); background-image: radial-gradient(var(--border-color) 1px, transparent 1px); background-size: 24px 24px; }
+    .hero-content { max-width: 800px; margin: 0 auto; }
+    .assign-title { font-family: var(--font-heading); font-size: 2.25rem; font-weight: 700; margin-bottom: 16px; letter-spacing: -0.5px; }
+    .meta-tags { display: flex; gap: 12px; flex-wrap: wrap; }
+    .meta-tag { display: inline-flex; align-items: center; gap: 6px; background-color: var(--brand-black); color: var(--white); padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+    .meta-tag.status-tag { background-color: var(--bg-tertiary); color: var(--text-primary); box-shadow: none; border: 1px solid var(--border-color); }
+
+    .portal-container { max-width: 800px; margin: -20px auto 60px; padding: 0 24px; position: relative; z-index: 10; }
+    .panel { background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 12px; padding: 32px; margin-bottom: 24px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.02); }
+    .panel-title { font-family: var(--font-heading); font-size: 1.15rem; font-weight: 600; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--bg-tertiary); }
+    .instructions-content { font-size: 0.95rem; color: var(--text-secondary); }
+
+    .upload-zone { border: 2px dashed var(--border-color); border-radius: 8px; padding: 40px 20px; text-align: center; background-color: var(--bg-secondary); cursor: pointer; transition: all 0.2s; margin-bottom: 20px; }
+    .upload-zone:hover { border-color: var(--brand-black); background-color: var(--bg-tertiary); }
+    .upload-icon { margin: 0 auto 12px; color: var(--brand-black); }
     
-    .assignment-header { margin-bottom: 30px; }
-    .assignment-title { font-family: var(--font-heading); font-size: 2rem; font-weight: 700; margin-bottom: 12px; }
-    .meta-tags { display: flex; gap: 16px; font-size: 0.85rem; color: var(--text-secondary); }
-    .meta-tag { display: flex; align-items: center; gap: 6px; background: var(--bg-tertiary); padding: 4px 12px; border-radius: 4px; font-weight: 500; color: var(--black); }
-
-    .content-block { background-color: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 6px; padding: 30px; margin-bottom: 24px; }
-    .block-title { font-family: var(--font-heading); font-size: 1.1rem; font-weight: 600; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color); }
-    
-    .intro-text { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; }
-    .intro-text p { margin-bottom: 12px; }
-
-    /* UPLOAD ZONE */
-    .upload-zone { border: 2px dashed var(--border-color); border-radius: 6px; padding: 40px 20px; text-align: center; background-color: #fafafa; transition: border-color 0.2s, background-color 0.2s; cursor: pointer; }
-    .upload-zone:hover, .upload-zone.dragover { border-color: var(--black); background-color: var(--bg-secondary); }
-    .upload-icon { color: var(--text-tertiary); margin-bottom: 12px; }
-    .upload-title { font-weight: 600; margin-bottom: 4px; }
-    .upload-subtitle { font-size: 0.85rem; color: var(--text-secondary); }
-    
-    .submit-btn { width: 100%; padding: 14px; background-color: var(--black); color: var(--white); border: none; border-radius: 4px; font-family: var(--font-heading); font-size: 1rem; font-weight: 600; margin-top: 20px; cursor: pointer; opacity: 0.5; pointer-events: none; transition: opacity 0.2s; }
-    .submit-btn.active { opacity: 1; pointer-events: auto; }
-    .submit-btn.active:hover { opacity: 0.9; }
-
-    #file-input { display: none; }
+    .submit-btn { display: block; width: 100%; padding: 16px; background-color: var(--brand-black); color: var(--white); border: none; border-radius: 8px; font-family: var(--font-heading); font-weight: 600; font-size: 1rem; cursor: pointer; transition: transform 0.1s, opacity 0.2s; }
+    .submit-btn:hover { opacity: 0.9; }
+    .submit-btn:active { transform: scale(0.99); }
   </style>
 </head>
 <body>
-
   <header>
     <div class="nav-container">
-      <div class="back-link" onclick="history.back()">
-        <i data-lucide="arrow-left" style="width: 20px; height: 20px;"></i> Back to Modules
-      </div>
-      <div style="font-family: var(--font-heading); font-weight: 700; text-transform: uppercase;">Submission Portal</div>
+      <div class="back-link" onclick="history.back()"><i data-lucide="arrow-left" style="width: 18px; height: 18px;"></i> Back to Modules</div>
+      <div style="font-family: var(--font-heading); font-weight: 700; font-size: 1.1rem; letter-spacing: -0.5px; color: var(--brand-black);">SUBMISSION PORTAL</div>
     </div>
   </header>
+  
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="assign-title" id="assign-title">Loading Assignment...</h1>
+      <div class="meta-tags" id="assign-meta">
+        <div class="meta-tag"><i data-lucide="clock" style="width: 14px; height: 14px;"></i> Fetching data...</div>
+      </div>
+    </div>
+  </section>
 
   <div class="portal-container" id="main-container">
-    <div style="text-align: center; padding: 60px;">
-      <i data-lucide="loader-2" style="animation: spin 2s linear infinite; margin: 0 auto 10px; display: block;"></i>
-      Decrypting assignment data...
+    <div class="panel">
+      <h2 class="panel-title">Instructions</h2>
+      <div class="instructions-content" id="assign-instructions">Please wait...</div>
+    </div>
+    
+    <div class="panel">
+      <h2 class="panel-title">Upload Submission</h2>
+      <div class="upload-zone" id="drop-zone">
+        <i data-lucide="cloud-upload" class="upload-icon" style="width: 40px; height: 40px;"></i>
+        <div style="font-weight: 600; margin-bottom: 4px;">Click to browse or drag file here</div>
+        <div style="font-size: 0.85rem; color: var(--text-secondary);">Accepts .cpp, .py, .pdf, .zip (Max 50MB)</div>
+      </div>
+      <input type="file" id="file-input" style="display: none;">
+      <button class="submit-btn" id="submit-btn">Transmit to Moodle</button>
     </div>
   </div>
 
   <script>
     lucide.createIcons();
-    
     const MOODLE_URL = 'http://localhost:8000';
     const userToken = localStorage.getItem('madar_user_token');
-    
-    if (!userToken) window.location.href = 'login.html';
-
     const urlParams = new URLSearchParams(window.location.search);
     const assignId = urlParams.get('assignid');
     const courseId = urlParams.get('courseid');
 
-    if (!assignId || !courseId) window.location.href = 'index.html';
-
-    async function loadAssignmentDetails() {
-      const container = document.getElementById('main-container');
-
+    async function loadAssignment() {
       try {
-        const endpoint = `${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=mod_assign_get_assignments&courseids[0]=${courseId}&moodlewsrestformat=json`;
-        const res = await fetch(endpoint);
+        const res = await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=mod_assign_get_assignments&courseids[0]=${courseId}&moodlewsrestformat=json`);
         const data = await res.json();
-
-        if (data.exception) throw new Error(data.message);
-
-        const courseData = data.courses.find(c => c.id == courseId);
-        const assignment = courseData.assignments.find(a => a.id == assignId);
-
-        if (!assignment) throw new Error("Assignment not found.");
-
-        const dueDateObj = new Date(assignment.duedate * 1000);
-        const dateString = dueDateObj.toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
-
-        container.innerHTML = `
-          <div class="assignment-header">
-            <h1 class="assignment-title">${assignment.name}</h1>
-            <div class="meta-tags">
-              <div class="meta-tag"><i data-lucide="calendar" style="width: 14px; height: 14px;"></i> Due: ${dateString}</div>
-              <div class="meta-tag"><i data-lucide="file-check" style="width: 14px; height: 14px;"></i> Status: Pending</div>
-            </div>
-          </div>
-
-          <div class="content-block">
-            <h2 class="block-title">Instructions</h2>
-            <div class="intro-text">
-              ${assignment.intro || 'No specific instructions provided. Submit your files below.'}
-            </div>
-          </div>
-
-          <div class="content-block">
-            <h2 class="block-title">Upload Submission</h2>
-            
-            <input type="file" id="file-input" />
-            
-            <div class="upload-zone" id="drop-zone" onclick="document.getElementById('file-input').click()">
-              <i data-lucide="upload-cloud" class="upload-icon" style="width: 48px; height: 48px;"></i>
-              <div class="upload-title" id="upload-text">Click to browse or drag file here</div>
-              <div class="upload-subtitle">Accepts .cpp, .py, .pdf, .zip (Max 50MB)</div>
-            </div>
-
-            <button class="submit-btn" id="submit-btn">Transmit to Moodle</button>
-          </div>
-        `;
-
-        lucide.createIcons();
-        setupUploadLogic();
-
-      } catch (error) {
-        console.error(error);
-        container.innerHTML = `
-          <div style="text-align: center; padding: 40px; background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 6px;">
-            <h3 style="margin-bottom: 10px;">Error Loading Assignment</h3>
-            <p style="color: var(--text-secondary); font-size: 0.9rem;">${error.message}</p>
-            <button onclick="history.back()" style="margin-top: 20px; padding: 8px 16px; background: var(--bg-secondary); border: 1px solid var(--border-color); cursor: pointer;">Go Back</button>
-          </div>
-        `;
-      }
-    }
-
-    function setupUploadLogic() {
-      const dropZone = document.getElementById('drop-zone');
-      const fileInput = document.getElementById('file-input');
-      const uploadText = document.getElementById('upload-text');
-      const submitBtn = document.getElementById('submit-btn');
-
-      dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
-      dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
-      dropZone.addEventListener('drop', (e) => {
-        e.preventDefault();
-        dropZone.classList.remove('dragover');
-        if (e.dataTransfer.files.length) {
-          fileInput.files = e.dataTransfer.files;
-          updateUI();
-        }
-      });
-
-      fileInput.addEventListener('change', updateUI);
-
-      function updateUI() {
-        if (fileInput.files.length > 0) {
-          const file = fileInput.files[0];
-          uploadText.innerHTML = `<span style="color: #16a34a;">${file.name} ready for upload</span>`;
-          submitBtn.classList.add('active');
-        }
-      }
-
-      submitBtn.addEventListener('click', async () => {
-        if (!submitBtn.classList.contains('active')) return;
+        const assign = data.courses[0].assignments.find(a => a.id == assignId);
         
-        const file = fileInput.files[0];
-        if (!file) return;
-
-        submitBtn.innerHTML = '<i data-lucide="loader-2" style="animation: spin 2s linear infinite;"></i> Uploading to Madar...';
-        lucide.createIcons();
-        submitBtn.classList.remove('active'); 
-
-        try {
-          // STEP 1: Upload the file to Moodle's Draft Area
-          const formData = new FormData();
-          formData.append('token', userToken);
-          formData.append('filearea', 'draft');
-          formData.append('itemid', 0); 
-          formData.append('file', file);
-
-          const uploadRes = await fetch(`${MOODLE_URL}/webservice/upload.php`, {
-            method: 'POST',
-            body: formData
-          });
-          const uploadData = await uploadRes.json();
+        if(assign) {
+          document.getElementById('assign-title').textContent = assign.name;
+          document.getElementById('assign-instructions').innerHTML = assign.intro || 'No specific instructions provided. Submit your files below.';
           
-          if (uploadData.error) throw new Error(uploadData.error);
+          const dueDate = new Date(assign.duedate * 1000).toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
           
-          const itemid = uploadData[0].itemid;
-
-          // STEP 2: Attach the draft file to the specific assignment
-          const submitUrl = new URL(`${MOODLE_URL}/webservice/rest/server.php`);
-          submitUrl.searchParams.append('wstoken', userToken);
-          submitUrl.searchParams.append('wsfunction', 'mod_assign_save_submission');
-          submitUrl.searchParams.append('moodlewsrestformat', 'json');
-          submitUrl.searchParams.append('assignmentid', assignId);
-          submitUrl.searchParams.append('plugindata[files_filemanager]', itemid);
-
-          const submitRes = await fetch(submitUrl, { method: 'POST' });
-          const submitText = await submitRes.text(); 
-          
-          if (submitText.includes('exception')) {
-             const errorObj = JSON.parse(submitText);
-             throw new Error(errorObj.message);
-          }
-
-          submitBtn.innerHTML = '<i data-lucide="check-circle" style="margin-right: 8px;"></i> Submission Successful';
-          submitBtn.style.backgroundColor = '#16a34a';
+          document.getElementById('assign-meta').innerHTML = `
+            <div class="meta-tag"><i data-lucide="calendar" style="width: 14px; height: 14px;"></i> Due: ${dueDate}</div>
+            <div class="meta-tag status-tag"><i data-lucide="check-circle" style="width: 14px; height: 14px;"></i> Status: Pending</div>
+          `;
           lucide.createIcons();
-
-        } catch (error) {
-          console.error('Upload Failed:', error);
-          
-          submitBtn.innerHTML = '<i data-lucide="x-circle" style="margin-right: 8px;"></i> Error: ' + error.message;
-          submitBtn.style.backgroundColor = '#dc2626';
-          lucide.createIcons();
-          
-          setTimeout(() => {
-              submitBtn.innerHTML = 'Transmit to Moodle';
-              submitBtn.style.backgroundColor = 'var(--black)';
-              submitBtn.classList.add('active');
-          }, 4000);
         }
-      });
+      } catch (e) {
+        document.getElementById('assign-title').textContent = "Error Loading Data";
+      }
     }
 
-    loadAssignmentDetails();
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('file-input');
+    dropZone.addEventListener('click', () => fileInput.click());
+
+    loadAssignment();
   </script>
 </body>
 </html>

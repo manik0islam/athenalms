@@ -7,33 +7,57 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
-    :root { --bg-primary: #ffffff; --bg-secondary: #f4f4f5; --bg-tertiary: #e4e4e7; --text-primary: #000000; --text-secondary: #52525b; --border-color: #d4d4d8; --black: #09090b; --font-heading: 'Space Grotesk', sans-serif; --font-body: 'Inter', sans-serif; }
+    :root {
+      --bg-primary: #ffffff; --bg-secondary: #f8fafc; --bg-tertiary: #f1f5f9;
+      --text-primary: #09090b; --text-secondary: #52525b;
+      --border-color: #e2e8f0; --brand-black: #000000; --white: #ffffff;
+      --font-heading: 'Space Grotesk', sans-serif; --font-body: 'Inter', sans-serif;
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: var(--font-body); background-color: var(--bg-secondary); color: var(--text-primary); }
-    header { background-color: var(--bg-primary); border-bottom: 1px solid var(--border-color); position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
-    .nav-container { max-width: 800px; margin: 0 auto; padding: 0 24px; height: 70px; display: flex; justify-content: space-between; align-items: center; }
-    .back-link { display: flex; align-items: center; gap: 8px; font-weight: 600; cursor: pointer; }
-    .portal-container { max-width: 800px; margin: 100px auto 40px; padding: 0 24px; }
-    .forum-title { font-family: var(--font-heading); font-size: 2rem; font-weight: 700; margin-bottom: 24px; }
-    .post-card { background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 6px; padding: 24px; margin-bottom: 16px; }
-    .post-header { display: flex; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px solid var(--bg-secondary); padding-bottom: 12px; }
-    .post-subject { font-weight: 600; font-size: 1.1rem; }
-    .post-meta { font-size: 0.85rem; color: var(--text-secondary); }
-    .post-body { font-size: 0.95rem; line-height: 1.6; color: var(--text-secondary); }
+    body { font-family: var(--font-body); background-color: var(--bg-secondary); color: var(--text-primary); line-height: 1.6; }
+    
+    header { background-color: rgba(255, 255, 255, 0.95); border-bottom: 1px solid var(--border-color); position: fixed; top: 0; left: 0; right: 0; z-index: 100; backdrop-filter: blur(8px); }
+    .nav-container { max-width: 1000px; margin: 0 auto; padding: 0 24px; height: 70px; display: flex; justify-content: space-between; align-items: center; }
+    .back-link { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.95rem; color: var(--text-secondary); cursor: pointer; transition: color 0.2s; }
+    .back-link:hover { color: var(--brand-black); }
+
+    .hero { margin-top: 70px; background-color: var(--bg-primary); padding: 80px 24px 60px; border-bottom: 1px solid var(--border-color); background-image: radial-gradient(var(--border-color) 1px, transparent 1px); background-size: 24px 24px; text-align: center; }
+    .hero-title { font-family: var(--font-heading); font-size: 2.75rem; font-weight: 700; margin-bottom: 16px; letter-spacing: -0.5px; }
+    .forum-badge { display: inline-flex; align-items: center; gap: 6px; background-color: var(--brand-black); color: var(--white); padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 16px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+
+    .portal-container { max-width: 800px; margin: -20px auto 60px; padding: 0 24px; position: relative; z-index: 10; }
+    
+    .post-card { background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 12px; padding: 24px 32px; margin-bottom: 20px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.02); }
+    .post-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--bg-tertiary); }
+    .post-subject { font-family: var(--font-heading); font-weight: 600; font-size: 1.2rem; }
+    .post-meta { font-size: 0.85rem; color: var(--text-secondary); display: flex; align-items: center; gap: 6px; }
+    .post-body { font-size: 0.95rem; color: var(--text-secondary); white-space: pre-wrap; }
+
+    .loading-state { padding: 60px; text-align: center; background-color: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-secondary); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
   </style>
 </head>
 <body>
   <header>
     <div class="nav-container">
-      <div class="back-link" onclick="history.back()"><i data-lucide="arrow-left" style="width: 20px; height: 20px;"></i> Back to Modules</div>
-      <div style="font-family: var(--font-heading); font-weight: 700; text-transform: uppercase;">Communications</div>
+      <div class="back-link" onclick="history.back()"><i data-lucide="arrow-left" style="width: 18px; height: 18px;"></i> Back to Modules</div>
+      <div style="font-family: var(--font-heading); font-weight: 700; font-size: 1.1rem; letter-spacing: -0.5px; color: var(--brand-black);">COMMUNICATIONS</div>
     </div>
   </header>
+  
+  <div id="hero-container">
+    <section class="hero">
+      <div class="forum-badge"><i data-lucide="message-square" style="width: 14px; height: 14px;"></i> Initializing</div>
+      <h1 class="hero-title">Loading...</h1>
+    </section>
+  </div>
+
   <div class="portal-container" id="main-container">
-    <div style="text-align: center; padding: 60px;">
-      <i data-lucide="loader-2" style="animation: spin 2s linear infinite; margin: 0 auto 10px; display: block;"></i> Loading announcements...
+    <div class="loading-state">
+      <i data-lucide="loader-2" style="animation: spin 2s linear infinite; margin: 0 auto 12px; display: block; width: 32px; height: 32px; color: var(--brand-black);"></i>
+      Fetching announcements...
     </div>
   </div>
+
   <script>
     lucide.createIcons();
     const MOODLE_URL = 'http://localhost:8000';
@@ -44,20 +68,26 @@
 
     async function loadForum() {
       const container = document.getElementById('main-container');
+      const heroContainer = document.getElementById('hero-container');
       try {
-        // Fetch Forum info
         const forumRes = await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=mod_forum_get_forums_by_courses&courseids[0]=${courseId}&moodlewsrestformat=json`);
         const forumData = await forumRes.json();
         const forum = forumData.find(f => f.id == forumId);
 
-        // Fetch Discussions
+        heroContainer.innerHTML = `
+          <section class="hero">
+            <div class="forum-badge"><i data-lucide="radio" style="width: 14px; height: 14px;"></i> Broadcast Center</div>
+            <h1 class="hero-title">${forum ? forum.name : 'Announcements'}</h1>
+          </section>
+        `;
+        lucide.createIcons();
+
         const discRes = await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=mod_forum_get_forum_discussions&forumid=${forumId}&moodlewsrestformat=json`);
         const discData = await discRes.json();
 
-        let html = `<h1 class="forum-title">${forum ? forum.name : 'Announcements'}</h1>`;
-
+        let html = ``;
         if (!discData.discussions || discData.discussions.length === 0) {
-          html += `<div class="post-card"><div class="post-body">No announcements have been posted yet.</div></div>`;
+          html = `<div class="post-card"><div class="post-body" style="text-align: center;">No announcements have been posted yet.</div></div>`;
         } else {
           discData.discussions.forEach(post => {
             const dateStr = new Date(post.created * 1000).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
@@ -65,7 +95,7 @@
               <div class="post-card">
                 <div class="post-header">
                   <div class="post-subject">${post.subject}</div>
-                  <div class="post-meta">By ${post.userfullname} &bull; ${dateStr}</div>
+                  <div class="post-meta"><i data-lucide="user" style="width: 14px; height: 14px;"></i> ${post.userfullname} &nbsp;&bull;&nbsp; ${dateStr}</div>
                 </div>
                 <div class="post-body">${post.message}</div>
               </div>
@@ -73,8 +103,9 @@
           });
         }
         container.innerHTML = html;
+        lucide.createIcons();
       } catch (e) {
-        container.innerHTML = `<div class="post-card" style="color: #dc2626;">Error loading forum data.</div>`;
+        container.innerHTML = `<div class="loading-state" style="color: #dc2626;">Error loading forum data.</div>`;
       }
     }
     loadForum();
