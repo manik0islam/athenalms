@@ -63,11 +63,9 @@
       top: 0;
       left: 0;
       right: 0;
-
       height: 70px;
 
       background: rgba(255,255,255,0.96);
-
       border-bottom: 1px solid var(--border-color);
 
       backdrop-filter: blur(10px);
@@ -80,7 +78,6 @@
       height: 70px;
 
       margin: 0 auto;
-
       padding: 0 24px;
 
       display: flex;
@@ -160,7 +157,6 @@
       font-size: clamp(2rem, 5vw, 3rem);
 
       line-height: 1.1;
-
       letter-spacing: -1px;
 
       margin-bottom: 10px;
@@ -193,7 +189,6 @@
       background: var(--white);
 
       border: 1px solid var(--border-color);
-
       border-radius: 10px;
 
       padding: 24px;
@@ -226,7 +221,6 @@
       font-family: var(--font-heading);
 
       font-size: 2rem;
-
       font-weight: 700;
 
       letter-spacing: -0.7px;
@@ -253,7 +247,6 @@
       background: var(--white);
 
       border: 1px solid var(--border-color);
-
       border-radius: 10px;
 
       overflow: hidden;
@@ -268,7 +261,6 @@
       border-bottom: 1px solid var(--border-color);
 
       display: flex;
-
       align-items: center;
       justify-content: space-between;
 
@@ -279,7 +271,6 @@
       font-family: var(--font-heading);
 
       font-size: 1.15rem;
-
       font-weight: 700;
     }
 
@@ -301,7 +292,6 @@
       font-family: var(--font-heading);
 
       font-size: 1.4rem;
-
       font-weight: 700;
     }
 
@@ -321,7 +311,6 @@
 
     .table-wrapper {
       width: 100%;
-
       overflow-x: auto;
     }
 
@@ -381,21 +370,17 @@
 
     .grade-points {
       font-family: var(--font-heading);
-
       font-weight: 700;
     }
 
     .grade-percentage {
       font-family: var(--font-heading);
-
       font-weight: 700;
     }
 
     .status {
       display: inline-flex;
-
       align-items: center;
-
       gap: 5px;
 
       padding: 4px 8px;
@@ -403,31 +388,26 @@
       border-radius: 5px;
 
       font-size: 0.72rem;
-
       font-weight: 700;
     }
 
     .status.pass {
       color: var(--success);
-
       background: var(--success-bg);
     }
 
     .status.warning {
       color: var(--warning);
-
       background: var(--warning-bg);
     }
 
     .status.fail {
       color: var(--danger);
-
       background: var(--danger-bg);
     }
 
     .status.neutral {
       color: var(--text-secondary);
-
       background: var(--bg-tertiary);
     }
 
@@ -437,7 +417,6 @@
 
     .progress-container {
       display: flex;
-
       align-items: center;
 
       gap: 10px;
@@ -447,7 +426,6 @@
 
     .progress-bar {
       width: 90px;
-
       height: 6px;
 
       border-radius: 10px;
@@ -471,6 +449,22 @@
       color: var(--text-secondary);
 
       min-width: 38px;
+    }
+
+    /* =========================================
+       COURSE TOTAL INDICATOR
+    ========================================= */
+
+    .course-total-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+
+      margin-top: 5px;
+
+      color: var(--text-tertiary);
+
+      font-size: 0.68rem;
     }
 
     /* =========================================
@@ -556,7 +550,6 @@
 
       .course-header {
         align-items: flex-start;
-
         flex-direction: column;
 
         padding: 18px;
@@ -585,14 +578,12 @@
       class="back-link"
       onclick="history.back()"
     >
-
       <i
         data-lucide="arrow-left"
         style="width:18px;height:18px;"
       ></i>
 
       Back to Dashboard
-
     </div>
 
     <div class="page-label">
@@ -607,7 +598,7 @@
 <main class="page">
 
   <!-- =========================================
-       HEADER
+       PAGE HEADER
   ========================================== -->
 
   <section class="page-header">
@@ -665,7 +656,10 @@
         —
       </div>
 
-      <div class="summary-detail">
+      <div
+        class="summary-detail"
+        id="course-count-detail"
+      >
         Enrolled courses with grade data
       </div>
 
@@ -681,7 +675,7 @@
           style="width:16px;height:16px;"
         ></i>
 
-        Overall Average
+        Overall Course Average
 
       </div>
 
@@ -693,7 +687,7 @@
       </div>
 
       <div class="summary-detail">
-        Based on available graded items
+        Average of available Moodle course totals
       </div>
 
     </div>
@@ -842,10 +836,17 @@
     Object.entries(params).forEach(
       ([key, value]) => {
 
-        body.append(
-          key,
-          value
-        );
+        if (
+          value !== undefined &&
+          value !== null
+        ) {
+
+          body.append(
+            key,
+            value
+          );
+
+        }
 
       }
     );
@@ -906,15 +907,22 @@
       value === undefined ||
       value === ''
     ) {
+
       return '—';
+
     }
+
 
     const number =
       Number(value);
 
+
     if (!Number.isFinite(number)) {
+
       return '—';
+
     }
+
 
     return `${number.toFixed(1)}%`;
 
@@ -922,7 +930,7 @@
 
 
   /* ==========================================
-     STATUS
+     GET STATUS
   ========================================== */
 
   function getStatus(
@@ -982,7 +990,7 @@
 
 
   /* ==========================================
-     COURSE GRADE DATA
+     GET COURSE GRADES
   ========================================== */
 
   async function getCourseGrades(
@@ -1000,10 +1008,16 @@
 
 
   /* ==========================================
-     EXTRACT GRADE ITEMS
+     EXTRACT COURSE + ASSESSMENT GRADES
   ========================================== */
 
-  function extractItems(data) {
+  function extractGradeData(data) {
+
+    const result = {
+      items: [],
+      courseItem: null
+    };
+
 
     if (
       !data ||
@@ -1012,12 +1026,9 @@
       )
     ) {
 
-      return [];
+      return result;
 
     }
-
-
-    const items = [];
 
 
     data.usergrades.forEach(
@@ -1038,21 +1049,25 @@
           item => {
 
             /*
-             * Moodle can return course-level
-             * summary items. We keep them out
-             * of the individual assessment table.
+             * Keep Moodle's course-level
+             * grade separately.
              */
 
             if (
               item.itemtype === 'course'
             ) {
 
+              result.courseItem =
+                item;
+
               return;
 
             }
 
 
-            items.push(item);
+            result.items.push(
+              item
+            );
 
           }
         );
@@ -1061,7 +1076,7 @@
     );
 
 
-    return items;
+    return result;
 
   }
 
@@ -1070,7 +1085,21 @@
      GET PERCENTAGE
   ========================================== */
 
-  function getPercentage(item) {
+  function getPercentage(
+    item
+  ) {
+
+    if (!item) {
+
+      return null;
+
+    }
+
+
+    /*
+     * Prefer Moodle's own percentage
+     * when it provides one.
+     */
 
     if (
       item.percentage !== undefined &&
@@ -1081,12 +1110,22 @@
       const value =
         Number(item.percentage);
 
-      if (Number.isFinite(value)) {
+
+      if (
+        Number.isFinite(value)
+      ) {
+
         return value;
+
       }
 
     }
 
+
+    /*
+     * Fallback:
+     * grade / max grade.
+     */
 
     if (
       item.grademax !== undefined &&
@@ -1096,10 +1135,23 @@
       item.grade !== null
     ) {
 
-      return (
-        Number(item.grade) /
-        Number(item.grademax)
-      ) * 100;
+      const grade =
+        Number(item.grade);
+
+      const max =
+        Number(item.grademax);
+
+
+      if (
+        Number.isFinite(grade) &&
+        Number.isFinite(max)
+      ) {
+
+        return (
+          grade / max
+        ) * 100;
+
+      }
 
     }
 
@@ -1110,10 +1162,45 @@
 
 
   /* ==========================================
-     COURSE AVERAGE
+     GET COURSE AVERAGE
   ========================================== */
 
-  function getCourseAverage(items) {
+  function getCourseAverage(
+    items,
+    courseItem
+  ) {
+
+    /*
+     * First priority:
+     * Moodle's own course-level grade.
+     */
+
+    const moodleCoursePercentage =
+      getPercentage(
+        courseItem
+      );
+
+
+    if (
+      moodleCoursePercentage !== null &&
+      Number.isFinite(
+        moodleCoursePercentage
+      )
+    ) {
+
+      return moodleCoursePercentage;
+
+    }
+
+
+    /*
+     * Fallback:
+     * Calculate an average only when
+     * Moodle didn't give us a course total.
+     *
+     * This is NOT intended to replace
+     * Moodle's weighted gradebook.
+     */
 
     const graded =
       items.filter(
@@ -1122,9 +1209,12 @@
           const percentage =
             getPercentage(item);
 
+
           return (
             percentage !== null &&
-            Number.isFinite(percentage)
+            Number.isFinite(
+              percentage
+            )
           );
 
         }
@@ -1132,14 +1222,22 @@
 
 
     if (!graded.length) {
+
       return null;
+
     }
 
 
     const total =
       graded.reduce(
-        (sum, item) =>
-          sum + getPercentage(item),
+        (sum, item) => {
+
+          return (
+            sum +
+            getPercentage(item)
+          );
+
+        },
         0
       );
 
@@ -1156,11 +1254,16 @@
 
   function renderCourse(
     course,
-    items
+    items,
+    courseItem
   ) {
 
     const average =
-      getCourseAverage(items);
+      getCourseAverage(
+        items,
+        courseItem
+      );
+
 
     const averageText =
       average === null
@@ -1168,13 +1271,21 @@
         : `${average.toFixed(1)}%`;
 
 
+    const usingMoodleTotal =
+      getPercentage(
+        courseItem
+      ) !== null;
+
+
     const rows =
       items.length
+
         ? items.map(
             item => {
 
               const percentage =
                 getPercentage(item);
+
 
               const status =
                 getStatus(
@@ -1182,23 +1293,38 @@
                 );
 
 
+              /*
+               * Don't display 0 if Moodle
+               * says the item is ungraded.
+               */
+
+              const hasGrade =
+                item.grade !== undefined &&
+                item.grade !== null &&
+                item.grade !== '';
+
+
               const grade =
                 item.gradeformatted ||
                 (
-                  item.grade !== undefined &&
-                  item.grade !== null
+                  hasGrade
                     ? Number(item.grade)
                         .toFixed(2)
-                    : '—'
+                    : 'Not graded'
                 );
 
 
-              const max =
+              const hasMax =
                 item.grademax !== undefined &&
-                item.grademax !== null
+                item.grademax !== null &&
+                item.grademax !== '';
+
+
+              const max =
+                hasMax
                   ? Number(item.grademax)
                       .toFixed(2)
-                  : '—';
+                  : null;
 
 
               const progress =
@@ -1220,18 +1346,22 @@
                   <td>
 
                     <div class="item-name">
+
                       ${escapeHtml(
                         item.itemname ||
                         'Assessment'
                       )}
+
                     </div>
 
                     <div class="item-type">
+
                       ${escapeHtml(
                         item.itemmodule ||
                         item.itemtype ||
                         'Grade item'
                       )}
+
                     </div>
 
                   </td>
@@ -1248,7 +1378,7 @@
                     </span>
 
                     ${
-                      max !== '—'
+                      hasMax && hasGrade
                         ? `
                           <span
                             style="
@@ -1294,11 +1424,15 @@
                       </div>
 
                       <span class="progress-value">
-                        ${percentage === null
-                          ? '—'
-                          : `${Math.round(
-                              percentage
-                            )}%`}
+
+                        ${
+                          percentage === null
+                            ? '—'
+                            : `${Math.round(
+                                percentage
+                              )}%`
+                        }
+
                       </span>
 
                     </div>
@@ -1332,6 +1466,7 @@
 
             }
           ).join('')
+
         : `
 
           <tr>
@@ -1388,14 +1523,50 @@
             <div
               class="course-average-value"
             >
+
               ${averageText}
+
             </div>
 
             <div
               class="course-average-label"
             >
-              Course Average
+              Moodle Course Total
             </div>
+
+            ${
+              usingMoodleTotal
+                ? `
+                  <div class="course-total-note">
+
+                    <i
+                      data-lucide="database"
+                      style="
+                        width:11px;
+                        height:11px;
+                      "
+                    ></i>
+
+                    From Moodle gradebook
+
+                  </div>
+                `
+                : `
+                  <div class="course-total-note">
+
+                    <i
+                      data-lucide="calculator"
+                      style="
+                        width:11px;
+                        height:11px;
+                      "
+                    ></i>
+
+                    Calculated fallback
+
+                  </div>
+                `
+            }
 
           </div>
 
@@ -1465,18 +1636,46 @@
 
 
     try {
-      /*
-       * 1. First, get the actual User ID of the logged-in student
-       */
-      const siteInfo = await moodleRequest('core_webservice_get_site_info');
-      const userId = siteInfo.userid;
 
       /*
-       * 2. Retrieve the student's enrolled courses using their real ID
+       * STEP 1:
+       * Get the actual logged-in user.
        */
-      const courses = await moodleRequest('core_enrol_get_users_courses', {
-          userid: userId
-      });
+
+      const siteInfo =
+        await moodleRequest(
+          'core_webservice_get_site_info'
+        );
+
+
+      if (
+        !siteInfo ||
+        !siteInfo.userid
+      ) {
+
+        throw new Error(
+          'Could not determine the logged-in Moodle user.'
+        );
+
+      }
+
+
+      const userId =
+        siteInfo.userid;
+
+
+      /*
+       * STEP 2:
+       * Get the student's enrolled courses.
+       */
+
+      const courses =
+        await moodleRequest(
+          'core_enrol_get_users_courses',
+          {
+            userid: userId
+          }
+        );
 
 
       if (
@@ -1495,8 +1694,9 @@
 
 
       /*
-       * Request gradebook data
-       * for every enrolled course.
+       * STEP 3:
+       * Retrieve gradebook data
+       * for each course.
        */
 
       for (
@@ -1511,26 +1711,28 @@
             );
 
 
-          const items =
-            extractItems(
+          const parsed =
+            extractGradeData(
               gradeData
             );
 
 
           courseResults.push({
+
             course,
-            items
+
+            items:
+              parsed.items,
+
+            courseItem:
+              parsed.courseItem
+
           });
 
 
-        } catch (error) {
+        }
 
-          /*
-           * A course without gradebook
-           * permission/data should not
-           * prevent other courses from
-           * appearing.
-           */
+        catch (error) {
 
           console.warn(
             `Could not load grades for course ${course.id}:`,
@@ -1539,8 +1741,13 @@
 
 
           courseResults.push({
+
             course,
-            items: []
+
+            items: [],
+
+            courseItem: null
+
           });
 
         }
@@ -1549,14 +1756,21 @@
 
 
       /*
-       * Summary calculations
+       * STEP 4:
+       * Flatten assessment items.
        */
 
       const allItems =
         courseResults.flatMap(
-          result => result.items
+          result =>
+            result.items
         );
 
+
+      /*
+       * Only count actually graded
+       * assessments.
+       */
 
       const gradedItems =
         allItems.filter(
@@ -1565,13 +1779,25 @@
         );
 
 
-      const averages =
+      /*
+       * STEP 5:
+       * Get course averages.
+       *
+       * Each course prefers Moodle's
+       * own course-level grade.
+       */
+
+      const courseAverages =
         courseResults
           .map(
-            result =>
-              getCourseAverage(
-                result.items
-              )
+            result => {
+
+              return getCourseAverage(
+                result.items,
+                result.courseItem
+              );
+
+            }
           )
           .filter(
             value =>
@@ -1579,19 +1805,41 @@
           );
 
 
+      /*
+       * STEP 6:
+       * Overall displayed average.
+       *
+       * This is an average of the available
+       * course totals, not a credit-weighted GPA.
+       */
+
       const overallAverage =
-        averages.length
-          ? averages.reduce(
-              (a, b) => a + b,
+        courseAverages.length
+
+          ? courseAverages.reduce(
+              (sum, value) =>
+                sum + value,
               0
-            ) / averages.length
+            ) / courseAverages.length
+
           : null;
 
+
+      /*
+       * STEP 7:
+       * Update summary cards.
+       */
 
       document.getElementById(
         'course-count'
       ).textContent =
         courseResults.length;
+
+
+      document.getElementById(
+        'course-count-detail'
+      ).textContent =
+        `${courseAverages.length} with available grade totals`;
 
 
       document.getElementById(
@@ -1604,18 +1852,23 @@
         'overall-average'
       ).textContent =
         overallAverage === null
+
           ? '—'
+
           : `${overallAverage.toFixed(1)}%`;
 
 
       /*
-       * Render courses
+       * STEP 8:
+       * Only render courses that have
+       * some grade information.
        */
 
       const visibleCourses =
         courseResults.filter(
           result =>
-            result.items.length > 0
+            result.items.length > 0 ||
+            result.courseItem !== null
         );
 
 
@@ -1639,14 +1892,17 @@
             </h2>
 
             <p class="state-text">
+
               Your enrolled courses were found,
               but Moodle has not returned any
-              grade items yet.
+              grade information yet.
+
             </p>
 
           </div>
 
         `;
+
 
         lucide.createIcons();
 
@@ -1655,27 +1911,56 @@
       }
 
 
+      /*
+       * STEP 9:
+       * Render all courses.
+       */
+
       container.innerHTML =
         visibleCourses
           .map(
-            result =>
-              renderCourse(
+            result => {
+
+              return renderCourse(
                 result.course,
-                result.items
-              )
+                result.items,
+                result.courseItem
+              );
+
+            }
           )
           .join('');
 
 
       lucide.createIcons();
 
+    }
 
-    } catch (error) {
+
+    catch (error) {
 
       console.error(
         'Gradebook error:',
         error
       );
+
+
+      document.getElementById(
+        'course-count'
+      ).textContent =
+        '—';
+
+
+      document.getElementById(
+        'assessment-count'
+      ).textContent =
+        '—';
+
+
+      document.getElementById(
+        'overall-average'
+      ).textContent =
+        '—';
 
 
       container.innerHTML = `
@@ -1697,14 +1982,17 @@
           </h2>
 
           <p class="state-text">
+
             ${escapeHtml(
               error.message
             )}
+
           </p>
 
         </div>
 
       `;
+
 
       lucide.createIcons();
 
