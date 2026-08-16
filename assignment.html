@@ -3,116 +3,2433 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Madar LMS | Submission Portal</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
   <script src="https://unpkg.com/lucide@latest"></script>
+
   <style>
     :root {
-      --bg-primary: #ffffff; --bg-secondary: #f8fafc; --bg-tertiary: #f1f5f9;
-      --text-primary: #09090b; --text-secondary: #52525b;
-      --border-color: #e2e8f0; --brand-black: #000000; --white: #ffffff;
-      --font-heading: 'Space Grotesk', sans-serif; --font-body: 'Inter', sans-serif;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-tertiary: #f1f5f9;
+
+      --text-primary: #09090b;
+      --text-secondary: #52525b;
+      --text-tertiary: #71717a;
+
+      --border-color: #e2e8f0;
+
+      --brand-black: #000000;
+      --white: #ffffff;
+
+      --success-bg: #f0fdf4;
+      --success-border: #bbf7d0;
+      --success-text: #166534;
+
+      --warning-bg: #fffbeb;
+      --warning-border: #fde68a;
+      --warning-text: #92400e;
+
+      --danger-bg: #fef2f2;
+      --danger-border: #fecaca;
+      --danger-text: #991b1b;
+
+      --font-heading: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', sans-serif;
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: var(--font-body); background-color: var(--bg-secondary); color: var(--text-primary); line-height: 1.6; }
-    
-    header { background-color: rgba(255, 255, 255, 0.95); border-bottom: 1px solid var(--border-color); position: fixed; top: 0; left: 0; right: 0; z-index: 100; backdrop-filter: blur(8px); }
-    .nav-container { max-width: 1000px; margin: 0 auto; padding: 0 24px; height: 70px; display: flex; justify-content: space-between; align-items: center; }
-    .back-link { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.95rem; color: var(--text-secondary); cursor: pointer; transition: color 0.2s; }
-    .back-link:hover { color: var(--brand-black); }
 
-    .hero { margin-top: 70px; background-color: var(--bg-primary); padding: 80px 24px 40px; border-bottom: 1px solid var(--border-color); background-image: radial-gradient(var(--border-color) 1px, transparent 1px); background-size: 24px 24px; }
-    .hero-content { max-width: 800px; margin: 0 auto; }
-    .assign-title { font-family: var(--font-heading); font-size: 2.25rem; font-weight: 700; margin-bottom: 16px; letter-spacing: -0.5px; }
-    .meta-tags { display: flex; gap: 12px; flex-wrap: wrap; }
-    .meta-tag { display: inline-flex; align-items: center; gap: 6px; background-color: var(--brand-black); color: var(--white); padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
-    .meta-tag.status-tag { background-color: var(--bg-tertiary); color: var(--text-primary); box-shadow: none; border: 1px solid var(--border-color); }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    .portal-container { max-width: 800px; margin: -20px auto 60px; padding: 0 24px; position: relative; z-index: 10; }
-    .panel { background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 12px; padding: 32px; margin-bottom: 24px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.02); }
-    .panel-title { font-family: var(--font-heading); font-size: 1.15rem; font-weight: 600; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--bg-tertiary); }
-    .instructions-content { font-size: 0.95rem; color: var(--text-secondary); }
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-secondary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
 
-    .upload-zone { border: 2px dashed var(--border-color); border-radius: 8px; padding: 40px 20px; text-align: center; background-color: var(--bg-secondary); cursor: pointer; transition: all 0.2s; margin-bottom: 20px; }
-    .upload-zone:hover { border-color: var(--brand-black); background-color: var(--bg-tertiary); }
-    .upload-icon { margin: 0 auto 12px; color: var(--brand-black); }
-    
-    .submit-btn { display: block; width: 100%; padding: 16px; background-color: var(--brand-black); color: var(--white); border: none; border-radius: 8px; font-family: var(--font-heading); font-weight: 600; font-size: 1rem; cursor: pointer; transition: transform 0.1s, opacity 0.2s; }
-    .submit-btn:hover { opacity: 0.9; }
-    .submit-btn:active { transform: scale(0.99); }
-  </style>
-</head>
-<body>
-  <header>
-    <div class="nav-container">
-      <div class="back-link" onclick="history.back()"><i data-lucide="arrow-left" style="width: 18px; height: 18px;"></i> Back to Modules</div>
-      <div style="font-family: var(--font-heading); font-weight: 700; font-size: 1.1rem; letter-spacing: -0.5px; color: var(--brand-black);">SUBMISSION PORTAL</div>
-    </div>
-  </header>
-  
-  <section class="hero">
-    <div class="hero-content">
-      <h1 class="assign-title" id="assign-title">Loading Assignment...</h1>
-      <div class="meta-tags" id="assign-meta">
-        <div class="meta-tag"><i data-lucide="clock" style="width: 14px; height: 14px;"></i> Fetching data...</div>
-      </div>
-    </div>
-  </section>
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-  <div class="portal-container" id="main-container">
-    <div class="panel">
-      <h2 class="panel-title">Instructions</h2>
-      <div class="instructions-content" id="assign-instructions">Please wait...</div>
-    </div>
-    
-    <div class="panel">
-      <h2 class="panel-title">Upload Submission</h2>
-      <div class="upload-zone" id="drop-zone">
-        <i data-lucide="cloud-upload" class="upload-icon" style="width: 40px; height: 40px;"></i>
-        <div style="font-weight: 600; margin-bottom: 4px;">Click to browse or drag file here</div>
-        <div style="font-size: 0.85rem; color: var(--text-secondary);">Accepts .cpp, .py, .pdf, .zip (Max 50MB)</div>
-      </div>
-      <input type="file" id="file-input" style="display: none;">
-      <button class="submit-btn" id="submit-btn">Transmit to Moodle</button>
-    </div>
-  </div>
+    button,
+    input {
+      font: inherit;
+    }
 
-  <script>
-    lucide.createIcons();
-    const MOODLE_URL = 'http://localhost:8000';
-    const userToken = localStorage.getItem('madar_user_token');
-    const urlParams = new URLSearchParams(window.location.search);
-    const assignId = urlParams.get('assignid');
-    const courseId = urlParams.get('courseid');
+    /* =========================
+       HEADER
+    ========================= */
 
-    async function loadAssignment() {
-      try {
-        const res = await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=mod_assign_get_assignments&courseids[0]=${courseId}&moodlewsrestformat=json`);
-        const data = await res.json();
-        const assign = data.courses[0].assignments.find(a => a.id == assignId);
-        
-        if(assign) {
-          document.getElementById('assign-title').textContent = assign.name;
-          document.getElementById('assign-instructions').innerHTML = assign.intro || 'No specific instructions provided. Submit your files below.';
-          
-          const dueDate = new Date(assign.duedate * 1000).toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
-          
-          document.getElementById('assign-meta').innerHTML = `
-            <div class="meta-tag"><i data-lucide="calendar" style="width: 14px; height: 14px;"></i> Due: ${dueDate}</div>
-            <div class="meta-tag status-tag"><i data-lucide="check-circle" style="width: 14px; height: 14px;"></i> Status: Pending</div>
-          `;
-          lucide.createIcons();
-        }
-      } catch (e) {
-        document.getElementById('assign-title').textContent = "Error Loading Data";
+    header {
+      background-color: rgba(255, 255, 255, 0.95);
+      border-bottom: 1px solid var(--border-color);
+
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+
+      z-index: 100;
+
+      backdrop-filter: blur(8px);
+    }
+
+    .nav-container {
+      max-width: 1000px;
+      margin: 0 auto;
+
+      padding: 0 24px;
+
+      height: 70px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .back-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      font-weight: 600;
+      font-size: 0.95rem;
+
+      color: var(--text-secondary);
+
+      cursor: pointer;
+
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--brand-black);
+    }
+
+    .portal-label {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1.1rem;
+
+      letter-spacing: -0.5px;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      margin-top: 70px;
+
+      background-color: var(--bg-primary);
+
+      padding: 80px 24px 40px;
+
+      border-bottom: 1px solid var(--border-color);
+
+      background-image:
+        radial-gradient(
+          var(--border-color) 1px,
+          transparent 1px
+        );
+
+      background-size: 24px 24px;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .course-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+
+      margin-bottom: 14px;
+
+      font-size: 0.82rem;
+      font-weight: 600;
+
+      color: var(--text-secondary);
+    }
+
+    .assign-title {
+      font-family: var(--font-heading);
+
+      font-size: 2.25rem;
+      font-weight: 700;
+
+      margin-bottom: 18px;
+
+      letter-spacing: -0.5px;
+    }
+
+    .meta-tags {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .meta-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+
+      background-color: var(--brand-black);
+      color: var(--white);
+
+      padding: 6px 14px;
+
+      border-radius: 20px;
+
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .meta-tag.status-tag {
+      background-color: var(--bg-tertiary);
+      color: var(--text-primary);
+
+      border: 1px solid var(--border-color);
+    }
+
+    /* =========================
+       MAIN
+    ========================= */
+
+    .portal-container {
+      max-width: 800px;
+
+      margin: -20px auto 60px;
+
+      padding: 0 24px;
+
+      position: relative;
+      z-index: 10;
+    }
+
+    .panel {
+      background: var(--bg-primary);
+
+      border: 1px solid var(--border-color);
+
+      border-radius: 12px;
+
+      padding: 32px;
+
+      margin-bottom: 24px;
+
+      box-shadow:
+        0 4px 6px -1px rgba(0, 0, 0, 0.05),
+        0 2px 4px -2px rgba(0, 0, 0, 0.02);
+    }
+
+    .panel-title {
+      font-family: var(--font-heading);
+
+      font-size: 1.15rem;
+      font-weight: 600;
+
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+
+      border-bottom: 1px solid var(--bg-tertiary);
+    }
+
+    .instructions-content {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+
+      overflow-wrap: anywhere;
+    }
+
+    .instructions-content img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* =========================
+       STATUS
+    ========================= */
+
+    .status-box {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+
+      padding: 16px;
+
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+
+      margin-bottom: 20px;
+    }
+
+    .status-box.success {
+      background: var(--success-bg);
+      border-color: var(--success-border);
+      color: var(--success-text);
+    }
+
+    .status-box.warning {
+      background: var(--warning-bg);
+      border-color: var(--warning-border);
+      color: var(--warning-text);
+    }
+
+    .status-box.danger {
+      background: var(--danger-bg);
+      border-color: var(--danger-border);
+      color: var(--danger-text);
+    }
+
+    .status-icon {
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .status-content {
+      flex: 1;
+    }
+
+    .status-title {
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .status-description {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    /* =========================
+       UPLOAD
+    ========================= */
+
+    .upload-zone {
+      border: 2px dashed var(--border-color);
+
+      border-radius: 8px;
+
+      padding: 40px 20px;
+
+      text-align: center;
+
+      background-color: var(--bg-secondary);
+
+      cursor: pointer;
+
+      transition:
+        border-color 0.2s,
+        background-color 0.2s,
+        transform 0.2s;
+
+      margin-bottom: 20px;
+    }
+
+    .upload-zone:hover,
+    .upload-zone.dragover {
+      border-color: var(--brand-black);
+      background-color: var(--bg-tertiary);
+    }
+
+    .upload-zone.dragover {
+      transform: scale(1.01);
+    }
+
+    .upload-icon {
+      margin: 0 auto 12px;
+
+      color: var(--brand-black);
+    }
+
+    .upload-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .upload-description {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    #file-input {
+      display: none;
+    }
+
+    /* =========================
+       SELECTED FILE
+    ========================= */
+
+    .selected-file {
+      display: none;
+
+      align-items: center;
+      gap: 12px;
+
+      padding: 14px;
+
+      background-color: var(--bg-tertiary);
+
+      border: 1px solid var(--border-color);
+
+      border-radius: 8px;
+
+      margin-bottom: 20px;
+    }
+
+    .selected-file.visible {
+      display: flex;
+    }
+
+    .file-icon {
+      width: 42px;
+      height: 42px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: var(--brand-black);
+      color: var(--white);
+
+      border-radius: 7px;
+
+      flex-shrink: 0;
+    }
+
+    .file-info {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .file-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .file-size {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+    }
+
+    .remove-file {
+      border: none;
+      background: transparent;
+
+      cursor: pointer;
+
+      color: var(--text-secondary);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 6px;
+    }
+
+    .remove-file:hover {
+      color: var(--brand-black);
+    }
+
+    /* =========================
+       BUTTON
+    ========================= */
+
+    .submit-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+
+      width: 100%;
+
+      padding: 16px;
+
+      background-color: var(--brand-black);
+      color: var(--white);
+
+      border: none;
+      border-radius: 8px;
+
+      font-family: var(--font-heading);
+
+      font-weight: 600;
+      font-size: 1rem;
+
+      cursor: pointer;
+
+      transition:
+        transform 0.1s,
+        opacity 0.2s;
+    }
+
+    .submit-btn:hover:not(:disabled) {
+      opacity: 0.9;
+    }
+
+    .submit-btn:active:not(:disabled) {
+      transform: scale(0.99);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    /* =========================
+       PROGRESS
+    ========================= */
+
+    .upload-progress {
+      display: none;
+
+      margin-top: 18px;
+    }
+
+    .upload-progress.visible {
+      display: block;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+
+      font-size: 0.82rem;
+
+      margin-bottom: 7px;
+
+      color: var(--text-secondary);
+    }
+
+    .progress-track {
+      height: 6px;
+
+      background: var(--bg-tertiary);
+
+      border-radius: 10px;
+
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+
+      width: 0%;
+
+      background: var(--brand-black);
+
+      transition: width 0.2s ease;
+    }
+
+    /* =========================
+       EXISTING SUBMISSION
+    ========================= */
+
+    .submission-details {
+      display: none;
+    }
+
+    .submission-details.visible {
+      display: block;
+    }
+
+    .submission-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      padding: 12px 0;
+
+      border-bottom: 1px solid var(--bg-tertiary);
+    }
+
+    .submission-row:last-child {
+      border-bottom: none;
+    }
+
+    .submission-label {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .submission-value {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-align: right;
+    }
+
+    /* =========================
+       MESSAGE
+    ========================= */
+
+    .message {
+      display: none;
+
+      padding: 14px 16px;
+
+      border-radius: 8px;
+
+      margin-bottom: 20px;
+
+      font-size: 0.88rem;
+    }
+
+    .message.visible {
+      display: block;
+    }
+
+    .message.success {
+      background: var(--success-bg);
+      color: var(--success-text);
+      border: 1px solid var(--success-border);
+    }
+
+    .message.error {
+      background: var(--danger-bg);
+      color: var(--danger-text);
+      border: 1px solid var(--danger-border);
+    }
+
+    /* =========================
+       LOADING
+    ========================= */
+
+    .loading {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    .spinner {
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
       }
     }
 
-    const dropZone = document.getElementById('drop-zone');
-    const fileInput = document.getElementById('file-input');
-    dropZone.addEventListener('click', () => fileInput.click());
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 600px) {
+
+      .nav-container {
+        padding: 0 16px;
+      }
+
+      .portal-label {
+        font-size: 0.9rem;
+      }
+
+      .hero {
+        padding: 55px 18px 35px;
+      }
+
+      .assign-title {
+        font-size: 1.8rem;
+      }
+
+      .portal-container {
+        padding: 0 16px;
+      }
+
+      .panel {
+        padding: 22px;
+      }
+
+      .upload-zone {
+        padding: 32px 15px;
+      }
+
+      .submission-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+
+      .submission-value {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       HEADER
+  ========================= -->
+
+  <header>
+    <div class="nav-container">
+
+      <div
+        class="back-link"
+        onclick="history.back()"
+      >
+        <i
+          data-lucide="arrow-left"
+          style="width: 18px; height: 18px;"
+        ></i>
+
+        Back to Course
+      </div>
+
+      <div class="portal-label">
+        SUBMISSION PORTAL
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- =========================
+       HERO
+  ========================= -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <div class="course-label" id="course-label">
+        <i
+          data-lucide="book-open"
+          style="width: 15px; height: 15px;"
+        ></i>
+
+        Loading course...
+      </div>
+
+      <h1
+        class="assign-title"
+        id="assign-title"
+      >
+        Loading Assignment...
+      </h1>
+
+      <div
+        class="meta-tags"
+        id="assign-meta"
+      >
+
+        <div class="meta-tag">
+          <i
+            data-lucide="loader-2"
+            class="spinner"
+            style="width: 14px; height: 14px;"
+          ></i>
+
+          Fetching data...
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       MAIN
+  ========================= -->
+
+  <main
+    class="portal-container"
+    id="main-container"
+  >
+
+    <!-- STATUS MESSAGE -->
+
+    <div
+      id="message"
+      class="message"
+    ></div>
+
+
+    <!-- INSTRUCTIONS -->
+
+    <section class="panel">
+
+      <h2 class="panel-title">
+        Instructions
+      </h2>
+
+      <div
+        class="instructions-content"
+        id="assign-instructions"
+      >
+        Please wait while assignment instructions load...
+      </div>
+
+    </section>
+
+
+    <!-- CURRENT SUBMISSION -->
+
+    <section
+      class="panel"
+      id="current-submission-panel"
+    >
+
+      <h2 class="panel-title">
+        Submission Status
+      </h2>
+
+      <div
+        class="status-box warning"
+        id="status-box"
+      >
+
+        <i
+          data-lucide="clock"
+          class="status-icon"
+          style="width: 20px; height: 20px;"
+        ></i>
+
+        <div class="status-content">
+
+          <div
+            class="status-title"
+            id="status-title"
+          >
+            Checking submission status...
+          </div>
+
+          <div
+            class="status-description"
+            id="status-description"
+          >
+            Connecting to Moodle.
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="submission-details"
+        id="submission-details"
+      >
+
+        <div class="submission-row">
+
+          <span class="submission-label">
+            Submitted
+          </span>
+
+          <span
+            class="submission-value"
+            id="submission-date"
+          >
+            —
+          </span>
+
+        </div>
+
+        <div class="submission-row">
+
+          <span class="submission-label">
+            Attempt
+          </span>
+
+          <span
+            class="submission-value"
+            id="submission-attempt"
+          >
+            —
+          </span>
+
+        </div>
+
+        <div class="submission-row">
+
+          <span class="submission-label">
+            Grade
+          </span>
+
+          <span
+            class="submission-value"
+            id="submission-grade"
+          >
+            Not graded
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- UPLOAD -->
+
+    <section
+      class="panel"
+      id="upload-panel"
+    >
+
+      <h2 class="panel-title">
+        Upload Submission
+      </h2>
+
+      <div
+        class="upload-zone"
+        id="drop-zone"
+      >
+
+        <i
+          data-lucide="cloud-upload"
+          class="upload-icon"
+          style="width: 40px; height: 40px;"
+        ></i>
+
+        <div class="upload-title">
+          Click to browse or drag a file here
+        </div>
+
+        <div class="upload-description">
+          PDF, ZIP, DOCX, CPP, PY and other Moodle-supported formats
+        </div>
+
+        <div
+          class="upload-description"
+          style="margin-top: 5px;"
+        >
+          Maximum file size: 50 MB
+        </div>
+
+      </div>
+
+      <input
+        type="file"
+        id="file-input"
+      >
+
+
+      <!-- SELECTED FILE -->
+
+      <div
+        class="selected-file"
+        id="selected-file"
+      >
+
+        <div class="file-icon">
+
+          <i
+            data-lucide="file"
+            style="width: 20px; height: 20px;"
+          ></i>
+
+        </div>
+
+        <div class="file-info">
+
+          <div
+            class="file-name"
+            id="file-name"
+          >
+            —
+          </div>
+
+          <div
+            class="file-size"
+            id="file-size"
+          >
+            —
+          </div>
+
+        </div>
+
+        <button
+          class="remove-file"
+          id="remove-file"
+          type="button"
+          aria-label="Remove file"
+        >
+
+          <i
+            data-lucide="x"
+            style="width: 18px; height: 18px;"
+          ></i>
+
+        </button>
+
+      </div>
+
+
+      <!-- SUBMIT -->
+
+      <button
+        class="submit-btn"
+        id="submit-btn"
+        type="button"
+        disabled
+      >
+
+        <i
+          data-lucide="upload-cloud"
+          style="width: 18px; height: 18px;"
+        ></i>
+
+        Submit Assignment
+
+      </button>
+
+
+      <!-- PROGRESS -->
+
+      <div
+        class="upload-progress"
+        id="upload-progress"
+      >
+
+        <div class="progress-header">
+
+          <span id="progress-label">
+            Uploading...
+          </span>
+
+          <span id="progress-percent">
+            0%
+          </span>
+
+        </div>
+
+        <div class="progress-track">
+
+          <div
+            class="progress-bar"
+            id="progress-bar"
+          ></div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <script>
+
+    /* ==========================================================
+       CONFIGURATION
+    ========================================================== */
+
+    const MOODLE_URL = 'http://localhost:8000';
+
+    const MAX_FILE_SIZE = 50 * 1024 * 1024;
+
+
+    /* ==========================================================
+       AUTHENTICATION
+    ========================================================== */
+
+    const userToken =
+      localStorage.getItem('madar_user_token');
+
+
+    if (!userToken) {
+      window.location.href = 'login.html';
+    }
+
+
+    /* ==========================================================
+       URL PARAMETERS
+    ========================================================== */
+
+    const urlParams =
+      new URLSearchParams(window.location.search);
+
+    const assignId =
+      urlParams.get('assignid');
+
+    const courseId =
+      urlParams.get('courseid');
+
+
+    if (!assignId || !courseId) {
+
+      window.location.href = 'index.html';
+
+    }
+
+
+    /* ==========================================================
+       DOM
+    ========================================================== */
+
+    const assignTitle =
+      document.getElementById('assign-title');
+
+    const courseLabel =
+      document.getElementById('course-label');
+
+    const assignMeta =
+      document.getElementById('assign-meta');
+
+    const instructions =
+      document.getElementById('assign-instructions');
+
+    const statusBox =
+      document.getElementById('status-box');
+
+    const statusTitle =
+      document.getElementById('status-title');
+
+    const statusDescription =
+      document.getElementById('status-description');
+
+    const submissionDetails =
+      document.getElementById('submission-details');
+
+    const submissionDate =
+      document.getElementById('submission-date');
+
+    const submissionAttempt =
+      document.getElementById('submission-attempt');
+
+    const submissionGrade =
+      document.getElementById('submission-grade');
+
+    const dropZone =
+      document.getElementById('drop-zone');
+
+    const fileInput =
+      document.getElementById('file-input');
+
+    const selectedFile =
+      document.getElementById('selected-file');
+
+    const fileName =
+      document.getElementById('file-name');
+
+    const fileSize =
+      document.getElementById('file-size');
+
+    const removeFile =
+      document.getElementById('remove-file');
+
+    const submitBtn =
+      document.getElementById('submit-btn');
+
+    const uploadProgress =
+      document.getElementById('upload-progress');
+
+    const progressBar =
+      document.getElementById('progress-bar');
+
+    const progressPercent =
+      document.getElementById('progress-percent');
+
+    const progressLabel =
+      document.getElementById('progress-label');
+
+    const message =
+      document.getElementById('message');
+
+
+    /* ==========================================================
+       LUCIDE
+    ========================================================== */
+
+    lucide.createIcons();
+
+
+    /* ==========================================================
+       MOODLE REQUEST
+    ========================================================== */
+
+    async function moodleRequest(
+      wsfunction,
+      params = {}
+    ) {
+
+      const body =
+        new URLSearchParams();
+
+      body.append(
+        'wstoken',
+        userToken
+      );
+
+      body.append(
+        'wsfunction',
+        wsfunction
+      );
+
+      body.append(
+        'moodlewsrestformat',
+        'json'
+      );
+
+
+      Object.entries(params).forEach(
+        ([key, value]) => {
+
+          if (
+            value !== undefined &&
+            value !== null
+          ) {
+
+            body.append(
+              key,
+              value
+            );
+
+          }
+
+        }
+      );
+
+
+      const response =
+        await fetch(
+          `${MOODLE_URL}/webservice/rest/server.php`,
+          {
+            method: 'POST',
+
+            headers: {
+              'Content-Type':
+                'application/x-www-form-urlencoded'
+            },
+
+            body
+          }
+        );
+
+
+      if (!response.ok) {
+
+        throw new Error(
+          `Moodle returned HTTP ${response.status}`
+        );
+
+      }
+
+
+      const data =
+        await response.json();
+
+
+      if (data.exception) {
+
+        throw new Error(
+          data.message ||
+          'Moodle API error'
+        );
+
+      }
+
+
+      return data;
+
+    }
+
+
+    /* ==========================================================
+       MESSAGE
+    ========================================================== */
+
+    function showMessage(
+      text,
+      type = 'error'
+    ) {
+
+      message.textContent = text;
+
+      message.className =
+        `message visible ${type}`;
+
+    }
+
+
+    function hideMessage() {
+
+      message.className =
+        'message';
+
+      message.textContent = '';
+
+    }
+
+
+    /* ==========================================================
+       FORMAT HELPERS
+    ========================================================== */
+
+    function formatDate(timestamp) {
+
+      if (
+        !timestamp ||
+        Number(timestamp) <= 0
+      ) {
+
+        return 'No deadline';
+
+      }
+
+
+      return new Date(
+        Number(timestamp) * 1000
+      ).toLocaleString(
+        'en-US',
+        {
+          weekday: 'short',
+          month: 'short',
+          day: 'numeric',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        }
+      );
+
+    }
+
+
+    function formatFileSize(bytes) {
+
+      if (!bytes) {
+        return '0 B';
+      }
+
+
+      const units =
+        ['B', 'KB', 'MB', 'GB'];
+
+      const index =
+        Math.floor(
+          Math.log(bytes) /
+          Math.log(1024)
+        );
+
+
+      return `${(
+        bytes /
+        Math.pow(1024, index)
+      ).toFixed(index === 0 ? 0 : 2)} ${units[index]}`;
+
+    }
+
+
+    function formatSubmissionStatus(status) {
+
+      switch (status) {
+
+        case 'submitted':
+          return 'Submitted';
+
+        case 'draft':
+          return 'Draft';
+
+        case 'reopened':
+          return 'Reopened';
+
+        case 'new':
+          return 'Not submitted';
+
+        default:
+          return status || 'Not submitted';
+
+      }
+
+    }
+
+
+    /* ==========================================================
+       LOAD ASSIGNMENT
+    ========================================================== */
+
+    async function loadAssignment() {
+
+      try {
+
+        const data =
+          await moodleRequest(
+            'mod_assign_get_assignments',
+            {
+              'courseids[0]': courseId
+            }
+          );
+
+
+        if (
+          !data.courses ||
+          !Array.isArray(data.courses)
+        ) {
+
+          throw new Error(
+            'Moodle did not return course data.'
+          );
+
+        }
+
+
+        /*
+         * IMPORTANT:
+         * Do not assume courses[0] is the
+         * requested course.
+         */
+
+        const course =
+          data.courses.find(
+            course =>
+              Number(course.id) ===
+              Number(courseId)
+          );
+
+
+        if (!course) {
+
+          throw new Error(
+            'You are not enrolled in this course.'
+          );
+
+        }
+
+
+        const assignment =
+          course.assignments?.find(
+            assignment =>
+              Number(assignment.id) ===
+              Number(assignId)
+          );
+
+
+        if (!assignment) {
+
+          throw new Error(
+            'Assignment was not found.'
+          );
+
+        }
+
+
+        window.currentAssignment =
+          assignment;
+
+
+        /* COURSE */
+
+        courseLabel.innerHTML = `
+          <i
+            data-lucide="book-open"
+            style="width:15px;height:15px;"
+          ></i>
+
+          ${escapeHtml(course.fullname || 'Course')}
+        `;
+
+
+        /* TITLE */
+
+        assignTitle.textContent =
+          assignment.name;
+
+
+        /* INSTRUCTIONS */
+
+        instructions.innerHTML =
+          assignment.intro ||
+          'No specific instructions were provided.';
+
+
+        /* META */
+
+        const dueText =
+          assignment.duedate &&
+          Number(assignment.duedate) > 0
+            ? formatDate(assignment.duedate)
+            : 'No deadline';
+
+
+        assignMeta.innerHTML = `
+
+          <div class="meta-tag">
+
+            <i
+              data-lucide="calendar"
+              style="width:14px;height:14px;"
+            ></i>
+
+            Due: ${escapeHtml(dueText)}
+
+          </div>
+
+          <div
+            class="meta-tag status-tag"
+            id="deadline-status"
+          >
+
+            <i
+              data-lucide="clock"
+              style="width:14px;height:14px;"
+            ></i>
+
+            Checking status...
+
+          </div>
+
+        `;
+
+
+        lucide.createIcons();
+
+
+        updateDeadlineStatus(
+          assignment
+        );
+
+
+        /*
+         * Load submission after the
+         * assignment itself is available.
+         */
+
+        await loadSubmissionStatus();
+
+      }
+
+      catch (error) {
+
+        console.error(
+          'Assignment loading error:',
+          error
+        );
+
+
+        assignTitle.textContent =
+          'Error Loading Assignment';
+
+
+        courseLabel.textContent =
+          'Moodle connection error';
+
+
+        instructions.textContent =
+          error.message;
+
+
+        showMessage(
+          error.message,
+          'error'
+        );
+
+      }
+
+    }
+
+
+    /* ==========================================================
+       DEADLINE
+    ========================================================== */
+
+    function updateDeadlineStatus(
+      assignment
+    ) {
+
+      const element =
+        document.getElementById(
+          'deadline-status'
+        );
+
+
+      if (!element) {
+        return;
+      }
+
+
+      if (
+        !assignment.duedate ||
+        Number(assignment.duedate) <= 0
+      ) {
+
+        element.innerHTML = `
+          <i
+            data-lucide="infinity"
+            style="width:14px;height:14px;"
+          ></i>
+
+          No deadline
+        `;
+
+        lucide.createIcons();
+
+        return;
+
+      }
+
+
+      const due =
+        Number(assignment.duedate) * 1000;
+
+      const now =
+        Date.now();
+
+
+      if (now > due) {
+
+        element.innerHTML = `
+          <i
+            data-lucide="alert-circle"
+            style="width:14px;height:14px;"
+          ></i>
+
+          Deadline passed
+        `;
+
+      }
+      else {
+
+        element.innerHTML = `
+          <i
+            data-lucide="clock"
+            style="width:14px;height:14px;"
+          ></i>
+
+          Submission open
+        `;
+
+      }
+
+
+      lucide.createIcons();
+
+    }
+
+
+    /* ==========================================================
+       LOAD SUBMISSION STATUS
+    ========================================================== */
+
+    async function loadSubmissionStatus() {
+
+      try {
+
+        const data =
+          await moodleRequest(
+            'mod_assign_get_submission_status',
+            {
+              assignid: assignId
+            }
+          );
+
+
+        console.log(
+          'Submission status:',
+          data
+        );
+
+
+        renderSubmissionStatus(
+          data
+        );
+
+      }
+
+      catch (error) {
+
+        console.warn(
+          'Could not load submission status:',
+          error
+        );
+
+
+        /*
+         * Keep the upload interface available.
+         * Some Moodle configurations may not
+         * expose submission status to the token.
+         */
+
+        setStatus(
+          'Status unavailable',
+          'Moodle did not provide submission status. You can still attempt a submission.',
+          'warning',
+          'help-circle'
+        );
+
+      }
+
+    }
+
+
+    /* ==========================================================
+       RENDER SUBMISSION STATUS
+    ========================================================== */
+
+    function renderSubmissionStatus(
+      data
+    ) {
+
+      const status =
+        data.status ||
+        data.lastattempt?.status ||
+        'new';
+
+
+      const submission =
+        data.lastattempt ||
+        data.submission ||
+        null;
+
+
+      switch (status) {
+
+        case 'submitted':
+
+          setStatus(
+            'Submitted',
+            'Your assignment has been submitted to Moodle.',
+            'success',
+            'check-circle'
+          );
+
+          break;
+
+
+        case 'draft':
+
+          setStatus(
+            'Draft',
+            'You have a saved draft submission that has not been finalized.',
+            'warning',
+            'file-edit'
+          );
+
+          break;
+
+
+        case 'reopened':
+
+          setStatus(
+            'Reopened',
+            'Your assignment has been reopened and can be submitted again.',
+            'warning',
+            'refresh-cw'
+          );
+
+          break;
+
+
+        default:
+
+          setStatus(
+            'Not submitted',
+            'No finalized submission has been detected.',
+            'warning',
+            'clock'
+          );
+
+      }
+
+
+      if (submission) {
+
+        submissionDetails.classList.add(
+          'visible'
+        );
+
+
+        submissionDate.textContent =
+          submission.timemodified
+            ? formatDate(
+                submission.timemodified
+              )
+            : '—';
+
+
+        submissionAttempt.textContent =
+          submission.attemptnumber !== undefined
+            ? Number(submission.attemptnumber) + 1
+            : '—';
+
+
+        submissionGrade.textContent =
+          submission.grade !== undefined &&
+          submission.grade !== null &&
+          Number(submission.grade) >= 0
+            ? submission.grade
+            : 'Not graded';
+
+      }
+
+    }
+
+
+    /* ==========================================================
+       STATUS UI
+    ========================================================== */
+
+    function setStatus(
+      title,
+      description,
+      type,
+      icon
+    ) {
+
+      statusBox.className =
+        `status-box ${type}`;
+
+
+      statusBox.innerHTML = `
+
+        <i
+          data-lucide="${icon}"
+          class="status-icon"
+          style="width:20px;height:20px;"
+        ></i>
+
+        <div class="status-content">
+
+          <div class="status-title">
+            ${escapeHtml(title)}
+          </div>
+
+          <div class="status-description">
+            ${escapeHtml(description)}
+          </div>
+
+        </div>
+
+      `;
+
+
+      lucide.createIcons();
+
+    }
+
+
+    /* ==========================================================
+       FILE SELECTION
+    ========================================================== */
+
+    dropZone.addEventListener(
+      'click',
+      () => fileInput.click()
+    );
+
+
+    fileInput.addEventListener(
+      'change',
+      event => {
+
+        const file =
+          event.target.files?.[0];
+
+
+        if (file) {
+
+          handleFile(file);
+
+        }
+
+      }
+    );
+
+
+    /* ==========================================================
+       DRAG & DROP
+    ========================================================== */
+
+    [
+      'dragenter',
+      'dragover'
+    ].forEach(
+      eventName => {
+
+        dropZone.addEventListener(
+          eventName,
+          event => {
+
+            event.preventDefault();
+
+            dropZone.classList.add(
+              'dragover'
+            );
+
+          }
+        );
+
+      }
+    );
+
+
+    [
+      'dragleave',
+      'drop'
+    ].forEach(
+      eventName => {
+
+        dropZone.addEventListener(
+          eventName,
+          event => {
+
+            event.preventDefault();
+
+            dropZone.classList.remove(
+              'dragover'
+            );
+
+          }
+        );
+
+      }
+    );
+
+
+    dropZone.addEventListener(
+      'drop',
+      event => {
+
+        const file =
+          event.dataTransfer.files?.[0];
+
+
+        if (file) {
+
+          handleFile(file);
+
+        }
+
+      }
+    );
+
+
+    /* ==========================================================
+       HANDLE FILE
+    ========================================================== */
+
+    function handleFile(file) {
+
+      hideMessage();
+
+
+      /*
+       * File size validation.
+       */
+
+      if (
+        file.size >
+        MAX_FILE_SIZE
+      ) {
+
+        showMessage(
+          `File is too large. Maximum allowed size is 50 MB.`,
+          'error'
+        );
+
+        clearSelectedFile();
+
+        return;
+
+      }
+
+
+      /*
+       * Empty file validation.
+       */
+
+      if (file.size === 0) {
+
+        showMessage(
+          'The selected file is empty.',
+          'error'
+        );
+
+        clearSelectedFile();
+
+        return;
+
+      }
+
+
+      /*
+       * Keep the file in a DataTransfer object
+       * so the normal input still contains it.
+       */
+
+      const transfer =
+        new DataTransfer();
+
+      transfer.items.add(file);
+
+      fileInput.files =
+        transfer.files;
+
+
+      fileName.textContent =
+        file.name;
+
+
+      fileSize.textContent =
+        formatFileSize(
+          file.size
+        );
+
+
+      selectedFile.classList.add(
+        'visible'
+      );
+
+
+      submitBtn.disabled =
+        false;
+
+
+      lucide.createIcons();
+
+    }
+
+
+    /* ==========================================================
+       REMOVE FILE
+    ========================================================== */
+
+    removeFile.addEventListener(
+      'click',
+      event => {
+
+        event.stopPropagation();
+
+        clearSelectedFile();
+
+      }
+    );
+
+
+    function clearSelectedFile() {
+
+      fileInput.value = '';
+
+      selectedFile.classList.remove(
+        'visible'
+      );
+
+      submitBtn.disabled =
+        true;
+
+    }
+
+
+    /* ==========================================================
+       UPLOAD FILE TO MOODLE DRAFT AREA
+    ========================================================== */
+
+    async function uploadFileToDraft(
+      file
+    ) {
+
+      return new Promise(
+        (resolve, reject) => {
+
+          const xhr =
+            new XMLHttpRequest();
+
+
+          const uploadUrl =
+            `${MOODLE_URL}/webservice/upload.php?token=${encodeURIComponent(userToken)}`;
+
+
+          xhr.open(
+            'POST',
+            uploadUrl,
+            true
+          );
+
+
+          xhr.upload.addEventListener(
+            'progress',
+            event => {
+
+              if (!event.lengthComputable) {
+                return;
+              }
+
+
+              const percent =
+                Math.round(
+                  (event.loaded /
+                    event.total) *
+                  100
+                );
+
+
+              progressBar.style.width =
+                `${percent}%`;
+
+              progressPercent.textContent =
+                `${percent}%`;
+
+            }
+          );
+
+
+          xhr.addEventListener(
+            'load',
+            () => {
+
+              if (
+                xhr.status < 200 ||
+                xhr.status >= 300
+              ) {
+
+                reject(
+                  new Error(
+                    `Upload failed with HTTP ${xhr.status}.`
+                  )
+                );
+
+                return;
+
+              }
+
+
+              try {
+
+                const data =
+                  JSON.parse(
+                    xhr.responseText
+                  );
+
+
+                if (
+                  !Array.isArray(data) ||
+                  !data[0]
+                ) {
+
+                  throw new Error(
+                    'Moodle returned an invalid upload response.'
+                  );
+
+                }
+
+
+                if (data[0].error) {
+
+                  throw new Error(
+                    data[0].error
+                  );
+
+                }
+
+
+                resolve(data[0]);
+
+              }
+
+              catch (error) {
+
+                reject(error);
+
+              }
+
+            }
+          );
+
+
+          xhr.addEventListener(
+            'error',
+            () => {
+
+              reject(
+                new Error(
+                  'Network error while uploading the file.'
+                )
+              );
+
+            }
+          );
+
+
+          const formData =
+            new FormData();
+
+
+          /*
+           * Moodle's upload endpoint expects
+           * the uploaded file as multipart/form-data.
+           */
+
+          formData.append(
+            'file',
+            file,
+            file.name
+          );
+
+
+          xhr.send(
+            formData
+          );
+
+        }
+      );
+
+    }
+
+
+    /* ==========================================================
+       SAVE ASSIGNMENT SUBMISSION
+    ========================================================== */
+
+    async function saveSubmission(draftItemId) {
+
+  const data = await moodleRequest(
+    'mod_assign_save_submission',
+    {
+      assignmentid: assignId,
+
+      'plugindata[files_filemanager]': draftItemId
+    }
+  );
+
+  return data;
+}
+
+
+    /* ==========================================================
+       SUBMIT ASSIGNMENT
+    ========================================================== */
+
+    submitBtn.addEventListener(
+      'click',
+      submitAssignment
+    );
+
+
+    async function submitAssignment() {
+
+      const file =
+        fileInput.files?.[0];
+
+
+      if (!file) {
+
+        showMessage(
+          'Please select a file first.',
+          'error'
+        );
+
+        return;
+
+      }
+
+
+      if (!window.currentAssignment) {
+
+        showMessage(
+          'Assignment information has not finished loading.',
+          'error'
+        );
+
+        return;
+
+      }
+
+
+      hideMessage();
+
+
+      submitBtn.disabled =
+        true;
+
+      dropZone.classList.add(
+        'loading'
+      );
+
+      uploadProgress.classList.add(
+        'visible'
+      );
+
+
+      progressLabel.textContent =
+        'Uploading file...';
+
+      progressBar.style.width =
+        '0%';
+
+      progressPercent.textContent =
+        '0%';
+
+
+      try {
+
+        /*
+         * STEP 1
+         * Upload file into Moodle draft storage.
+         */
+
+        const uploaded =
+          await uploadFileToDraft(
+            file
+          );
+
+
+        console.log(
+          'Moodle upload response:',
+          uploaded
+        );
+
+
+        if (!uploaded.itemid) {
+
+          throw new Error(
+            'Moodle did not return a draft item ID.'
+          );
+
+        }
+
+
+        progressLabel.textContent =
+          'Saving submission...';
+
+
+        progressBar.style.width =
+          '100%';
+
+        progressPercent.textContent =
+          '100%';
+
+
+        /*
+         * STEP 2
+         * Save the draft submission.
+         */
+
+        await saveSubmission(
+          uploaded.itemid
+        );
+
+
+        progressLabel.textContent =
+          'Submission saved.';
+
+
+        /*
+         * STEP 3
+         * Reload status.
+         */
+
+        await loadSubmissionStatus();
+
+
+        showMessage(
+          'Your submission has been uploaded successfully.',
+          'success'
+        );
+
+
+        clearSelectedFile();
+
+
+      }
+
+      catch (error) {
+
+        console.error(
+          'Submission error:',
+          error
+        );
+
+
+        showMessage(
+          `Submission failed: ${error.message}`,
+          'error'
+        );
+
+      }
+
+      finally {
+
+        submitBtn.disabled =
+          true;
+
+        dropZone.classList.remove(
+          'loading'
+        );
+
+
+        setTimeout(
+          () => {
+
+            uploadProgress.classList.remove(
+              'visible'
+            );
+
+            progressBar.style.width =
+              '0%';
+
+          },
+          1500
+        );
+
+      }
+
+    }
+
+
+    /* ==========================================================
+       HTML ESCAPING
+    ========================================================== */
+
+    function escapeHtml(value) {
+
+      return String(value ?? '')
+        .replace(
+          /&/g,
+          '&amp;'
+        )
+        .replace(
+          /</g,
+          '&lt;'
+        )
+        .replace(
+          />/g,
+          '&gt;'
+        )
+        .replace(
+          /"/g,
+          '&quot;'
+        )
+        .replace(
+          /'/g,
+          '&#039;'
+        );
+
+    }
+
+
+    /* ==========================================================
+       INITIALIZE
+    ========================================================== */
 
     loadAssignment();
+
   </script>
+
 </body>
 </html>
