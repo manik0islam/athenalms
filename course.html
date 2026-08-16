@@ -31,7 +31,7 @@
     /* HEADER */
     header { background-color: var(--bg-primary); border-bottom: 1px solid var(--border-color); position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
     .nav-container { max-width: 1000px; margin: 0 auto; padding: 0 24px; height: 70px; display: flex; justify-content: space-between; align-items: center; }
-    .back-link { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.95rem; transition: opacity 0.2s; }
+    .back-link { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.95rem; transition: opacity 0.2s; cursor: pointer; }
     .back-link:hover { opacity: 0.7; }
     
     /* HERO */
@@ -50,8 +50,8 @@
     .module-item:hover { background-color: var(--bg-secondary); }
     
     .module-icon { width: 40px; height: 40px; background-color: var(--bg-tertiary); border-radius: 4px; display: flex; align-items: center; justify-content: center; }
-    .module-details h4 { font-size: 1rem; font-weight: 500; }
-    .module-details p { font-size: 0.85rem; color: var(--text-secondary); margin-top: 2px; }
+    .module-details h4 { font-size: 1rem; font-weight: 500; margin-bottom: 2px; }
+    .module-details p { font-size: 0.85rem; color: var(--text-secondary); }
 
     .loading-state, .error-state { padding: 40px; text-align: center; background-color: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-secondary); }
   </style>
@@ -114,7 +114,7 @@
       const titleEl = document.getElementById('course-title');
 
       try {
-        // We first need the course name (Moodle's get_contents doesn't return the course title, just the sections)
+        // We first need the course name
         const infoRes = await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=core_webservice_get_site_info&moodlewsrestformat=json`);
         const siteInfo = await infoRes.json();
         
@@ -140,23 +140,29 @@
 
           let modulesHTML = section.modules.map(mod => {
             const isAssign = mod.modname === 'assign';
+            const isForum = mod.modname === 'forum';
+            const isResource = mod.modname === 'resource';
             
-            // If it's an assignment, link to our custom portal.
-            // If it's a file/quiz, keep the external link for now.
             let hrefAttr = '';
             let linkIcon = '';
             
             if (isAssign) {
-              // We pass the assignment ID and the course ID in the URL
               hrefAttr = `href="assignment.html?assignid=${mod.instance}&courseid=${courseId}"`;
+              linkIcon = `<div style="margin-left: auto; color: var(--text-tertiary);"><i data-lucide="chevron-right" style="width: 18px; height: 18px;"></i></div>`;
+            } else if (isForum) {
+              hrefAttr = `href="forum.html?forumid=${mod.instance}&courseid=${courseId}"`;
+              linkIcon = `<div style="margin-left: auto; color: var(--text-tertiary);"><i data-lucide="chevron-right" style="width: 18px; height: 18px;"></i></div>`;
+            } else if (isResource) {
+              hrefAttr = `href="resource.html?resourceid=${mod.instance}&courseid=${courseId}"`;
               linkIcon = `<div style="margin-left: auto; color: var(--text-tertiary);"><i data-lucide="chevron-right" style="width: 18px; height: 18px;"></i></div>`;
             } else if (mod.url) {
               hrefAttr = `href="${mod.url}" target="_blank"`;
               linkIcon = `<div style="margin-left: auto; color: var(--text-tertiary);"><i data-lucide="external-link" style="width: 18px; height: 18px;"></i></div>`;
             }
 
-            const tag = (mod.url || isAssign) ? 'a' : 'div';
-            const interactiveStyle = (mod.url || isAssign) ? 'cursor: pointer; text-decoration: none; color: inherit;' : '';
+            const isInteractive = isAssign || isForum || isResource || mod.url;
+            const tag = isInteractive ? 'a' : 'div';
+            const interactiveStyle = isInteractive ? 'cursor: pointer; text-decoration: none; color: inherit;' : '';
 
             return `
               <${tag} ${hrefAttr} class="module-item" style="display: flex; ${interactiveStyle}">

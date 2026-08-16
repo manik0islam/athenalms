@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Madar LMS | File Resource</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root { --bg-primary: #ffffff; --bg-secondary: #f4f4f5; --bg-tertiary: #e4e4e7; --text-primary: #000000; --text-secondary: #52525b; --border-color: #d4d4d8; --black: #09090b; --font-heading: 'Space Grotesk', sans-serif; --font-body: 'Inter', sans-serif; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-body); background-color: var(--bg-secondary); color: var(--text-primary); }
+    header { background-color: var(--bg-primary); border-bottom: 1px solid var(--border-color); position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
+    .nav-container { max-width: 800px; margin: 0 auto; padding: 0 24px; height: 70px; display: flex; justify-content: space-between; align-items: center; }
+    .back-link { display: flex; align-items: center; gap: 8px; font-weight: 600; cursor: pointer; }
+    .portal-container { max-width: 800px; margin: 120px auto 40px; padding: 0 24px; display: flex; justify-content: center; }
+    .file-card { background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 6px; padding: 40px; text-align: center; width: 100%; max-width: 500px; }
+    .file-icon { width: 64px; height: 64px; margin: 0 auto 20px; color: var(--black); background: var(--bg-secondary); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+    .file-name { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 600; margin-bottom: 8px; word-break: break-all; }
+    .file-meta { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 30px; }
+    .download-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 14px; background-color: var(--black); color: #fff; border-radius: 4px; font-family: var(--font-heading); font-weight: 600; text-decoration: none; transition: opacity 0.2s; }
+    .download-btn:hover { opacity: 0.9; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-container">
+      <div class="back-link" onclick="history.back()"><i data-lucide="arrow-left" style="width: 20px; height: 20px;"></i> Back to Modules</div>
+      <div style="font-family: var(--font-heading); font-weight: 700; text-transform: uppercase;">Resource Viewer</div>
+    </div>
+  </header>
+  <div class="portal-container" id="main-container">
+    <div style="text-align: center; padding: 60px;">
+      <i data-lucide="loader-2" style="animation: spin 2s linear infinite; margin: 0 auto 10px; display: block;"></i> Locating file...
+    </div>
+  </div>
+  <script>
+    lucide.createIcons();
+    const MOODLE_URL = 'http://localhost:8000';
+    const userToken = localStorage.getItem('madar_user_token');
+    const urlParams = new URLSearchParams(window.location.search);
+    const resourceId = urlParams.get('resourceid');
+    const courseId = urlParams.get('courseid');
+
+    async function loadResource() {
+      const container = document.getElementById('main-container');
+      try {
+        const res = await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=mod_resource_get_resources_by_courses&courseids[0]=${courseId}&moodlewsrestformat=json`);
+        const data = await res.json();
+        
+        const fileData = data.resources.find(r => r.id == resourceId);
+        if (!fileData || !fileData.contentfiles || fileData.contentfiles.length === 0) throw new Error("File not found");
+
+        const targetFile = fileData.contentfiles[0];
+        
+        // Moodle requires the webservice token to be appended to download files headlessly
+        const downloadUrl = targetFile.fileurl + (targetFile.fileurl.includes('?') ? '&' : '?') + 'token=' + userToken;
+        
+        // Format filesize
+        const sizeKB = (targetFile.filesize / 1024).toFixed(1);
+        const sizeStr = sizeKB > 1024 ? (sizeKB / 1024).toFixed(2) + ' MB' : sizeKB + ' KB';
+
+        container.innerHTML = `
+          <div class="file-card">
+            <div class="file-icon"><i data-lucide="file-text" style="width: 32px; height: 32px;"></i></div>
+            <h2 class="file-name">${targetFile.filename}</h2>
+            <div class="file-meta">Resource Document &bull; ${sizeStr}</div>
+            <a href="${downloadUrl}" target="_blank" class="download-btn">
+              <i data-lucide="download" style="width: 18px; height: 18px;"></i> Download File
+            </a>
+          </div>
+        `;
+        lucide.createIcons();
+      } catch (e) {
+        container.innerHTML = `<div class="file-card" style="color: #dc2626;">Error: Could not locate the requested resource.</div>`;
+      }
+    }
+    loadResource();
+  </script>
+</body>
+</html>
