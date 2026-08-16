@@ -1,638 +1,5340 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>athena  | Dashboard</title>
-  
-  <!-- Fonts & Icons -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Athena LMS | Dashboard</title>
+
+  <!-- =========================================================
+       FONTS
+  ========================================================== -->
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
   <script src="https://unpkg.com/lucide@latest"></script>
 
+
+  <!-- =========================================================
+       STYLES
+  ========================================================== -->
+
   <style>
-    /* ==========================================
-       1. CORE DESIGN SYSTEM (Black & White)
-       ========================================== */
+
     :root {
-      --bg-primary: #ffffff;
-      --bg-secondary: #f4f4f5;
-      --bg-tertiary: #e4e4e7;
-      
-      --text-primary: #000000;
-      --text-secondary: #52525b;
-      --text-tertiary: #71717a;
-      
-      --border-color: #d4d4d8;
-      --black: #09090b;
+
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-2: #f1f5f9;
+      --surface-3: #e2e8f0;
+
+      --text: #09090b;
+      --muted: #52525b;
+      --muted-2: #71717a;
+
+      --border: #e2e8f0;
+      --border-dark: #cbd5e1;
+
+      --black: #000000;
       --white: #ffffff;
-      
+
+      --green-bg: #f0fdf4;
+      --green-border: #bbf7d0;
+      --green-text: #166534;
+
+      --yellow-bg: #fffbeb;
+      --yellow-border: #fde68a;
+      --yellow-text: #92400e;
+
+      --red-bg: #fef2f2;
+      --red-border: #fecaca;
+      --red-text: #991b1b;
+
       --font-heading: 'Space Grotesk', sans-serif;
       --font-body: 'Inter', sans-serif;
+
+      --radius: 12px;
+
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+
+    html {
+      scroll-behavior: smooth;
+    }
+
 
     body {
+
       font-family: var(--font-body);
-      background-color: var(--bg-secondary);
-      color: var(--text-primary);
+
+      background:
+        var(--bg);
+
+      color:
+        var(--text);
+
       line-height: 1.6;
-      overflow-x: hidden;
+
     }
 
-    a { color: var(--text-primary); text-decoration: none; }
 
-    /* ==========================================
-       2. HEADER
-       ========================================== */
-    header {
-      background-color: var(--bg-primary);
-      border-bottom: 1px solid var(--border-color);
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
+    button,
+    input,
+    select,
+    textarea {
+
+      font: inherit;
+
     }
 
-    .nav-container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 24px;
-      height: 70px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .brand-icon {
-      color: var(--black);
-      display: flex;
-    }
-
-    .brand-text {
-      font-family: var(--font-heading);
-      font-size: 1.25rem;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      text-transform: uppercase;
-    }
-
-    .user-controls {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .icon-btn {
-      background: none;
-      border: none;
-      color: var(--text-secondary);
+    button {
       cursor: pointer;
-      display: flex;
-      position: relative;
-      transition: color 0.2s;
     }
 
-    .icon-btn:hover {
-      color: var(--black);
+
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
-    .badge {
-      position: absolute;
-      top: -4px; right: -4px;
-      background-color: var(--black);
-      color: var(--white);
-      font-size: 0.65rem;
-      font-weight: bold;
-      width: 16px; height: 16px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
 
-    .user-profile {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding-left: 20px;
-      border-left: 1px solid var(--border-color);
-      transition: opacity 0.2s;
-    }
-
-    .user-profile:hover {
-      opacity: 0.7;
-    }
-
-    .avatar {
-      width: 36px; height: 36px;
-      background-color: var(--bg-tertiary);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-secondary);
-    }
-
-    /* ==========================================
-       3. HERO SECTION
-       ========================================== */
-    .hero {
-      margin-top: 70px;
-      background-color: var(--bg-primary);
-      padding: 60px 24px;
-      border-bottom: 1px solid var(--border-color);
-      position: relative;
-      background-image: 
-        linear-gradient(var(--bg-secondary) 1px, transparent 1px),
-        linear-gradient(90deg, var(--bg-secondary) 1px, transparent 1px);
-      background-size: 30px 30px;
-    }
-
-    .hero-content {
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .hero-title {
-      font-family: var(--font-heading);
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .hero-subtitle {
-      color: var(--text-secondary);
-      font-size: 1.1rem;
-    }
-
-    /* ==========================================
-       4. DASHBOARD LAYOUT
-       ========================================== */
-    .dashboard-container {
-      max-width: 1400px;
-      margin: 40px auto;
-      padding: 0 24px;
-      display: grid;
-      grid-template-columns: 1fr 350px;
-      gap: 32px;
-    }
-
-    .section-title {
-      font-family: var(--font-heading);
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 20px;
-    }
-
-    .course-filters {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-
-    .filter-btn {
-      background-color: var(--bg-primary);
-      border: 1px solid var(--border-color);
-      padding: 8px 16px;
-      border-radius: 4px;
-      font-size: 0.9rem;
-      cursor: pointer;
-      color: var(--text-secondary);
-    }
-    
-    .filter-btn.active {
-      background-color: var(--black);
-      color: var(--white);
-      border-color: var(--black);
-    }
-
-    .course-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 24px;
-    }
-
-    .course-card {
-      background-color: var(--bg-primary);
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      overflow: hidden;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-
-    .course-card:hover {
-      border-color: var(--black);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    }
-
-    .course-img-placeholder {
-      height: 120px;
-      background-color: var(--bg-secondary);
-      border-bottom: 1px solid var(--border-color);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-tertiary);
-      background-image: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 10px,
-        rgba(0,0,0,0.03) 10px,
-        rgba(0,0,0,0.03) 11px
-      );
-    }
-
-    .course-content {
-      padding: 20px;
-    }
-
-    .course-category {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      font-weight: 600;
-      color: var(--text-secondary);
-      margin-bottom: 8px;
+    img {
+      max-width: 100%;
       display: block;
     }
 
-    .course-title {
-      font-family: var(--font-heading);
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 12px;
-      line-height: 1.3;
+
+    /* =========================================================
+       HEADER
+    ========================================================== */
+
+    header {
+
+      position: fixed;
+
+      top: 0;
+      left: 0;
+      right: 0;
+
+      z-index: 100;
+
+      height: 70px;
+
+      background:
+        rgba(255,255,255,0.94);
+
+      border-bottom:
+        1px solid var(--border);
+
+      backdrop-filter:
+        blur(10px);
+
     }
 
-    .progress-container { margin-top: 20px; }
 
-    .progress-text {
+    .nav {
+
+      max-width: 1280px;
+
+      height: 70px;
+
+      margin: 0 auto;
+
+      padding:
+        0 24px;
+
       display: flex;
-      justify-content: space-between;
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-      margin-bottom: 6px;
-    }
 
-    .progress-bar {
-      height: 6px;
-      background-color: var(--bg-tertiary);
-      border-radius: 3px;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      height: 100%;
-      background-color: var(--black);
-      border-radius: 3px;
-    }
-
-    /* ==========================================
-       5. SIDEBAR BLOCKS
-       ========================================== */
-    .sidebar { display: flex; flex-direction: column; gap: 24px; }
-
-    .moodle-block {
-      background-color: var(--bg-primary);
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      padding: 20px;
-    }
-
-    .block-title {
-      font-family: var(--font-heading);
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 16px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border-color);
-      display: flex;
       align-items: center;
-      gap: 8px;
+
+      justify-content: space-between;
+
+      gap: 20px;
+
     }
 
-    .timeline-list, .announcement-list { list-style: none; }
-    .timeline-item { display: flex; gap: 12px; margin-bottom: 16px; }
-    .timeline-item:last-child { margin-bottom: 0; }
 
-    .date-box {
-      min-width: 45px;
-      text-align: center;
-      background-color: var(--bg-secondary);
-      border: 1px solid var(--border-color);
-      border-radius: 4px;
-      padding: 4px;
+    .brand {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
     }
 
-    .date-month { font-size: 0.65rem; text-transform: uppercase; font-weight: 700; color: var(--text-secondary); }
-    .date-day { font-size: 1.1rem; font-weight: 700; line-height: 1; }
-    .event-details h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 2px; }
-    .event-details p { font-size: 0.8rem; color: var(--text-secondary); }
 
-    .announcement-item { margin-bottom: 16px; }
-    .announcement-item:last-child { margin-bottom: 0; }
-    .announcement-meta { font-size: 0.75rem; color: var(--text-tertiary); margin-bottom: 4px; }
-    .announcement-title { font-size: 0.9rem; font-weight: 500; color: var(--black); }
+    .brand-mark {
 
-    .loading-state, .error-state {
-      grid-column: 1 / -1;
-      padding: 40px;
-      text-align: center;
-      background-color: var(--bg-primary);
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      color: var(--text-secondary);
+      width: 34px;
+      height: 34px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      background:
+        var(--black);
+
+      color:
+        var(--white);
+
+      border-radius:
+        7px;
+
+      font-family:
+        var(--font-heading);
+
+      font-weight:
+        700;
+
     }
 
-    @media (max-width: 992px) {
-      .dashboard-container { grid-template-columns: 1fr; }
+
+    .brand-text {
+
+      font-family:
+        var(--font-heading);
+
+      font-size:
+        1.05rem;
+
+      font-weight:
+        700;
+
+      letter-spacing:
+        -0.4px;
+
     }
+
+
+    .nav-right {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+    }
+
+
+    .nav-button {
+
+      width: 38px;
+      height: 38px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      background:
+        var(--surface);
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        8px;
+
+      color:
+        var(--muted);
+
+      transition:
+        0.2s ease;
+
+    }
+
+
+    .nav-button:hover {
+
+      border-color:
+        var(--black);
+
+      color:
+        var(--black);
+
+    }
+
+
+    .avatar-button {
+
+      width: 38px;
+      height: 38px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      overflow: hidden;
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        50%;
+
+      background:
+        var(--surface-2);
+
+      font-family:
+        var(--font-heading);
+
+      font-size:
+        0.8rem;
+
+      font-weight:
+        700;
+
+      cursor:
+        pointer;
+
+    }
+
+
+    .avatar-button img {
+
+      width: 100%;
+      height: 100%;
+
+      object-fit:
+        cover;
+
+    }
+
+
+    /* =========================================================
+       PAGE
+    ========================================================== */
+
+    .page {
+
+      max-width:
+        1280px;
+
+      margin:
+        0 auto;
+
+      padding:
+        105px 24px 60px;
+
+    }
+
+
+    /* =========================================================
+       HERO
+    ========================================================== */
+
+    .hero {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        minmax(0, 1.7fr)
+        minmax(280px, 0.8fr);
+
+      gap:
+        18px;
+
+      margin-bottom:
+        20px;
+
+    }
+
+
+    .hero-main {
+
+      position:
+        relative;
+
+      overflow:
+        hidden;
+
+      min-height:
+        260px;
+
+      padding:
+        34px;
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      justify-content:
+        space-between;
+
+      background:
+        var(--surface);
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        var(--radius);
+
+    }
+
+
+    .hero-main::after {
+
+      content: "";
+
+      position:
+        absolute;
+
+      inset:
+        0;
+
+      pointer-events:
+        none;
+
+      opacity:
+        0.65;
+
+      background-image:
+
+        linear-gradient(
+          var(--border) 1px,
+          transparent 1px
+        ),
+
+        linear-gradient(
+          90deg,
+          var(--border) 1px,
+          transparent 1px
+        );
+
+      background-size:
+        32px 32px;
+
+      mask-image:
+        linear-gradient(
+          135deg,
+          black,
+          transparent 70%
+        );
+
+    }
+
+
+    .hero-content {
+
+      position:
+        relative;
+
+      z-index:
+        2;
+
+    }
+
+
+    .eyebrow {
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      gap:
+        7px;
+
+      margin-bottom:
+        12px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        0.74rem;
+
+      font-weight:
+        700;
+
+      text-transform:
+        uppercase;
+
+      letter-spacing:
+        0.09em;
+
+    }
+
+
+    .hero-title {
+
+      max-width:
+        700px;
+
+      font-family:
+        var(--font-heading);
+
+      font-size:
+        clamp(
+          2rem,
+          5vw,
+          3.3rem
+        );
+
+      line-height:
+        1.05;
+
+      letter-spacing:
+        -1.6px;
+
+      margin-bottom:
+        12px;
+
+    }
+
+
+    .hero-subtitle {
+
+      max-width:
+        650px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        0.95rem;
+
+    }
+
+
+    .hero-bottom {
+
+      position:
+        relative;
+
+      z-index:
+        2;
+
+      display:
+        flex;
+
+      flex-wrap:
+        wrap;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      gap:
+        16px;
+
+      margin-top:
+        32px;
+
+    }
+
+
+    .student-meta {
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        10px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        0.82rem;
+
+    }
+
+
+    .student-meta strong {
+
+      color:
+        var(--text);
+
+      font-weight:
+        600;
+
+    }
+
+
+    /* =========================================================
+       HERO SIDE / CONTINUE
+    ========================================================== */
+
+    .continue-card {
+
+      background:
+        var(--black);
+
+      color:
+        var(--white);
+
+      border-radius:
+        var(--radius);
+
+      padding:
+        28px;
+
+      position:
+        relative;
+
+      overflow:
+        hidden;
+
+      min-height:
+        260px;
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      justify-content:
+        space-between;
+
+    }
+
+
+    .continue-card::before {
+
+      content: "";
+
+      position:
+        absolute;
+
+      width:
+        200px;
+
+      height:
+        200px;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.15);
+
+      border-radius:
+        50%;
+
+      right:
+        -80px;
+
+      top:
+        -80px;
+
+    }
+
+
+    .continue-card::after {
+
+      content: "";
+
+      position:
+        absolute;
+
+      width:
+        120px;
+
+      height:
+        120px;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.12);
+
+      border-radius:
+        50%;
+
+      right:
+        -30px;
+
+      top:
+        -30px;
+
+    }
+
+
+    .continue-top {
+
+      position:
+        relative;
+
+      z-index:
+        2;
+
+    }
+
+
+    .continue-label {
+
+      font-size:
+        0.72rem;
+
+      font-weight:
+        700;
+
+      text-transform:
+        uppercase;
+
+      letter-spacing:
+        0.08em;
+
+      opacity:
+        0.62;
+
+      margin-bottom:
+        10px;
+
+    }
+
+
+    .continue-course {
+
+      font-family:
+        var(--font-heading);
+
+      font-size:
+        1.45rem;
+
+      font-weight:
+        700;
+
+      line-height:
+        1.15;
+
+      margin-bottom:
+        5px;
+
+    }
+
+
+    .continue-activity {
+
+      font-size:
+        0.82rem;
+
+      opacity:
+        0.72;
+
+    }
+
+
+    .continue-progress-wrap {
+
+      position:
+        relative;
+
+      z-index:
+        2;
+
+      margin-top:
+        18px;
+
+    }
+
+
+    .continue-progress-header {
+
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      font-size:
+        0.72rem;
+
+      margin-bottom:
+        7px;
+
+      opacity:
+        0.75;
+
+    }
+
+
+    .continue-progress {
+
+      height:
+        6px;
+
+      border-radius:
+        999px;
+
+      background:
+        rgba(255,255,255,0.15);
+
+      overflow:
+        hidden;
+
+    }
+
+
+    .continue-progress-fill {
+
+      height:
+        100%;
+
+      width:
+        0%;
+
+      background:
+        white;
+
+      transition:
+        width 0.4s ease;
+
+    }
+
+
+    .continue-button {
+
+      position:
+        relative;
+
+      z-index:
+        2;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      gap:
+        8px;
+
+      width:
+        100%;
+
+      padding:
+        12px 14px;
+
+      margin-top:
+        18px;
+
+      border:
+        none;
+
+      border-radius:
+        8px;
+
+      background:
+        var(--white);
+
+      color:
+        var(--black);
+
+      font-family:
+        var(--font-heading);
+
+      font-size:
+        0.85rem;
+
+      font-weight:
+        700;
+
+    }
+
+
+    .continue-button:hover {
+
+      opacity:
+        0.9;
+
+    }
+
+
+    /* =========================================================
+       SECTION HEADERS
+    ========================================================== */
+
+    .section-header {
+
+      display:
+        flex;
+
+      align-items:
+        flex-end;
+
+      justify-content:
+        space-between;
+
+      gap:
+        15px;
+
+      margin-bottom:
+        12px;
+
+    }
+
+
+    .section-title {
+
+      font-family:
+        var(--font-heading);
+
+      font-size:
+        1.1rem;
+
+      font-weight:
+        700;
+
+      letter-spacing:
+        -0.3px;
+
+    }
+
+
+    .section-note {
+
+      color:
+        var(--muted-2);
+
+      font-size:
+        0.72rem;
+
+    }
+
+
+    .text-link {
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      gap:
+        5px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        0.75rem;
+
+      font-weight:
+        600;
+
+    }
+
+
+    .text-link:hover {
+
+      color:
+        var(--black);
+
+    }
+
+
+    /* =========================================================
+       TODAY / PERFORMANCE
+    ========================================================== */
+
+    .top-grid {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        minmax(0,1.35fr)
+        minmax(300px,0.65fr);
+
+      gap:
+        18px;
+
+      margin-bottom:
+        24px;
+
+    }
+
+
+    .panel {
+
+      background:
+        var(--surface);
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        var(--radius);
+
+      overflow:
+        hidden;
+
+    }
+
+
+    .panel-header {
+
+      padding:
+        18px 20px;
+
+      border-bottom:
+        1px solid var(--border);
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      gap:
+        10px;
+
+    }
+
+
+    .panel-header-left {
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      gap:
+        2px;
+
+    }
+
+
+    .panel-kicker {
+
+      color:
+        var(--muted-2);
+
+      font-size:
+        0.66rem;
+
+      font-weight:
+        700;
+
+      text-transform:
+        uppercase;
+
+      letter-spacing:
+        0.08em;
+
+    }
+
+
+    .panel-title {
+
+      font-family:
+        var(--font-heading);
+
+      font-size:
+        1rem;
+
+      font-weight:
+        700;
+
+    }
+
+
+    .panel-body {
+
+      padding:
+        18px 20px;
+
+    }
+
+
+    /* =========================================================
+       TASK LIST
+    ========================================================== */
+
+    .task-list {
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      gap:
+        9px;
+
+    }
+
+
+    .task-row {
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        12px;
+
+      padding:
+        11px 12px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        8px;
+
+      transition:
+        0.15s ease;
+
+    }
+
+
+    .task-row:hover {
+
+      border-color:
+        var(--border-dark);
+
+      background:
+        var(--surface-2);
+
+    }
+
+
+    .task-icon {
+
+      width:
+        34px;
+
+      height:
+        34px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      flex-shrink:
+        0;
+
+      background:
+        var(--surface-2);
+
+      border-radius:
+        7px;
+
+    }
+
+
+    .task-content {
+
+      min-width:
+        0;
+
+      flex:
+        1;
+
+    }
+
+
+    .task-name {
+
+      font-size:
+        0.83rem;
+
+      font-weight:
+        600;
+
+      white-space:
+        nowrap;
+
+      overflow:
+        hidden;
+
+      text-overflow:
+        ellipsis;
+
+    }
+
+
+    .task-course {
+
+      color:
+        var(--muted-2);
+
+      font-size:
+        0.7rem;
+
+      white-space:
+        nowrap;
+
+      overflow:
+        hidden;
+
+      text-overflow:
+        ellipsis;
+
+    }
+
+
+    .task-due {
+
+      flex-shrink:
+        0;
+
+      text-align:
+        right;
+
+    }
+
+
+    .task-due-label {
+
+      color:
+        var(--muted-2);
+
+      font-size:
+        0.66rem;
+
+    }
+
+
+    .task-due-value {
+
+      font-size:
+        0.72rem;
+
+      font-weight:
+        700;
+
+    }
+
+
+    .task-due-value.urgent {
+
+      color:
+        var(--red-text);
+
+    }
+
+
+    .task-due-value.soon {
+
+      color:
+        var(--yellow-text);
+
+    }
+
+
+    .empty-state {
+
+      padding:
+        20px 10px;
+
+      text-align:
+        center;
+
+      color:
+        var(--muted);
+
+      font-size:
+        0.78rem;
+
+    }
+
+
+    /* =========================================================
+       PERFORMANCE
+    ========================================================== */
+
+    .performance-main {
+
+      display:
+        flex;
+
+      align-items:
+        flex-end;
+
+      justify-content:
+        space-between;
+
+      gap:
+        20px;
+
+      margin-bottom:
+        16px;
+
+    }
+
+
+    .performance-number {
+
+      font-family:
+        var(--font-heading);
+
+      font-size:
+        2.4rem;
+
+      font-weight:
+        700;
+
+      line-height:
+        1;
+
+    }
+
+
+    .performance-label {
+
+      margin-top:
+        5px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        0.72rem;
+
+    }
+
+
+    .performance-badge {
+
+      padding:
+        5px 8px;
+
+      border-radius:
+        5px;
+
+      background:
+        var(--green-bg);
+
+      color:
+        var(--green-text);
+
+      font-size:
+        0.68rem;
+
+      font-weight:
+        700;
+
+    }
+
+
+    .performance-stats {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(2, minmax(0,1fr));
+
+      gap:
+        8px;
+
+    }
+
+
+    .performance-stat {
+
+      padding:
+        11px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        8px;
+
+    }
+
+
+    .performance-stat-label {
+
+      color:
+        var(--muted-2);
+
+      font-size:
+        0.65rem;
+
+      margin-bottom:
+        3px;
+
+    }
+
+
+    .performance-stat-value {
+
+      font-family:
+        var(--font-heading);
+
+      font-size:
+        0.95rem;
+
+      font-weight:
+        700;
+
+    }
+
+
+    /* =========================================================
+       COURSE GRID
+    ========================================================== */
+
+    .course-section {
+
+      margin-bottom:
+        24px;
+
+    }
+
+
+    .course-grid {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(
+            260px,
+            1fr
+          )
+        );
+
+      gap:
+        14px;
+
+    }
+
+
+    .course-card {
+
+      position:
+        relative;
+
+      background:
+        var(--surface);
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        var(--radius);
+
+      padding:
+        20px;
+
+      overflow:
+        hidden;
+
+      transition:
+        transform 0.18s ease,
+        border-color 0.18s ease;
+
+    }
+
+
+    .course-card:hover {
+
+      transform:
+        translateY(-2px);
+
+      border-color:
+        var(--border-dark);
+
+    }
+
+
+    .course-top {
+
+      display:
+        flex;
+
+      align-items:
+        flex-start;
+
+      justify-content:
+        space-between;
+
+      gap:
+        10px;
+
+      margin-bottom:
+        18px;
+
+    }
+
+
+    .course-icon {
+
+      width:
+        38px;
+
+      height:
+        38px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      background:
+        var(--black);
+
+      color:
+        var(--white);
+
+      border-radius:
+        8px;
+
+      font-family:
+        var(--font-heading);
+
+      font-size:
+        0.72rem;
+
+      font-weight:
+        700;
+
+    }
+
+
+    .course-status {
+
+      padding:
+        4px 7px;
+
+      border-radius:
+        5px;
+
+      background:
+        var(--surface-2);
+
+      color:
+        var(--muted);
+
+      font-size:
+        0.64rem;
+
+      font-weight:
+        700;
+
+      text-transform:
+        uppercase;
+
+    }
+
+
+    .course-name {
+
+      font-family:
+        var(--font-heading);
+
+      font-size:
+        1rem;
+
+      font-weight:
+        700;
+
+      line-height:
+        1.25;
+
+      margin-bottom:
+        4px;
+
+    }
+
+
+    .course-shortname {
+
+      color:
+        var(--muted-2);
+
+      font-size:
+        0.7rem;
+
+      margin-bottom:
+        14px;
+
+    }
+
+
+    .course-progress-meta {
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      gap:
+        10px;
+
+      margin-bottom:
+        7px;
+
+    }
+
+
+    .course-progress-label {
+
+      color:
+        var(--muted);
+
+      font-size:
+        0.68rem;
+
+    }
+
+
+    .course-progress-value {
+
+      font-family:
+        var(--font-heading);
+
+      font-size:
+        0.76rem;
+
+      font-weight:
+        700;
+
+    }
+
+
+    .course-progress {
+
+      height:
+        6px;
+
+      background:
+        var(--surface-3);
+
+      border-radius:
+        999px;
+
+      overflow:
+        hidden;
+
+    }
+
+
+    .course-progress-fill {
+
+      height:
+        100%;
+
+      width:
+        0%;
+
+      background:
+        var(--black);
+
+      border-radius:
+        inherit;
+
+      transition:
+        width 0.5s ease;
+
+    }
+
+
+    .course-footer {
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      gap:
+        10px;
+
+      margin-top:
+        15px;
+
+      padding-top:
+        13px;
+
+      border-top:
+        1px solid var(--border);
+
+    }
+
+
+    .course-meta {
+
+      color:
+        var(--muted-2);
+
+      font-size:
+        0.67rem;
+
+    }
+
+
+    .course-open {
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      gap:
+        5px;
+
+      color:
+        var(--black);
+
+      font-size:
+        0.7rem;
+
+      font-weight:
+        700;
+
+    }
+
+
+    /* =========================================================
+       LOWER GRID
+    ========================================================== */
+
+    .lower-grid {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        minmax(0,1fr)
+        minmax(0,1fr);
+
+      gap:
+        18px;
+
+    }
+
+
+    /* =========================================================
+       UPCOMING
+    ========================================================== */
+
+    .deadline-list {
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      gap:
+        8px;
+
+    }
+
+
+    .deadline-row {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        54px
+        minmax(0,1fr)
+        auto;
+
+      align-items:
+        center;
+
+      gap:
+        12px;
+
+      padding:
+        11px 0;
+
+      border-bottom:
+        1px solid var(--border);
+
+    }
+
+
+    .deadline-row:last-child {
+
+      border-bottom:
+        none;
+
+    }
+
+
+    .deadline-date {
+
+      text-align:
+        center;
+
+      padding:
+        6px;
+
+      background:
+        var(--surface-2);
+
+      border-radius:
+        7px;
+
+    }
+
+
+    .deadline-month {
+
+      font-size:
+        0.58rem;
+
+      font-weight:
+        700;
+
+      text-transform:
+        uppercase;
+
+      color:
+        var(--muted-2);
+
+    }
+
+
+    .deadline-day {
+
+      font-family:
+        var(--font-heading);
+
+      font-size:
+        1.05rem;
+
+      font-weight:
+        700;
+
+      line-height:
+        1.1;
+
+    }
+
+
+    .deadline-name {
+
+      font-size:
+        0.8rem;
+
+      font-weight:
+        600;
+
+      white-space:
+        nowrap;
+
+      overflow:
+        hidden;
+
+      text-overflow:
+        ellipsis;
+
+    }
+
+
+    .deadline-course {
+
+      color:
+        var(--muted-2);
+
+      font-size:
+        0.68rem;
+
+      margin-top:
+        2px;
+
+      white-space:
+        nowrap;
+
+      overflow:
+        hidden;
+
+      text-overflow:
+        ellipsis;
+
+    }
+
+
+    .deadline-relative {
+
+      font-size:
+        0.68rem;
+
+      font-weight:
+        700;
+
+      color:
+        var(--muted);
+
+      white-space:
+        nowrap;
+
+    }
+
+
+    .deadline-relative.urgent {
+
+      color:
+        var(--red-text);
+
+    }
+
+
+    .deadline-relative.soon {
+
+      color:
+        var(--yellow-text);
+
+    }
+
+
+    /* =========================================================
+       RECENT ACTIVITY
+    ========================================================== */
+
+    .activity-list {
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+    }
+
+
+    .activity-row {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        34px
+        minmax(0,1fr)
+        auto;
+
+      gap:
+        10px;
+
+      align-items:
+        center;
+
+      padding:
+        11px 0;
+
+      border-bottom:
+        1px solid var(--border);
+
+    }
+
+
+    .activity-row:last-child {
+      border-bottom:
+        none;
+    }
+
+
+    .activity-icon {
+
+      width:
+        32px;
+
+      height:
+        32px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      border-radius:
+        7px;
+
+      background:
+        var(--surface-2);
+
+    }
+
+
+    .activity-name {
+
+      font-size:
+        0.78rem;
+
+      font-weight:
+        600;
+
+    }
+
+
+    .activity-course {
+
+      color:
+        var(--muted-2);
+
+      font-size:
+        0.67rem;
+
+    }
+
+
+    .activity-time {
+
+      color:
+        var(--muted-2);
+
+      font-size:
+        0.65rem;
+
+      white-space:
+        nowrap;
+
+    }
+
+
+    /* =========================================================
+       QUICK ACTIONS
+    ========================================================== */
+
+    .quick-actions {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(
+          5,
+          minmax(0,1fr)
+        );
+
+      gap:
+        9px;
+
+      margin-top:
+        18px;
+
+    }
+
+
+    .quick-action {
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      gap:
+        7px;
+
+      min-height:
+        76px;
+
+      padding:
+        10px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        8px;
+
+      background:
+        var(--surface);
+
+      color:
+        var(--muted);
+
+      font-size:
+        0.66rem;
+
+      font-weight:
+        600;
+
+      text-align:
+        center;
+
+      transition:
+        0.15s ease;
+
+    }
+
+
+    .quick-action:hover {
+
+      border-color:
+        var(--black);
+
+      color:
+        var(--black);
+
+      background:
+        var(--surface-2);
+
+    }
+
+
+    /* =========================================================
+       LOADING
+    ========================================================== */
+
+    .loading {
+
+      animation:
+        spin
+        1s
+        linear
+        infinite;
+
+    }
+
+
+    @keyframes spin {
+
+      to {
+        transform:
+          rotate(360deg);
+      }
+
+    }
+
+
+    /* =========================================================
+       MOBILE
+    ========================================================== */
+
+    @media (max-width: 1000px) {
+
+      .hero {
+
+        grid-template-columns:
+          1fr;
+
+      }
+
+
+      .top-grid {
+
+        grid-template-columns:
+          1fr;
+
+      }
+
+    }
+
+
+    @media (max-width: 760px) {
+
+      .nav {
+
+        padding:
+          0 16px;
+
+      }
+
+
+      .page {
+
+        padding:
+          92px 16px 45px;
+
+      }
+
+
+      .hero-main {
+
+        padding:
+          25px;
+
+      }
+
+
+      .continue-card {
+
+        min-height:
+          220px;
+
+      }
+
+
+      .lower-grid {
+
+        grid-template-columns:
+          1fr;
+
+      }
+
+
+      .quick-actions {
+
+        grid-template-columns:
+          repeat(
+            2,
+            minmax(0,1fr)
+          );
+
+      }
+
+    }
+
+
+    @media (max-width: 540px) {
+
+      .hero-title {
+
+        font-size:
+          2rem;
+
+      }
+
+
+      .panel-body {
+
+        padding:
+          15px;
+
+      }
+
+
+      .panel-header {
+
+        padding:
+          15px;
+
+      }
+
+
+      .task-row {
+
+        align-items:
+          flex-start;
+
+      }
+
+
+      .task-due {
+
+        display:
+          none;
+
+      }
+
+
+      .deadline-row {
+
+        grid-template-columns:
+          50px
+          minmax(0,1fr);
+
+      }
+
+
+      .deadline-relative {
+
+        display:
+          none;
+
+      }
+
+
+      .quick-actions {
+
+        grid-template-columns:
+          repeat(
+            2,
+            minmax(0,1fr)
+          );
+
+      }
+
+    }
+
   </style>
+
 </head>
+
+
 <body>
 
-  <header>
-    <div class="nav-container">
-      <a href="#" class="brand">
-        <div class="brand-icon"><i data-lucide="triangle" style="width: 28px; height: 28px; fill: var(--black);"></i></div>
-        <span class="brand-text">athena</span>
-      </a>
-      
-      <div class="user-controls">
-        <button class="icon-btn" title="Search Courses"><i data-lucide="search" style="width: 20px; height: 20px;"></i></button>
-        <button class="icon-btn" title="Notifications"><i data-lucide="bell" style="width: 20px; height: 20px;"></i><span class="badge">2</span></button>
-        <button class="icon-btn" title="Messages"><i data-lucide="message-square" style="width: 20px; height: 20px;"></i></button>
-        
-        <div class="user-profile" title="Click to Logout" style="cursor: pointer;">
-          <span style="font-size: 0.9rem; font-weight: 500; display: none; @media(min-width: 600px){display:block;}">Loading...</span>
-          <div class="avatar"><i data-lucide="user" style="width: 20px; height: 20px;"></i></div>
-          <i data-lucide="chevron-down" style="width: 16px; height: 16px; color: var(--text-secondary);"></i>
-        </div>
+
+<!-- =========================================================
+     HEADER
+========================================================== -->
+
+<header>
+
+  <nav class="nav">
+
+    <a
+      href="index.html"
+      class="brand"
+    >
+
+      <div class="brand-mark">
+        A
       </div>
+
+      <div class="brand-text">
+        ATHENA
+      </div>
+
+    </a>
+
+
+    <div class="nav-right">
+
+      <button
+        class="nav-button"
+        id="refresh-button"
+        title="Refresh dashboard"
+      >
+
+        <i
+          data-lucide="refresh-cw"
+          style="
+            width:17px;
+            height:17px;
+          "
+        ></i>
+
+      </button>
+
+
+      <button
+        class="avatar-button"
+        id="profile-button"
+        title="Profile"
+      >
+
+        <span
+          id="avatar-fallback"
+        >
+          —
+        </span>
+
+      </button>
+
     </div>
-  </header>
+
+  </nav>
+
+</header>
+
+
+<!-- =========================================================
+     MAIN
+========================================================== -->
+
+<main class="page">
+
+
+  <!-- =======================================================
+       HERO
+  ======================================================== -->
 
   <section class="hero">
-    <div class="hero-content">
-      <h1 class="hero-title">Dashboard</h1>
-      <p class="hero-subtitle">Welcome back. Continue your foundational studies in precision mechanics and logic.</p>
+
+
+    <div class="hero-main">
+
+      <div class="hero-content">
+
+        <div class="eyebrow">
+
+          <i
+            data-lucide="terminal"
+            style="
+              width:14px;
+              height:14px;
+            "
+          ></i>
+
+          Student Dashboard
+
+        </div>
+
+
+        <h1
+          class="hero-title"
+          id="welcome-title"
+        >
+          Welcome back.
+        </h1>
+
+
+        <p
+          class="hero-subtitle"
+          id="welcome-subtitle"
+        >
+          Loading your academic workspace...
+        </p>
+
+      </div>
+
+
+      <div class="hero-bottom">
+
+        <div
+          class="student-meta"
+          id="student-meta"
+        >
+
+          <i
+            data-lucide="user"
+            style="
+              width:15px;
+              height:15px;
+            "
+          ></i>
+
+          <span>
+            Loading student information...
+          </span>
+
+        </div>
+
+
+        <div
+          class="student-meta"
+          id="date-meta"
+        >
+
+          <i
+            data-lucide="calendar"
+            style="
+              width:15px;
+              height:15px;
+            "
+          ></i>
+
+          <span>
+            —
+          </span>
+
+        </div>
+
+      </div>
+
     </div>
+
+
+    <!-- CONTINUE LEARNING -->
+
+    <div
+      class="continue-card"
+      id="continue-card"
+    >
+
+      <div class="continue-top">
+
+        <div class="continue-label">
+          Continue Learning
+        </div>
+
+
+        <div
+          class="continue-course"
+          id="continue-course"
+        >
+          Loading...
+        </div>
+
+
+        <div
+          class="continue-activity"
+          id="continue-activity"
+        >
+          Finding your next activity...
+        </div>
+
+      </div>
+
+
+      <div class="continue-progress-wrap">
+
+        <div
+          class="continue-progress-header"
+        >
+
+          <span>
+            Course progress
+          </span>
+
+          <span
+            id="continue-progress-value"
+          >
+            0%
+          </span>
+
+        </div>
+
+
+        <div class="continue-progress">
+
+          <div
+            class="continue-progress-fill"
+            id="continue-progress-fill"
+          ></div>
+
+        </div>
+
+
+        <a
+          href="#"
+          class="continue-button"
+          id="continue-button"
+        >
+
+          Continue
+
+          <i
+            data-lucide="arrow-right"
+            style="
+              width:15px;
+              height:15px;
+            "
+          ></i>
+
+        </a>
+
+      </div>
+
+    </div>
+
   </section>
 
-  <div class="dashboard-container">
-    <main>
-      <div class="section-title">Course Overview</div>
-      <div class="course-filters">
-        <button class="filter-btn active">All</button>
-        <button class="filter-btn">In Progress</button>
-        <button class="filter-btn">Future</button>
-      </div>
 
-      <div id="course-grid" class="course-grid">
-        <div class="loading-state">
-          <i data-lucide="loader-2" style="animation: spin 2s linear infinite; margin: 0 auto 10px; display: block;"></i>
-          Connecting to Madar Moodle API...
+  <!-- =======================================================
+       TODAY / PERFORMANCE
+  ======================================================== -->
+
+  <section class="top-grid">
+
+
+    <!-- TODAY -->
+
+    <div class="panel">
+
+      <div class="panel-header">
+
+        <div
+          class="panel-header-left"
+        >
+
+          <div class="panel-kicker">
+            Attention
+          </div>
+
+          <div class="panel-title">
+            Today
+          </div>
+
         </div>
-      </div>
-    </main>
 
-    <aside class="sidebar">
-      <div class="moodle-block">
-        <h3 class="block-title"><i data-lucide="calendar" style="width: 18px; height: 18px;"></i> Timeline</h3>
-        <ul class="timeline-list">
-          <li class="timeline-item">
-            <div class="date-box">
-              <div class="date-month">Aug</div>
-              <div class="date-day">23</div>
+
+        <div
+          class="section-note"
+          id="today-count"
+        >
+          0 tasks
+        </div>
+
+      </div>
+
+
+      <div class="panel-body">
+
+        <div
+          class="task-list"
+          id="today-list"
+        >
+
+          <div class="empty-state">
+            Loading tasks...
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- PERFORMANCE -->
+
+    <div class="panel">
+
+      <div class="panel-header">
+
+        <div
+          class="panel-header-left"
+        >
+
+          <div class="panel-kicker">
+            Gradebook
+          </div>
+
+          <div class="panel-title">
+            Performance
+          </div>
+
+        </div>
+
+
+        <a
+          href="grades.html"
+          class="text-link"
+        >
+
+          View grades
+
+          <i
+            data-lucide="arrow-up-right"
+            style="
+              width:13px;
+              height:13px;
+            "
+          ></i>
+
+        </a>
+
+      </div>
+
+
+      <div class="panel-body">
+
+
+        <div class="performance-main">
+
+          <div>
+
+            <div
+              class="performance-number"
+              id="overall-average"
+            >
+              —
             </div>
-            <div class="event-details">
-              <h4>Drafting Assignment 1</h4>
-              <p>Architectural Design • Due 23:59</p>
+
+            <div
+              class="performance-label"
+            >
+              Overall average
             </div>
-          </li>
-        </ul>
+
+          </div>
+
+
+          <div
+            class="performance-badge"
+            id="performance-badge"
+          >
+            Awaiting data
+          </div>
+
+        </div>
+
+
+        <div class="performance-stats">
+
+
+          <div class="performance-stat">
+
+            <div class="performance-stat-label">
+              Best course
+            </div>
+
+            <div
+              class="performance-stat-value"
+              id="best-course"
+            >
+              —
+            </div>
+
+          </div>
+
+
+          <div class="performance-stat">
+
+            <div class="performance-stat-label">
+              Assessments
+            </div>
+
+            <div
+              class="performance-stat-value"
+              id="assessment-count"
+            >
+              —
+            </div>
+
+          </div>
+
+
+        </div>
+
       </div>
 
-      <div class="moodle-block">
-        <h3 class="block-title"><i data-lucide="megaphone" style="width: 18px; height: 18px;"></i> Announcements</h3>
-        <ul class="announcement-list">
-          <li class="announcement-item">
-            <div class="announcement-meta">15 Aug, 09:00 • Site Admin</div>
-            <a href="#" class="announcement-title">System maintenance scheduled for this weekend</a>
-          </li>
-        </ul>
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       COURSES
+  ======================================================== -->
+
+  <section class="course-section">
+
+
+    <div class="section-header">
+
+      <div>
+
+        <div class="section-title">
+          Your Courses
+        </div>
+
+        <div class="section-note">
+          Live from Moodle
+        </div>
+
       </div>
-    </aside>
-  </div>
 
-  <script>
-    lucide.createIcons();
-    const MOODLE_URL = 'http://localhost:8000'; 
-    
-    // Auth Check
-    const userToken = localStorage.getItem('madar_user_token');
-    const username = localStorage.getItem('madar_username');
-    if (!userToken) window.location.href = 'login.html';
 
-    // UI Personalization & Logout
-    const userDisplay = document.querySelector('.user-profile span');
-    if (userDisplay && username) userDisplay.textContent = username;
+      <a
+        href="#"
+        class="text-link"
+        id="courses-count-link"
+      >
 
-    document.querySelector('.user-profile').addEventListener('click', () => {
-      window.location.href = 'profile.html';
-    });
+        <span id="courses-count">
+          0
+        </span>
 
-    // Helper for icons
-    function getCourseMetadata(courseName) {
-      const lowerName = courseName.toLowerCase();
-      if (lowerName.includes('math') || lowerName.includes('calc')) return { category: 'Mathematics', icon: 'calculator' };
-      if (lowerName.includes('engin') || lowerName.includes('mech') || lowerName.includes('system') || lowerName.includes('c++')) return { category: 'Engineering', icon: 'settings' };
-      if (lowerName.includes('python')) return { category: 'Programming', icon: 'code' };
-      return { category: 'General Foundation', icon: 'book-open' };
+        courses
+
+      </a>
+
+    </div>
+
+
+    <div
+      class="course-grid"
+      id="course-grid"
+    >
+
+      <div
+        class="panel"
+        style="
+          grid-column:1/-1;
+          padding:40px;
+          text-align:center;
+        "
+      >
+
+        <i
+          data-lucide="loader-2"
+          class="loading"
+          style="
+            width:28px;
+            height:28px;
+            margin:0 auto 10px;
+          "
+        ></i>
+
+        <div
+          style="
+            color:var(--muted);
+            font-size:.8rem;
+          "
+        >
+          Loading courses...
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       UPCOMING / RECENT
+  ======================================================== -->
+
+  <section class="lower-grid">
+
+
+    <!-- UPCOMING -->
+
+    <div class="panel">
+
+      <div class="panel-header">
+
+        <div
+          class="panel-header-left"
+        >
+
+          <div class="panel-kicker">
+            Deadlines
+          </div>
+
+          <div class="panel-title">
+            Upcoming
+          </div>
+
+        </div>
+
+
+        <div class="section-note">
+          Next deadlines
+        </div>
+
+      </div>
+
+
+      <div class="panel-body">
+
+        <div
+          class="deadline-list"
+          id="deadline-list"
+        >
+
+          <div class="empty-state">
+            Loading upcoming work...
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- RECENT ACTIVITY -->
+
+    <div class="panel">
+
+      <div class="panel-header">
+
+        <div
+          class="panel-header-left"
+        >
+
+          <div class="panel-kicker">
+            Activity
+          </div>
+
+          <div class="panel-title">
+            Recent Activity
+          </div>
+
+        </div>
+
+
+        <div class="section-note">
+          Latest updates
+        </div>
+
+      </div>
+
+
+      <div class="panel-body">
+
+        <div
+          class="activity-list"
+          id="activity-list"
+        >
+
+          <div class="empty-state">
+            Loading recent activity...
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       QUICK ACTIONS
+  ======================================================== -->
+
+  <section
+    class="panel"
+    style="
+      margin-top:18px;
+    "
+  >
+
+    <div class="panel-header">
+
+      <div
+        class="panel-header-left"
+      >
+
+        <div class="panel-kicker">
+          Navigation
+        </div>
+
+        <div class="panel-title">
+          Quick Actions
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="panel-body">
+
+      <div class="quick-actions">
+
+
+        <a
+          href="grades.html"
+          class="quick-action"
+        >
+
+          <i
+            data-lucide="graduation-cap"
+            style="
+              width:19px;
+              height:19px;
+            "
+          ></i>
+
+          Grades
+
+        </a>
+
+
+        <a
+          href="#course-grid"
+          class="quick-action"
+        >
+
+          <i
+            data-lucide="book-open"
+            style="
+              width:19px;
+              height:19px;
+            "
+          ></i>
+
+          Courses
+
+        </a>
+
+
+        <a
+          href="#deadline-list"
+          class="quick-action"
+        >
+
+          <i
+            data-lucide="calendar-clock"
+            style="
+              width:19px;
+              height:19px;
+            "
+          ></i>
+
+          Deadlines
+
+        </a>
+
+
+        <a
+          href="profile.html"
+          class="quick-action"
+        >
+
+          <i
+            data-lucide="user"
+            style="
+              width:19px;
+              height:19px;
+            "
+          ></i>
+
+          Profile
+
+        </a>
+
+
+        <button
+          class="quick-action"
+          id="refresh-action"
+          type="button"
+        >
+
+          <i
+            data-lucide="refresh-cw"
+            style="
+              width:19px;
+              height:19px;
+            "
+          ></i>
+
+          Refresh
+
+        </button>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<!-- =========================================================
+     SCRIPT
+========================================================== -->
+
+<script>
+
+  /* =========================================================
+     CONFIG
+  ========================================================== */
+
+  const MOODLE_URL =
+    'http://localhost:8000';
+
+
+  const userToken =
+    localStorage.getItem(
+      'madar_user_token'
+    );
+
+
+  /* =========================================================
+     AUTH
+  ========================================================== */
+
+  if (
+    !userToken
+  ) {
+
+    window.location.href =
+      'login.html';
+
+  }
+
+
+  /* =========================================================
+     GLOBAL STATE
+  ========================================================== */
+
+  let currentUser =
+    null;
+
+  let enrolledCourses =
+    [];
+
+  let assignments =
+    [];
+
+  let gradeData =
+    [];
+
+  let recentActivities =
+    [];
+
+
+  /* =========================================================
+     DOM
+  ========================================================== */
+
+  const welcomeTitle =
+    document.getElementById(
+      'welcome-title'
+    );
+
+
+  const welcomeSubtitle =
+    document.getElementById(
+      'welcome-subtitle'
+    );
+
+
+  const studentMeta =
+    document.getElementById(
+      'student-meta'
+    );
+
+
+  const dateMeta =
+    document.getElementById(
+      'date-meta'
+    );
+
+
+  const avatarFallback =
+    document.getElementById(
+      'avatar-fallback'
+    );
+
+
+  const courseGrid =
+    document.getElementById(
+      'course-grid'
+    );
+
+
+  const courseCount =
+    document.getElementById(
+      'courses-count'
+    );
+
+
+  const continueCourse =
+    document.getElementById(
+      'continue-course'
+    );
+
+
+  const continueActivity =
+    document.getElementById(
+      'continue-activity'
+    );
+
+
+  const continueProgressValue =
+    document.getElementById(
+      'continue-progress-value'
+    );
+
+
+  const continueProgressFill =
+    document.getElementById(
+      'continue-progress-fill'
+    );
+
+
+  const continueButton =
+    document.getElementById(
+      'continue-button'
+    );
+
+
+  const todayList =
+    document.getElementById(
+      'today-list'
+    );
+
+
+  const todayCount =
+    document.getElementById(
+      'today-count'
+    );
+
+
+  const deadlineList =
+    document.getElementById(
+      'deadline-list'
+    );
+
+
+  const activityList =
+    document.getElementById(
+      'activity-list'
+    );
+
+
+  const overallAverage =
+    document.getElementById(
+      'overall-average'
+    );
+
+
+  const performanceBadge =
+    document.getElementById(
+      'performance-badge'
+    );
+
+
+  const bestCourse =
+    document.getElementById(
+      'best-course'
+    );
+
+
+  const assessmentCount =
+    document.getElementById(
+      'assessment-count'
+    );
+
+
+  /* =========================================================
+     ESCAPE
+  ========================================================== */
+
+  function escapeHtml(
+    value
+  ) {
+
+    return String(
+      value ?? ''
+    )
+
+      .replace(
+        /&/g,
+        '&amp;'
+      )
+
+      .replace(
+        /</g,
+        '&lt;'
+      )
+
+      .replace(
+        />/g,
+        '&gt;'
+      )
+
+      .replace(
+        /"/g,
+        '&quot;'
+      )
+
+      .replace(
+        /'/g,
+        '&#039;'
+      );
+
+  }
+
+
+  /* =========================================================
+     MOODLE REQUEST
+  ========================================================== */
+
+  async function moodleRequest(
+    wsfunction,
+    params = {}
+  ) {
+
+    const body =
+      new URLSearchParams();
+
+
+    body.append(
+      'wstoken',
+      userToken
+    );
+
+
+    body.append(
+      'wsfunction',
+      wsfunction
+    );
+
+
+    body.append(
+      'moodlewsrestformat',
+      'json'
+    );
+
+
+    Object.entries(
+      params
+    ).forEach(
+      ([key, value]) => {
+
+        if (
+          value === undefined ||
+          value === null
+        ) {
+
+          return;
+
+        }
+
+
+        body.append(
+          key,
+          value
+        );
+
+      }
+    );
+
+
+    const response =
+      await fetch(
+        `${MOODLE_URL}/webservice/rest/server.php`,
+        {
+          method:
+            'POST',
+
+          headers: {
+            'Content-Type':
+              'application/x-www-form-urlencoded'
+          },
+
+          body
+        }
+      );
+
+
+    if (
+      !response.ok
+    ) {
+
+      throw new Error(
+        `Moodle HTTP ${response.status}`
+      );
+
     }
 
-    // Dynamic Fetch for Workspace
-    async function fetchAthenaWorkspace() {
-      const courseGrid = document.getElementById('course-grid');
-      const timelineList = document.querySelector('.timeline-list');
-      const announcementList = document.querySelector('.announcement-list');
+
+    const data =
+      await response.json();
+
+
+    if (
+      data.exception
+    ) {
+
+      throw new Error(
+        data.message ||
+        'Moodle API error'
+      );
+
+    }
+
+
+    return data;
+
+  }
+
+
+  /* =========================================================
+     SITE INFO / USER
+  ========================================================== */
+
+  async function loadCurrentUser() {
+
+    const data =
+      await moodleRequest(
+        'core_webservice_get_site_info'
+      );
+
+
+    currentUser =
+      data;
+
+
+    const firstname =
+      data.firstname ||
+      'Student';
+
+
+    const lastname =
+      data.lastname ||
+      '';
+
+
+    const fullname =
+      `${firstname} ${lastname}`.trim();
+
+
+    welcomeTitle.textContent =
+      `Welcome back, ${
+        firstname
+      }.`;
+
+
+
+    welcomeSubtitle.textContent =
+      'Your academic workspace is ready.';
+
+
+    studentMeta.innerHTML = `
+
+      <i
+        data-lucide="user"
+        style="
+          width:15px;
+          height:15px;
+        "
+      ></i>
+
+      <span>
+
+        <strong>
+          ${escapeHtml(
+            fullname
+          )}
+        </strong>
+
+      </span>
+
+    `;
+
+
+    const today =
+      new Date()
+        .toLocaleDateString(
+          'en-US',
+          {
+            weekday:
+              'long',
+
+            month:
+              'long',
+
+            day:
+              'numeric'
+
+          }
+        );
+
+
+    dateMeta.innerHTML = `
+
+      <i
+        data-lucide="calendar"
+        style="
+          width:15px;
+          height:15px;
+        "
+      ></i>
+
+      <span>
+        ${escapeHtml(today)}
+      </span>
+
+    `;
+
+
+    const initials =
+      `${firstname.charAt(0)}${
+        lastname.charAt(0)
+      }`.toUpperCase();
+
+
+    avatarFallback.textContent =
+      initials ||
+      'A';
+
+
+    lucide.createIcons();
+
+  }
+
+
+  /* =========================================================
+     COURSES
+  ========================================================== */
+
+  async function loadCourses() {
+
+    if (
+      !currentUser?.userid
+    ) {
+
+      return;
+
+    }
+
+
+    const courses =
+      await moodleRequest(
+        'core_enrol_get_users_courses',
+        {
+          userid:
+            currentUser.userid
+        }
+      );
+
+
+    enrolledCourses =
+      Array.isArray(courses)
+        ? courses
+        : [];
+
+
+    courseCount.textContent =
+      enrolledCourses.length;
+
+
+    renderCourses();
+
+    await setupContinueLearning();
+
+  }
+
+
+  /* =========================================================
+     COURSE PROGRESS
+  ========================================================== */
+
+  function getCourseProgress(
+    course
+  ) {
+
+    const value =
+      Number(
+        course.progress
+      );
+
+
+    if (
+      Number.isFinite(
+        value
+      ) &&
+      value >= 0 &&
+      value <= 100
+    ) {
+
+      return value;
+
+    }
+
+
+    return 0;
+
+  }
+
+
+  /* =========================================================
+     RENDER COURSES
+  ========================================================== */
+
+  function renderCourses() {
+
+    if (
+      !enrolledCourses.length
+    ) {
+
+      courseGrid.innerHTML = `
+
+        <div
+          class="panel"
+          style="
+            grid-column:1/-1;
+            padding:40px;
+            text-align:center;
+          "
+        >
+
+          <i
+            data-lucide="book-open"
+            style="
+              width:32px;
+              height:32px;
+              margin:0 auto 10px;
+            "
+          ></i>
+
+          <div
+            style="
+              color:var(--muted);
+              font-size:.8rem;
+            "
+          >
+            No enrolled courses found.
+          </div>
+
+        </div>
+
+      `;
+
+
+      lucide.createIcons();
+
+      return;
+
+    }
+
+
+    courseGrid.innerHTML =
+      enrolledCourses
+        .map(
+          course => {
+
+            const progress =
+              getCourseProgress(
+                course
+              );
+
+
+            const short =
+              course.shortname ||
+              'COURSE';
+
+
+            const iconText =
+              short
+                .replace(
+                  /[^a-zA-Z0-9]/g,
+                  ''
+                )
+                .slice(
+                  0,
+                  2
+                )
+                .toUpperCase();
+
+
+            const visible =
+              course.visible !==
+              0;
+
+
+            return `
+
+              <article
+                class="course-card"
+              >
+
+                <div
+                  class="course-top"
+                >
+
+                  <div
+                    class="course-icon"
+                  >
+                    ${escapeHtml(
+                      iconText ||
+                      'C'
+                    )}
+                  </div>
+
+
+                  <div
+                    class="course-status"
+                  >
+                    ${
+                      visible
+                        ? 'Active'
+                        : 'Hidden'
+                    }
+                  </div>
+
+                </div>
+
+
+                <div
+                  class="course-name"
+                >
+
+                  ${escapeHtml(
+                    course.fullname ||
+                    course.shortname ||
+                    'Course'
+                  )}
+
+                </div>
+
+
+                <div
+                  class="course-shortname"
+                >
+
+                  ${escapeHtml(
+                    course.shortname ||
+                    ''
+                  )}
+
+                </div>
+
+
+                <div
+                  class="course-progress-meta"
+                >
+
+                  <span
+                    class="course-progress-label"
+                  >
+                    Course progress
+                  </span>
+
+
+                  <span
+                    class="course-progress-value"
+                  >
+                    ${progress.toFixed(
+                      0
+                    )}%
+                  </span>
+
+                </div>
+
+
+                <div
+                  class="course-progress"
+                >
+
+                  <div
+                    class="
+                      course-progress-fill
+                    "
+                    style="
+                      width:${progress}%;
+                    "
+                  ></div>
+
+                </div>
+
+
+                <div
+                  class="course-footer"
+                >
+
+                  <span
+                    class="course-meta"
+                  >
+
+                    ${
+                      course.id
+                        ? `Course ID ${escapeHtml(
+                            course.id
+                          )}`
+                        : 'Moodle course'
+                    }
+
+                  </span>
+
+
+                  <a
+                    class="course-open"
+                    href="course.html?id=${
+                      encodeURIComponent(
+                        course.id
+                      )
+                    }"
+                  >
+
+                    Open
+
+                    <i
+                      data-lucide="arrow-up-right"
+                      style="
+                        width:13px;
+                        height:13px;
+                      "
+                    ></i>
+
+                  </a>
+
+                </div>
+
+              </article>
+
+            `;
+
+          }
+        )
+        .join('');
+
+
+    lucide.createIcons();
+
+  }
+
+
+  /* =========================================================
+     ASSIGNMENTS
+  ========================================================== */
+
+  async function loadAssignments() {
+
+    assignments = [];
+
+
+    for (
+      const course
+      of enrolledCourses
+    ) {
 
       try {
-        // STEP 1: Ask Moodle for the logged-in user's ID
-        const infoEndpoint = `${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=core_webservice_get_site_info&moodlewsrestformat=json`;
-        const infoResponse = await fetch(infoEndpoint);
-        const siteInfo = await infoResponse.json();
-        
-        if (siteInfo.exception) throw new Error(`Site Info Error: ${siteInfo.message}`);
-        
-        const userId = siteInfo.userid;
-        if (userDisplay && siteInfo.firstname) {
-          userDisplay.textContent = siteInfo.firstname;
-          userDisplay.style.display = 'block';
-        }
 
-        // STEP 2: Fetch Courses
-        const coursesEndpoint = `${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=core_enrol_get_users_courses&userid=${userId}&moodlewsrestformat=json`;
-        const coursesResponse = await fetch(coursesEndpoint);
-        const courses = await coursesResponse.json();
+        const data =
+          await moodleRequest(
+            'mod_assign_get_assignments',
+            {
+              'courseids[0]':
+                course.id
+            }
+          );
 
-        if (courses.exception) throw new Error(`Course Fetch Error: ${courses.message}`);
 
-        courseGrid.innerHTML = '';
-        const validCourses = courses.filter(course => course.id !== 1);
+        const courseAssignments =
+          data?.courses?.find(
+            item =>
+              Number(
+                item.id
+              ) ===
+              Number(
+                course.id
+              )
+          )?.assignments ||
+          [];
 
-        if (validCourses.length === 0) {
-            courseGrid.innerHTML = `
-              <div class="loading-state">
-                <i data-lucide="book-x" style="margin: 0 auto 10px; display: block; width: 32px; height: 32px;"></i>
-                No enrolled courses found. Time to check the catalog!
-              </div>`;
-            lucide.createIcons();
-            return;
-        }
 
-        // Render Courses
-        validCourses.forEach(course => {
-          const meta = getCourseMetadata(course.fullname);
-          const mockProgress = Math.floor(Math.random() * 80) + 10; 
+        courseAssignments.forEach(
+          assignment => {
 
-          const card = document.createElement('a');
-          card.href = `course.html?id=${course.id}`;
-          card.className = 'course-card';
-          card.innerHTML = `
-            <div class="course-img-placeholder">
-              <i data-lucide="${meta.icon}" style="width: 40px; height: 40px;"></i>
-            </div>
-            <div class="course-content">
-              <span class="course-category">${meta.category}</span>
-              <h3 class="course-title">${course.fullname}</h3>
-              <div class="progress-container">
-                <div class="progress-text">
-                  <span>Course Progress</span>
-                  <strong>${mockProgress}%</strong>
-                </div>
-                <div class="progress-bar">
-                  <div class="progress-fill" style="width: ${mockProgress}%;"></div>
-                </div>
-              </div>
-            </div>
-          `;
-          courseGrid.appendChild(card);
-        });
+            assignments.push({
 
-        const courseIds = validCourses.map(c => c.id);
-        const assignParams = courseIds.map((id, idx) => `courseids[${idx}]=${id}`).join('&');
+              ...assignment,
 
-        // STEP 3: Fetch Assignments for Timeline
-        if (courseIds.length > 0) {
-          timelineList.innerHTML = `<li style="text-align: center; color: var(--text-secondary); font-size: 0.85rem;">Checking deadlines...</li>`;
-          
-          const assignRes = await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=mod_assign_get_assignments&${assignParams}&moodlewsrestformat=json`);
-          const assignData = await assignRes.json();
-          
-          let upcoming = [];
-          const now = Math.floor(Date.now() / 1000);
-          
-          if (assignData.courses) {
-            assignData.courses.forEach(courseObj => {
-              const cName = validCourses.find(c => c.id === courseObj.id)?.fullname || 'Course';
-              courseObj.assignments.forEach(assign => {
-                if (assign.duedate > now) upcoming.push({ ...assign, cName, cId: courseObj.id });
-              });
+              courseId:
+                course.id,
+
+              courseName:
+                course.fullname ||
+                course.shortname ||
+                'Course'
+
             });
+
           }
-          
-          upcoming.sort((a, b) => a.duedate - b.duedate);
-          
-          if (upcoming.length === 0) {
-             timelineList.innerHTML = `<li style="font-size: 0.85rem; color: var(--text-secondary); text-align: center;">No upcoming deadlines.</li>`;
-          } else {
-             timelineList.innerHTML = '';
-             upcoming.slice(0, 3).forEach(assign => {
-               const d = new Date(assign.duedate * 1000);
-               const month = d.toLocaleString('default', { month: 'short' });
-               const day = d.getDate();
-               const time = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
-               
-               timelineList.innerHTML += `
-                 <li class="timeline-item">
-                   <div class="date-box">
-                     <div class="date-month">${month}</div>
-                     <div class="date-day">${day}</div>
-                   </div>
-                   <div class="event-details">
-                     <h4><a href="assignment.html?assignid=${assign.id}&courseid=${assign.cId}" style="text-decoration: none; color: inherit;">${assign.name}</a></h4>
-                     <p>${assign.cName} • Due ${time}</p>
-                   </div>
-                 </li>
-               `;
-             });
-          }
-        }
+        );
 
-        // STEP 4: Fetch Live Announcements
-        if (courseIds.length > 0) {
-          announcementList.innerHTML = `<li style="text-align: center; color: var(--text-secondary); font-size: 0.85rem;">Connecting to comms channel...</li>`;
-          
-          try {
-            const forumRes = await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=mod_forum_get_forums_by_courses&${assignParams}&moodlewsrestformat=json`);
-            const forums = await forumRes.json();
-            
-            let allDiscussions = [];
-            // Limit to the first 2 courses to prevent API overload
-            const targetForums = forums.slice(0, 2); 
-            
-            for (const forum of targetForums) {
-              const discRes = await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=mod_forum_get_forum_discussions&forumid=${forum.id}&moodlewsrestformat=json`);
-              const discData = await discRes.json();
-              if (discData.discussions) {
-                 allDiscussions = allDiscussions.concat(discData.discussions);
-              }
-            }
-
-            // Sort by newest first
-            allDiscussions.sort((a, b) => b.created - a.created);
-
-            if (allDiscussions.length === 0) {
-              announcementList.innerHTML = `<li style="font-size: 0.85rem; color: var(--text-secondary); text-align: center;">No new announcements.</li>`;
-            } else {
-              announcementList.innerHTML = '';
-              allDiscussions.slice(0, 3).forEach(post => {
-                const dateStr = new Date(post.created * 1000).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
-                announcementList.innerHTML += `
-                  <li class="announcement-item">
-                    <div class="announcement-meta">${dateStr} • ${post.userfullname}</div>
-                    <a href="forum.html?forumid=${post.forum}&courseid=${courseIds[0]}" class="announcement-title">${post.subject}</a>
-                  </li>
-                `;
-              });
-            }
-          } catch (e) {
-            announcementList.innerHTML = `<li style="font-size: 0.85rem; color: #dc2626; text-align: center;">Unable to load announcements.</li>`;
-          }
-        }
-
-        lucide.createIcons();
-
-      } catch (error) {
-        console.error('API Error:', error);
-        courseGrid.innerHTML = `
-          <div class="error-state">
-            <h4 style="margin-bottom: 8px; color: var(--black); font-weight: 600;">Connection Error</h4>
-            <p style="font-size: 0.9rem;">${error.message}</p>
-          </div>
-        `;
       }
+      catch (error) {
+
+        console.warn(
+          `Assignments failed for course ${course.id}:`,
+          error
+        );
+
+      }
+
     }
 
-    fetchAthenaWorkspace();
-  </script>
+
+    assignments =
+      assignments
+        .filter(
+          assignment =>
+            Number(
+              assignment.duedate
+            ) > 0
+        )
+        .sort(
+          (a,b) =>
+            Number(
+              a.duedate
+            ) -
+            Number(
+              b.duedate
+            )
+        );
+
+
+    renderToday();
+
+    renderUpcoming();
+
+  }
+
+
+  /* =========================================================
+     DATE HELPERS
+  ========================================================== */
+
+  function startOfDay(
+    date
+  ) {
+
+    const value =
+      new Date(
+        date
+      );
+
+
+    value.setHours(
+      0,
+      0,
+      0,
+      0
+    );
+
+
+    return value;
+
+  }
+
+
+  function differenceInDays(
+    timestamp
+  ) {
+
+    const now =
+      startOfDay(
+        new Date()
+      );
+
+
+    const due =
+      startOfDay(
+        new Date(
+          Number(
+            timestamp
+          ) * 1000
+        )
+      );
+
+
+    return Math.round(
+      (
+        due.getTime() -
+        now.getTime()
+      ) /
+      86400000
+    );
+
+  }
+
+
+  function dueLabel(
+    timestamp
+  ) {
+
+    const days =
+      differenceInDays(
+        timestamp
+      );
+
+
+    if (
+      days < 0
+    ) {
+
+      return 'Overdue';
+
+    }
+
+
+    if (
+      days === 0
+    ) {
+
+      return 'Due today';
+
+    }
+
+
+    if (
+      days === 1
+    ) {
+
+      return 'Due tomorrow';
+
+    }
+
+
+    return `Due in ${days} days`;
+
+  }
+
+
+  function dueClass(
+    timestamp
+  ) {
+
+    const days =
+      differenceInDays(
+        timestamp
+      );
+
+
+    if (
+      days <= 0
+    ) {
+
+      return 'urgent';
+
+    }
+
+
+    if (
+      days <= 2
+    ) {
+
+      return 'soon';
+
+    }
+
+
+    return '';
+
+  }
+
+
+  function shortDate(
+    timestamp
+  ) {
+
+    return new Date(
+      Number(
+        timestamp
+      ) * 1000
+    ).toLocaleDateString(
+      'en-US',
+      {
+        month:
+          'short',
+
+        day:
+          'numeric'
+      }
+    );
+
+  }
+
+
+  /* =========================================================
+     TODAY
+  ========================================================== */
+
+  function renderToday() {
+
+    const now =
+      new Date();
+
+
+    const upcomingToday =
+      assignments
+        .filter(
+          assignment => {
+
+            const due =
+              new Date(
+                Number(
+                  assignment.duedate
+                ) * 1000
+              );
+
+
+            return (
+              due.getFullYear() ===
+                now.getFullYear() &&
+              due.getMonth() ===
+                now.getMonth() &&
+              due.getDate() ===
+                now.getDate()
+            );
+
+          }
+        )
+        .slice(
+          0,
+          5
+        );
+
+
+    todayCount.textContent =
+      `${upcomingToday.length} task${
+        upcomingToday.length === 1
+          ? ''
+          : 's'
+      }`;
+
+
+    if (
+      !upcomingToday.length
+    ) {
+
+      const soon =
+        assignments
+          .filter(
+            assignment =>
+              differenceInDays(
+                assignment.duedate
+              ) >=
+                0
+          )
+          .slice(
+            0,
+            3
+          );
+
+
+      if (
+        soon.length
+      ) {
+
+        todayList.innerHTML = `
+
+          <div
+            class="empty-state"
+            style="
+              text-align:left;
+              padding-left:0;
+            "
+          >
+
+            Nothing due today.
+            ${
+              soon.length
+                ? `Next deadline:
+                   ${escapeHtml(
+                     shortDate(
+                       soon[0].duedate
+                     )
+                   )}`
+                : ''
+            }
+
+          </div>
+
+        `;
+
+      }
+      else {
+
+        todayList.innerHTML = `
+
+          <div class="empty-state">
+
+            No coursework requires
+            attention today.
+
+          </div>
+
+        `;
+
+      }
+
+
+      return;
+
+    }
+
+
+    todayList.innerHTML =
+      upcomingToday
+        .map(
+          assignment => `
+
+            <a
+              class="task-row"
+              href="
+                assignment.html
+                ?assignid=${
+                  encodeURIComponent(
+                    assignment.id
+                  )
+                }
+                &courseid=${
+                  encodeURIComponent(
+                    assignment.courseId
+                  )
+                }
+              "
+            >
+
+              <div class="task-icon">
+
+                <i
+                  data-lucide="clipboard-check"
+                  style="
+                    width:16px;
+                    height:16px;
+                  "
+                ></i>
+
+              </div>
+
+
+              <div class="task-content">
+
+                <div
+                  class="task-name"
+                >
+
+                  ${escapeHtml(
+                    assignment.name ||
+                    'Assignment'
+                  )}
+
+                </div>
+
+
+                <div
+                  class="task-course"
+                >
+
+                  ${escapeHtml(
+                    assignment.courseName
+                  )}
+
+                </div>
+
+              </div>
+
+
+              <div class="task-due">
+
+                <div
+                  class="task-due-label"
+                >
+                  Deadline
+                </div>
+
+                <div
+                  class="
+                    task-due-value
+                    urgent
+                  "
+                >
+                  ${escapeHtml(
+                    new Date(
+                      Number(
+                        assignment.duedate
+                      ) *
+                      1000
+                    ).toLocaleTimeString(
+                      'en-US',
+                      {
+                        hour:
+                          'numeric',
+
+                        minute:
+                          '2-digit'
+                      }
+                    )
+                  )}
+                </div>
+
+              </div>
+
+            </a>
+
+          `
+        )
+        .join('');
+
+
+    lucide.createIcons();
+
+  }
+
+
+  /* =========================================================
+     UPCOMING
+  ========================================================== */
+
+  function renderUpcoming() {
+
+    const list =
+      assignments
+        .filter(
+          assignment =>
+            Number(
+              assignment.duedate
+            ) > 0
+        )
+        .slice(
+          0,
+          6
+        );
+
+
+    if (
+      !list.length
+    ) {
+
+      deadlineList.innerHTML = `
+
+        <div class="empty-state">
+          No upcoming deadlines.
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    deadlineList.innerHTML =
+      list
+        .map(
+          assignment => {
+
+            const due =
+              new Date(
+                Number(
+                  assignment.duedate
+                ) *
+                1000
+              );
+
+
+            const day =
+              due.getDate();
+
+
+            const month =
+              due
+                .toLocaleDateString(
+                  'en-US',
+                  {
+                    month:
+                      'short'
+                  }
+                );
+
+
+            const urgency =
+              dueClass(
+                assignment.duedate
+              );
+
+
+            return `
+
+              <a
+                class="deadline-row"
+                href="
+                  assignment.html
+                  ?assignid=${
+                    encodeURIComponent(
+                      assignment.id
+                    )
+                  }
+                  &courseid=${
+                    encodeURIComponent(
+                      assignment.courseId
+                    )
+                  }
+                "
+              >
+
+                <div class="deadline-date">
+
+                  <div
+                    class="deadline-month"
+                  >
+                    ${escapeHtml(
+                      month
+                    )}
+                  </div>
+
+                  <div
+                    class="deadline-day"
+                  >
+                    ${day}
+                  </div>
+
+                </div>
+
+
+                <div>
+
+                  <div
+                    class="deadline-name"
+                  >
+
+                    ${escapeHtml(
+                      assignment.name ||
+                      'Assignment'
+                    )}
+
+                  </div>
+
+
+                  <div
+                    class="deadline-course"
+                  >
+
+                    ${escapeHtml(
+                      assignment.courseName
+                    )}
+
+                  </div>
+
+                </div>
+
+
+                <div
+                  class="
+                    deadline-relative
+                    ${urgency}
+                  "
+                >
+
+                  ${escapeHtml(
+                    dueLabel(
+                      assignment.duedate
+                    )
+                  )}
+
+                </div>
+
+              </a>
+
+            `;
+
+          }
+        )
+        .join('');
+
+  }
+
+
+  /* =========================================================
+     CONTINUE LEARNING
+  ========================================================== */
+
+  async function setupContinueLearning() {
+
+    if (
+      !enrolledCourses.length
+    ) {
+
+      continueCourse.textContent =
+        'No course available';
+
+
+      continueActivity.textContent =
+        'Enroll in a course to begin learning.';
+
+
+      continueButton.href =
+        '#';
+
+
+      return;
+
+    }
+
+
+    /*
+     * Prefer the course with the highest
+     * lastaccess value when Moodle provides it.
+     */
+
+    const sorted =
+      [...enrolledCourses].sort(
+        (a,b) =>
+          Number(
+            b.lastaccess ||
+            0
+          ) -
+          Number(
+            a.lastaccess ||
+            0
+          )
+      );
+
+
+    const course =
+      sorted[0];
+
+
+    const progress =
+      getCourseProgress(
+        course
+      );
+
+
+    continueCourse.textContent =
+      course.fullname ||
+      course.shortname ||
+      'Course';
+
+
+    continueActivity.textContent =
+      progress >= 100
+        ? 'Course completed'
+        : progress > 0
+          ? 'Continue where you left off'
+          : 'Begin your first activity';
+
+
+    continueProgressValue.textContent =
+      `${progress.toFixed(0)}%`;
+
+
+    continueProgressFill.style.width =
+      `${Math.max(
+        0,
+        Math.min(
+          100,
+          progress
+        )
+      )}%`;
+
+
+    continueButton.href =
+      `course.html?id=${
+        encodeURIComponent(
+          course.id
+        )
+      }`;
+
+  }
+
+
+  /* =========================================================
+     GRADEBOOK
+  ========================================================== */
+
+  async function loadPerformance() {
+
+    if (
+      !enrolledCourses.length
+    ) {
+
+      return;
+
+    }
+
+
+    gradeData = [];
+
+
+    for (
+      const course
+      of enrolledCourses
+    ) {
+
+      try {
+
+        const data =
+          await moodleRequest(
+            'gradereport_user_get_grade_items',
+            {
+              courseid:
+                course.id
+            }
+          );
+
+
+        const items =
+          extractGradeItems(
+            data
+          );
+
+
+        gradeData.push({
+
+          course:
+            course,
+
+          items:
+            items
+
+        });
+
+      }
+      catch (error) {
+
+        console.warn(
+          `Grades unavailable for course ${course.id}:`,
+          error
+        );
+
+
+        gradeData.push({
+
+          course:
+            course,
+
+          items:
+            []
+
+        });
+
+      }
+
+    }
+
+
+    renderPerformance();
+
+  }
+
+
+  function extractGradeItems(
+    data
+  ) {
+
+    const output = [];
+
+
+    if (
+      !data ||
+      !Array.isArray(
+        data.usergrades
+      )
+    ) {
+
+      return output;
+
+    }
+
+
+    data.usergrades.forEach(
+      user => {
+
+        if (
+          !Array.isArray(
+            user.gradeitems
+          )
+        ) {
+
+          return;
+
+        }
+
+
+        user.gradeitems.forEach(
+          item => {
+
+            if (
+              item.itemtype ===
+              'course'
+            ) {
+
+              return;
+
+            }
+
+
+            const percentage =
+              getGradePercentage(
+                item
+              );
+
+
+            if (
+              percentage ===
+              null
+            ) {
+
+              return;
+
+            }
+
+
+            output.push({
+
+              ...item,
+
+              percentage:
+                percentage
+
+            });
+
+          }
+        );
+
+      }
+    );
+
+
+    return output;
+
+  }
+
+
+  function getGradePercentage(
+    item
+  ) {
+
+    if (
+      item.percentage !==
+        undefined &&
+      item.percentage !==
+        null &&
+      item.percentage !==
+        ''
+    ) {
+
+      const value =
+        Number(
+          item.percentage
+        );
+
+
+      if (
+        Number.isFinite(
+          value
+        )
+      ) {
+
+        return value;
+
+      }
+
+    }
+
+
+    const grade =
+      Number(
+        item.grade
+      );
+
+
+    const max =
+      Number(
+        item.grademax
+      );
+
+
+    if (
+      Number.isFinite(
+        grade
+      ) &&
+      Number.isFinite(
+        max
+      ) &&
+      max > 0
+    ) {
+
+      return (
+        grade /
+        max
+      ) *
+      100;
+
+    }
+
+
+    return null;
+
+  }
+
+
+  function renderPerformance() {
+
+    const all =
+      gradeData.flatMap(
+        entry =>
+          entry.items
+      );
+
+
+    if (
+      !all.length
+    ) {
+
+      overallAverage.textContent =
+        '—';
+
+
+      bestCourse.textContent =
+        '—';
+
+
+      assessmentCount.textContent =
+        '0';
+
+
+      performanceBadge.textContent =
+        'No grades yet';
+
+
+      return;
+
+    }
+
+
+    const average =
+      all.reduce(
+        (
+          sum,
+          item
+        ) =>
+          sum +
+          Number(
+            item.percentage
+          ),
+        0
+      ) /
+      all.length;
+
+
+    overallAverage.textContent =
+      `${average.toFixed(
+        1
+      )}%`;
+
+
+    assessmentCount.textContent =
+      all.length;
+
+
+    if (
+      average >= 85
+    ) {
+
+      performanceBadge.textContent =
+        'Excellent';
+
+    }
+    else if (
+      average >= 70
+    ) {
+
+      performanceBadge.textContent =
+        'Strong';
+
+    }
+    else if (
+      average >= 50
+    ) {
+
+      performanceBadge.textContent =
+        'Needs review';
+
+    }
+    else {
+
+      performanceBadge.textContent =
+        'At risk';
+
+    }
+
+
+    const courseAverages =
+      gradeData
+        .map(
+          entry => {
+
+            if (
+              !entry.items.length
+            ) {
+
+              return null;
+
+            }
+
+
+            const avg =
+              entry.items.reduce(
+                (
+                  sum,
+                  item
+                ) =>
+                  sum +
+                  Number(
+                    item.percentage
+                  ),
+                0
+              ) /
+              entry.items.length;
+
+
+            return {
+
+              course:
+                entry.course,
+
+              average:
+                avg
+
+            };
+
+          }
+        )
+        .filter(
+          Boolean
+        );
+
+
+    courseAverages.sort(
+      (
+        a,
+        b
+      ) =>
+        b.average -
+        a.average
+    );
+
+
+    if (
+      courseAverages.length
+    ) {
+
+      const best =
+        courseAverages[0];
+
+
+      bestCourse.textContent =
+        `${(
+          best.average
+        ).toFixed(
+          0
+        )}%`;
+
+      bestCourse.title =
+        best.course.fullname ||
+        best.course.shortname ||
+        '';
+
+    }
+
+  }
+
+
+  /* =========================================================
+     RECENT ACTIVITY
+  ========================================================== */
+
+  async function loadRecentActivity() {
+
+    const activities = [];
+
+
+    /*
+     * We use Moodle course contents as the
+     * reliable baseline for available activities.
+     *
+     * This gives the dashboard useful live
+     * course activity without requiring
+     * elevated logging permissions.
+     */
+
+    for (
+      const course
+      of enrolledCourses.slice(
+        0,
+        6
+      )
+    ) {
+
+      try {
+
+        const sections =
+          await moodleRequest(
+            'core_course_get_contents',
+            {
+              courseid:
+                course.id
+            }
+          );
+
+
+        if (
+          !Array.isArray(
+            sections
+          )
+        ) {
+
+          continue;
+
+        }
+
+
+        for (
+          const section
+          of sections
+        ) {
+
+          const modules =
+            Array.isArray(
+              section.modules
+            )
+              ? section.modules
+              : [];
+
+
+          modules
+            .slice(
+              0,
+              3
+            )
+            .forEach(
+              module => {
+
+                if (
+                  module.visible ===
+                  0
+                ) {
+
+                  return;
+
+                }
+
+
+                let icon =
+                  'book-open';
+
+
+                if (
+                  module.modname ===
+                  'assign'
+                ) {
+
+                  icon =
+                    'clipboard-check';
+
+                }
+                else if (
+                  module.modname ===
+                  'quiz'
+                ) {
+
+                  icon =
+                    'badge-check';
+
+                }
+                else if (
+                  module.modname ===
+                  'resource'
+                ) {
+
+                  icon =
+                    'file-text';
+
+                }
+                else if (
+                  module.modname ===
+                  'url'
+                ) {
+
+                  icon =
+                    'external-link';
+
+                }
+
+
+                activities.push({
+
+                  name:
+                    module.name ||
+                    'Activity',
+
+                  course:
+                    course.fullname ||
+                    course.shortname ||
+                    'Course',
+
+                  icon:
+                    icon
+
+                });
+
+              }
+            );
+
+        }
+
+      }
+      catch (error) {
+
+        console.warn(
+          `Activity load failed for course ${course.id}:`,
+          error
+        );
+
+      }
+
+    }
+
+
+    recentActivities =
+      activities.slice(
+        0,
+        8
+      );
+
+
+    renderRecentActivity();
+
+  }
+
+
+  function renderRecentActivity() {
+
+    if (
+      !recentActivities.length
+    ) {
+
+      activityList.innerHTML = `
+
+        <div class="empty-state">
+          No recent activity available.
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    activityList.innerHTML =
+      recentActivities
+        .map(
+          activity => `
+
+            <div class="activity-row">
+
+              <div
+                class="activity-icon"
+              >
+
+                <i
+                  data-lucide="${
+                    activity.icon
+                  }"
+                  style="
+                    width:15px;
+                    height:15px;
+                  "
+                ></i>
+
+              </div>
+
+
+              <div>
+
+                <div
+                  class="activity-name"
+                >
+
+                  ${escapeHtml(
+                    activity.name
+                  )}
+
+                </div>
+
+
+                <div
+                  class="activity-course"
+                >
+
+                  ${escapeHtml(
+                    activity.course
+                  )}
+
+                </div>
+
+              </div>
+
+
+              <div
+                class="activity-time"
+              >
+                Moodle
+              </div>
+
+            </div>
+
+          `
+        )
+        .join('');
+
+
+    lucide.createIcons();
+
+  }
+
+
+  /* =========================================================
+     REFRESH
+  ========================================================== */
+
+  async function loadDashboard() {
+
+    try {
+
+      welcomeSubtitle.textContent =
+        'Synchronizing with Moodle...';
+
+
+      await loadCurrentUser();
+
+      await loadCourses();
+
+
+      await Promise.all([
+        loadAssignments(),
+        loadPerformance(),
+        loadRecentActivity()
+      ]);
+
+
+      welcomeSubtitle.textContent =
+        'Your academic workspace is ready.';
+
+
+    }
+    catch (error) {
+
+      console.error(
+        'Dashboard error:',
+        error
+      );
+
+
+      welcomeSubtitle.textContent =
+        'Some dashboard data could not be loaded.';
+
+
+      courseGrid.innerHTML = `
+
+        <div
+          class="panel"
+          style="
+            grid-column:1/-1;
+            padding:30px;
+          "
+        >
+
+          <div
+            style="
+              font-family:var(--font-heading);
+              font-weight:700;
+              margin-bottom:5px;
+            "
+          >
+            Dashboard connection issue
+          </div>
+
+
+          <div
+            style="
+              color:var(--muted);
+              font-size:.8rem;
+            "
+          >
+
+            ${escapeHtml(
+              error.message
+            )}
+
+          </div>
+
+        </div>
+
+      `;
+
+    }
+    finally {
+
+      lucide.createIcons();
+
+    }
+
+  }
+
+
+  /* =========================================================
+     EVENTS
+  ========================================================== */
+
+  document
+    .getElementById(
+      'refresh-button'
+    )
+    .addEventListener(
+      'click',
+      loadDashboard
+    );
+
+
+  document
+    .getElementById(
+      'refresh-action'
+    )
+    .addEventListener(
+      'click',
+      loadDashboard
+    );
+
+
+  document
+    .getElementById(
+      'profile-button'
+    )
+    .addEventListener(
+      'click',
+      () => {
+
+        window.location.href =
+          'profile.html';
+
+      }
+    );
+
+
+  /* =========================================================
+     INITIALIZE
+  ========================================================== */
+
+  loadDashboard();
+
+</script>
+
+
 </body>
+
 </html>
