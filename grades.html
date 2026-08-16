@@ -1011,151 +1011,120 @@
   function extractGradeData(data) {
 
     const result = {
-      items: [],
-      courseItem: null
+        items: [],
+        courseItem: null
     };
 
-
     if (
-      !data ||
-      !Array.isArray(
-        data.usergrades
-      )
+        !data ||
+        !Array.isArray(data.usergrades)
     ) {
-
-      return result;
-
+        return result;
     }
 
-
-    data.usergrades.forEach(
-      user => {
+    data.usergrades.forEach(user => {
 
         if (
-          !Array.isArray(
-            user.gradeitems
-          )
+            !Array.isArray(user.gradeitems)
         ) {
-
-          return;
-
+            return;
         }
 
+        user.gradeitems.forEach(item => {
 
-        user.gradeitems.forEach(
-          item => {
+            const itemType =
+                String(item.itemtype || '')
+                    .toLowerCase();
+
+            const itemName =
+                String(
+                    item.itemname || ''
+                ).toLowerCase();
 
             /*
-             * Keep Moodle's course-level
-             * grade separately.
+             * Moodle's course total should normally
+             * have itemtype = "course".
              */
-
             if (
-              item.itemtype === 'course'
+                itemType === 'course' ||
+                itemName === 'course total'
             ) {
 
-              result.courseItem =
-                item;
-
-              return;
-
+                result.courseItem = item;
+                return;
             }
 
+            result.items.push(item);
 
-            result.items.push(
-              item
-            );
+        });
 
-          }
-        );
-
-      }
-    );
-
+    });
 
     return result;
-
-  }
+}
 
 
   /* ==========================================
      GET PERCENTAGE
   ========================================== */
 
-  function getPercentage(
-    item
-  ) {
+function getPercentage(item) {
 
     if (!item) {
-
-      return null;
-
+        return null;
     }
 
-
-    /*
-     * Prefer Moodle's own percentage
-     * when it provides one.
-     */
+    // 1. Moodle may already provide a percentage.
+    const directPercentage = Number(item.percentage);
 
     if (
-      item.percentage !== undefined &&
-      item.percentage !== null &&
-      item.percentage !== ''
+        Number.isFinite(directPercentage) &&
+        item.percentage !== ''
     ) {
-
-      const value =
-        Number(item.percentage);
-
-
-      if (
-        Number.isFinite(value)
-      ) {
-
-        return value;
-
-      }
-
+        return directPercentage;
     }
 
+    // 2. Some Moodle responses expose the percentage
+    //    as a formatted string such as "80.00 %".
+    if (item.percentageformatted) {
 
-    /*
-     * Fallback:
-     * grade / max grade.
-     */
+        const formattedMatch =
+            String(item.percentageformatted)
+                .replace(',', '.')
+                .match(/-?\d+(?:\.\d+)?/);
 
-    if (
-      item.grademax !== undefined &&
-      item.grademax !== null &&
-      Number(item.grademax) > 0 &&
-      item.grade !== undefined &&
-      item.grade !== null
-    ) {
+        if (formattedMatch) {
 
-      const grade =
+            const formattedValue =
+                Number(formattedMatch[0]);
+
+            if (Number.isFinite(formattedValue)) {
+                return formattedValue;
+            }
+        }
+    }
+
+    // 3. Calculate from numeric grade + max grade.
+    const grade =
         Number(item.grade);
 
-      const max =
+    const gradeMax =
         Number(item.grademax);
 
-
-      if (
+    if (
         Number.isFinite(grade) &&
-        Number.isFinite(max)
-      ) {
+        Number.isFinite(gradeMax) &&
+        gradeMax > 0
+    ) {
 
         return (
-          grade / max
+            grade / gradeMax
         ) * 100;
-
-      }
-
     }
 
-
+    // 4. Nothing usable was returned.
     return null;
-
-  }
+}
 
 
   /* ==========================================
@@ -1294,11 +1263,9 @@
                * Don't display 0 if Moodle
                * says the item is ungraded.
                */
-
+              
               const hasGrade =
-                item.grade !== undefined &&
-                item.grade !== null &&
-                item.grade !== '';
+                  percentage !== null;
 
 
               const grade =
@@ -1528,7 +1495,7 @@
             <div
               class="course-average-label"
             >
-              Moodle Course Total
+               Course Total
             </div>
 
             ${
@@ -1544,7 +1511,7 @@
                       "
                     ></i>
 
-                    From Moodle gradebook
+                    grade
 
                   </div>
                 `
@@ -1709,7 +1676,7 @@
             );
 
            console.log(
-            'ATHENA GRADE RESPONSE:',
+            'ATHENA GRADE RESPONSE JSON:',
             course.id,
             gradeData
            );
