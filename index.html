@@ -12,10 +12,6 @@
 
   <title>Athena LMS | Dashboard</title>
 
-  <!-- =========================================================
-       FONTS
-  ========================================================== -->
-
   <link
     href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
     rel="stylesheet"
@@ -23,10 +19,6 @@
 
   <script src="https://unpkg.com/lucide@latest"></script>
 
-
-  <!-- =========================================================
-       STYLES
-  ========================================================== -->
 
   <style>
 
@@ -48,22 +40,18 @@
       --white: #ffffff;
 
       --green-bg: #f0fdf4;
-      --green-border: #bbf7d0;
       --green-text: #166534;
 
       --yellow-bg: #fffbeb;
-      --yellow-border: #fde68a;
       --yellow-text: #92400e;
 
       --red-bg: #fef2f2;
-      --red-border: #fecaca;
       --red-text: #991b1b;
 
       --font-heading: 'Space Grotesk', sans-serif;
       --font-body: 'Inter', sans-serif;
 
       --radius: 12px;
-
     }
 
 
@@ -80,32 +68,10 @@
 
 
     body {
-
       font-family: var(--font-body);
-
-      background:
-        var(--bg);
-
-      color:
-        var(--text);
-
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.6;
-
-    }
-
-
-    button,
-    input,
-    select,
-    textarea {
-
-      font: inherit;
-
-    }
-
-
-    button {
-      cursor: pointer;
     }
 
 
@@ -115,9 +81,16 @@
     }
 
 
-    img {
-      max-width: 100%;
-      display: block;
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+
+    button {
+      cursor: pointer;
     }
 
 
@@ -138,14 +111,13 @@
       height: 70px;
 
       background:
-        rgba(255,255,255,0.94);
+        rgba(255, 255, 255, 0.95);
 
       border-bottom:
         1px solid var(--border);
 
       backdrop-filter:
         blur(10px);
-
     }
 
 
@@ -157,17 +129,13 @@
 
       margin: 0 auto;
 
-      padding:
-        0 24px;
+      padding: 0 24px;
 
       display: flex;
 
       align-items: center;
 
       justify-content: space-between;
-
-      gap: 20px;
-
     }
 
 
@@ -178,7 +146,6 @@
       align-items: center;
 
       gap: 10px;
-
     }
 
 
@@ -192,38 +159,27 @@
       align-items: center;
       justify-content: center;
 
-      background:
-        var(--black);
+      background: var(--black);
 
-      color:
-        var(--white);
+      color: var(--white);
 
-      border-radius:
-        7px;
+      border-radius: 7px;
 
-      font-family:
-        var(--font-heading);
+      font-family: var(--font-heading);
 
-      font-weight:
-        700;
-
+      font-weight: 700;
     }
 
 
     .brand-text {
 
-      font-family:
-        var(--font-heading);
+      font-family: var(--font-heading);
 
-      font-size:
-        1.05rem;
+      font-size: 1.05rem;
 
-      font-weight:
-        700;
+      font-weight: 700;
 
-      letter-spacing:
-        -0.4px;
-
+      letter-spacing: -0.4px;
     }
 
 
@@ -234,7 +190,6 @@
       align-items: center;
 
       gap: 10px;
-
     }
 
 
@@ -248,32 +203,33 @@
       align-items: center;
       justify-content: center;
 
-      background:
-        var(--surface);
+      background: var(--surface);
 
-      border:
-        1px solid var(--border);
+      border: 1px solid var(--border);
 
-      border-radius:
-        8px;
+      border-radius: 8px;
 
-      color:
-        var(--muted);
+      color: var(--muted);
 
       transition:
-        0.2s ease;
-
+        color 0.15s ease,
+        border-color 0.15s ease,
+        transform 0.15s ease;
     }
 
 
     .nav-button:hover {
 
-      border-color:
-        var(--black);
+      color: var(--black);
 
-      color:
-        var(--black);
+      border-color: var(--black);
+    }
 
+
+    .nav-button.refreshing i {
+
+      animation:
+        spin 0.8s linear infinite;
     }
 
 
@@ -287,40 +243,17 @@
       align-items: center;
       justify-content: center;
 
-      overflow: hidden;
+      border: 1px solid var(--border);
 
-      border:
-        1px solid var(--border);
+      border-radius: 50%;
 
-      border-radius:
-        50%;
+      background: var(--surface-2);
 
-      background:
-        var(--surface-2);
+      font-family: var(--font-heading);
 
-      font-family:
-        var(--font-heading);
+      font-size: 0.8rem;
 
-      font-size:
-        0.8rem;
-
-      font-weight:
-        700;
-
-      cursor:
-        pointer;
-
-    }
-
-
-    .avatar-button img {
-
-      width: 100%;
-      height: 100%;
-
-      object-fit:
-        cover;
-
+      font-weight: 700;
     }
 
 
@@ -330,15 +263,12 @@
 
     .page {
 
-      max-width:
-        1280px;
+      max-width: 1280px;
 
-      margin:
-        0 auto;
+      margin: 0 auto;
 
       padding:
-        105px 24px 60px;
-
+        105px 24px 55px;
     }
 
 
@@ -348,54 +278,39 @@
 
     .hero {
 
-      display:
-        grid;
+      display: grid;
 
       grid-template-columns:
         minmax(0, 1.7fr)
         minmax(280px, 0.8fr);
 
-      gap:
-        18px;
+      gap: 18px;
 
-      margin-bottom:
-        20px;
-
+      margin-bottom: 20px;
     }
 
 
     .hero-main {
 
-      position:
-        relative;
+      position: relative;
 
-      overflow:
-        hidden;
+      overflow: hidden;
 
-      min-height:
-        260px;
+      min-height: 260px;
 
-      padding:
-        34px;
+      padding: 34px;
 
-      display:
-        flex;
+      display: flex;
 
-      flex-direction:
-        column;
+      flex-direction: column;
 
-      justify-content:
-        space-between;
+      justify-content: space-between;
 
-      background:
-        var(--surface);
+      background: var(--surface);
 
-      border:
-        1px solid var(--border);
+      border: 1px solid var(--border);
 
-      border-radius:
-        var(--radius);
-
+      border-radius: var(--radius);
     }
 
 
@@ -403,224 +318,158 @@
 
       content: "";
 
-      position:
-        absolute;
+      position: absolute;
 
-      inset:
-        0;
+      inset: 0;
 
-      pointer-events:
-        none;
-
-      opacity:
-        0.65;
+      pointer-events: none;
 
       background-image:
-
         linear-gradient(
           var(--border) 1px,
           transparent 1px
         ),
-
         linear-gradient(
           90deg,
           var(--border) 1px,
           transparent 1px
         );
 
-      background-size:
-        32px 32px;
+      background-size: 32px 32px;
 
       mask-image:
         linear-gradient(
           135deg,
           black,
-          transparent 70%
+          transparent 72%
         );
 
+      opacity: 0.7;
     }
 
 
     .hero-content {
 
-      position:
-        relative;
+      position: relative;
 
-      z-index:
-        2;
-
+      z-index: 2;
     }
 
 
     .eyebrow {
 
-      display:
-        inline-flex;
+      display: inline-flex;
 
-      align-items:
-        center;
+      align-items: center;
 
-      gap:
-        7px;
+      gap: 7px;
 
-      margin-bottom:
-        12px;
+      margin-bottom: 12px;
 
-      color:
-        var(--muted);
+      color: var(--muted);
 
-      font-size:
-        0.74rem;
+      font-size: 0.74rem;
 
-      font-weight:
-        700;
+      font-weight: 700;
 
-      text-transform:
-        uppercase;
+      text-transform: uppercase;
 
-      letter-spacing:
-        0.09em;
-
+      letter-spacing: 0.09em;
     }
 
 
     .hero-title {
 
-      max-width:
-        700px;
+      max-width: 700px;
 
-      font-family:
-        var(--font-heading);
+      font-family: var(--font-heading);
 
       font-size:
-        clamp(
-          2rem,
-          5vw,
-          3.3rem
-        );
+        clamp(2rem, 5vw, 3.3rem);
 
-      line-height:
-        1.05;
+      line-height: 1.05;
 
-      letter-spacing:
-        -1.6px;
+      letter-spacing: -1.6px;
 
-      margin-bottom:
-        12px;
-
+      margin-bottom: 12px;
     }
 
 
     .hero-subtitle {
 
-      max-width:
-        650px;
+      max-width: 650px;
 
-      color:
-        var(--muted);
+      color: var(--muted);
 
-      font-size:
-        0.95rem;
-
+      font-size: 0.95rem;
     }
 
 
     .hero-bottom {
 
-      position:
-        relative;
+      position: relative;
 
-      z-index:
-        2;
+      z-index: 2;
 
-      display:
-        flex;
+      display: flex;
 
-      flex-wrap:
-        wrap;
+      align-items: center;
 
-      align-items:
-        center;
+      justify-content: space-between;
 
-      justify-content:
-        space-between;
+      gap: 16px;
 
-      gap:
-        16px;
-
-      margin-top:
-        32px;
-
+      margin-top: 30px;
     }
 
 
     .student-meta {
 
-      display:
-        flex;
+      display: flex;
 
-      align-items:
-        center;
+      align-items: center;
 
-      gap:
-        10px;
+      gap: 9px;
 
-      color:
-        var(--muted);
+      color: var(--muted);
 
-      font-size:
-        0.82rem;
-
+      font-size: 0.8rem;
     }
 
 
     .student-meta strong {
 
-      color:
-        var(--text);
+      color: var(--text);
 
-      font-weight:
-        600;
-
+      font-weight: 600;
     }
 
 
     /* =========================================================
-       HERO SIDE / CONTINUE
+       CONTINUE LEARNING
     ========================================================== */
 
     .continue-card {
 
-      background:
-        var(--black);
+      position: relative;
 
-      color:
-        var(--white);
+      overflow: hidden;
 
-      border-radius:
-        var(--radius);
+      min-height: 260px;
 
-      padding:
-        28px;
+      padding: 28px;
 
-      position:
-        relative;
+      display: flex;
 
-      overflow:
-        hidden;
+      flex-direction: column;
 
-      min-height:
-        260px;
+      justify-content: space-between;
 
-      display:
-        flex;
+      background: var(--black);
 
-      flex-direction:
-        column;
+      color: var(--white);
 
-      justify-content:
-        space-between;
-
+      border-radius: var(--radius);
     }
 
 
@@ -628,28 +477,19 @@
 
       content: "";
 
-      position:
-        absolute;
+      position: absolute;
 
-      width:
-        200px;
+      width: 220px;
+      height: 220px;
 
-      height:
-        200px;
+      right: -90px;
+      top: -90px;
 
       border:
         1px solid
-        rgba(255,255,255,0.15);
+        rgba(255, 255, 255, 0.15);
 
-      border-radius:
-        50%;
-
-      right:
-        -80px;
-
-      top:
-        -80px;
-
+      border-radius: 50%;
     }
 
 
@@ -657,415 +497,207 @@
 
       content: "";
 
-      position:
-        absolute;
+      position: absolute;
 
-      width:
-        120px;
+      width: 130px;
+      height: 130px;
 
-      height:
-        120px;
+      right: -35px;
+      top: -35px;
 
       border:
         1px solid
-        rgba(255,255,255,0.12);
+        rgba(255, 255, 255, 0.12);
 
-      border-radius:
-        50%;
-
-      right:
-        -30px;
-
-      top:
-        -30px;
-
+      border-radius: 50%;
     }
 
 
-    .continue-top {
+    .continue-top,
+    .continue-bottom {
 
-      position:
-        relative;
+      position: relative;
 
-      z-index:
-        2;
-
+      z-index: 2;
     }
 
 
     .continue-label {
 
-      font-size:
-        0.72rem;
+      margin-bottom: 10px;
 
-      font-weight:
-        700;
+      font-size: 0.72rem;
 
-      text-transform:
-        uppercase;
+      font-weight: 700;
 
-      letter-spacing:
-        0.08em;
+      text-transform: uppercase;
 
-      opacity:
-        0.62;
+      letter-spacing: 0.08em;
 
-      margin-bottom:
-        10px;
-
+      opacity: 0.65;
     }
 
 
     .continue-course {
 
-      font-family:
-        var(--font-heading);
+      font-family: var(--font-heading);
 
-      font-size:
-        1.45rem;
+      font-size: 1.4rem;
 
-      font-weight:
-        700;
+      font-weight: 700;
 
-      line-height:
-        1.15;
+      line-height: 1.15;
 
-      margin-bottom:
-        5px;
-
+      margin-bottom: 5px;
     }
 
 
     .continue-activity {
 
-      font-size:
-        0.82rem;
+      font-size: 0.8rem;
 
-      opacity:
-        0.72;
-
-    }
-
-
-    .continue-progress-wrap {
-
-      position:
-        relative;
-
-      z-index:
-        2;
-
-      margin-top:
-        18px;
-
+      opacity: 0.72;
     }
 
 
     .continue-progress-header {
 
-      display:
-        flex;
+      display: flex;
 
-      justify-content:
-        space-between;
+      align-items: center;
 
-      font-size:
-        0.72rem;
+      justify-content: space-between;
 
-      margin-bottom:
-        7px;
+      margin-bottom: 7px;
 
-      opacity:
-        0.75;
+      font-size: 0.72rem;
 
+      opacity: 0.78;
     }
 
 
     .continue-progress {
 
-      height:
-        6px;
+      height: 6px;
 
-      border-radius:
-        999px;
+      overflow: hidden;
+
+      border-radius: 999px;
 
       background:
-        rgba(255,255,255,0.15);
-
-      overflow:
-        hidden;
-
+        rgba(255, 255, 255, 0.16);
     }
 
 
     .continue-progress-fill {
 
-      height:
-        100%;
+      width: 0%;
 
-      width:
-        0%;
+      height: 100%;
 
-      background:
-        white;
+      background: var(--white);
 
       transition:
         width 0.4s ease;
-
     }
 
 
     .continue-button {
 
-      position:
-        relative;
+      display: flex;
 
-      z-index:
-        2;
+      align-items: center;
 
-      display:
-        flex;
+      justify-content: center;
 
-      align-items:
-        center;
+      gap: 8px;
 
-      justify-content:
-        center;
+      width: 100%;
 
-      gap:
-        8px;
+      margin-top: 18px;
 
-      width:
-        100%;
+      padding: 12px 14px;
 
-      padding:
-        12px 14px;
+      border: none;
 
-      margin-top:
-        18px;
+      border-radius: 8px;
 
-      border:
-        none;
+      background: var(--white);
 
-      border-radius:
-        8px;
+      color: var(--black);
 
-      background:
-        var(--white);
+      font-family: var(--font-heading);
 
-      color:
-        var(--black);
+      font-size: 0.84rem;
 
-      font-family:
-        var(--font-heading);
-
-      font-size:
-        0.85rem;
-
-      font-weight:
-        700;
-
+      font-weight: 700;
     }
 
 
     .continue-button:hover {
-
-      opacity:
-        0.9;
-
+      opacity: 0.9;
     }
 
 
     /* =========================================================
-       SECTION HEADERS
+       PANELS
     ========================================================== */
-
-    .section-header {
-
-      display:
-        flex;
-
-      align-items:
-        flex-end;
-
-      justify-content:
-        space-between;
-
-      gap:
-        15px;
-
-      margin-bottom:
-        12px;
-
-    }
-
-
-    .section-title {
-
-      font-family:
-        var(--font-heading);
-
-      font-size:
-        1.1rem;
-
-      font-weight:
-        700;
-
-      letter-spacing:
-        -0.3px;
-
-    }
-
-
-    .section-note {
-
-      color:
-        var(--muted-2);
-
-      font-size:
-        0.72rem;
-
-    }
-
-
-    .text-link {
-
-      display:
-        inline-flex;
-
-      align-items:
-        center;
-
-      gap:
-        5px;
-
-      color:
-        var(--muted);
-
-      font-size:
-        0.75rem;
-
-      font-weight:
-        600;
-
-    }
-
-
-    .text-link:hover {
-
-      color:
-        var(--black);
-
-    }
-
-
-    /* =========================================================
-       TODAY / PERFORMANCE
-    ========================================================== */
-
-    .top-grid {
-
-      display:
-        grid;
-
-      grid-template-columns:
-        minmax(0,1.35fr)
-        minmax(300px,0.65fr);
-
-      gap:
-        18px;
-
-      margin-bottom:
-        24px;
-
-    }
-
 
     .panel {
 
-      background:
-        var(--surface);
+      background: var(--surface);
 
       border:
-        1px solid var(--border);
+        1px solid
+        var(--border);
 
-      border-radius:
-        var(--radius);
+      border-radius: var(--radius);
 
-      overflow:
-        hidden;
-
+      overflow: hidden;
     }
 
 
     .panel-header {
 
-      padding:
-        18px 20px;
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 12px;
+
+      padding: 17px 20px;
 
       border-bottom:
-        1px solid var(--border);
-
-      display:
-        flex;
-
-      align-items:
-        center;
-
-      justify-content:
-        space-between;
-
-      gap:
-        10px;
-
-    }
-
-
-    .panel-header-left {
-
-      display:
-        flex;
-
-      flex-direction:
-        column;
-
-      gap:
-        2px;
-
+        1px solid
+        var(--border);
     }
 
 
     .panel-kicker {
 
-      color:
-        var(--muted-2);
+      margin-bottom: 2px;
 
-      font-size:
-        0.66rem;
+      color: var(--muted-2);
 
-      font-weight:
-        700;
+      font-size: 0.65rem;
 
-      text-transform:
-        uppercase;
+      font-weight: 700;
 
-      letter-spacing:
-        0.08em;
+      text-transform: uppercase;
 
+      letter-spacing: 0.08em;
     }
 
 
     .panel-title {
 
-      font-family:
-        var(--font-heading);
+      font-family: var(--font-heading);
 
-      font-size:
-        1rem;
+      font-size: 1rem;
 
-      font-weight:
-        700;
-
+      font-weight: 700;
     }
 
 
@@ -1073,13 +705,191 @@
 
       padding:
         18px 20px;
+    }
 
+
+    .text-link {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 5px;
+
+      color: var(--muted);
+
+      font-size: 0.74rem;
+
+      font-weight: 600;
+    }
+
+
+    .text-link:hover {
+
+      color:
+        var(--black);
     }
 
 
     /* =========================================================
-       TASK LIST
+       TODAY + PERFORMANCE
     ========================================================== */
+
+    .top-grid {
+
+      display: grid;
+
+      grid-template-columns:
+        minmax(0, 1.35fr)
+        minmax(300px, 0.65fr);
+
+      gap: 18px;
+
+      margin-bottom: 24px;
+    }
+
+
+    .today-empty {
+
+      min-height: 112px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 20px;
+    }
+
+
+    .today-empty-main {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 13px;
+    }
+
+
+    .today-empty-icon {
+
+      width: 40px;
+      height: 40px;
+
+      flex-shrink: 0;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius: 8px;
+
+      background:
+        var(--surface-2);
+    }
+
+
+    .today-empty-title {
+
+      font-family:
+        var(--font-heading);
+
+      font-size: 0.9rem;
+
+      font-weight: 700;
+    }
+
+
+    .today-empty-text {
+
+      margin-top: 2px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        0.75rem;
+    }
+
+
+    .today-next {
+
+      min-width:
+        170px;
+
+      padding:
+        10px 12px;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:
+        8px;
+
+      text-align:
+        right;
+    }
+
+
+    .today-next-label {
+
+      color:
+        var(--muted-2);
+
+      font-size:
+        0.62rem;
+
+      font-weight:
+        700;
+
+      text-transform:
+        uppercase;
+
+      letter-spacing:
+        0.05em;
+    }
+
+
+    .today-next-name {
+
+      margin-top:
+        2px;
+
+      font-size:
+        0.76rem;
+
+      font-weight:
+        700;
+
+      white-space:
+        nowrap;
+
+      overflow:
+        hidden;
+
+      text-overflow:
+        ellipsis;
+    }
+
+
+    .today-next-date {
+
+      color:
+        var(--muted);
+
+      font-size:
+        0.66rem;
+    }
+
 
     .task-list {
 
@@ -1090,8 +900,7 @@
         column;
 
       gap:
-        9px;
-
+        8px;
     }
 
 
@@ -1107,28 +916,24 @@
         12px;
 
       padding:
-        11px 12px;
+        10px 12px;
 
       border:
-        1px solid var(--border);
+        1px solid
+        var(--border);
 
       border-radius:
         8px;
-
-      transition:
-        0.15s ease;
-
     }
 
 
     .task-row:hover {
 
-      border-color:
-        var(--border-dark);
-
       background:
         var(--surface-2);
 
+      border-color:
+        var(--border-dark);
     }
 
 
@@ -1140,6 +945,9 @@
       height:
         34px;
 
+      flex-shrink:
+        0;
+
       display:
         flex;
 
@@ -1149,15 +957,11 @@
       justify-content:
         center;
 
-      flex-shrink:
-        0;
-
-      background:
-        var(--surface-2);
-
       border-radius:
         7px;
 
+      background:
+        var(--surface-2);
     }
 
 
@@ -1168,14 +972,13 @@
 
       flex:
         1;
-
     }
 
 
     .task-name {
 
       font-size:
-        0.83rem;
+        0.82rem;
 
       font-weight:
         600;
@@ -1188,7 +991,6 @@
 
       text-overflow:
         ellipsis;
-
     }
 
 
@@ -1198,17 +1000,7 @@
         var(--muted-2);
 
       font-size:
-        0.7rem;
-
-      white-space:
-        nowrap;
-
-      overflow:
-        hidden;
-
-      text-overflow:
-        ellipsis;
-
+        0.68rem;
     }
 
 
@@ -1217,70 +1009,23 @@
       flex-shrink:
         0;
 
-      text-align:
-        right;
-
-    }
-
-
-    .task-due-label {
-
-      color:
-        var(--muted-2);
-
-      font-size:
-        0.66rem;
-
-    }
-
-
-    .task-due-value {
-
-      font-size:
-        0.72rem;
-
-      font-weight:
-        700;
-
-    }
-
-
-    .task-due-value.urgent {
-
-      color:
-        var(--red-text);
-
-    }
-
-
-    .task-due-value.soon {
-
-      color:
-        var(--yellow-text);
-
-    }
-
-
-    .empty-state {
-
-      padding:
-        20px 10px;
-
-      text-align:
-        center;
-
       color:
         var(--muted);
 
       font-size:
-        0.78rem;
+        0.68rem;
 
+      font-weight:
+        700;
     }
 
 
-    /* =========================================================
-       PERFORMANCE
-    ========================================================== */
+    .task-due.urgent {
+
+      color:
+        var(--red-text);
+    }
+
 
     .performance-main {
 
@@ -1298,7 +1043,6 @@
 
       margin-bottom:
         16px;
-
     }
 
 
@@ -1315,7 +1059,6 @@
 
       line-height:
         1;
-
     }
 
 
@@ -1328,8 +1071,7 @@
         var(--muted);
 
       font-size:
-        0.72rem;
-
+        0.7rem;
     }
 
 
@@ -1342,17 +1084,46 @@
         5px;
 
       background:
+        var(--surface-2);
+
+      color:
+        var(--muted);
+
+      font-size:
+        0.67rem;
+
+      font-weight:
+        700;
+    }
+
+
+    .performance-badge.good {
+
+      background:
         var(--green-bg);
 
       color:
         var(--green-text);
+    }
 
-      font-size:
-        0.68rem;
 
-      font-weight:
-        700;
+    .performance-badge.warning {
 
+      background:
+        var(--yellow-bg);
+
+      color:
+        var(--yellow-text);
+    }
+
+
+    .performance-badge.danger {
+
+      background:
+        var(--red-bg);
+
+      color:
+        var(--red-text);
     }
 
 
@@ -1362,11 +1133,13 @@
         grid;
 
       grid-template-columns:
-        repeat(2, minmax(0,1fr));
+        repeat(
+          2,
+          minmax(0,1fr)
+        );
 
       gap:
         8px;
-
     }
 
 
@@ -1376,11 +1149,11 @@
         11px;
 
       border:
-        1px solid var(--border);
+        1px solid
+        var(--border);
 
       border-radius:
         8px;
-
     }
 
 
@@ -1390,15 +1163,14 @@
         var(--muted-2);
 
       font-size:
-        0.65rem;
-
-      margin-bottom:
-        3px;
-
+        0.64rem;
     }
 
 
     .performance-stat-value {
+
+      margin-top:
+        2px;
 
       font-family:
         var(--font-heading);
@@ -1408,19 +1180,62 @@
 
       font-weight:
         700;
-
     }
 
 
     /* =========================================================
-       COURSE GRID
+       COURSES
     ========================================================== */
 
     .course-section {
 
       margin-bottom:
         24px;
+    }
 
+
+    .section-header {
+
+      display:
+        flex;
+
+      align-items:
+        flex-end;
+
+      justify-content:
+        space-between;
+
+      gap:
+        10px;
+
+      margin-bottom:
+        12px;
+    }
+
+
+    .section-title {
+
+      font-family:
+        var(--font-heading);
+
+      font-size:
+        1.05rem;
+
+      font-weight:
+        700;
+    }
+
+
+    .section-note {
+
+      margin-top:
+        2px;
+
+      color:
+        var(--muted-2);
+
+      font-size:
+        0.68rem;
     }
 
 
@@ -1440,34 +1255,27 @@
 
       gap:
         14px;
-
     }
 
 
     .course-card {
 
-      position:
-        relative;
+      padding:
+        19px;
 
       background:
         var(--surface);
 
       border:
-        1px solid var(--border);
+        1px solid
+        var(--border);
 
       border-radius:
         var(--radius);
 
-      padding:
-        20px;
-
-      overflow:
-        hidden;
-
       transition:
-        transform 0.18s ease,
-        border-color 0.18s ease;
-
+        transform .18s ease,
+        border-color .18s ease;
     }
 
 
@@ -1478,7 +1286,6 @@
 
       border-color:
         var(--border-dark);
-
     }
 
 
@@ -1493,12 +1300,8 @@
       justify-content:
         space-between;
 
-      gap:
-        10px;
-
       margin-bottom:
-        18px;
-
+        17px;
     }
 
 
@@ -1519,14 +1322,14 @@
       justify-content:
         center;
 
+      border-radius:
+        8px;
+
       background:
         var(--black);
 
       color:
         var(--white);
-
-      border-radius:
-        8px;
 
       font-family:
         var(--font-heading);
@@ -1536,7 +1339,6 @@
 
       font-weight:
         700;
-
     }
 
 
@@ -1555,14 +1357,13 @@
         var(--muted);
 
       font-size:
-        0.64rem;
+        0.62rem;
 
       font-weight:
         700;
 
       text-transform:
         uppercase;
-
     }
 
 
@@ -1582,21 +1383,22 @@
 
       margin-bottom:
         4px;
-
     }
 
 
     .course-shortname {
 
-      color:
-        var(--muted-2);
-
-      font-size:
-        0.7rem;
+      min-height:
+        18px;
 
       margin-bottom:
         14px;
 
+      color:
+        var(--muted-2);
+
+      font-size:
+        0.68rem;
     }
 
 
@@ -1611,12 +1413,8 @@
       justify-content:
         space-between;
 
-      gap:
-        10px;
-
       margin-bottom:
         7px;
-
     }
 
 
@@ -1626,8 +1424,7 @@
         var(--muted);
 
       font-size:
-        0.68rem;
-
+        0.67rem;
     }
 
 
@@ -1641,7 +1438,6 @@
 
       font-weight:
         700;
-
     }
 
 
@@ -1650,25 +1446,24 @@
       height:
         6px;
 
-      background:
-        var(--surface-3);
+      overflow:
+        hidden;
 
       border-radius:
         999px;
 
-      overflow:
-        hidden;
-
+      background:
+        var(--surface-3);
     }
 
 
     .course-progress-fill {
 
-      height:
-        100%;
-
       width:
         0%;
+
+      height:
+        100%;
 
       background:
         var(--black);
@@ -1677,8 +1472,7 @@
         inherit;
 
       transition:
-        width 0.5s ease;
-
+        width .5s ease;
     }
 
 
@@ -1694,17 +1488,17 @@
         space-between;
 
       gap:
-        10px;
+        8px;
 
       margin-top:
-        15px;
+        14px;
 
       padding-top:
-        13px;
+        12px;
 
       border-top:
-        1px solid var(--border);
-
+        1px solid
+        var(--border);
     }
 
 
@@ -1714,8 +1508,7 @@
         var(--muted-2);
 
       font-size:
-        0.67rem;
-
+        0.64rem;
     }
 
 
@@ -1730,20 +1523,16 @@
       gap:
         5px;
 
-      color:
-        var(--black);
-
       font-size:
-        0.7rem;
+        0.68rem;
 
       font-weight:
         700;
-
     }
 
 
     /* =========================================================
-       LOWER GRID
+       LOWER
     ========================================================== */
 
     .lower-grid {
@@ -1757,25 +1546,17 @@
 
       gap:
         18px;
-
     }
 
 
-    /* =========================================================
-       UPCOMING
-    ========================================================== */
-
-    .deadline-list {
+    .deadline-list,
+    .activity-list {
 
       display:
         flex;
 
       flex-direction:
         column;
-
-      gap:
-        8px;
-
     }
 
 
@@ -1796,53 +1577,49 @@
         12px;
 
       padding:
-        11px 0;
+        10px 0;
 
       border-bottom:
-        1px solid var(--border);
-
+        1px solid
+        var(--border);
     }
 
 
     .deadline-row:last-child {
-
       border-bottom:
         none;
-
     }
 
 
     .deadline-date {
 
-      text-align:
-        center;
-
       padding:
         6px;
+
+      text-align:
+        center;
 
       background:
         var(--surface-2);
 
       border-radius:
         7px;
-
     }
 
 
     .deadline-month {
 
+      color:
+        var(--muted-2);
+
       font-size:
-        0.58rem;
+        0.57rem;
 
       font-weight:
         700;
 
       text-transform:
         uppercase;
-
-      color:
-        var(--muted-2);
-
     }
 
 
@@ -1852,21 +1629,20 @@
         var(--font-heading);
 
       font-size:
-        1.05rem;
+        1rem;
 
       font-weight:
         700;
 
       line-height:
         1.1;
-
     }
 
 
     .deadline-name {
 
       font-size:
-        0.8rem;
+        0.78rem;
 
       font-weight:
         600;
@@ -1879,20 +1655,19 @@
 
       text-overflow:
         ellipsis;
-
     }
 
 
     .deadline-course {
 
+      margin-top:
+        2px;
+
       color:
         var(--muted-2);
 
       font-size:
-        0.68rem;
-
-      margin-top:
-        2px;
+        0.66rem;
 
       white-space:
         nowrap;
@@ -1902,55 +1677,34 @@
 
       text-overflow:
         ellipsis;
-
     }
 
 
     .deadline-relative {
 
+      color:
+        var(--muted);
+
       font-size:
-        0.68rem;
+        0.66rem;
 
       font-weight:
         700;
 
-      color:
-        var(--muted);
-
       white-space:
         nowrap;
-
     }
 
 
     .deadline-relative.urgent {
-
       color:
         var(--red-text);
-
     }
 
 
     .deadline-relative.soon {
-
       color:
         var(--yellow-text);
-
-    }
-
-
-    /* =========================================================
-       RECENT ACTIVITY
-    ========================================================== */
-
-    .activity-list {
-
-      display:
-        flex;
-
-      flex-direction:
-        column;
-
     }
 
 
@@ -1964,18 +1718,18 @@
         minmax(0,1fr)
         auto;
 
-      gap:
-        10px;
-
       align-items:
         center;
 
+      gap:
+        10px;
+
       padding:
-        11px 0;
+        10px 0;
 
       border-bottom:
-        1px solid var(--border);
-
+        1px solid
+        var(--border);
     }
 
 
@@ -2007,18 +1761,16 @@
 
       background:
         var(--surface-2);
-
     }
 
 
     .activity-name {
 
       font-size:
-        0.78rem;
+        0.77rem;
 
       font-weight:
         600;
-
     }
 
 
@@ -2028,8 +1780,7 @@
         var(--muted-2);
 
       font-size:
-        0.67rem;
-
+        0.65rem;
     }
 
 
@@ -2039,11 +1790,10 @@
         var(--muted-2);
 
       font-size:
-        0.65rem;
+        0.63rem;
 
       white-space:
         nowrap;
-
     }
 
 
@@ -2064,14 +1814,13 @@
 
       gap:
         9px;
-
-      margin-top:
-        18px;
-
     }
 
 
     .quick-action {
+
+      min-height:
+        72px;
 
       display:
         flex;
@@ -2088,14 +1837,12 @@
       gap:
         7px;
 
-      min-height:
-        76px;
-
       padding:
         10px;
 
       border:
-        1px solid var(--border);
+        1px solid
+        var(--border);
 
       border-radius:
         8px;
@@ -2107,46 +1854,54 @@
         var(--muted);
 
       font-size:
-        0.66rem;
+        0.64rem;
 
       font-weight:
         600;
 
       text-align:
         center;
-
-      transition:
-        0.15s ease;
-
     }
 
 
     .quick-action:hover {
 
-      border-color:
+      color:
         var(--black);
 
-      color:
+      border-color:
         var(--black);
 
       background:
         var(--surface-2);
-
     }
 
 
     /* =========================================================
-       LOADING
+       EMPTY / LOADING
     ========================================================== */
+
+    .empty-state {
+
+      padding:
+        22px 5px;
+
+      text-align:
+        center;
+
+      color:
+        var(--muted);
+
+      font-size:
+        0.76rem;
+    }
+
 
     .loading {
 
       animation:
         spin
-        1s
-        linear
-        infinite;
-
+        1s linear infinite;
     }
 
 
@@ -2166,19 +1921,11 @@
 
     @media (max-width: 1000px) {
 
-      .hero {
-
-        grid-template-columns:
-          1fr;
-
-      }
-
-
+      .hero,
       .top-grid {
 
         grid-template-columns:
           1fr;
-
       }
 
     }
@@ -2186,35 +1933,17 @@
 
     @media (max-width: 760px) {
 
-      .nav {
-
-        padding:
-          0 16px;
-
-      }
-
-
       .page {
 
         padding:
           92px 16px 45px;
-
       }
 
 
-      .hero-main {
+      .nav {
 
         padding:
-          25px;
-
-      }
-
-
-      .continue-card {
-
-        min-height:
-          220px;
-
+          0 16px;
       }
 
 
@@ -2222,7 +1951,6 @@
 
         grid-template-columns:
           1fr;
-
       }
 
 
@@ -2230,46 +1958,60 @@
 
         grid-template-columns:
           repeat(
-            2,
+            3,
             minmax(0,1fr)
           );
-
       }
 
     }
 
 
-    @media (max-width: 540px) {
+    @media (max-width: 560px) {
 
-      .hero-title {
+      .hero-main {
 
-        font-size:
-          2rem;
-
-      }
-
-
-      .panel-body {
+        min-height:
+          230px;
 
         padding:
-          15px;
-
+          25px;
       }
 
 
-      .panel-header {
+      .continue-card {
 
-        padding:
-          15px;
-
+        min-height:
+          230px;
       }
 
 
-      .task-row {
+      .hero-bottom {
 
         align-items:
           flex-start;
 
+        flex-direction:
+          column;
+      }
+
+
+      .today-empty {
+
+        align-items:
+          flex-start;
+
+        flex-direction:
+          column;
+      }
+
+
+      .today-next {
+
+        width:
+          100%;
+
+        text-align:
+          left;
       }
 
 
@@ -2277,7 +2019,6 @@
 
         display:
           none;
-
       }
 
 
@@ -2286,7 +2027,6 @@
         grid-template-columns:
           50px
           minmax(0,1fr);
-
       }
 
 
@@ -2294,7 +2034,6 @@
 
         display:
           none;
-
       }
 
 
@@ -2305,7 +2044,6 @@
             2,
             minmax(0,1fr)
           );
-
       }
 
     }
@@ -2348,6 +2086,7 @@
         class="nav-button"
         id="refresh-button"
         title="Refresh dashboard"
+        type="button"
       >
 
         <i
@@ -2365,6 +2104,7 @@
         class="avatar-button"
         id="profile-button"
         title="Profile"
+        type="button"
       >
 
         <span
@@ -2449,7 +2189,7 @@
           ></i>
 
           <span>
-            Loading student information...
+            Loading student...
           </span>
 
         </div>
@@ -2481,10 +2221,7 @@
 
     <!-- CONTINUE LEARNING -->
 
-    <div
-      class="continue-card"
-      id="continue-card"
-    >
+    <div class="continue-card">
 
       <div class="continue-top">
 
@@ -2505,13 +2242,13 @@
           class="continue-activity"
           id="continue-activity"
         >
-          Finding your next activity...
+          Checking your course progress...
         </div>
 
       </div>
 
 
-      <div class="continue-progress-wrap">
+      <div class="continue-bottom">
 
         <div
           class="continue-progress-header"
@@ -2578,9 +2315,7 @@
 
       <div class="panel-header">
 
-        <div
-          class="panel-header-left"
-        >
+        <div>
 
           <div class="panel-kicker">
             Attention
@@ -2603,17 +2338,13 @@
       </div>
 
 
-      <div class="panel-body">
+      <div
+        class="panel-body"
+        id="today-container"
+      >
 
-        <div
-          class="task-list"
-          id="today-list"
-        >
-
-          <div class="empty-state">
-            Loading tasks...
-          </div>
-
+        <div class="empty-state">
+          Loading today's work...
         </div>
 
       </div>
@@ -2627,9 +2358,7 @@
 
       <div class="panel-header">
 
-        <div
-          class="panel-header-left"
-        >
+        <div>
 
           <div class="panel-kicker">
             Gradebook
@@ -2664,7 +2393,6 @@
 
       <div class="panel-body">
 
-
         <div class="performance-main">
 
           <div>
@@ -2676,9 +2404,7 @@
               —
             </div>
 
-            <div
-              class="performance-label"
-            >
+            <div class="performance-label">
               Overall average
             </div>
 
@@ -2689,14 +2415,13 @@
             class="performance-badge"
             id="performance-badge"
           >
-            Awaiting data
+            Loading
           </div>
 
         </div>
 
 
         <div class="performance-stats">
-
 
           <div class="performance-stat">
 
@@ -2729,7 +2454,6 @@
 
           </div>
 
-
         </div>
 
       </div>
@@ -2761,19 +2485,22 @@
       </div>
 
 
-      <a
-        href="#"
+      <div
         class="text-link"
-        id="courses-count-link"
+        style="
+          cursor:default;
+        "
       >
 
-        <span id="courses-count">
+        <span
+          id="courses-count"
+        >
           0
         </span>
 
         courses
 
-      </a>
+      </div>
 
     </div>
 
@@ -2819,7 +2546,7 @@
 
 
   <!-- =======================================================
-       UPCOMING / RECENT
+       UPCOMING / ACTIVITY
   ======================================================== -->
 
   <section class="lower-grid">
@@ -2831,9 +2558,7 @@
 
       <div class="panel-header">
 
-        <div
-          class="panel-header-left"
-        >
+        <div>
 
           <div class="panel-kicker">
             Deadlines
@@ -2843,11 +2568,6 @@
             Upcoming
           </div>
 
-        </div>
-
-
-        <div class="section-note">
-          Next deadlines
         </div>
 
       </div>
@@ -2871,29 +2591,22 @@
     </div>
 
 
-    <!-- RECENT ACTIVITY -->
+    <!-- COURSE ACTIVITY -->
 
     <div class="panel">
 
       <div class="panel-header">
 
-        <div
-          class="panel-header-left"
-        >
+        <div>
 
           <div class="panel-kicker">
             Activity
           </div>
 
           <div class="panel-title">
-            Recent Activity
+            Course Activity
           </div>
 
-        </div>
-
-
-        <div class="section-note">
-          Latest updates
         </div>
 
       </div>
@@ -2907,7 +2620,7 @@
         >
 
           <div class="empty-state">
-            Loading recent activity...
+            Loading activity...
           </div>
 
         </div>
@@ -2932,9 +2645,7 @@
 
     <div class="panel-header">
 
-      <div
-        class="panel-header-left"
-      >
+      <div>
 
         <div class="panel-kicker">
           Navigation
@@ -3027,9 +2738,9 @@
 
 
         <button
+          type="button"
           class="quick-action"
           id="refresh-action"
-          type="button"
         >
 
           <i
@@ -3044,7 +2755,6 @@
 
         </button>
 
-
       </div>
 
     </div>
@@ -3054,19 +2764,14 @@
 </main>
 
 
-<!-- =========================================================
-     SCRIPT
-========================================================== -->
-
 <script>
 
   /* =========================================================
-     CONFIG
+     CONFIGURATION
   ========================================================== */
 
   const MOODLE_URL =
     'http://localhost:8000';
-
 
   const userToken =
     localStorage.getItem(
@@ -3075,12 +2780,10 @@
 
 
   /* =========================================================
-     AUTH
+     AUTHENTICATION
   ========================================================== */
 
-  if (
-    !userToken
-  ) {
+  if (!userToken) {
 
     window.location.href =
       'login.html';
@@ -3089,23 +2792,19 @@
 
 
   /* =========================================================
-     GLOBAL STATE
+     STATE
   ========================================================== */
 
-  let currentUser =
-    null;
+  let currentUser = null;
 
-  let enrolledCourses =
-    [];
+  let enrolledCourses = [];
 
-  let assignments =
-    [];
+  let assignments = [];
 
-  let gradeData =
-    [];
+  let courseProgressMap =
+    new Map();
 
-  let recentActivities =
-    [];
+  let courseGrades = [];
 
 
   /* =========================================================
@@ -3117,128 +2816,112 @@
       'welcome-title'
     );
 
-
   const welcomeSubtitle =
     document.getElementById(
       'welcome-subtitle'
     );
-
 
   const studentMeta =
     document.getElementById(
       'student-meta'
     );
 
-
   const dateMeta =
     document.getElementById(
       'date-meta'
     );
-
 
   const avatarFallback =
     document.getElementById(
       'avatar-fallback'
     );
 
-
   const courseGrid =
     document.getElementById(
       'course-grid'
     );
 
-
-  const courseCount =
+  const coursesCount =
     document.getElementById(
       'courses-count'
     );
-
 
   const continueCourse =
     document.getElementById(
       'continue-course'
     );
 
-
   const continueActivity =
     document.getElementById(
       'continue-activity'
     );
-
 
   const continueProgressValue =
     document.getElementById(
       'continue-progress-value'
     );
 
-
   const continueProgressFill =
     document.getElementById(
       'continue-progress-fill'
     );
-
 
   const continueButton =
     document.getElementById(
       'continue-button'
     );
 
-
-  const todayList =
+  const todayContainer =
     document.getElementById(
-      'today-list'
+      'today-container'
     );
-
 
   const todayCount =
     document.getElementById(
       'today-count'
     );
 
-
   const deadlineList =
     document.getElementById(
       'deadline-list'
     );
-
 
   const activityList =
     document.getElementById(
       'activity-list'
     );
 
-
   const overallAverage =
     document.getElementById(
       'overall-average'
     );
-
 
   const performanceBadge =
     document.getElementById(
       'performance-badge'
     );
 
-
   const bestCourse =
     document.getElementById(
       'best-course'
     );
-
 
   const assessmentCount =
     document.getElementById(
       'assessment-count'
     );
 
+  const refreshButton =
+    document.getElementById(
+      'refresh-button'
+    );
+
 
   /* =========================================================
-     ESCAPE
+     HELPERS
   ========================================================== */
 
-  function escapeHtml(
-    value
-  ) {
+  function escapeHtml(value) {
 
     return String(
       value ?? ''
@@ -3377,7 +3060,7 @@
 
 
   /* =========================================================
-     SITE INFO / USER
+     USER
   ========================================================== */
 
   async function loadCurrentUser() {
@@ -3390,6 +3073,17 @@
 
     currentUser =
       data;
+
+
+    if (
+      !currentUser.userid
+    ) {
+
+      throw new Error(
+        'Moodle did not return the logged-in user ID.'
+      );
+
+    }
 
 
     const firstname =
@@ -3407,10 +3101,7 @@
 
 
     welcomeTitle.textContent =
-      `Welcome back, ${
-        firstname
-      }.`;
-
+      `Welcome back, ${firstname}.`;
 
 
     welcomeSubtitle.textContent =
@@ -3441,21 +3132,19 @@
 
 
     const today =
-      new Date()
-        .toLocaleDateString(
-          'en-US',
-          {
-            weekday:
-              'long',
+      new Date().toLocaleDateString(
+        'en-US',
+        {
+          weekday:
+            'long',
 
-            month:
-              'long',
+          month:
+            'long',
 
-            day:
-              'numeric'
-
-          }
-        );
+          day:
+            'numeric'
+        }
+      );
 
 
     dateMeta.innerHTML = `
@@ -3469,7 +3158,9 @@
       ></i>
 
       <span>
-        ${escapeHtml(today)}
+        ${escapeHtml(
+          today
+        )}
       </span>
 
     `;
@@ -3497,15 +3188,6 @@
 
   async function loadCourses() {
 
-    if (
-      !currentUser?.userid
-    ) {
-
-      return;
-
-    }
-
-
     const courses =
       await moodleRequest(
         'core_enrol_get_users_courses',
@@ -3517,31 +3199,452 @@
 
 
     enrolledCourses =
-      Array.isArray(courses)
+      Array.isArray(
+        courses
+      )
         ? courses
         : [];
 
 
-    courseCount.textContent =
+    coursesCount.textContent =
       enrolledCourses.length;
+
+
+    await loadAllCourseProgress();
 
 
     renderCourses();
 
-    await setupContinueLearning();
+    setupContinueLearning();
 
   }
 
 
   /* =========================================================
-     COURSE PROGRESS
+     COURSE PROGRESS ENGINE
   ========================================================== */
 
-  function getCourseProgress(
+  async function loadAllCourseProgress() {
+
+    courseProgressMap =
+      new Map();
+
+
+    /*
+     * Run the courses independently.
+     * One course failing must not break all others.
+     */
+
+    await Promise.all(
+      enrolledCourses.map(
+        async course => {
+
+          try {
+
+            const result =
+              await calculateCourseProgress(
+                course
+              );
+
+
+            courseProgressMap.set(
+              Number(course.id),
+              result
+            );
+
+          }
+          catch (error) {
+
+            console.warn(
+              `ATHENA PROGRESS FAILED ${course.id}:`,
+              error
+            );
+
+
+            courseProgressMap.set(
+              Number(course.id),
+              0
+            );
+
+          }
+
+        }
+      )
+    );
+
+
+    console.log(
+      'ATHENA COURSE PROGRESS MAP:',
+      Object.fromEntries(
+        courseProgressMap
+      )
+    );
+
+  }
+
+
+  async function calculateCourseProgress(
     course
   ) {
 
-    const value =
+    const courseId =
+      Number(
+        course.id
+      );
+
+
+    /* =======================================================
+       METHOD 1
+       Activity completion API
+    ======================================================== */
+
+    try {
+
+      const data =
+        await moodleRequest(
+          'core_completion_get_activities_completion_status',
+          {
+            courseid:
+              courseId,
+
+            userid:
+              currentUser.userid
+          }
+        );
+
+
+      console.log(
+        `ATHENA ACTIVITY COMPLETION RESPONSE ${courseId}:`,
+        data
+      );
+
+
+      const statuses =
+        Array.isArray(
+          data?.statuses
+        )
+          ? data.statuses
+          : [];
+
+
+      if (
+        statuses.length
+      ) {
+
+        /*
+         * Only count activities for which
+         * completion tracking is meaningful.
+         */
+
+        const tracked =
+          statuses.filter(
+            activity => {
+
+              if (
+                activity.tracking !== undefined &&
+                Number(
+                  activity.tracking
+                ) === 0
+              ) {
+
+                return false;
+
+              }
+
+
+              if (
+                activity.hascompletion !== undefined &&
+                (
+                  activity.hascompletion === false ||
+                  Number(
+                    activity.hascompletion
+                  ) === 0
+                )
+              ) {
+
+                return false;
+
+              }
+
+
+              return true;
+
+            }
+          );
+
+
+        if (
+          tracked.length
+        ) {
+
+          const completed =
+            tracked.filter(
+              activity => {
+
+                const state =
+                  Number(
+                    activity.state
+                  );
+
+
+                return (
+                  state === 1 ||
+                  activity.completed === true ||
+                  Number(
+                    activity.completed
+                  ) === 1
+                );
+
+              }
+            ).length;
+
+
+          const percentage =
+            Math.round(
+              (
+                completed /
+                tracked.length
+              ) * 100
+            );
+
+
+          console.log(
+            `ATHENA ACTIVITY PROGRESS ${courseId}:`,
+            {
+              tracked:
+                tracked.length,
+
+              completed:
+                completed,
+
+              percentage:
+                percentage
+            }
+          );
+
+
+          return clampPercentage(
+            percentage
+          );
+
+        }
+
+      }
+
+    }
+    catch (error) {
+
+      console.warn(
+        `Activity completion unavailable for ${courseId}:`,
+        error.message
+      );
+
+    }
+
+
+    /* =======================================================
+       METHOD 2
+       Course contents completiondata
+    ======================================================== */
+
+    try {
+
+      const sections =
+        await moodleRequest(
+          'core_course_get_contents',
+          {
+            courseid:
+              courseId
+          }
+        );
+
+
+      if (
+        Array.isArray(
+          sections
+        )
+      ) {
+
+        const modules = [];
+
+
+        sections.forEach(
+          section => {
+
+            if (
+              !Array.isArray(
+                section.modules
+              )
+            ) {
+
+              return;
+
+            }
+
+
+            section.modules.forEach(
+              module => {
+
+                if (
+                  module.visible === 0
+                ) {
+
+                  return;
+
+                }
+
+
+                modules.push(
+                  module
+                );
+
+              }
+            );
+
+          }
+        );
+
+
+        const trackedModules =
+          modules.filter(
+            module => {
+
+              const completion =
+                module.completiondata;
+
+
+              if (
+                completion
+              ) {
+
+                if (
+                  completion.hascompletion === false ||
+                  Number(
+                    completion.hascompletion
+                  ) === 0
+                ) {
+
+                  return false;
+
+                }
+
+                return true;
+
+              }
+
+
+              /*
+               * Moodle may expose module.completion.
+               *
+               * 0 generally means no tracking.
+               */
+
+              if (
+                module.completion !== undefined &&
+                Number(
+                  module.completion
+                ) === 0
+              ) {
+
+                return false;
+
+              }
+
+
+              return false;
+
+            }
+          );
+
+
+        if (
+          trackedModules.length
+        ) {
+
+          const completedModules =
+            trackedModules.filter(
+              module => {
+
+                const completion =
+                  module.completiondata;
+
+
+                if (
+                  !completion
+                ) {
+
+                  return false;
+
+                }
+
+
+                const state =
+                  Number(
+                    completion.state
+                  );
+
+
+                return (
+                  state === 1 ||
+                  completion.completed === true ||
+                  Number(
+                    completion.completed
+                  ) === 1
+                );
+
+              }
+            ).length;
+
+
+          const percentage =
+            Math.round(
+              (
+                completedModules /
+                trackedModules.length
+              ) * 100
+            );
+
+
+          console.log(
+            `ATHENA MODULE PROGRESS ${courseId}:`,
+            {
+              tracked:
+                trackedModules.length,
+
+              completed:
+                completedModules,
+
+              percentage:
+                percentage
+            }
+          );
+
+
+          return clampPercentage(
+            percentage
+          );
+
+        }
+
+      }
+
+    }
+    catch (error) {
+
+      console.warn(
+        `Course content completion unavailable for ${courseId}:`,
+        error.message
+      );
+
+    }
+
+
+    /* =======================================================
+       METHOD 3
+       Enrollment API fallback
+    ======================================================== */
+
+    const fallback =
       Number(
         course.progress
       );
@@ -3549,24 +3652,277 @@
 
     if (
       Number.isFinite(
-        value
+        fallback
       ) &&
-      value >= 0 &&
-      value <= 100
+      fallback >= 0 &&
+      fallback <= 100
     ) {
 
-      return value;
+      console.log(
+        `ATHENA ENROLLMENT PROGRESS ${courseId}:`,
+        fallback
+      );
+
+
+      return Math.round(
+        fallback
+      );
 
     }
 
+
+    /*
+     * We genuinely do not have progress data.
+     */
 
     return 0;
 
   }
 
 
+  function clampPercentage(
+    value
+  ) {
+
+    const number =
+      Number(
+        value
+      );
+
+
+    if (
+      !Number.isFinite(
+        number
+      )
+    ) {
+
+      return 0;
+
+    }
+
+
+    return Math.round(
+      Math.max(
+        0,
+        Math.min(
+          100,
+          number
+        )
+      )
+    );
+
+  }
+
+
+  function getStoredCourseProgress(
+    course
+  ) {
+
+    return (
+      courseProgressMap.get(
+        Number(
+          course.id
+        )
+      ) ??
+      0
+    );
+
+  }
+
+
   /* =========================================================
-     RENDER COURSES
+     CONTINUE LEARNING
+  ========================================================== */
+
+  function selectContinueCourse() {
+
+    if (
+      !enrolledCourses.length
+    ) {
+
+      return null;
+
+    }
+
+
+    /*
+     * Priority 1:
+     * active course with the greatest
+     * measurable progress.
+     */
+
+    const progressed =
+      [...enrolledCourses]
+        .filter(
+          course => {
+
+            const progress =
+              getStoredCourseProgress(
+                course
+              );
+
+
+            return (
+              progress > 0 &&
+              progress < 100
+            );
+
+          }
+        )
+        .sort(
+          (a, b) =>
+            getStoredCourseProgress(
+              b
+            ) -
+            getStoredCourseProgress(
+              a
+            )
+        );
+
+
+    if (
+      progressed.length
+    ) {
+
+      return progressed[0];
+
+    }
+
+
+    /*
+     * Priority 2:
+     * recently accessed course.
+     */
+
+    const recent =
+      [...enrolledCourses]
+        .filter(
+          course =>
+            Number(
+              course.lastaccess
+            ) > 0
+        )
+        .sort(
+          (a, b) =>
+            Number(
+              b.lastaccess
+            ) -
+            Number(
+              a.lastaccess
+            )
+        );
+
+
+    if (
+      recent.length
+    ) {
+
+      return recent[0];
+
+    }
+
+
+    /*
+     * Priority 3:
+     * first enrolled course.
+     */
+
+    return enrolledCourses[0];
+
+  }
+
+
+  function setupContinueLearning() {
+
+    const course =
+      selectContinueCourse();
+
+
+    if (
+      !course
+    ) {
+
+      continueCourse.textContent =
+        'No course available';
+
+
+      continueActivity.textContent =
+        'Enroll in a course to begin learning.';
+
+
+      continueProgressValue.textContent =
+        '0%';
+
+
+      continueProgressFill.style.width =
+        '0%';
+
+
+      continueButton.href =
+        '#';
+
+
+      return;
+
+    }
+
+
+    const progress =
+      getStoredCourseProgress(
+        course
+      );
+
+
+    continueCourse.textContent =
+      course.fullname ||
+      course.shortname ||
+      'Course';
+
+
+    if (
+      progress >= 100
+    ) {
+
+      continueActivity.textContent =
+        'Course completed';
+
+    }
+    else if (
+      progress > 0
+    ) {
+
+      continueActivity.textContent =
+        'Continue where you left off';
+
+    }
+    else {
+
+      continueActivity.textContent =
+        'Begin your first activity';
+
+    }
+
+
+    continueProgressValue.textContent =
+      `${progress}%`;
+
+
+    continueProgressFill.style.width =
+      `${progress}%`;
+
+
+    continueButton.href =
+      `course.html?id=${
+        encodeURIComponent(
+          course.id
+        )
+      }`;
+
+  }
+
+
+  /* =========================================================
+     COURSE CARDS
   ========================================================== */
 
   function renderCourses() {
@@ -3622,7 +3978,7 @@
           course => {
 
             const progress =
-              getCourseProgress(
+              getStoredCourseProgress(
                 course
               );
 
@@ -3643,11 +3999,6 @@
                   2
                 )
                 .toUpperCase();
-
-
-            const visible =
-              course.visible !==
-              0;
 
 
             return `
@@ -3673,11 +4024,7 @@
                   <div
                     class="course-status"
                   >
-                    ${
-                      visible
-                        ? 'Active'
-                        : 'Hidden'
-                    }
+                    Active
                   </div>
 
                 </div>
@@ -3722,9 +4069,9 @@
                   <span
                     class="course-progress-value"
                   >
-                    ${progress.toFixed(
-                      0
-                    )}%
+
+                    ${progress}%
+
                   </span>
 
                 </div>
@@ -3735,9 +4082,7 @@
                 >
 
                   <div
-                    class="
-                      course-progress-fill
-                    "
+                    class="course-progress-fill"
                     style="
                       width:${progress}%;
                     "
@@ -3754,24 +4099,23 @@
                     class="course-meta"
                   >
 
-                    ${
+                    Course ID
+                    ${escapeHtml(
                       course.id
-                        ? `Course ID ${escapeHtml(
-                            course.id
-                          )}`
-                        : 'Moodle course'
-                    }
+                    )}
 
                   </span>
 
 
                   <a
                     class="course-open"
-                    href="course.html?id=${
-                      encodeURIComponent(
-                        course.id
-                      )
-                    }"
+                    href="
+                      course.html?id=${
+                        encodeURIComponent(
+                          course.id
+                        )
+                      }
+                    "
                   >
 
                     Open
@@ -3812,8 +4156,7 @@
 
 
     for (
-      const course
-      of enrolledCourses
+      const course of enrolledCourses
     ) {
 
       try {
@@ -3828,16 +4171,24 @@
           );
 
 
-        const courseAssignments =
-          data?.courses?.find(
-            item =>
-              Number(
-                item.id
-              ) ===
-              Number(
-                course.id
+        const courseData =
+          Array.isArray(
+            data?.courses
+          )
+            ? data.courses.find(
+                item =>
+                  Number(
+                    item.id
+                  ) ===
+                  Number(
+                    course.id
+                  )
               )
-          )?.assignments ||
+            : null;
+
+
+        const courseAssignments =
+          courseData?.assignments ||
           [];
 
 
@@ -3865,7 +4216,7 @@
       catch (error) {
 
         console.warn(
-          `Assignments failed for course ${course.id}:`,
+          `Assignments unavailable for course ${course.id}:`,
           error
         );
 
@@ -3883,7 +4234,7 @@
             ) > 0
         )
         .sort(
-          (a,b) =>
+          (a, b) =>
             Number(
               a.duedate
             ) -
@@ -3900,21 +4251,38 @@
   }
 
 
+  function assignmentUrl(
+    assignment
+  ) {
+
+    return `assignment.html?assignid=${
+      encodeURIComponent(
+        assignment.id
+      )
+    }&courseid=${
+      encodeURIComponent(
+        assignment.courseId
+      )
+    }`;
+
+  }
+
+
   /* =========================================================
      DATE HELPERS
   ========================================================== */
 
   function startOfDay(
-    date
+    value
   ) {
 
-    const value =
+    const date =
       new Date(
-        date
+        value
       );
 
 
-    value.setHours(
+    date.setHours(
       0,
       0,
       0,
@@ -3922,7 +4290,7 @@
     );
 
 
-    return value;
+    return date;
 
   }
 
@@ -3931,7 +4299,7 @@
     timestamp
   ) {
 
-    const now =
+    const today =
       startOfDay(
         new Date()
       );
@@ -3950,7 +4318,7 @@
     return Math.round(
       (
         due.getTime() -
-        now.getTime()
+        today.getTime()
       ) /
       86400000
     );
@@ -4033,28 +4401,6 @@
   }
 
 
-  function shortDate(
-    timestamp
-  ) {
-
-    return new Date(
-      Number(
-        timestamp
-      ) * 1000
-    ).toLocaleDateString(
-      'en-US',
-      {
-        month:
-          'short',
-
-        day:
-          'numeric'
-      }
-    );
-
-  }
-
-
   /* =========================================================
      TODAY
   ========================================================== */
@@ -4065,217 +4411,252 @@
       new Date();
 
 
-    const upcomingToday =
-      assignments
-        .filter(
-          assignment => {
+    const todayAssignments =
+      assignments.filter(
+        assignment => {
 
-            const due =
-              new Date(
-                Number(
-                  assignment.duedate
-                ) * 1000
-              );
-
-
-            return (
-              due.getFullYear() ===
-                now.getFullYear() &&
-              due.getMonth() ===
-                now.getMonth() &&
-              due.getDate() ===
-                now.getDate()
+          const due =
+            new Date(
+              Number(
+                assignment.duedate
+              ) * 1000
             );
 
-          }
-        )
-        .slice(
-          0,
-          5
-        );
+
+          return (
+            due.getFullYear() ===
+              now.getFullYear() &&
+            due.getMonth() ===
+              now.getMonth() &&
+            due.getDate() ===
+              now.getDate()
+          );
+
+        }
+      );
 
 
     todayCount.textContent =
-      `${upcomingToday.length} task${
-        upcomingToday.length === 1
+      `${todayAssignments.length} task${
+        todayAssignments.length === 1
           ? ''
           : 's'
       }`;
 
 
     if (
-      !upcomingToday.length
+      todayAssignments.length
     ) {
 
-      const soon =
-        assignments
-          .filter(
-            assignment =>
-              differenceInDays(
-                assignment.duedate
-              ) >=
-                0
-          )
-          .slice(
-            0,
-            3
-          );
+      todayContainer.innerHTML = `
+
+        <div
+          class="task-list"
+        >
+
+          ${todayAssignments
+            .slice(0, 5)
+            .map(
+              assignment => `
+
+                <a
+                  class="task-row"
+                  href="${assignmentUrl(
+                    assignment
+                  )}"
+                >
+
+                  <div
+                    class="task-icon"
+                  >
+
+                    <i
+                      data-lucide="clipboard-check"
+                      style="
+                        width:16px;
+                        height:16px;
+                      "
+                    ></i>
+
+                  </div>
 
 
-      if (
-        soon.length
-      ) {
+                  <div
+                    class="task-content"
+                  >
 
-        todayList.innerHTML = `
+                    <div
+                      class="task-name"
+                    >
 
-          <div
-            class="empty-state"
-            style="
-              text-align:left;
-              padding-left:0;
-            "
-          >
+                      ${escapeHtml(
+                        assignment.name
+                      )}
 
-            Nothing due today.
-            ${
-              soon.length
-                ? `Next deadline:
-                   ${escapeHtml(
-                     shortDate(
-                       soon[0].duedate
-                     )
-                   )}`
-                : ''
-            }
+                    </div>
 
-          </div>
 
-        `;
+                    <div
+                      class="task-course"
+                    >
 
-      }
-      else {
+                      ${escapeHtml(
+                        assignment.courseName
+                      )}
 
-        todayList.innerHTML = `
+                    </div>
 
-          <div class="empty-state">
+                  </div>
 
-            No coursework requires
-            attention today.
 
-          </div>
+                  <div
+                    class="
+                      task-due
+                      urgent
+                    "
+                  >
 
-        `;
+                    ${
+                      new Date(
+                        Number(
+                          assignment.duedate
+                        ) * 1000
+                      ).toLocaleTimeString(
+                        'en-US',
+                        {
+                          hour:
+                            'numeric',
 
-      }
+                          minute:
+                            '2-digit'
+                        }
+                      )
+                    }
 
+                  </div>
+
+                </a>
+
+              `
+            )
+            .join('')}
+
+        </div>
+
+      `;
+
+
+      lucide.createIcons();
 
       return;
 
     }
 
 
-    todayList.innerHTML =
-      upcomingToday
-        .map(
-          assignment => `
+    const next =
+      assignments.find(
+        assignment =>
+          differenceInDays(
+            assignment.duedate
+          ) >= 0
+      );
 
-            <a
-              class="task-row"
-              href="
-                assignment.html
-                ?assignid=${
-                  encodeURIComponent(
-                    assignment.id
-                  )
-                }
-                &courseid=${
-                  encodeURIComponent(
-                    assignment.courseId
-                  )
-                }
+
+    todayContainer.innerHTML = `
+
+      <div
+        class="today-empty"
+      >
+
+        <div
+          class="today-empty-main"
+        >
+
+          <div
+            class="today-empty-icon"
+          >
+
+            <i
+              data-lucide="check"
+              style="
+                width:18px;
+                height:18px;
               "
+            ></i>
+
+          </div>
+
+
+          <div>
+
+            <div
+              class="today-empty-title"
             >
-
-              <div class="task-icon">
-
-                <i
-                  data-lucide="clipboard-check"
-                  style="
-                    width:16px;
-                    height:16px;
-                  "
-                ></i>
-
-              </div>
+              Nothing due today
+            </div>
 
 
-              <div class="task-content">
+            <div
+              class="today-empty-text"
+            >
+              You're clear for today.
+            </div>
+
+          </div>
+
+        </div>
+
+
+        ${
+          next
+            ? `
+
+              <a
+                href="${assignmentUrl(
+                  next
+                )}"
+                class="today-next"
+              >
 
                 <div
-                  class="task-name"
+                  class="today-next-label"
+                >
+                  Next up
+                </div>
+
+
+                <div
+                  class="today-next-name"
                 >
 
                   ${escapeHtml(
-                    assignment.name ||
-                    'Assignment'
+                    next.name
                   )}
 
                 </div>
 
 
                 <div
-                  class="task-course"
+                  class="today-next-date"
                 >
 
                   ${escapeHtml(
-                    assignment.courseName
-                  )}
-
-                </div>
-
-              </div>
-
-
-              <div class="task-due">
-
-                <div
-                  class="task-due-label"
-                >
-                  Deadline
-                </div>
-
-                <div
-                  class="
-                    task-due-value
-                    urgent
-                  "
-                >
-                  ${escapeHtml(
-                    new Date(
-                      Number(
-                        assignment.duedate
-                      ) *
-                      1000
-                    ).toLocaleTimeString(
-                      'en-US',
-                      {
-                        hour:
-                          'numeric',
-
-                        minute:
-                          '2-digit'
-                      }
+                    dueLabel(
+                      next.duedate
                     )
                   )}
+
                 </div>
 
-              </div>
+              </a>
 
-            </a>
+            `
+            : ''
+        }
 
-          `
-        )
-        .join('');
+      </div>
+
+    `;
 
 
     lucide.createIcons();
@@ -4290,17 +4671,10 @@
   function renderUpcoming() {
 
     const list =
-      assignments
-        .filter(
-          assignment =>
-            Number(
-              assignment.duedate
-            ) > 0
-        )
-        .slice(
-          0,
-          6
-        );
+      assignments.slice(
+        0,
+        6
+      );
 
 
     if (
@@ -4309,7 +4683,9 @@
 
       deadlineList.innerHTML = `
 
-        <div class="empty-state">
+        <div
+          class="empty-state"
+        >
           No upcoming deadlines.
         </div>
 
@@ -4329,8 +4705,17 @@
               new Date(
                 Number(
                   assignment.duedate
-                ) *
-                1000
+                ) * 1000
+              );
+
+
+            const month =
+              due.toLocaleDateString(
+                'en-US',
+                {
+                  month:
+                    'short'
+                }
               );
 
 
@@ -4338,56 +4723,36 @@
               due.getDate();
 
 
-            const month =
-              due
-                .toLocaleDateString(
-                  'en-US',
-                  {
-                    month:
-                      'short'
-                  }
-                );
-
-
-            const urgency =
-              dueClass(
-                assignment.duedate
-              );
-
-
             return `
 
               <a
                 class="deadline-row"
-                href="
-                  assignment.html
-                  ?assignid=${
-                    encodeURIComponent(
-                      assignment.id
-                    )
-                  }
-                  &courseid=${
-                    encodeURIComponent(
-                      assignment.courseId
-                    )
-                  }
-                "
+                href="${assignmentUrl(
+                  assignment
+                )}"
               >
 
-                <div class="deadline-date">
+                <div
+                  class="deadline-date"
+                >
 
                   <div
                     class="deadline-month"
                   >
+
                     ${escapeHtml(
                       month
                     )}
+
                   </div>
+
 
                   <div
                     class="deadline-day"
                   >
+
                     ${day}
+
                   </div>
 
                 </div>
@@ -4400,8 +4765,7 @@
                   >
 
                     ${escapeHtml(
-                      assignment.name ||
-                      'Assignment'
+                      assignment.name
                     )}
 
                   </div>
@@ -4423,7 +4787,9 @@
                 <div
                   class="
                     deadline-relative
-                    ${urgency}
+                    ${dueClass(
+                      assignment.duedate
+                    )}
                   "
                 >
 
@@ -4447,115 +4813,12 @@
 
 
   /* =========================================================
-     CONTINUE LEARNING
-  ========================================================== */
-
-  async function setupContinueLearning() {
-
-    if (
-      !enrolledCourses.length
-    ) {
-
-      continueCourse.textContent =
-        'No course available';
-
-
-      continueActivity.textContent =
-        'Enroll in a course to begin learning.';
-
-
-      continueButton.href =
-        '#';
-
-
-      return;
-
-    }
-
-
-    /*
-     * Prefer the course with the highest
-     * lastaccess value when Moodle provides it.
-     */
-
-    const sorted =
-      [...enrolledCourses].sort(
-        (a,b) =>
-          Number(
-            b.lastaccess ||
-            0
-          ) -
-          Number(
-            a.lastaccess ||
-            0
-          )
-      );
-
-
-    const course =
-      sorted[0];
-
-
-    const progress =
-      getCourseProgress(
-        course
-      );
-
-
-    continueCourse.textContent =
-      course.fullname ||
-      course.shortname ||
-      'Course';
-
-
-    continueActivity.textContent =
-      progress >= 100
-        ? 'Course completed'
-        : progress > 0
-          ? 'Continue where you left off'
-          : 'Begin your first activity';
-
-
-    continueProgressValue.textContent =
-      `${progress.toFixed(0)}%`;
-
-
-    continueProgressFill.style.width =
-      `${Math.max(
-        0,
-        Math.min(
-          100,
-          progress
-        )
-      )}%`;
-
-
-    continueButton.href =
-      `course.html?id=${
-        encodeURIComponent(
-          course.id
-        )
-      }`;
-
-  }
-
-
-  /* =========================================================
      GRADEBOOK
   ========================================================== */
 
   async function loadPerformance() {
 
-    if (
-      !enrolledCourses.length
-    ) {
-
-      return;
-
-    }
-
-
-    gradeData = [];
+    courseGrades = [];
 
 
     for (
@@ -4565,29 +4828,38 @@
 
       try {
 
+        /*
+         * Explicitly request the current student.
+         * This mirrors the working grades page.
+         */
+
         const data =
           await moodleRequest(
             'gradereport_user_get_grade_items',
             {
               courseid:
-                course.id
+                course.id,
+
+              userid:
+                currentUser.userid
             }
           );
 
 
-        const items =
-          extractGradeItems(
-            data
-          );
+        console.log(
+          'ATHENA DASHBOARD GRADE RESPONSE:',
+          course.id,
+          data
+        );
 
 
-        gradeData.push({
+        courseGrades.push({
 
           course:
             course,
 
-          items:
-            items
+          data:
+            data
 
         });
 
@@ -4595,18 +4867,18 @@
       catch (error) {
 
         console.warn(
-          `Grades unavailable for course ${course.id}:`,
+          `Dashboard grade request failed for course ${course.id}:`,
           error
         );
 
 
-        gradeData.push({
+        courseGrades.push({
 
           course:
             course,
 
-          items:
-            []
+          data:
+            null
 
         });
 
@@ -4620,12 +4892,13 @@
   }
 
 
-  function extractGradeItems(
+  /* =========================================================
+     GRADE EXTRACTION
+  ========================================================== */
+
+  function getGradeItems(
     data
   ) {
-
-    const output = [];
-
 
     if (
       !data ||
@@ -4634,86 +4907,31 @@
       )
     ) {
 
-      return output;
+      return [];
 
     }
 
 
-    data.usergrades.forEach(
-      user => {
-
-        if (
-          !Array.isArray(
-            user.gradeitems
-          )
-        ) {
-
-          return;
-
-        }
-
-
-        user.gradeitems.forEach(
-          item => {
-
-            if (
-              item.itemtype ===
-              'course'
-            ) {
-
-              return;
-
-            }
-
-
-            const percentage =
-              getGradePercentage(
-                item
-              );
-
-
-            if (
-              percentage ===
-              null
-            ) {
-
-              return;
-
-            }
-
-
-            output.push({
-
-              ...item,
-
-              percentage:
-                percentage
-
-            });
-
-          }
-        );
-
-      }
+    return data.usergrades.flatMap(
+      user =>
+        Array.isArray(
+          user.gradeitems
+        )
+          ? user.gradeitems
+          : []
     );
-
-
-    return output;
 
   }
 
 
-  function getGradePercentage(
+  function getItemPercentage(
     item
   ) {
 
     if (
-      item.percentage !==
-        undefined &&
-      item.percentage !==
-        null &&
-      item.percentage !==
-        ''
+      item.percentage !== undefined &&
+      item.percentage !== null &&
+      item.percentage !== ''
     ) {
 
       const value =
@@ -4760,8 +4978,7 @@
       return (
         grade /
         max
-      ) *
-      100;
+      ) * 100;
 
     }
 
@@ -4771,17 +4988,174 @@
   }
 
 
-  function renderPerformance() {
+  function getCourseAverage(
+    data
+  ) {
 
-    const all =
-      gradeData.flatMap(
-        entry =>
-          entry.items
+    const items =
+      getGradeItems(
+        data
       );
 
 
     if (
-      !all.length
+      !items.length
+    ) {
+
+      return null;
+
+    }
+
+
+    /*
+     * First try Moodle's course item.
+     */
+
+    const courseItem =
+      items.find(
+        item =>
+          item.itemtype ===
+          'course'
+      );
+
+
+    if (
+      courseItem
+    ) {
+
+      const percentage =
+        getItemPercentage(
+          courseItem
+        );
+
+
+      if (
+        percentage !== null
+      ) {
+
+        return percentage;
+
+      }
+
+    }
+
+
+    /*
+     * Fall back to the same individual-item
+     * approach used by the working grade page.
+     */
+
+    const gradedItems =
+      items.filter(
+        item =>
+          item.itemtype !==
+            'course' &&
+          getItemPercentage(
+            item
+          ) !== null
+      );
+
+
+    if (
+      !gradedItems.length
+    ) {
+
+      return null;
+
+    }
+
+
+    const total =
+      gradedItems.reduce(
+        (
+          sum,
+          item
+        ) =>
+          sum +
+          getItemPercentage(
+            item
+          ),
+        0
+      );
+
+
+    return (
+      total /
+      gradedItems.length
+    );
+
+  }
+
+
+  function renderPerformance() {
+
+    const results =
+      courseGrades
+        .map(
+          entry => ({
+
+            course:
+              entry.course,
+
+            average:
+              getCourseAverage(
+                entry.data
+              )
+
+          })
+        );
+
+
+    const available =
+      results.filter(
+        result =>
+          result.average !== null &&
+          Number.isFinite(
+            result.average
+          )
+      );
+
+
+    /*
+     * Count individual graded assessments.
+     */
+
+    const assessmentTotal =
+      courseGrades.reduce(
+        (
+          total,
+          entry
+        ) => {
+
+          const items =
+            getGradeItems(
+              entry.data
+            );
+
+
+          return (
+            total +
+            items.filter(
+              item =>
+                item.itemtype !==
+                  'course' &&
+                getItemPercentage(
+                  item
+                ) !== null
+            ).length
+          );
+
+        },
+        0
+      );
+
+
+    assessmentCount.textContent =
+      assessmentTotal;
+
+
+    if (
+      !available.length
     ) {
 
       overallAverage.textContent =
@@ -4792,12 +5166,12 @@
         '—';
 
 
-      assessmentCount.textContent =
-        '0';
-
-
       performanceBadge.textContent =
         'No grades yet';
+
+
+      performanceBadge.className =
+        'performance-badge';
 
 
       return;
@@ -4805,53 +5179,77 @@
     }
 
 
-    const average =
-      all.reduce(
+    const overall =
+      available.reduce(
         (
           sum,
-          item
+          result
         ) =>
           sum +
-          Number(
-            item.percentage
-          ),
+          result.average,
         0
       ) /
-      all.length;
+      available.length;
 
 
     overallAverage.textContent =
-      `${average.toFixed(
+      `${overall.toFixed(
         1
       )}%`;
 
 
-    assessmentCount.textContent =
-      all.length;
+    const best =
+      [...available]
+        .sort(
+          (a, b) =>
+            b.average -
+            a.average
+        )[0];
+
+
+    bestCourse.textContent =
+      `${best.average.toFixed(
+        0
+      )}%`;
+
+
+    bestCourse.title =
+      best.course.fullname ||
+      best.course.shortname ||
+      '';
 
 
     if (
-      average >= 85
+      overall >= 85
     ) {
 
       performanceBadge.textContent =
         'Excellent';
 
+      performanceBadge.className =
+        'performance-badge good';
+
     }
     else if (
-      average >= 70
+      overall >= 70
     ) {
 
       performanceBadge.textContent =
         'Strong';
 
+      performanceBadge.className =
+        'performance-badge good';
+
     }
     else if (
-      average >= 50
+      overall >= 50
     ) {
 
       performanceBadge.textContent =
         'Needs review';
+
+      performanceBadge.className =
+        'performance-badge warning';
 
     }
     else {
@@ -4859,84 +5257,8 @@
       performanceBadge.textContent =
         'At risk';
 
-    }
-
-
-    const courseAverages =
-      gradeData
-        .map(
-          entry => {
-
-            if (
-              !entry.items.length
-            ) {
-
-              return null;
-
-            }
-
-
-            const avg =
-              entry.items.reduce(
-                (
-                  sum,
-                  item
-                ) =>
-                  sum +
-                  Number(
-                    item.percentage
-                  ),
-                0
-              ) /
-              entry.items.length;
-
-
-            return {
-
-              course:
-                entry.course,
-
-              average:
-                avg
-
-            };
-
-          }
-        )
-        .filter(
-          Boolean
-        );
-
-
-    courseAverages.sort(
-      (
-        a,
-        b
-      ) =>
-        b.average -
-        a.average
-    );
-
-
-    if (
-      courseAverages.length
-    ) {
-
-      const best =
-        courseAverages[0];
-
-
-      bestCourse.textContent =
-        `${(
-          best.average
-        ).toFixed(
-          0
-        )}%`;
-
-      bestCourse.title =
-        best.course.fullname ||
-        best.course.shortname ||
-        '';
+      performanceBadge.className =
+        'performance-badge danger';
 
     }
 
@@ -4944,22 +5266,13 @@
 
 
   /* =========================================================
-     RECENT ACTIVITY
+     COURSE ACTIVITY
   ========================================================== */
 
-  async function loadRecentActivity() {
+  async function loadCourseActivity() {
 
     const activities = [];
 
-
-    /*
-     * We use Moodle course contents as the
-     * reliable baseline for available activities.
-     *
-     * This gives the dashboard useful live
-     * course activity without requiring
-     * elevated logging permissions.
-     */
 
     for (
       const course
@@ -5006,22 +5319,16 @@
 
 
           modules
+            .filter(
+              module =>
+                module.visible !== 0
+            )
             .slice(
               0,
               3
             )
             .forEach(
               module => {
-
-                if (
-                  module.visible ===
-                  0
-                ) {
-
-                  return;
-
-                }
-
 
                 let icon =
                   'book-open';
@@ -5090,7 +5397,7 @@
       catch (error) {
 
         console.warn(
-          `Activity load failed for course ${course.id}:`,
+          `Course activity unavailable for ${course.id}:`,
           error
         );
 
@@ -5099,31 +5406,34 @@
     }
 
 
-    recentActivities =
+    renderCourseActivity(
       activities.slice(
         0,
         8
-      );
-
-
-    renderRecentActivity();
+      )
+    );
 
   }
 
 
-  function renderRecentActivity() {
+  function renderCourseActivity(
+    activities
+  ) {
 
     if (
-      !recentActivities.length
+      !activities.length
     ) {
 
       activityList.innerHTML = `
 
-        <div class="empty-state">
-          No recent activity available.
+        <div
+          class="empty-state"
+        >
+          No course activity available.
         </div>
 
       `;
+
 
       return;
 
@@ -5131,20 +5441,20 @@
 
 
     activityList.innerHTML =
-      recentActivities
+      activities
         .map(
           activity => `
 
-            <div class="activity-row">
+            <div
+              class="activity-row"
+            >
 
               <div
                 class="activity-icon"
               >
 
                 <i
-                  data-lucide="${
-                    activity.icon
-                  }"
+                  data-lucide="${activity.icon}"
                   style="
                     width:15px;
                     height:15px;
@@ -5199,16 +5509,21 @@
 
 
   /* =========================================================
-     REFRESH
+     DASHBOARD REFRESH
   ========================================================== */
 
   async function loadDashboard() {
 
+    refreshButton.classList.add(
+      'refreshing'
+    );
+
+
+    welcomeSubtitle.textContent =
+      'Synchronizing with Moodle...';
+
+
     try {
-
-      welcomeSubtitle.textContent =
-        'Synchronizing with Moodle...';
-
 
       await loadCurrentUser();
 
@@ -5218,67 +5533,77 @@
       await Promise.all([
         loadAssignments(),
         loadPerformance(),
-        loadRecentActivity()
+        loadCourseActivity()
       ]);
 
 
       welcomeSubtitle.textContent =
         'Your academic workspace is ready.';
 
-
     }
     catch (error) {
 
       console.error(
-        'Dashboard error:',
+        'ATHENA DASHBOARD ERROR:',
         error
       );
 
 
       welcomeSubtitle.textContent =
-        'Some dashboard data could not be loaded.';
+        'Some dashboard information could not be loaded.';
 
 
-      courseGrid.innerHTML = `
+      if (
+        !enrolledCourses.length
+      ) {
 
-        <div
-          class="panel"
-          style="
-            grid-column:1/-1;
-            padding:30px;
-          "
-        >
+        courseGrid.innerHTML = `
 
           <div
+            class="panel"
             style="
-              font-family:var(--font-heading);
-              font-weight:700;
-              margin-bottom:5px;
-            "
-          >
-            Dashboard connection issue
-          </div>
-
-
-          <div
-            style="
-              color:var(--muted);
-              font-size:.8rem;
+              grid-column:1/-1;
+              padding:30px;
             "
           >
 
-            ${escapeHtml(
-              error.message
-            )}
+            <div
+              style="
+                font-family:var(--font-heading);
+                font-weight:700;
+                margin-bottom:5px;
+              "
+            >
+              Dashboard connection issue
+            </div>
+
+
+            <div
+              style="
+                color:var(--muted);
+                font-size:.8rem;
+              "
+            >
+
+              ${escapeHtml(
+                error.message
+              )}
+
+            </div>
 
           </div>
 
-        </div>
+        `;
 
-      `;
+      }
 
     }
     finally {
+
+      refreshButton.classList.remove(
+        'refreshing'
+      );
+
 
       lucide.createIcons();
 
@@ -5333,7 +5658,6 @@
   loadDashboard();
 
 </script>
-
 
 </body>
 
