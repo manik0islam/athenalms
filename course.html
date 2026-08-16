@@ -145,15 +145,17 @@
             const isAssign = mod.modname === 'assign';
             const isForum = mod.modname === 'forum';
             const isResource = mod.modname === 'resource';
+            const isQuiz = mod.modname === 'quiz';
             
             let hrefAttr = ''; let linkIcon = '';
             
             if (isAssign) hrefAttr = `href="assignment.html?assignid=${mod.instance}&courseid=${courseId}"`;
             else if (isForum) hrefAttr = `href="forum.html?forumid=${mod.instance}&courseid=${courseId}"`;
             else if (isResource) hrefAttr = `href="resource.html?resourceid=${mod.instance}&courseid=${courseId}"`;
+            else if (isQuiz) hrefAttr = `href="quiz.html?quizid=${mod.instance}&courseid=${courseId}"`;
             else if (mod.url) hrefAttr = `href="${mod.url}" target="_blank"`;
 
-            const isInteractive = isAssign || isForum || isResource || mod.url;
+            const isInteractive = isAssign || isForum || isResource || isQuiz || mod.url;
             const tag = isInteractive ? 'a' : 'div';
             const interactiveStyle = isInteractive ? 'cursor: pointer; text-decoration: none; color: inherit;' : '';
             
@@ -164,7 +166,7 @@
                 <div class="module-icon"><i data-lucide="${getModuleIcon(mod.modname)}"></i></div>
                 <div class="module-details">
                   <h4>${mod.name}</h4>
-                  <p>${mod.modname === 'assign' ? 'Assignment' : mod.modname === 'resource' ? 'Document' : mod.modplural}</p>
+                  <p>${mod.modname === 'assign' ? 'Assignment' : mod.modname === 'resource' ? 'Document' : mod.modname === 'quiz' ? 'Quiz' : mod.modplural}</p>
                 </div>
                 ${linkIcon}
               </${tag}>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Madar LMS | Quiz Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root {
+      --bg-primary: #ffffff; --bg-secondary: #f4f4f5; --bg-tertiary: #e4e4e7;
+      --text-primary: #000000; --text-secondary: #52525b; --text-tertiary: #71717a;
+      --border-color: #d4d4d8; --black: #09090b; --white: #ffffff;
+      --font-heading: 'Space Grotesk', sans-serif; --font-body: 'Inter', sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-body); background-color: var(--bg-secondary); color: var(--text-primary); line-height: 1.6; }
+    
+    header { background-color: var(--bg-primary); border-bottom: 1px solid var(--border-color); position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
+    .nav-container { max-width: 1000px; margin: 0 auto; padding: 0 24px; height: 70px; display: flex; justify-content: space-between; align-items: center; }
+    .back-link { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.95rem; color: var(--text-secondary); cursor: pointer; transition: color 0.2s; }
+    .back-link:hover { color: var(--black); }
+
+    .hero { margin-top: 70px; background-color: var(--bg-primary); padding: 80px 24px 40px; border-bottom: 1px solid var(--border-color); background-image: linear-gradient(var(--bg-secondary) 1px, transparent 1px), linear-gradient(90deg, var(--bg-secondary) 1px, transparent 1px); background-size: 30px 30px; }
+    .hero-content { max-width: 800px; margin: 0 auto; }
+    .quiz-title { font-family: var(--font-heading); font-size: 2.25rem; font-weight: 700; margin-bottom: 16px; letter-spacing: -0.5px; }
+    .meta-tags { display: flex; gap: 12px; flex-wrap: wrap; }
+    .meta-tag { display: inline-flex; align-items: center; gap: 6px; background-color: var(--black); color: var(--white); padding: 6px 14px; border-radius: 4px; font-size: 0.85rem; font-weight: 600; }
+    .meta-tag.sub-tag { background-color: var(--bg-primary); color: var(--text-primary); border: 1px solid var(--border-color); }
+
+    .portal-container { max-width: 800px; margin: 32px auto 60px; padding: 0 24px; display: flex; flex-direction: column; gap: 24px; }
+    .panel { background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 6px; padding: 32px; }
+    .panel-title { font-family: var(--font-heading); font-size: 1.15rem; font-weight: 600; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--border-color); }
+    .instructions-content { font-size: 0.95rem; color: var(--text-secondary); }
+
+    .action-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 16px; background-color: var(--black); color: var(--white); border: none; border-radius: 4px; font-family: var(--font-heading); font-weight: 600; font-size: 1rem; cursor: pointer; text-decoration: none; transition: opacity 0.2s; }
+    .action-btn:hover { opacity: 0.9; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-container">
+      <div class="back-link" onclick="history.back()"><i data-lucide="arrow-left" style="width: 18px; height: 18px;"></i> Back to Course</div>
+      <div style="font-family: var(--font-heading); font-weight: 700; font-size: 1.1rem; text-transform: uppercase;">QUIZ PORTAL</div>
+    </div>
+  </header>
+  
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="quiz-title" id="quiz-title">Loading Quiz...</h1>
+      <div class="meta-tags" id="quiz-meta">
+        <div class="meta-tag sub-tag"><i data-lucide="clock" style="width: 14px; height: 14px;"></i> Fetching details...</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="portal-container">
+    <div class="panel">
+      <h2 class="panel-title">Quiz Instructions</h2>
+      <div class="instructions-content" id="quiz-instructions">Please wait while we load the assessment specifications...</div>
+    </div>
+    
+    <div class="panel">
+      <h2 class="panel-title">Attempt Assessment</h2>
+      <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 20px;">Ensure you have a stable network connection before launching your attempt.</p>
+      <a href="#" id="launch-btn" class="action-btn" target="_blank">
+        <i data-lucide="play-circle" style="width: 18px; height: 18px;"></i> Launch Quiz in Moodle
+      </a>
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+    const MOODLE_URL = 'http://localhost:8000';
+    const userToken = localStorage.getItem('madar_user_token');
+    const urlParams = new URLSearchParams(window.location.search);
+    const quizId = urlParams.get('quizid');
+    const courseId = urlParams.get('courseid');
+
+    if (!userToken) window.location.href = 'login.html';
+
+    async function loadQuiz() {
+      try {
+        // Using course contents API which is fully authorized and reliable
+        const res = await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=core_course_get_contents&courseid=${courseId}&moodlewsrestformat=json`);
+        const sections = await res.json();
+        
+        if (sections.exception) throw new Error(sections.message);
+
+        let targetQuiz = null;
+        for (const section of sections) {
+          const found = section.modules.find(mod => mod.modname === 'quiz' && mod.instance == quizId);
+          if (found) {
+            targetQuiz = found;
+            break;
+          }
+        }
+
+        if (targetQuiz) {
+          document.getElementById('quiz-title').textContent = targetQuiz.name;
+          document.getElementById('quiz-instructions').innerHTML = targetQuiz.description || 'Read all instructions carefully before starting your assessment attempt.';
+          
+          document.getElementById('quiz-meta').innerHTML = `
+            <div class="meta-tag"><i data-lucide="check-circle" style="width: 14px; height: 14px;"></i> Status: Ready</div>
+            <div class="meta-tag sub-tag"><i data-lucide="book-open" style="width: 14px; height: 14px;"></i> Module: Quiz</div>
+          `;
+
+          // Link directly to the interactive quiz launch URL provided by Moodle
+          document.getElementById('launch-btn').href = targetQuiz.url;
+          lucide.createIcons();
+        } else {
+          throw new Error("Quiz module not found in course contents.");
+        }
+
+      } catch (e) {
+        console.error(e);
+        document.getElementById('quiz-title').textContent = "Error Loading Quiz";
+        document.getElementById('quiz-instructions').textContent = "Could not retrieve quiz data: " + e.message;
+      }
+    }
+
+    loadQuiz();
+  </script>
+</body>
+</html>
