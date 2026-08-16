@@ -1,125 +1,2616 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Madar LMS | Quiz Portal</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Athena LMS | Quiz</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
   <script src="https://unpkg.com/lucide@latest"></script>
+
   <style>
+
     :root {
-      --bg-primary: #ffffff; --bg-secondary: #f4f4f5; --bg-tertiary: #e4e4e7;
-      --text-primary: #000000; --text-secondary: #52525b; --text-tertiary: #71717a;
-      --border-color: #d4d4d8; --black: #09090b; --white: #ffffff;
-      --font-heading: 'Space Grotesk', sans-serif; --font-body: 'Inter', sans-serif;
+
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-tertiary: #f1f5f9;
+
+      --text-primary: #09090b;
+      --text-secondary: #52525b;
+      --text-tertiary: #71717a;
+
+      --border-color: #e2e8f0;
+
+      --black: #000000;
+      --white: #ffffff;
+
+      --success-bg: #f0fdf4;
+      --success-border: #bbf7d0;
+      --success-text: #166534;
+
+      --warning-bg: #fffbeb;
+      --warning-border: #fde68a;
+      --warning-text: #92400e;
+
+      --danger-bg: #fef2f2;
+      --danger-border: #fecaca;
+      --danger-text: #991b1b;
+
+      --font-heading: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', sans-serif;
+
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: var(--font-body); background-color: var(--bg-secondary); color: var(--text-primary); line-height: 1.6; }
-    
-    header { background-color: var(--bg-primary); border-bottom: 1px solid var(--border-color); position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
-    .nav-container { max-width: 1000px; margin: 0 auto; padding: 0 24px; height: 70px; display: flex; justify-content: space-between; align-items: center; }
-    .back-link { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.95rem; color: var(--text-secondary); cursor: pointer; transition: color 0.2s; }
-    .back-link:hover { color: var(--black); }
 
-    .hero { margin-top: 70px; background-color: var(--bg-primary); padding: 80px 24px 40px; border-bottom: 1px solid var(--border-color); background-image: linear-gradient(var(--bg-secondary) 1px, transparent 1px), linear-gradient(90deg, var(--bg-secondary) 1px, transparent 1px); background-size: 30px 30px; }
-    .hero-content { max-width: 800px; margin: 0 auto; }
-    .quiz-title { font-family: var(--font-heading); font-size: 2.25rem; font-weight: 700; margin-bottom: 16px; letter-spacing: -0.5px; }
-    .meta-tags { display: flex; gap: 12px; flex-wrap: wrap; }
-    .meta-tag { display: inline-flex; align-items: center; gap: 6px; background-color: var(--black); color: var(--white); padding: 6px 14px; border-radius: 4px; font-size: 0.85rem; font-weight: 600; }
-    .meta-tag.sub-tag { background-color: var(--bg-primary); color: var(--text-primary); border: 1px solid var(--border-color); }
 
-    .portal-container { max-width: 800px; margin: 32px auto 60px; padding: 0 24px; display: flex; flex-direction: column; gap: 24px; }
-    .panel { background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 6px; padding: 32px; }
-    .panel-title { font-family: var(--font-heading); font-size: 1.15rem; font-weight: 600; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--border-color); }
-    .instructions-content { font-size: 0.95rem; color: var(--text-secondary); }
+    * {
 
-    .action-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 16px; background-color: var(--black); color: var(--white); border: none; border-radius: 4px; font-family: var(--font-heading); font-weight: 600; font-size: 1rem; cursor: pointer; text-decoration: none; transition: opacity 0.2s; }
-    .action-btn:hover { opacity: 0.9; }
+      margin: 0;
+      padding: 0;
+
+      box-sizing: border-box;
+
+    }
+
+
+    body {
+
+      font-family: var(--font-body);
+
+      background: var(--bg-secondary);
+
+      color: var(--text-primary);
+
+      line-height: 1.6;
+
+    }
+
+
+    a {
+
+      color: inherit;
+
+      text-decoration: none;
+
+    }
+
+
+    button {
+
+      font: inherit;
+
+    }
+
+
+    /* =========================================
+       HEADER
+    ========================================= */
+
+    header {
+
+      background: rgba(255,255,255,0.96);
+
+      border-bottom:
+        1px solid var(--border-color);
+
+      position: fixed;
+
+      top: 0;
+      left: 0;
+      right: 0;
+
+      z-index: 100;
+
+      backdrop-filter:
+        blur(10px);
+
+    }
+
+
+    .nav-container {
+
+      max-width: 1000px;
+
+      margin: 0 auto;
+
+      padding: 0 24px;
+
+      height: 70px;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      gap: 20px;
+
+    }
+
+
+    .back-link {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      color: var(--text-secondary);
+
+      font-size: 0.9rem;
+
+      font-weight: 600;
+
+      cursor: pointer;
+
+      transition:
+        color 0.2s ease;
+
+    }
+
+
+    .back-link:hover {
+
+      color: var(--black);
+
+    }
+
+
+    .portal-label {
+
+      font-family:
+        var(--font-heading);
+
+      font-size: 1rem;
+
+      font-weight: 700;
+
+      letter-spacing:
+        -0.3px;
+
+    }
+
+
+    /* =========================================
+       HERO
+    ========================================= */
+
+    .hero {
+
+      margin-top: 70px;
+
+      background:
+        var(--bg-primary);
+
+      padding:
+        75px 24px 45px;
+
+      border-bottom:
+        1px solid var(--border-color);
+
+      background-image:
+
+        linear-gradient(
+          var(--bg-tertiary) 1px,
+          transparent 1px
+        ),
+
+        linear-gradient(
+          90deg,
+          var(--bg-tertiary) 1px,
+          transparent 1px
+        );
+
+      background-size:
+        30px 30px;
+
+    }
+
+
+    .hero-content {
+
+      max-width: 800px;
+
+      margin: 0 auto;
+
+    }
+
+
+    .course-label {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 7px;
+
+      color: var(--text-secondary);
+
+      font-size: 0.8rem;
+
+      font-weight: 600;
+
+      margin-bottom: 10px;
+
+    }
+
+
+    .quiz-title {
+
+      font-family:
+        var(--font-heading);
+
+      font-size:
+        clamp(1.9rem, 5vw, 2.6rem);
+
+      line-height: 1.15;
+
+      font-weight: 700;
+
+      letter-spacing: -0.7px;
+
+      margin-bottom: 18px;
+
+    }
+
+
+    .meta-tags {
+
+      display: flex;
+
+      gap: 8px;
+
+      flex-wrap: wrap;
+
+    }
+
+
+    .meta-tag {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 6px;
+
+      background:
+        var(--black);
+
+      color:
+        var(--white);
+
+      padding:
+        7px 12px;
+
+      border-radius: 5px;
+
+      font-size: 0.78rem;
+
+      font-weight: 600;
+
+    }
+
+
+    .meta-tag.light {
+
+      background:
+        var(--white);
+
+      color:
+        var(--text-primary);
+
+      border:
+        1px solid var(--border-color);
+
+    }
+
+
+    /* =========================================
+       CONTAINER
+    ========================================= */
+
+    .portal-container {
+
+      max-width: 800px;
+
+      margin:
+        30px auto 60px;
+
+      padding:
+        0 24px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 20px;
+
+    }
+
+
+    /* =========================================
+       PANEL
+    ========================================= */
+
+    .panel {
+
+      background:
+        var(--white);
+
+      border:
+        1px solid var(--border-color);
+
+      border-radius: 10px;
+
+      padding: 28px;
+
+      box-shadow:
+        0 2px 4px
+        rgba(0,0,0,0.02);
+
+    }
+
+
+    .panel-title {
+
+      font-family:
+        var(--font-heading);
+
+      font-size: 1.1rem;
+
+      font-weight: 600;
+
+      margin-bottom: 16px;
+
+      padding-bottom: 14px;
+
+      border-bottom:
+        1px solid var(--border-color);
+
+    }
+
+
+    /* =========================================
+       STATUS
+    ========================================= */
+
+    .status-box {
+
+      display: flex;
+
+      align-items: flex-start;
+
+      gap: 13px;
+
+      padding: 16px;
+
+      border:
+        1px solid var(--border-color);
+
+      border-radius: 8px;
+
+    }
+
+
+    .status-box.success {
+
+      background:
+        var(--success-bg);
+
+      border-color:
+        var(--success-border);
+
+      color:
+        var(--success-text);
+
+    }
+
+
+    .status-box.warning {
+
+      background:
+        var(--warning-bg);
+
+      border-color:
+        var(--warning-border);
+
+      color:
+        var(--warning-text);
+
+    }
+
+
+    .status-box.danger {
+
+      background:
+        var(--danger-bg);
+
+      border-color:
+        var(--danger-border);
+
+      color:
+        var(--danger-text);
+
+    }
+
+
+    .status-box.neutral {
+
+      background:
+        var(--bg-secondary);
+
+    }
+
+
+    .status-icon {
+
+      flex-shrink: 0;
+
+      margin-top: 2px;
+
+    }
+
+
+    .status-content {
+
+      flex: 1;
+
+    }
+
+
+    .status-title {
+
+      font-weight: 700;
+
+      margin-bottom: 2px;
+
+    }
+
+
+    .status-description {
+
+      font-size: 0.83rem;
+
+      opacity: 0.9;
+
+    }
+
+
+    /* =========================================
+       QUIZ INFO GRID
+    ========================================= */
+
+    .info-grid {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, minmax(0,1fr));
+
+      gap: 12px;
+
+    }
+
+
+    .info-card {
+
+      border:
+        1px solid var(--border-color);
+
+      border-radius: 8px;
+
+      padding: 16px;
+
+      background:
+        var(--bg-secondary);
+
+    }
+
+
+    .info-label {
+
+      color:
+        var(--text-tertiary);
+
+      font-size: 0.72rem;
+
+      font-weight: 700;
+
+      text-transform:
+        uppercase;
+
+      letter-spacing:
+        0.05em;
+
+      margin-bottom: 5px;
+
+    }
+
+
+    .info-value {
+
+      font-family:
+        var(--font-heading);
+
+      font-size: 1rem;
+
+      font-weight: 600;
+
+    }
+
+
+    /* =========================================
+       INSTRUCTIONS
+    ========================================= */
+
+    .instructions-content {
+
+      color:
+        var(--text-secondary);
+
+      font-size:
+        0.92rem;
+
+      overflow-wrap:
+        anywhere;
+
+    }
+
+
+    .instructions-content img {
+
+      max-width: 100%;
+
+      height: auto;
+
+    }
+
+
+    .instructions-content table {
+
+      max-width: 100%;
+
+      overflow-x: auto;
+
+    }
+
+
+    /* =========================================
+       ATTEMPTS
+    ========================================= */
+
+    .attempt-list {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 10px;
+
+    }
+
+
+    .attempt-row {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content:
+        space-between;
+
+      gap: 15px;
+
+      padding: 14px;
+
+      border:
+        1px solid var(--border-color);
+
+      border-radius: 8px;
+
+      background:
+        var(--bg-primary);
+
+    }
+
+
+    .attempt-main {
+
+      min-width: 0;
+
+    }
+
+
+    .attempt-number {
+
+      font-weight: 700;
+
+      margin-bottom: 2px;
+
+    }
+
+
+    .attempt-date {
+
+      color:
+        var(--text-tertiary);
+
+      font-size:
+        0.76rem;
+
+    }
+
+
+    .attempt-grade {
+
+      text-align: right;
+
+      flex-shrink: 0;
+
+    }
+
+
+    .attempt-grade-value {
+
+      font-family:
+        var(--font-heading);
+
+      font-size:
+        1rem;
+
+      font-weight: 700;
+
+    }
+
+
+    .attempt-grade-label {
+
+      color:
+        var(--text-tertiary);
+
+      font-size:
+        0.7rem;
+
+    }
+
+
+    /* =========================================
+       CTA
+    ========================================= */
+
+    .launch-panel {
+
+      background:
+        var(--black);
+
+      color:
+        var(--white);
+
+      border:
+        1px solid var(--black);
+
+    }
+
+
+    .launch-panel .panel-title {
+
+      border-color:
+        rgba(255,255,255,0.2);
+
+    }
+
+
+    .launch-description {
+
+      color:
+        rgba(255,255,255,0.72);
+
+      font-size:
+        0.88rem;
+
+      margin-bottom:
+        20px;
+
+    }
+
+
+    .action-btn {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 9px;
+
+      width: 100%;
+
+      padding: 16px;
+
+      background:
+        var(--white);
+
+      color:
+        var(--black);
+
+      border: none;
+
+      border-radius: 6px;
+
+      font-family:
+        var(--font-heading);
+
+      font-weight: 700;
+
+      font-size: 1rem;
+
+      cursor: pointer;
+
+      text-decoration: none;
+
+      transition:
+        transform 0.1s ease,
+        opacity 0.2s ease;
+
+    }
+
+
+    .action-btn:hover {
+
+      opacity:
+        0.92;
+
+    }
+
+
+    .action-btn:active {
+
+      transform:
+        scale(0.99);
+
+    }
+
+
+    .action-btn.disabled {
+
+      opacity:
+        0.45;
+
+      pointer-events:
+        none;
+
+    }
+
+
+    /* =========================================
+       MESSAGE
+    ========================================= */
+
+    .message {
+
+      display: none;
+
+      padding:
+        13px 15px;
+
+      border-radius:
+        7px;
+
+      font-size:
+        0.85rem;
+
+    }
+
+
+    .message.visible {
+
+      display:
+        block;
+
+    }
+
+
+    .message.error {
+
+      background:
+        var(--danger-bg);
+
+      border:
+        1px solid var(--danger-border);
+
+      color:
+        var(--danger-text);
+
+    }
+
+
+    /* =========================================
+       LOADING
+    ========================================= */
+
+    .loading {
+
+      text-align:
+        center;
+
+      padding:
+        55px 20px;
+
+      color:
+        var(--text-secondary);
+
+    }
+
+
+    .spinner {
+
+      animation:
+        spin 1s linear infinite;
+
+    }
+
+
+    @keyframes spin {
+
+      from {
+        transform:
+          rotate(0deg);
+      }
+
+      to {
+        transform:
+          rotate(360deg);
+      }
+
+    }
+
+
+    /* =========================================
+       MOBILE
+    ========================================= */
+
+    @media (max-width: 650px) {
+
+      .nav-container {
+
+        padding:
+          0 16px;
+
+      }
+
+
+      .portal-label {
+
+        font-size:
+          0.85rem;
+
+      }
+
+
+      .back-link {
+
+        font-size:
+          0.82rem;
+
+      }
+
+
+      .hero {
+
+        padding:
+          55px 18px 35px;
+
+      }
+
+
+      .portal-container {
+
+        padding:
+          0 16px;
+
+      }
+
+
+      .panel {
+
+        padding:
+          22px;
+
+      }
+
+
+      .info-grid {
+
+        grid-template-columns:
+          1fr;
+
+      }
+
+
+      .attempt-row {
+
+        align-items:
+          flex-start;
+
+        flex-direction:
+          column;
+
+      }
+
+
+      .attempt-grade {
+
+        text-align:
+          left;
+
+      }
+
+    }
+
   </style>
+
 </head>
+
+
 <body>
+
+
+  <!-- =========================================
+       HEADER
+  ========================================== -->
+
   <header>
+
     <div class="nav-container">
-      <div class="back-link" onclick="history.back()"><i data-lucide="arrow-left" style="width: 18px; height: 18px;"></i> Back to Course</div>
-      <div style="font-family: var(--font-heading); font-weight: 700; font-size: 1.1rem; text-transform: uppercase;">QUIZ PORTAL</div>
-    </div>
-  </header>
-  
-  <section class="hero">
-    <div class="hero-content">
-      <h1 class="quiz-title" id="quiz-title">Loading Quiz...</h1>
-      <div class="meta-tags" id="quiz-meta">
-        <div class="meta-tag sub-tag"><i data-lucide="clock" style="width: 14px; height: 14px;"></i> Fetching details...</div>
+
+      <div
+        class="back-link"
+        onclick="history.back()"
+      >
+
+        <i
+          data-lucide="arrow-left"
+          style="width:18px;height:18px;"
+        ></i>
+
+        Back to Course
+
       </div>
+
+
+      <div class="portal-label">
+        QUIZ PORTAL
+      </div>
+
     </div>
+
+  </header>
+
+
+  <!-- =========================================
+       HERO
+  ========================================== -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <div
+        class="course-label"
+        id="course-label"
+      >
+
+        <i
+          data-lucide="book-open"
+          style="width:15px;height:15px;"
+        ></i>
+
+        Loading course...
+
+      </div>
+
+
+      <h1
+        class="quiz-title"
+        id="quiz-title"
+      >
+        Loading Quiz...
+      </h1>
+
+
+      <div
+        class="meta-tags"
+        id="quiz-meta"
+      >
+
+        <div class="meta-tag light">
+
+          <i
+            data-lucide="loader-2"
+            class="spinner"
+            style="width:14px;height:14px;"
+          ></i>
+
+          Loading...
+
+        </div>
+
+      </div>
+
+    </div>
+
   </section>
 
-  <div class="portal-container">
-    <div class="panel">
-      <h2 class="panel-title">Quiz Instructions</h2>
-      <div class="instructions-content" id="quiz-instructions">Please wait while we load the assessment specifications...</div>
-    </div>
-    
-    <div class="panel">
-      <h2 class="panel-title">Attempt Assessment</h2>
-      <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 20px;">Ensure you have a stable network connection before launching your attempt.</p>
-      <a href="#" id="launch-btn" class="action-btn" target="_blank">
-        <i data-lucide="play-circle" style="width: 18px; height: 18px;"></i> Launch Quiz in Moodle
+
+  <!-- =========================================
+       MAIN
+  ========================================== -->
+
+  <main class="portal-container">
+
+
+    <!-- MESSAGE -->
+
+    <div
+      class="message"
+      id="message"
+    ></div>
+
+
+    <!-- STATUS -->
+
+    <section class="panel">
+
+      <h2 class="panel-title">
+        Assessment Status
+      </h2>
+
+
+      <div
+        class="status-box neutral"
+        id="status-box"
+      >
+
+        <i
+          data-lucide="loader-2"
+          class="status-icon spinner"
+          style="width:20px;height:20px;"
+        ></i>
+
+
+        <div class="status-content">
+
+          <div
+            class="status-title"
+            id="status-title"
+          >
+            Checking quiz status...
+          </div>
+
+
+          <div
+            class="status-description"
+            id="status-description"
+          >
+            Connecting to Moodle.
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- QUIZ INFORMATION -->
+
+    <section class="panel">
+
+      <h2 class="panel-title">
+        Quiz Information
+      </h2>
+
+
+      <div class="info-grid">
+
+        <div class="info-card">
+
+          <div class="info-label">
+            Attempts
+          </div>
+
+          <div
+            class="info-value"
+            id="attempt-info"
+          >
+            —
+
+          </div>
+
+        </div>
+
+
+        <div class="info-card">
+
+          <div class="info-label">
+            Best Grade
+          </div>
+
+          <div
+            class="info-value"
+            id="best-grade"
+          >
+            —
+
+          </div>
+
+        </div>
+
+
+        <div class="info-card">
+
+          <div class="info-label">
+            Time Limit
+          </div>
+
+          <div
+            class="info-value"
+            id="time-limit"
+          >
+            —
+
+          </div>
+
+        </div>
+
+
+        <div class="info-card">
+
+          <div class="info-label">
+            Maximum Grade
+          </div>
+
+          <div
+            class="info-value"
+            id="max-grade"
+          >
+            —
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- INSTRUCTIONS -->
+
+    <section class="panel">
+
+      <h2 class="panel-title">
+        Quiz Instructions
+      </h2>
+
+
+      <div
+        class="instructions-content"
+        id="quiz-instructions"
+      >
+
+        Loading quiz instructions...
+
+      </div>
+
+    </section>
+
+
+    <!-- ATTEMPTS -->
+
+    <section
+      class="panel"
+      id="attempts-panel"
+      style="display:none;"
+    >
+
+      <h2 class="panel-title">
+        Your Attempts
+      </h2>
+
+
+      <div
+        class="attempt-list"
+        id="attempt-list"
+      ></div>
+
+    </section>
+
+
+    <!-- LAUNCH -->
+
+    <section class="panel launch-panel">
+
+      <h2 class="panel-title">
+        Take Assessment
+      </h2>
+
+
+      <div
+        class="launch-description"
+        id="launch-description"
+      >
+
+        Your actual quiz attempt will open in
+        Moodle. Make sure you have a stable
+        connection before starting.
+
+      </div>
+
+
+      <a
+        href="#"
+        id="launch-btn"
+        class="action-btn disabled"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+
+        <i
+          data-lucide="play-circle"
+          style="width:19px;height:19px;"
+        ></i>
+
+        Start Quiz
+
       </a>
-    </div>
-  </div>
+
+    </section>
+
+
+  </main>
+
 
   <script>
-    lucide.createIcons();
-    const MOODLE_URL = 'http://localhost:8000';
-    const userToken = localStorage.getItem('madar_user_token');
-    const urlParams = new URLSearchParams(window.location.search);
-    const quizId = urlParams.get('quizid');
-    const courseId = urlParams.get('courseid');
 
-    if (!userToken) window.location.href = 'login.html';
+    /* ==========================================================
+       CONFIGURATION
+    ========================================================== */
 
-    async function loadQuiz() {
-      try {
-        // Using course contents API which is fully authorized and reliable
-        const res = await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=core_course_get_contents&courseid=${courseId}&moodlewsrestformat=json`);
-        const sections = await res.json();
-        
-        if (sections.exception) throw new Error(sections.message);
+    const MOODLE_URL =
+      'http://localhost:8000';
 
-        let targetQuiz = null;
-        for (const section of sections) {
-          const found = section.modules.find(mod => mod.modname === 'quiz' && mod.instance == quizId);
-          if (found) {
-            targetQuiz = found;
-            break;
-          }
-        }
 
-        if (targetQuiz) {
-          document.getElementById('quiz-title').textContent = targetQuiz.name;
-          document.getElementById('quiz-instructions').innerHTML = targetQuiz.description || 'Read all instructions carefully before starting your assessment attempt.';
-          
-          document.getElementById('quiz-meta').innerHTML = `
-            <div class="meta-tag"><i data-lucide="check-circle" style="width: 14px; height: 14px;"></i> Status: Ready</div>
-            <div class="meta-tag sub-tag"><i data-lucide="book-open" style="width: 14px; height: 14px;"></i> Module: Quiz</div>
-          `;
+    const userToken =
+      localStorage.getItem(
+        'madar_user_token'
+      );
 
-          // Link directly to the interactive quiz launch URL provided by Moodle
-          document.getElementById('launch-btn').href = targetQuiz.url;
-          lucide.createIcons();
-        } else {
-          throw new Error("Quiz module not found in course contents.");
-        }
 
-      } catch (e) {
-        console.error(e);
-        document.getElementById('quiz-title').textContent = "Error Loading Quiz";
-        document.getElementById('quiz-instructions').textContent = "Could not retrieve quiz data: " + e.message;
-      }
+    /* ==========================================================
+       URL
+    ========================================================== */
+
+    const urlParams =
+      new URLSearchParams(
+        window.location.search
+      );
+
+
+    const quizId =
+      urlParams.get(
+        'quizid'
+      );
+
+
+    const courseId =
+      urlParams.get(
+        'courseid'
+      );
+
+
+    /* ==========================================================
+       AUTH
+    ========================================================== */
+
+    if (!userToken) {
+
+      window.location.href =
+        'login.html';
+
     }
 
+
+    if (!quizId || !courseId) {
+
+      window.location.href =
+        'index.html';
+
+    }
+
+
+    /* ==========================================================
+       DOM
+    ========================================================== */
+
+    const courseLabel =
+      document.getElementById(
+        'course-label'
+      );
+
+
+    const quizTitle =
+      document.getElementById(
+        'quiz-title'
+      );
+
+
+    const quizMeta =
+      document.getElementById(
+        'quiz-meta'
+      );
+
+
+    const statusBox =
+      document.getElementById(
+        'status-box'
+      );
+
+
+    const statusTitle =
+      document.getElementById(
+        'status-title'
+      );
+
+
+    const statusDescription =
+      document.getElementById(
+        'status-description'
+      );
+
+
+    const quizInstructions =
+      document.getElementById(
+        'quiz-instructions'
+      );
+
+
+    const attemptInfo =
+      document.getElementById(
+        'attempt-info'
+      );
+
+
+    const bestGrade =
+      document.getElementById(
+        'best-grade'
+      );
+
+
+    const timeLimit =
+      document.getElementById(
+        'time-limit'
+      );
+
+
+    const maxGrade =
+      document.getElementById(
+        'max-grade'
+      );
+
+
+    const attemptsPanel =
+      document.getElementById(
+        'attempts-panel'
+      );
+
+
+    const attemptList =
+      document.getElementById(
+        'attempt-list'
+      );
+
+
+    const launchBtn =
+      document.getElementById(
+        'launch-btn'
+      );
+
+
+    const launchDescription =
+      document.getElementById(
+        'launch-description'
+      );
+
+
+    const message =
+      document.getElementById(
+        'message'
+      );
+
+
+    lucide.createIcons();
+
+
+    /* ==========================================================
+       HELPERS
+    ========================================================== */
+
+    function escapeHtml(value) {
+
+      return String(
+        value ?? ''
+      )
+
+        .replace(
+          /&/g,
+          '&amp;'
+        )
+
+        .replace(
+          /</g,
+          '&lt;'
+        )
+
+        .replace(
+          />/g,
+          '&gt;'
+        )
+
+        .replace(
+          /"/g,
+          '&quot;'
+        )
+
+        .replace(
+          /'/g,
+          '&#039;'
+        );
+
+    }
+
+
+    function formatDate(
+      timestamp
+    ) {
+
+      if (
+        !timestamp ||
+        Number(timestamp) <= 0
+      ) {
+
+        return '—';
+
+      }
+
+
+      return new Date(
+        Number(timestamp) * 1000
+      ).toLocaleString(
+        'en-US',
+        {
+          weekday: 'short',
+          month: 'short',
+          day: 'numeric',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        }
+      );
+
+    }
+
+
+    function formatDuration(
+      seconds
+    ) {
+
+      const value =
+        Number(seconds);
+
+
+      if (
+        !Number.isFinite(value) ||
+        value <= 0
+      ) {
+
+        return 'No time limit';
+
+      }
+
+
+      const minutes =
+        Math.floor(
+          value / 60
+        );
+
+
+      const hours =
+        Math.floor(
+          minutes / 60
+        );
+
+
+      const remainingMinutes =
+        minutes % 60;
+
+
+      if (hours > 0) {
+
+        return remainingMinutes > 0
+
+          ? `${hours}h ${remainingMinutes}m`
+
+          : `${hours}h`;
+
+      }
+
+
+      return `${minutes} min`;
+
+    }
+
+
+    function formatGrade(
+      grade,
+      max
+    ) {
+
+      const numericGrade =
+        Number(grade);
+
+      const numericMax =
+        Number(max);
+
+
+      if (
+        !Number.isFinite(
+          numericGrade
+        )
+      ) {
+
+        return 'Not graded';
+
+      }
+
+
+      if (
+        Number.isFinite(
+          numericMax
+        ) &&
+        numericMax > 0
+      ) {
+
+        return `${numericGrade.toFixed(1)} / ${numericMax}`;
+
+      }
+
+
+      return numericGrade.toFixed(1);
+
+    }
+
+
+    function showMessage(
+      text
+    ) {
+
+      message.textContent =
+        text;
+
+      message.className =
+        'message visible error';
+
+    }
+
+
+    /* ==========================================================
+       MOODLE REQUEST
+    ========================================================== */
+
+    async function moodleRequest(
+      wsfunction,
+      params = {}
+    ) {
+
+      const body =
+        new URLSearchParams();
+
+
+      body.append(
+        'wstoken',
+        userToken
+      );
+
+
+      body.append(
+        'wsfunction',
+        wsfunction
+      );
+
+
+      body.append(
+        'moodlewsrestformat',
+        'json'
+      );
+
+
+      Object.entries(
+        params
+      ).forEach(
+        ([key, value]) => {
+
+          if (
+            value !== undefined &&
+            value !== null
+          ) {
+
+            body.append(
+              key,
+              value
+            );
+
+          }
+
+        }
+      );
+
+
+      const response =
+        await fetch(
+          `${MOODLE_URL}/webservice/rest/server.php`,
+          {
+            method: 'POST',
+
+            headers: {
+              'Content-Type':
+                'application/x-www-form-urlencoded'
+            },
+
+            body
+          }
+        );
+
+
+      if (!response.ok) {
+
+        throw new Error(
+          `Moodle returned HTTP ${response.status}.`
+        );
+
+      }
+
+
+      const data =
+        await response.json();
+
+
+      if (data.exception) {
+
+        throw new Error(
+          data.message ||
+          'Moodle API error.'
+        );
+
+      }
+
+
+      return data;
+
+    }
+
+
+    /* ==========================================================
+       LOAD COURSE QUIZ MODULE
+    ========================================================== */
+
+    async function getCourseQuiz() {
+
+      const response =
+        await moodleRequest(
+          'core_course_get_contents',
+          {
+            courseid:
+              courseId
+          }
+        );
+
+
+      let targetQuiz = null;
+
+
+      if (
+        !Array.isArray(response)
+      ) {
+
+        throw new Error(
+          'Moodle returned an invalid course response.'
+        );
+
+      }
+
+
+      for (
+        const section
+        of response
+      ) {
+
+        if (
+          !Array.isArray(
+            section.modules
+          )
+        ) {
+
+          continue;
+
+        }
+
+
+        const found =
+          section.modules.find(
+            module =>
+              module.modname === 'quiz' &&
+              String(module.instance) ===
+              String(quizId)
+          );
+
+
+        if (found) {
+
+          targetQuiz =
+            found;
+
+          break;
+
+        }
+
+      }
+
+
+      if (!targetQuiz) {
+
+        throw new Error(
+          'Quiz module not found in this course.'
+        );
+
+      }
+
+
+      return targetQuiz;
+
+    }
+
+
+    /* ==========================================================
+       LOAD QUIZ DETAILS
+    ========================================================== */
+
+    async function getQuizDetails() {
+
+      const data =
+        await moodleRequest(
+          'mod_quiz_get_quizzes_by_courses',
+          {
+            'courseids[0]':
+              courseId
+          }
+        );
+
+
+      if (
+        !data.quizzes ||
+        !Array.isArray(
+          data.quizzes
+        )
+      ) {
+
+        throw new Error(
+          'Moodle did not return quiz details.'
+        );
+
+      }
+
+
+      const quiz =
+        data.quizzes.find(
+          item =>
+            String(item.id) ===
+            String(quizId)
+        );
+
+
+      if (!quiz) {
+
+        throw new Error(
+          'Quiz details were not found.'
+        );
+
+      }
+
+
+      return quiz;
+
+    }
+
+
+    /* ==========================================================
+       LOAD USER
+    ========================================================== */
+
+    async function getCurrentUser() {
+
+      return await moodleRequest(
+        'core_webservice_get_site_info'
+      );
+
+    }
+
+
+    /* ==========================================================
+       LOAD ATTEMPTS
+    ========================================================== */
+
+    async function getUserAttempts(
+      userId
+    ) {
+
+      /*
+       * Moodle 5.x supports get_user_attempts
+       * with quizid, userid, status and
+       * includepreviews.
+       */
+
+      return await moodleRequest(
+        'mod_quiz_get_user_attempts',
+        {
+          quizid:
+            quizId,
+
+          userid:
+            userId,
+
+          status:
+            'all',
+
+          includepreviews:
+            0
+        }
+      );
+
+    }
+
+
+    /* ==========================================================
+       LOAD BEST GRADE
+    ========================================================== */
+
+    async function getBestGrade(
+      userId
+    ) {
+
+      return await moodleRequest(
+        'mod_quiz_get_user_best_grade',
+        {
+          quizid:
+            quizId,
+
+          userid:
+            userId
+        }
+      );
+
+    }
+
+
+    /* ==========================================================
+       RENDER STATUS
+    ========================================================== */
+
+    function setStatus(
+      title,
+      description,
+      type,
+      icon
+    ) {
+
+      statusBox.className =
+        `status-box ${type}`;
+
+
+      statusBox.innerHTML = `
+
+        <i
+          data-lucide="${icon}"
+          class="status-icon"
+          style="width:20px;height:20px;"
+        ></i>
+
+
+        <div class="status-content">
+
+          <div class="status-title">
+
+            ${escapeHtml(title)}
+
+          </div>
+
+
+          <div class="status-description">
+
+            ${escapeHtml(
+              description
+            )}
+
+          </div>
+
+        </div>
+
+      `;
+
+
+      lucide.createIcons();
+
+    }
+
+
+    /* ==========================================================
+       RENDER ATTEMPTS
+    ========================================================== */
+
+    function renderAttempts(
+      data
+    ) {
+
+      const attempts =
+        Array.isArray(
+          data.attempts
+        )
+          ? data.attempts
+          : [];
+
+
+      if (
+        attempts.length === 0
+      ) {
+
+        attemptsPanel.style.display =
+          'none';
+
+        attemptInfo.textContent =
+          '0 attempts';
+
+        return;
+
+      }
+
+
+      attemptsPanel.style.display =
+        'block';
+
+
+      const finished =
+        attempts.filter(
+          attempt =>
+            String(
+              attempt.state ||
+              attempt.status ||
+              ''
+            ).toLowerCase() ===
+            'finished'
+        );
+
+
+      const unfinished =
+        attempts.find(
+          attempt => {
+
+            const state =
+              String(
+                attempt.state ||
+                attempt.status ||
+                ''
+              ).toLowerCase();
+
+            return (
+              state === 'inprogress' ||
+              state === 'inprogress' ||
+              state === 'unfinished'
+            );
+
+          }
+        );
+
+
+      attemptInfo.textContent =
+        `${attempts.length} attempt${
+          attempts.length === 1 ? '' : 's'
+        }`;
+
+
+      /*
+       * Render newest attempts first.
+       */
+
+      const sorted =
+        [...attempts].sort(
+          (a, b) => {
+
+            return (
+              Number(
+                b.timestart ||
+                b.timefinish ||
+                0
+              ) -
+
+              Number(
+                a.timestart ||
+                a.timefinish ||
+                0
+              )
+            );
+
+          }
+        );
+
+
+      attemptList.innerHTML =
+        sorted.map(
+          (attempt, index) => {
+
+            const state =
+              String(
+                attempt.state ||
+                attempt.status ||
+                'unknown'
+              ).toLowerCase();
+
+
+            const attemptNumber =
+              attempt.attempt !== undefined
+                ? attempt.attempt
+                : index + 1;
+
+
+            const startTime =
+              attempt.timestart ||
+              attempt.timefinish;
+
+
+            const grade =
+              attempt.sumgrades !== undefined &&
+              attempt.sumgrades !== null
+                ? attempt.sumgrades
+                : (
+                    attempt.grade !== undefined
+                      ? attempt.grade
+                      : null
+                  );
+
+
+            let stateLabel =
+              'Attempt';
+
+
+            if (
+              state ===
+              'finished'
+            ) {
+
+              stateLabel =
+                'Finished';
+
+            } else if (
+              state === 'inprogress' ||
+              state === 'unfinished'
+            ) {
+
+              stateLabel =
+                'In progress';
+
+            }
+
+
+            return `
+
+              <div class="attempt-row">
+
+                <div class="attempt-main">
+
+                  <div class="attempt-number">
+
+                    Attempt
+                    ${escapeHtml(
+                      attemptNumber
+                    )}
+
+                    <span
+                      style="
+                        color:var(--text-tertiary);
+                        font-size:.75rem;
+                        font-weight:500;
+                        margin-left:6px;
+                      "
+                    >
+
+                      ${escapeHtml(
+                        stateLabel
+                      )}
+
+                    </span>
+
+                  </div>
+
+
+                  <div class="attempt-date">
+
+                    ${formatDate(
+                      startTime
+                    )}
+
+                  </div>
+
+                </div>
+
+
+                <div class="attempt-grade">
+
+                  <div
+                    class="attempt-grade-value"
+                  >
+
+                    ${
+                      grade !== null &&
+                      grade !== undefined &&
+                      grade !== ''
+                        ? escapeHtml(
+                            Number(grade)
+                              .toFixed(1)
+                          )
+                        : '—'
+                    }
+
+                  </div>
+
+
+                  <div
+                    class="attempt-grade-label"
+                  >
+
+                    ${
+                      grade !== null &&
+                      grade !== undefined
+                        ? 'Score'
+                        : stateLabel
+                    }
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            `;
+
+          }
+        ).join('');
+
+
+      /*
+       * Inform the user about an unfinished
+       * attempt if one exists.
+       */
+
+      if (unfinished) {
+
+        setStatus(
+          'Attempt in progress',
+          'You already have an unfinished quiz attempt. Continue it rather than starting another one.',
+          'warning',
+          'play-circle'
+        );
+
+        launchBtn.textContent =
+          'Continue Quiz';
+
+
+        launchDescription.textContent =
+          'You have an unfinished attempt. Continue it in Moodle to preserve your current progress.';
+
+
+        return;
+
+      }
+
+
+      if (finished.length > 0) {
+
+        setStatus(
+          'Previous attempt found',
+          'You have completed at least one attempt. You can start another attempt if Moodle allows it.',
+          'success',
+          'check-circle'
+        );
+
+      } else {
+
+        setStatus(
+          'Ready to begin',
+          'No previous attempts were found for this quiz.',
+          'neutral',
+          'play-circle'
+        );
+
+      }
+
+    }
+
+
+    /* ==========================================================
+       RENDER BEST GRADE
+    ========================================================== */
+
+    function renderBestGrade(
+      data,
+      quiz
+    ) {
+
+      /*
+       * Moodle returns a grade structure.
+       * Keep the parser defensive because
+       * grade field naming can vary.
+       */
+
+      const grade =
+        data?.grade ??
+        data?.bestgrade ??
+        data?.bestgradeformatted ??
+        null;
+
+
+      const max =
+        quiz?.grade ??
+        quiz?.sumgrades ??
+        null;
+
+
+      if (
+        grade === null ||
+        grade === undefined ||
+        grade === ''
+      ) {
+
+        bestGrade.textContent =
+          'Not graded';
+
+        return;
+
+      }
+
+
+      if (
+        Number.isFinite(
+          Number(max)
+        )
+      ) {
+
+        bestGrade.textContent =
+          formatGrade(
+            grade,
+            max
+          );
+
+      } else {
+
+        bestGrade.textContent =
+          Number(grade).toFixed(1);
+
+      }
+
+    }
+
+
+    /* ==========================================================
+       INITIALIZE
+    ========================================================== */
+
+    async function loadQuiz() {
+
+      try {
+
+        /*
+         * 1. Load the module URL and description.
+         */
+
+        const targetQuiz =
+          await getCourseQuiz();
+
+
+        /*
+         * 2. Load detailed quiz metadata.
+         */
+
+        let quizDetails =
+          null;
+
+
+        try {
+
+          quizDetails =
+            await getQuizDetails();
+
+        }
+
+        catch (error) {
+
+          console.warn(
+            'Could not load detailed quiz metadata:',
+            error
+          );
+
+        }
+
+
+        /*
+         * 3. Get current user.
+         */
+
+        const siteInfo =
+          await getCurrentUser();
+
+
+        const userId =
+          siteInfo.userid;
+
+
+        /*
+         * 4. Render basic course/module info.
+         */
+
+        courseLabel.innerHTML = `
+
+          <i
+            data-lucide="book-open"
+            style="width:15px;height:15px;"
+          ></i>
+
+          Course ID:
+          ${escapeHtml(courseId)}
+
+        `;
+
+
+        quizTitle.textContent =
+          targetQuiz.name ||
+          quizDetails?.name ||
+          'Quiz';
+
+
+        quizInstructions.innerHTML =
+          targetQuiz.description ||
+          quizDetails?.intro ||
+          'Read all instructions carefully before starting your assessment.';
+
+
+        /*
+         * 5. Set launch URL.
+         */
+
+        if (
+          targetQuiz.url
+        ) {
+
+          launchBtn.href =
+            targetQuiz.url;
+
+          launchBtn.classList.remove(
+            'disabled'
+          );
+
+        } else {
+
+          launchBtn.classList.add(
+            'disabled'
+          );
+
+          showMessage(
+            'Moodle did not provide a quiz launch URL.'
+          );
+
+        }
+
+
+        /*
+         * 6. Render quiz metadata.
+         */
+
+        const timeLimitValue =
+          quizDetails?.timelimit;
+
+
+        const maxGradeValue =
+          quizDetails?.grade;
+
+
+        timeLimit.textContent =
+          formatDuration(
+            timeLimitValue
+          );
+
+
+        maxGrade.textContent =
+          Number.isFinite(
+            Number(maxGradeValue)
+          )
+
+            ? Number(
+                maxGradeValue
+              ).toFixed(1)
+
+            : '—';
+
+
+        quizMeta.innerHTML = `
+
+          <div class="meta-tag">
+
+            <i
+              data-lucide="check-circle"
+              style="width:14px;height:14px;"
+            ></i>
+
+            Assessment
+
+          </div>
+
+
+          <div class="meta-tag light">
+
+            <i
+              data-lucide="hash"
+              style="width:14px;height:14px;"
+            ></i>
+
+            Quiz ID:
+            ${escapeHtml(quizId)}
+
+          </div>
+
+        `;
+
+
+        /*
+         * 7. Attempts and best grade.
+         */
+
+        try {
+
+          const attemptsData =
+            await getUserAttempts(
+              userId
+            );
+
+
+          renderAttempts(
+            attemptsData
+          );
+
+        }
+
+        catch (error) {
+
+          console.warn(
+            'Could not load quiz attempts:',
+            error
+          );
+
+
+          setStatus(
+            'Ready',
+            'The quiz is available. Moodle did not provide attempt history to Athena.',
+            'neutral',
+            'play-circle'
+          );
+
+        }
+
+
+        /*
+         * 8. Best grade.
+         */
+
+        try {
+
+          const bestGradeData =
+            await getBestGrade(
+              userId
+            );
+
+
+          renderBestGrade(
+            bestGradeData,
+            quizDetails
+          );
+
+        }
+
+        catch (error) {
+
+          console.warn(
+            'Could not load best grade:',
+            error
+          );
+
+
+          bestGrade.textContent =
+            'Not graded';
+
+        }
+
+
+        /*
+         * Finish rendering.
+         */
+
+        lucide.createIcons();
+
+      }
+
+      catch (error) {
+
+        console.error(
+          'Quiz loading error:',
+          error
+        );
+
+
+        quizTitle.textContent =
+          'Unable to Load Quiz';
+
+
+        courseLabel.textContent =
+          'Moodle connection error';
+
+
+        quizInstructions.textContent =
+          'Could not retrieve the quiz information.';
+
+
+        launchBtn.classList.add(
+          'disabled'
+        );
+
+
+        showMessage(
+          error.message
+        );
+
+      }
+
+    }
+
+
+    /* ==========================================================
+       START
+    ========================================================== */
+
     loadQuiz();
+
   </script>
+
 </body>
+
 </html>
