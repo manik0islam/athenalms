@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Madar LMS | Student Profile</title>
+  <title>athena | Profile</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,6 +17,7 @@
       --bg-tertiary: #e4e4e7;
       --text-primary: #000000;
       --text-secondary: #52525b;
+      --text-tertiary: #71717a;
       --border-color: #d4d4d8;
       --black: #09090b;
       --white: #ffffff;
@@ -26,165 +27,177 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: var(--font-body); background-color: var(--bg-secondary); color: var(--text-primary); line-height: 1.6; }
-    a { color: inherit; text-decoration: none; }
+    a { color: var(--text-primary); text-decoration: none; }
 
     /* HEADER */
     header { background-color: var(--bg-primary); border-bottom: 1px solid var(--border-color); position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
-    .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 70px; display: flex; justify-content: space-between; align-items: center; }
-    .back-link { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: opacity 0.2s; }
-    .back-link:hover { opacity: 0.7; }
-
-    /* LAYOUT */
-    .profile-container { max-width: 1200px; margin: 100px auto 40px; padding: 0 24px; display: grid; grid-template-columns: 350px 1fr; gap: 32px; }
-    @media (max-width: 900px) { .profile-container { grid-template-columns: 1fr; } }
-
-    /* USER CARD */
-    .user-card { background-color: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 6px; padding: 30px; text-align: center; height: fit-content; }
-    .avatar-large { width: 100px; height: 100px; background-color: var(--bg-secondary); border: 2px solid var(--border-color); border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); }
-    .user-name { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; margin-bottom: 4px; }
-    .user-role { font-size: 0.9rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 24px; display: block; }
+    .nav-container { max-width: 1400px; margin: 0 auto; padding: 0 24px; height: 70px; display: flex; justify-content: space-between; align-items: center; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-icon { color: var(--black); display: flex; }
+    .brand-text { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; letter-spacing: -0.5px; text-transform: uppercase; }
     
-    .logout-btn { width: 100%; padding: 12px; background-color: transparent; color: #dc2626; border: 1px solid #dc2626; border-radius: 4px; font-family: var(--font-heading); font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
-    .logout-btn:hover { background-color: #dc2626; color: var(--white); }
+    .user-controls { display: flex; align-items: center; gap: 20px; }
+    .icon-btn { background: none; border: none; color: var(--text-secondary); cursor: pointer; display: flex; position: relative; transition: color 0.2s; }
+    .icon-btn:hover { color: var(--black); }
+    .user-profile { display: flex; align-items: center; gap: 10px; padding-left: 20px; border-left: 1px solid var(--border-color); cursor: pointer; }
+    .avatar { width: 36px; height: 36px; background-color: var(--bg-tertiary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); }
 
-    /* GRADEBOOK */
-    .content-block { background-color: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 6px; overflow: hidden; }
-    .block-title { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 600; padding: 20px; border-bottom: 1px solid var(--border-color); background: var(--bg-secondary); display: flex; align-items: center; gap: 10px; }
+    /* PROFILE HERO */
+    .hero { margin-top: 70px; background-color: var(--bg-primary); border-bottom: 1px solid var(--border-color); position: relative; }
+    .hero-banner { height: 160px; background-image: repeating-linear-gradient(45deg, var(--bg-secondary), var(--bg-secondary) 10px, var(--bg-primary) 10px, var(--bg-primary) 20px); border-bottom: 1px solid var(--border-color); }
+    .hero-content { max-width: 1000px; margin: 0 auto; padding: 0 24px; display: flex; align-items: flex-end; padding-bottom: 30px; margin-top: -50px; }
+    .profile-avatar-large { width: 100px; height: 100px; background-color: var(--bg-primary); border: 2px solid var(--border-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-family: var(--font-heading); font-weight: 700; box-shadow: 0 4px 12px rgba(0,0,0,0.05); z-index: 10; margin-right: 24px; }
+    .profile-title-block { padding-top: 60px; }
+    .profile-name { font-family: var(--font-heading); font-size: 2rem; font-weight: 700; line-height: 1.1; margin-bottom: 4px; }
+    .profile-role { color: var(--text-secondary); font-size: 1.05rem; font-weight: 500; }
+
+    /* PROFILE LAYOUT */
+    .profile-container { max-width: 1000px; margin: 40px auto 60px; padding: 0 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    @media (max-width: 768px) { .profile-container { grid-template-columns: 1fr; } }
+
+    .moodle-block { background-color: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 6px; padding: 24px; }
+    .block-title { font-family: var(--font-heading); font-size: 1.1rem; font-weight: 600; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; gap: 8px; }
     
-    .grade-table { width: 100%; border-collapse: collapse; }
-    .grade-table th { text-align: left; padding: 16px 20px; font-size: 0.85rem; text-transform: uppercase; color: var(--text-secondary); border-bottom: 1px solid var(--border-color); }
-    .grade-table td { padding: 16px 20px; border-bottom: 1px solid var(--border-color); }
-    .grade-table tr:last-child td { border-bottom: none; }
-    .grade-table tbody tr:hover { background-color: #fafafa; }
-
-    .course-cell { font-weight: 500; }
-    .grade-cell { font-family: var(--font-heading); font-weight: 700; font-size: 1.1rem; }
-    .status-badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; background: var(--bg-tertiary); color: var(--text-secondary); }
-    .status-badge.high { background: #dcfce7; color: #166534; }
-
-    .empty-state { padding: 40px; text-align: center; color: var(--text-secondary); }
+    .info-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+    .info-item { display: flex; flex-direction: column; }
+    .info-label { font-size: 0.75rem; text-transform: uppercase; font-weight: 600; color: var(--text-secondary); margin-bottom: 4px; letter-spacing: 0.5px; }
+    .info-value { font-size: 0.95rem; font-weight: 500; color: var(--black); display: flex; align-items: center; gap: 8px; }
+    
+    .action-btn { width: 100%; padding: 12px; background-color: var(--black); color: var(--white); border: none; border-radius: 4px; font-family: var(--font-body); font-weight: 500; font-size: 0.9rem; cursor: pointer; transition: opacity 0.2s; margin-top: 24px; display: flex; justify-content: center; align-items: center; gap: 8px; }
+    .action-btn:hover { opacity: 0.9; }
+    .logout-btn-alt { background-color: var(--bg-primary); color: var(--text-primary); border: 1px solid var(--border-color); margin-top: 12px; }
+    .logout-btn-alt:hover { border-color: var(--black); background-color: var(--bg-secondary); }
   </style>
 </head>
 <body>
 
   <header>
     <div class="nav-container">
-      <div class="back-link" onclick="window.location.href='index.html'">
-        <i data-lucide="arrow-left" style="width: 20px; height: 20px;"></i> Back to Dashboard
+      <a href="index.html" class="brand">
+        <div class="brand-icon"><i data-lucide="triangle" style="width: 28px; height: 28px; fill: var(--black);"></i></div>
+        <span class="brand-text">athena</span>
+      </a>
+      
+      <div class="user-controls">
+        <button class="icon-btn" onclick="window.location.href='index.html'" title="Back to Dashboard"><i data-lucide="layout-dashboard" style="width: 20px; height: 20px;"></i></button>
+        <div class="user-profile">
+          <span style="font-size: 0.9rem; font-weight: 500;" id="nav-username">Loading...</span>
+          <div class="avatar"><i data-lucide="user" style="width: 20px; height: 20px;"></i></div>
+        </div>
       </div>
-      <div style="font-family: var(--font-heading); font-weight: 700; text-transform: uppercase;">Student Hub</div>
     </div>
   </header>
 
+  <section class="hero">
+    <div class="hero-banner"></div>
+    <div class="hero-content">
+      <div class="profile-avatar-large" id="profile-initial">MI</div>
+      <div class="profile-title-block">
+        <h1 class="profile-name" id="main-username">Manik Islam</h1>
+        <div class="profile-role">Mechatronics Engineering Student</div>
+      </div>
+    </div>
+  </section>
+
   <div class="profile-container">
     
-    <aside class="user-card">
-      <div class="avatar-large">
-        <i data-lucide="user" style="width: 48px; height: 48px;"></i>
-      </div>
-      <h2 class="user-name" id="display-name">Loading...</h2>
-      <span class="user-role">Engineering Student</span>
-      
-      <button class="logout-btn" id="logout-btn">
-        <i data-lucide="log-out" style="width: 18px; height: 18px;"></i> Secure Logout
-      </button>
-    </aside>
+    <!-- LEFT COLUMN: Contact & System Data -->
+    <div class="moodle-block">
+      <h3 class="block-title"><i data-lucide="contact" style="width: 18px; height: 18px;"></i> System Identity</h3>
+      <ul class="info-list">
+        <li class="info-item">
+          <span class="info-label">Primary Email</span>
+          <span class="info-value" id="profile-email"><i data-lucide="mail" style="width: 16px; height: 16px; color: var(--text-tertiary);"></i> maniikislam05@gmail.com</span>
+        </li>
+        <li class="info-item">
+          <span class="info-label">Phone Number</span>
+          <span class="info-value"><i data-lucide="phone" style="width: 16px; height: 16px; color: var(--text-tertiary);"></i> 01150775909</span>
+        </li>
+        <li class="info-item">
+          <span class="info-label">Age</span>
+          <span class="info-value"><i data-lucide="calendar" style="width: 16px; height: 16px; color: var(--text-tertiary);"></i> 21 Years Old</span>
+        </li>
+        <li class="info-item">
+          <span class="info-label">Location Base</span>
+          <span class="info-value"><i data-lucide="map-pin" style="width: 16px; height: 16px; color: var(--text-tertiary);"></i> Giza, Egypt</span>
+        </li>
+      </ul>
+    </div>
 
-    <main class="content-block">
-      <div class="block-title">
-        <i data-lucide="bar-chart" style="width: 24px; height: 24px;"></i> Academic Telemetry
+    <!-- RIGHT COLUMN: Academic & Actions -->
+    <div class="moodle-block">
+      <h3 class="block-title"><i data-lucide="graduation-cap" style="width: 18px; height: 18px;"></i> Academic Profile</h3>
+      <ul class="info-list">
+        <li class="info-item">
+          <span class="info-label">Institution</span>
+          <span class="info-value">Misr University for Science and Technology (MUST)</span>
+        </li>
+        <li class="info-item">
+          <span class="info-label">Language Competency</span>
+          <span class="info-value">Bengali, Arabic, English, German</span>
+        </li>
+      </ul>
+
+      <div style="margin-top: 40px;">
+        <button class="action-btn" onclick="syncWithMoodle()">
+          <i data-lucide="refresh-cw" id="sync-icon" style="width: 16px; height: 16px;"></i> Sync Moodle Data
+        </button>
+        <button class="action-btn logout-btn-alt" onclick="logout()">
+          <i data-lucide="log-out" style="width: 16px; height: 16px;"></i> Disconnect Session
+        </button>
       </div>
-      
-      <table class="grade-table" id="grade-table">
-        <thead>
-          <tr>
-            <th>Course Module</th>
-            <th>Current Grade</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody id="grade-body">
-          <tr>
-            <td colspan="3" class="empty-state">
-              <i data-lucide="loader-2" style="animation: spin 2s linear infinite; margin: 0 auto 10px; display: block;"></i>
-              Compiling grades...
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </main>
+    </div>
 
   </div>
 
   <script>
     lucide.createIcons();
-    
-    const MOODLE_URL = 'http://localhost:8000';
+    const MOODLE_URL = 'http://localhost:8000'; 
     const userToken = localStorage.getItem('madar_user_token');
-    const username = localStorage.getItem('madar_username');
     
     if (!userToken) window.location.href = 'login.html';
 
-    // UI Setup
-    document.getElementById('display-name').textContent = username || 'Student';
-    
-    document.getElementById('logout-btn').addEventListener('click', () => {
-      localStorage.clear();
+    function logout() {
+      localStorage.removeItem('madar_user_token');
+      localStorage.removeItem('madar_username');
       window.location.href = 'login.html';
-    });
+    }
 
-    async function fetchGrades() {
-      const tbody = document.getElementById('grade-body');
+    async function syncWithMoodle() {
+      const syncIcon = document.getElementById('sync-icon');
+      syncIcon.style.animation = 'spin 1s linear infinite';
       
       try {
-        // Step 1: Get User ID
-        const infoRes = await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=core_webservice_get_site_info&moodlewsrestformat=json`);
-        const siteInfo = await infoRes.json();
-
-        // Step 2: Fetch Grades for all courses
-        const gradesRes = await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=gradereport_overview_get_course_grades&userid=${siteInfo.userid}&moodlewsrestformat=json`);
-        const data = await gradesRes.json();
-
-        if (data.exception) throw new Error(data.message);
+        const infoEndpoint = `${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=core_webservice_get_site_info&moodlewsrestformat=json`;
+        const response = await fetch(infoEndpoint);
+        const siteInfo = await response.json();
         
-        if (!data.grades || data.grades.length === 0) {
-          tbody.innerHTML = `<tr><td colspan="3" class="empty-state">No graded courses found in the database.</td></tr>`;
-          return;
+        if (siteInfo.exception) throw new Error(siteInfo.message);
+
+        // Update UI with live Moodle data
+        if (siteInfo.fullname) {
+          document.getElementById('main-username').textContent = siteInfo.fullname;
+          document.getElementById('nav-username').textContent = siteInfo.firstname;
+          document.getElementById('profile-initial').textContent = siteInfo.firstname.charAt(0) + (siteInfo.lastname ? siteInfo.lastname.charAt(0) : '');
+          localStorage.setItem('madar_username', siteInfo.firstname);
         }
 
-        tbody.innerHTML = '';
+        // If your Moodle setup exposes email in site_info, you can map it here.
+        // Otherwise, it falls back to the layout template defaults.
         
-        data.grades.forEach(item => {
-          // Moodle sometimes returns grades as strings or objects, we handle null/empty
-          const rawGrade = item.rawgrade ? item.rawgrade : '-';
-          
-          // Determine styling based on grade (Assuming out of 100 for visual sake)
-          const gradeNum = parseFloat(rawGrade);
-          let badgeClass = '';
-          let badgeText = 'Pending';
-          
-          if (!isNaN(gradeNum)) {
-            if (gradeNum >= 85) { badgeClass = 'high'; badgeText = 'Excellent'; }
-            else if (gradeNum >= 50) { badgeText = 'Passing'; }
-            else { badgeText = 'Needs Work'; }
-          }
-
-          tbody.innerHTML += `
-            <tr>
-              <td class="course-cell">Course ID: ${item.courseid}</td>
-              <td class="grade-cell">${rawGrade === '-' ? rawGrade : gradeNum + '%'}</td>
-              <td><span class="status-badge ${badgeClass}">${badgeText}</span></td>
-            </tr>
-          `;
-        });
+        setTimeout(() => {
+          syncIcon.style.animation = 'none';
+        }, 1000);
 
       } catch (error) {
-        console.error(error);
-        tbody.innerHTML = `<tr><td colspan="3" class="empty-state" style="color: #dc2626;">Error loading telemetry: ${error.message}</td></tr>`;
+        console.error('Moodle Sync Error:', error);
+        syncIcon.style.animation = 'none';
+        alert('Could not sync with Moodle. Check your connection.');
       }
     }
 
-    fetchGrades();
+    // Auto-sync on load
+    syncWithMoodle();
   </script>
 </body>
 </html>
