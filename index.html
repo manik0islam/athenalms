@@ -438,18 +438,14 @@
     
     // Auth Check
     const userToken = localStorage.getItem('madar_user_token');
-    const username = localStorage.getItem('madar_username');
     if (!userToken) window.location.href = 'login.html';
 
-    // UI Personalization & Logout
-    const userDisplay = document.querySelector('.user-profile span');
-    if (userDisplay && username) userDisplay.textContent = username;
-
+    // Profile Routing
     document.querySelector('.user-profile').addEventListener('click', () => {
-  window.location.href = 'profile.html';
-});
+      window.location.href = 'profile.html';
+    });
 
-    // Helper for icons
+    // Helper for icons based on course name
     function getCourseMetadata(courseName) {
       const lowerName = courseName.toLowerCase();
       if (lowerName.includes('math') || lowerName.includes('calc')) return { category: 'Mathematics', icon: 'calculator' };
@@ -458,12 +454,13 @@
       return { category: 'General Foundation', icon: 'book-open' };
     }
 
-    // Dynamic Fetch for SPECIFIC User
-    async function fetchAthenaCourses() {
+    async function fetchAthenaWorkspace() {
       const courseGrid = document.getElementById('course-grid');
+      const timelineList = document.querySelector('.timeline-list');
+      const userDisplay = document.querySelector('.user-profile span');
 
       try {
-        // STEP 1: Ask Moodle for the logged-in user's ID
+        // STEP 1: Get User Info & Update Header
         const infoEndpoint = `${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=core_webservice_get_site_info&moodlewsrestformat=json`;
         const infoResponse = await fetch(infoEndpoint);
         const siteInfo = await infoResponse.json();
@@ -471,8 +468,12 @@
         if (siteInfo.exception) throw new Error(`Site Info Error: ${siteInfo.message}`);
         
         const userId = siteInfo.userid;
+        if (userDisplay && siteInfo.firstname) {
+          userDisplay.textContent = siteInfo.firstname;
+          userDisplay.style.display = 'block';
+        }
 
-        // STEP 2: Ask Moodle for the courses specifically assigned to this User ID
+        // STEP 2: Fetch Courses
         const coursesEndpoint = `${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=core_enrol_get_users_courses&userid=${userId}&moodlewsrestformat=json`;
         const coursesResponse = await fetch(coursesEndpoint);
         const courses = await coursesResponse.json();
@@ -480,9 +481,8 @@
         if (courses.exception) throw new Error(`Course Fetch Error: ${courses.message}`);
 
         courseGrid.innerHTML = '';
-        const validCourses = courses.filter(course => course.id !== 1); // Hide "Site Home"
+        const validCourses = courses.filter(course => course.id !== 1);
 
-        // If they aren't enrolled in anything yet
         if (validCourses.length === 0) {
             courseGrid.innerHTML = `
               <div class="loading-state">
@@ -493,7 +493,7 @@
             return;
         }
 
-        // Render enrolled courses
+        // Render Courses
         validCourses.forEach(course => {
           const meta = getCourseMetadata(course.fullname);
           const mockProgress = Math.floor(Math.random() * 80) + 10; 
@@ -522,6 +522,55 @@
           courseGrid.appendChild(card);
         });
 
+        // STEP 3: Fetch Assignments for Timeline
+        const courseIds = validCourses.map(c => c.id);
+        if (courseIds.length > 0) {
+          timelineList.innerHTML = `<li style="text-align: center; color: var(--text-secondary); font-size: 0.85rem;">Checking deadlines...</li>`;
+          
+          const assignParams = courseIds.map((id, idx) => `courseids[${idx}]=${id}`).join('&');
+          const assignRes = await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=mod_assign_get_assignments&${assignParams}&moodlewsrestformat=json`);
+          const assignData = await assignRes.json();
+          
+          let upcoming = [];
+          const now = Math.floor(Date.now() / 1000);
+          
+          if (assignData.courses) {
+            assignData.courses.forEach(courseObj => {
+              const cName = validCourses.find(c => c.id === courseObj.id)?.fullname || 'Course';
+              courseObj.assignments.forEach(assign => {
+                if (assign.duedate > now) upcoming.push({ ...assign, cName, cId: courseObj.id });
+              });
+            });
+          }
+          
+          upcoming.sort((a, b) => a.duedate - b.duedate);
+          
+          if (upcoming.length === 0) {
+             timelineList.innerHTML = `<li style="font-size: 0.85rem; color: var(--text-secondary); text-align: center;">No upcoming deadlines.</li>`;
+          } else {
+             timelineList.innerHTML = '';
+             upcoming.slice(0, 3).forEach(assign => {
+               const d = new Date(assign.duedate * 1000);
+               const month = d.toLocaleString('default', { month: 'short' });
+               const day = d.getDate();
+               const time = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+               
+               timelineList.innerHTML += `
+                 <li class="timeline-item">
+                   <div class="date-box">
+                     <div class="date-month">${month}</div>
+                     <div class="date-day">${day}</div>
+                   </div>
+                   <div class="event-details">
+                     <h4><a href="assignment.html?assignid=${assign.id}&courseid=${assign.cId}" style="text-decoration: none; color: inherit;">${assign.name}</a></h4>
+                     <p>${assign.cName} • Due ${time}</p>
+                   </div>
+                 </li>
+               `;
+             });
+          }
+        }
+        
         lucide.createIcons();
 
       } catch (error) {
@@ -535,7 +584,7 @@
       }
     }
 
-    fetchAthenaCourses();
+    fetchAthenaWorkspace();
   </script>
 </body>
 </html>
