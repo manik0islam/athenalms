@@ -203,6 +203,26 @@
     }
 
     loadCourseContent();
+    /* =======================================================
+   SILENT TRIGGER: MARK COURSE AS VIEWED
+   ======================================================= */
+setTimeout(() => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const currentCourseId = urlParams.get('id') || urlParams.get('courseid');
+
+  if (currentCourseId && userToken) {
+    async function markCourseAsViewed(cId) {
+      try {
+        const response = await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=core_course_view_course&courseid=${cId}&moodlewsrestformat=json`);
+        const data = await response.json();
+        if (data.status) console.log("✅ Moodle completion updated: Course viewed.");
+      } catch (error) {
+        console.error("Silent trigger failed:", error);
+      }
+    }
+    markCourseAsViewed(currentCourseId);
+  }
+}, 500); // Slight delay to let the main page load first
   </script>
 </body>
 </html>

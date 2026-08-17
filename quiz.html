@@ -6052,6 +6052,31 @@
     }
   );
 
+  /* =======================================================
+   SILENT TRIGGER: MARK QUIZ AS VIEWED
+   ======================================================= */
+setTimeout(() => {
+  const urlParams = new URLSearchParams(window.location.search);
+  // Depending on how your quiz links are structured, check both 'quizid' and 'id'
+  const currentQuizId = urlParams.get('quizid') || urlParams.get('id');
+
+  if (currentQuizId && userToken) {
+    async function markQuizAsViewed(qId) {
+      try {
+        const response = await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=mod_quiz_view_quiz&quizid=${qId}&moodlewsrestformat=json`);
+        const data = await response.json();
+        
+        if (data.status) {
+          console.log("✅ Moodle completion updated: Quiz viewed.");
+        }
+      } catch (error) {
+        console.error("Silent trigger failed:", error);
+      }
+    }
+    markQuizAsViewed(currentQuizId);
+  }
+}, 500);
+
 </script>
 
 </body>

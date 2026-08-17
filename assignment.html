@@ -2429,6 +2429,27 @@
 
     loadAssignment();
 
+    /* =======================================================
+   SILENT TRIGGER: MARK ASSIGNMENT AS VIEWED
+   ======================================================= */
+setTimeout(() => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const currentAssignId = urlParams.get('assignid');
+
+  if (currentAssignId && userToken) {
+    async function markAssignAsViewed(aId) {
+      try {
+        const response = await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=mod_assign_view_assign&assignid=${aId}&moodlewsrestformat=json`);
+        const data = await response.json();
+        if (data.status) console.log("✅ Moodle completion updated: Assignment viewed.");
+      } catch (error) {
+        console.error("Silent trigger failed:", error);
+      }
+    }
+    markAssignAsViewed(currentAssignId);
+  }
+}, 500);
+
   </script>
 
 </body>

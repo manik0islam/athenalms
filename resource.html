@@ -1345,6 +1345,26 @@
     ========================================== */
 
     loadResource();
+    /* =======================================================
+   SILENT TRIGGER: MARK RESOURCE AS VIEWED
+   ======================================================= */
+setTimeout(() => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const currentResourceId = urlParams.get('resourceid');
+
+  if (currentResourceId && userToken) {
+    async function markResourceAsViewed(rId) {
+      try {
+        const response = await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=mod_resource_view_resource&resourceid=${rId}&moodlewsrestformat=json`);
+        const data = await response.json();
+        if (data.status) console.log("✅ Moodle completion updated: Resource viewed.");
+      } catch (error) {
+        console.error("Silent trigger failed:", error);
+      }
+    }
+    markResourceAsViewed(currentResourceId);
+  }
+}, 500);
 
   </script>
 
