@@ -10,6 +10,10 @@
 
   <title>Athena | Dashboard</title>
 
+  <!-- =========================================================
+       FONTS
+  ========================================================== -->
+
   <link
     rel="preconnect"
     href="https://fonts.googleapis.com"
@@ -82,28 +86,18 @@
 
     body {
       font-family: var(--font-body);
-
-      background:
-        var(--bg);
-
-      color:
-        var(--text);
-
-      line-height:
-        1.5;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
     }
 
     a {
-      color:
-        inherit;
-
-      text-decoration:
-        none;
+      color: inherit;
+      text-decoration: none;
     }
 
     button {
-      font:
-        inherit;
+      font: inherit;
     }
 
 
@@ -112,290 +106,182 @@
     ========================================================== */
 
     .topbar {
-      position:
-        fixed;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
 
-      top:
-        0;
+      height: 64px;
 
-      left:
-        0;
+      background: rgba(255,255,255,.97);
 
-      right:
-        0;
+      border-bottom: 1px solid var(--border);
 
-      height:
-        64px;
+      backdrop-filter: blur(12px);
 
-      background:
-        rgba(
-          255,
-          255,
-          255,
-          .97
-        );
-
-      border-bottom:
-        1px solid
-        var(--border);
-
-      backdrop-filter:
-        blur(12px);
-
-      z-index:
-        100;
+      z-index: 100;
     }
 
     .topbar-inner {
-      width:
-        min(
-          1320px,
-          calc(
-            100% - 48px
-          )
-        );
+      width: min(1320px, calc(100% - 48px));
 
-      height:
-        100%;
+      height: 100%;
 
-      margin:
-        0 auto;
+      margin: 0 auto;
 
-      display:
-        flex;
+      display: flex;
 
-      align-items:
-        center;
+      align-items: center;
 
-      justify-content:
-        space-between;
+      justify-content: space-between;
     }
 
     .brand {
-      display:
-        flex;
+      display: flex;
 
-      align-items:
-        center;
+      align-items: center;
 
-      gap:
-        10px;
+      gap: 10px;
     }
 
     .brand-mark {
-      width:
-        29px;
+      width: 29px;
+      height: 29px;
 
-      height:
-        29px;
+      display: flex;
 
-      display:
-        flex;
+      align-items: center;
+      justify-content: center;
 
-      align-items:
-        center;
+      border-radius: 7px;
 
-      justify-content:
-        center;
+      background: var(--black);
 
-      border-radius:
-        7px;
+      color: var(--white);
 
-      background:
-        var(--black);
+      font-family: var(--font-heading);
 
-      color:
-        var(--white);
+      font-size: 11px;
 
-      font-family:
-        var(--font-heading);
-
-      font-size:
-        11px;
-
-      font-weight:
-        700;
+      font-weight: 700;
     }
 
     .brand-name {
-      font-family:
-        var(--font-heading);
+      font-family: var(--font-heading);
 
-      font-size:
-        15px;
+      font-size: 15px;
 
-      font-weight:
-        700;
+      font-weight: 700;
     }
 
     .header-right {
-      display:
-        flex;
+      display: flex;
 
-      align-items:
-        center;
+      align-items: center;
 
-      gap:
-        13px;
+      gap: 13px;
     }
 
     .header-icon {
-      position:
-        relative;
+      position: relative;
 
-      width:
-        34px;
+      width: 34px;
+      height: 34px;
 
-      height:
-        34px;
+      display: flex;
 
-      display:
-        flex;
+      align-items: center;
+      justify-content: center;
 
-      align-items:
-        center;
+      border: none;
 
-      justify-content:
-        center;
+      background: transparent;
 
-      border:
-        none;
+      color: var(--muted);
 
-      background:
-        transparent;
-
-      color:
-        var(--muted);
-
-      cursor:
-        pointer;
+      cursor: pointer;
     }
 
     .header-icon:hover {
-      color:
-        var(--black);
+      color: var(--black);
     }
 
     .notification-badge {
-      position:
-        absolute;
+      position: absolute;
 
-      top:
-        1px;
+      top: 1px;
+      right: 0;
 
-      right:
-        0;
+      min-width: 15px;
+      height: 15px;
 
-      min-width:
-        15px;
+      display: flex;
 
-      height:
-        15px;
+      align-items: center;
+      justify-content: center;
 
-      display:
-        flex;
+      padding: 0 4px;
 
-      align-items:
-        center;
+      background: var(--black);
 
-      justify-content:
-        center;
+      color: white;
 
-      padding:
-        0 4px;
+      border-radius: 999px;
 
-      background:
-        var(--black);
+      font-size: 9px;
 
-      color:
-        white;
-
-      border-radius:
-        999px;
-
-      font-size:
-        9px;
-
-      font-weight:
-        700;
+      font-weight: 700;
     }
 
     .header-divider {
-      width:
-        1px;
+      width: 1px;
+      height: 27px;
 
-      height:
-        27px;
-
-      background:
-        var(--border);
+      background: var(--border);
     }
 
     .profile-mini {
-      display:
-        flex;
+      display: flex;
 
-      align-items:
-        center;
+      align-items: center;
 
-      gap:
-        9px;
+      gap: 9px;
     }
 
     .profile-name {
-      max-width:
-        110px;
+      max-width: 110px;
 
-      overflow:
-        hidden;
+      overflow: hidden;
 
-      text-overflow:
-        ellipsis;
+      text-overflow: ellipsis;
 
-      white-space:
-        nowrap;
+      white-space: nowrap;
 
-      font-size:
-        13px;
+      font-size: 13px;
 
-      font-weight:
-        600;
+      font-weight: 600;
     }
 
     .profile-avatar {
-      width:
-        34px;
+      width: 34px;
+      height: 34px;
 
-      height:
-        34px;
+      display: flex;
 
-      display:
-        flex;
+      align-items: center;
+      justify-content: center;
 
-      align-items:
-        center;
+      border: 1px solid var(--border);
 
-      justify-content:
-        center;
+      border-radius: 50%;
 
-      border:
-        1px solid
-        var(--border);
+      background: var(--soft);
 
-      border-radius:
-        50%;
+      color: var(--muted);
 
-      background:
-        var(--soft);
+      font-size: 11px;
 
-      color:
-        var(--muted);
-
-      font-size:
-        11px;
-
-      font-weight:
-        700;
+      font-weight: 700;
     }
 
 
@@ -404,22 +290,13 @@
     ========================================================== */
 
     .page {
-      width:
-        min(
-          1320px,
-          calc(
-            100% - 48px
-          )
-        );
+      width: min(1320px, calc(100% - 48px));
 
-      margin:
-        0 auto;
+      margin: 0 auto;
 
-      padding-top:
-        87px;
+      padding-top: 87px;
 
-      padding-bottom:
-        38px;
+      padding-bottom: 38px;
     }
 
 
@@ -428,360 +305,241 @@
     ========================================================== */
 
     .hero {
-      position:
-        relative;
+      position: relative;
 
-      padding:
-        25px 10px 24px;
+      padding: 25px 10px 24px;
 
-      margin-bottom:
-        17px;
+      margin-bottom: 17px;
     }
 
     .hero::before {
-      content:
-        "";
+      content: "";
 
-      position:
-        absolute;
+      position: absolute;
 
-      inset:
-        -15px -24px 0;
+      inset: -15px -24px 0;
 
       background-image:
         linear-gradient(
-          rgba(
-            229,
-            233,
-            237,
-            .85
-          ) 1px,
+          rgba(229,233,237,.85) 1px,
           transparent 1px
         ),
         linear-gradient(
           90deg,
-          rgba(
-            229,
-            233,
-            237,
-            .85
-          ) 1px,
+          rgba(229,233,237,.85) 1px,
           transparent 1px
         );
 
-      background-size:
-        28px 28px;
+      background-size: 28px 28px;
 
-      pointer-events:
-        none;
+      pointer-events: none;
     }
 
     .hero-inner {
-      position:
-        relative;
+      position: relative;
 
-      z-index:
-        2;
+      z-index: 2;
 
-      display:
-        flex;
+      display: flex;
 
-      align-items:
-        flex-end;
+      align-items: flex-end;
 
-      justify-content:
-        space-between;
+      justify-content: space-between;
 
-      gap:
-        25px;
+      gap: 25px;
     }
 
     .hero-title-area h1 {
-      font-family:
-        var(--font-heading);
+      font-family: var(--font-heading);
 
-      font-size:
-        clamp(
-          2.4rem,
-          4vw,
-          3.2rem
-        );
+      font-size: clamp(2.4rem,4vw,3.2rem);
 
-      line-height:
-        1;
+      line-height: 1;
 
-      letter-spacing:
-        -1.5px;
+      letter-spacing: -1.5px;
 
-      margin-bottom:
-        9px;
+      margin-bottom: 9px;
     }
 
     .hero-title-area p {
-      color:
-        var(--muted);
+      color: var(--muted);
 
-      font-size:
-        13px;
+      font-size: 13px;
     }
 
     .hero-actions {
-      display:
-        flex;
+      display: flex;
 
-      flex-wrap:
-        wrap;
+      flex-wrap: wrap;
 
-      justify-content:
-        flex-end;
+      justify-content: flex-end;
 
-      gap:
-        7px;
+      gap: 7px;
     }
 
     .hero-action {
-      height:
-        40px;
+      height: 40px;
 
-      padding:
-        0 13px;
+      padding: 0 13px;
 
-      display:
-        inline-flex;
+      display: inline-flex;
 
-      align-items:
-        center;
+      align-items: center;
 
-      justify-content:
-        center;
+      justify-content: center;
 
-      gap:
-        7px;
+      gap: 7px;
 
-      border:
-        1px solid
-        var(--border);
+      border: 1px solid var(--border);
 
-      border-radius:
-        8px;
+      border-radius: 8px;
 
-      background:
-        var(--white);
+      background: var(--white);
 
-      font-size:
-        10px;
+      font-size: 10px;
 
-      font-weight:
-        600;
+      font-weight: 600;
 
-      transition:
-        .15s ease;
+      transition: .15s ease;
     }
 
     .hero-action:hover {
-      border-color:
-        #c4cad0;
+      border-color: #c4cad0;
 
-      transform:
-        translateY(
-          -1px
-        );
+      transform: translateY(-1px);
     }
 
 
     /* =========================================================
-       MAIN DASHBOARD
+       MAIN DASHBOARD GRID
     ========================================================== */
 
     .dashboard-grid {
-      display:
-        grid;
+      display: grid;
 
       grid-template-columns:
-        minmax(
-          0,
-          1.65fr
-        )
-        minmax(
-          265px,
-          .75fr
-        )
-        minmax(
-          265px,
-          .75fr
-        );
+        minmax(0,1.65fr)
+        minmax(265px,.75fr)
+        minmax(265px,.75fr);
 
       grid-template-rows:
-        auto
-        auto
-        auto;
+        auto auto auto;
 
       grid-template-areas:
-
         "continue today upcoming"
-
         "courses performance upcoming"
-
         "activity momentum momentum";
 
-      gap:
-        13px;
+      gap: 13px;
 
-      align-items:
-        stretch;
+      align-items: stretch;
     }
 
 
     /* =========================================================
-       AREAS
+       GRID AREAS
     ========================================================== */
 
     .continue-card {
-      grid-area:
-        continue;
+      grid-area: continue;
     }
 
     .course-overview-card {
-      grid-area:
-        courses;
+      grid-area: courses;
     }
 
     .activity-card {
-      grid-area:
-        activity;
+      grid-area: activity;
     }
 
     .today-card {
-      grid-area:
-        today;
+      grid-area: today;
     }
 
     .performance-card {
-      grid-area:
-        performance;
+      grid-area: performance;
     }
 
     .upcoming-card {
-      grid-area:
-        upcoming;
+      grid-area: upcoming;
     }
 
     .momentum-card {
-      grid-area:
-        momentum;
+      grid-area: momentum;
     }
 
 
     /* =========================================================
-       GENERAL CARDS
+       GENERAL CARD
     ========================================================== */
 
     .card {
-      width:
-        100%;
+      width: 100%;
 
-      background:
-        var(--white);
+      background: var(--white);
 
-      border:
-        1px solid
-        var(--border);
+      border: 1px solid var(--border);
 
-      border-radius:
-        var(--radius);
+      border-radius: var(--radius);
 
-      overflow:
-        hidden;
+      overflow: hidden;
 
       box-shadow:
-        0 1px 2px
-        rgba(
-          0,
-          0,
-          0,
-          .02
-        );
+        0 1px 2px rgba(0,0,0,.02);
 
       transition:
-        border-color
-        .18s ease,
-
-        box-shadow
-        .18s ease;
+        border-color .18s ease,
+        box-shadow .18s ease;
     }
 
     .card:hover {
-      border-color:
-        #cfd4da;
+      border-color: #cfd4da;
 
       box-shadow:
-        0 5px 18px
-        rgba(
-          0,
-          0,
-          0,
-          .035
-        );
+        0 5px 18px rgba(0,0,0,.035);
     }
 
     .card-header {
-      min-height:
-        57px;
+      min-height: 57px;
 
-      padding:
-        14px 17px;
+      padding: 14px 17px;
 
-      display:
-        flex;
+      display: flex;
 
-      align-items:
-        center;
+      align-items: center;
 
-      justify-content:
-        space-between;
+      justify-content: space-between;
 
-      gap:
-        10px;
+      gap: 10px;
 
       border-bottom:
-        1px solid
-        var(--border-light);
+        1px solid var(--border-light);
     }
 
     .card-body {
-      padding:
-        16px 17px;
+      padding: 16px 17px;
     }
 
     .section-label {
-      color:
-        var(--muted);
+      color: var(--muted);
 
-      font-size:
-        9px;
+      font-size: 9px;
 
-      font-weight:
-        700;
+      font-weight: 700;
 
-      text-transform:
-        uppercase;
+      text-transform: uppercase;
 
-      letter-spacing:
-        .08em;
+      letter-spacing: .08em;
     }
 
     .section-title {
-      margin-top:
-        3px;
+      margin-top: 3px;
 
-      font-family:
-        var(--font-heading);
+      font-family: var(--font-heading);
 
-      font-size:
-        14px;
+      font-size: 14px;
 
-      font-weight:
-        700;
+      font-weight: 700;
     }
 
 
@@ -790,77 +548,52 @@
     ========================================================== */
 
     .continue-card {
-      min-height:
-        250px;
+      min-height: 250px;
 
-      padding:
-        19px;
+      padding: 19px;
 
-      display:
-        flex;
+      display: flex;
 
-      flex-direction:
-        column;
+      flex-direction: column;
 
-      justify-content:
-        space-between;
+      justify-content: space-between;
     }
 
     .continue-head {
-      color:
-        var(--muted);
+      color: var(--muted);
 
-      font-size:
-        9px;
+      font-size: 9px;
 
-      font-weight:
-        700;
+      font-weight: 700;
 
-      text-transform:
-        uppercase;
+      text-transform: uppercase;
 
-      letter-spacing:
-        .08em;
+      letter-spacing: .08em;
     }
 
     .continue-content {
-      flex:
-        1;
+      flex: 1;
 
-      display:
-        grid;
+      display: grid;
 
       grid-template-columns:
-        75px minmax(
-          0,
-          1fr
-        );
+        75px minmax(0,1fr);
 
-      align-items:
-        center;
+      align-items: center;
 
-      gap:
-        17px;
+      gap: 17px;
 
-      margin-top:
-        13px;
+      margin-top: 13px;
     }
 
     .course-big-icon {
-      width:
-        75px;
+      width: 75px;
+      height: 75px;
 
-      height:
-        75px;
+      display: flex;
 
-      display:
-        flex;
-
-      align-items:
-        center;
-
-      justify-content:
-        center;
+      align-items: center;
+      justify-content: center;
 
       background:
         linear-gradient(
@@ -869,169 +602,119 @@
           #edf0f3
         );
 
-      border:
-        1px solid
-        var(--border);
+      border: 1px solid var(--border);
 
-      border-radius:
-        11px;
+      border-radius: 11px;
 
-      color:
-        #56606a;
+      color: #56606a;
     }
 
     .continue-course-name {
-      font-family:
-        var(--font-heading);
+      font-family: var(--font-heading);
 
-      font-size:
-        20px;
+      font-size: 20px;
 
-      font-weight:
-        700;
+      font-weight: 700;
 
-      line-height:
-        1.1;
+      line-height: 1.1;
     }
 
     .continue-topic {
-      margin:
-        5px 0 13px;
+      margin: 5px 0 13px;
 
-      color:
-        var(--muted);
+      color: var(--muted);
 
-      font-size:
-        12px;
+      font-size: 12px;
     }
 
     .progress-line {
-      display:
-        grid;
+      display: grid;
 
       grid-template-columns:
-        minmax(
-          0,
-          1fr
-        )
+        minmax(0,1fr)
         auto;
 
-      align-items:
-        center;
+      align-items: center;
 
-      gap:
-        10px;
+      gap: 10px;
     }
 
     .progress-track {
-      height:
-        7px;
+      height: 7px;
 
-      background:
-        #e6e9ed;
+      background: #e6e9ed;
 
-      border-radius:
-        999px;
+      border-radius: 999px;
 
-      overflow:
-        hidden;
+      overflow: hidden;
     }
 
     .progress-fill {
-      width:
-        0%;
+      width: 0%;
 
-      height:
-        100%;
+      height: 100%;
 
-      background:
-        var(--black);
+      background: var(--black);
 
-      border-radius:
-        inherit;
+      border-radius: inherit;
 
-      transition:
-        width
-        .4s ease;
+      transition: width .4s ease;
     }
 
     .progress-percentage {
-      min-width:
-        35px;
+      min-width: 35px;
 
-      text-align:
-        right;
+      text-align: right;
 
-      font-family:
-        var(--font-heading);
+      font-family: var(--font-heading);
 
-      font-size:
-        14px;
+      font-size: 14px;
 
-      font-weight:
-        700;
+      font-weight: 700;
     }
 
     .continue-meta {
-      margin-top:
-        7px;
+      margin-top: 7px;
 
-      color:
-        var(--muted-2);
+      color: var(--muted-2);
 
-      font-size:
-        9px;
+      font-size: 9px;
     }
 
     .continue-footer {
-      display:
-        flex;
+      display: flex;
 
-      justify-content:
-        flex-end;
+      justify-content: flex-end;
 
-      margin-top:
-        12px;
+      margin-top: 12px;
     }
 
     .primary-button {
-      min-height:
-        38px;
+      min-height: 38px;
 
-      padding:
-        0 14px;
+      padding: 0 14px;
 
-      display:
-        inline-flex;
+      display: inline-flex;
 
-      align-items:
-        center;
+      align-items: center;
 
-      justify-content:
-        center;
+      justify-content: center;
 
-      gap:
-        7px;
+      gap: 7px;
 
-      background:
-        var(--black);
+      background: var(--black);
 
-      color:
-        white;
+      color: white;
 
-      border-radius:
-        7px;
+      border-radius: 7px;
 
-      font-size:
-        10px;
+      font-size: 10px;
 
-      font-weight:
-        600;
+      font-weight: 600;
     }
 
     .primary-button:hover {
-      opacity:
-        .9;
+      opacity: .9;
     }
 
 
@@ -1040,252 +723,177 @@
     ========================================================== */
 
     .course-overview-card {
-      min-height:
-        246px;
+      min-height: 246px;
     }
 
     .filter-tabs {
-      display:
-        flex;
+      display: flex;
 
-      gap:
-        5px;
+      gap: 5px;
     }
 
     .filter-tab {
-      height:
-        28px;
+      height: 28px;
 
-      padding:
-        0 9px;
+      padding: 0 9px;
 
-      border:
-        1px solid
-        var(--border);
+      border: 1px solid var(--border);
 
-      border-radius:
-        6px;
+      border-radius: 6px;
 
-      background:
-        var(--white);
+      background: var(--white);
 
-      color:
-        var(--muted);
+      color: var(--muted);
 
-      font-size:
-        9px;
+      font-size: 9px;
 
-      font-weight:
-        600;
+      font-weight: 600;
 
-      cursor:
-        pointer;
+      cursor: pointer;
     }
 
     .filter-tab.active {
-      background:
-        var(--black);
+      background: var(--black);
 
-      color:
-        white;
+      color: white;
 
-      border-color:
-        var(--black);
+      border-color: var(--black);
     }
 
     .course-mini-grid {
-      display:
-        grid;
+      display: grid;
 
       grid-template-columns:
         repeat(
           2,
-          minmax(
-            0,
-            1fr
-          )
+          minmax(0,1fr)
         );
 
-      gap:
-        10px;
+      gap: 10px;
     }
 
     .course-mini-card {
-      min-height:
-        144px;
+      min-height: 144px;
 
-      padding:
-        12px;
+      padding: 12px;
 
-      border:
-        1px solid
-        var(--border-light);
+      border: 1px solid var(--border-light);
 
-      border-radius:
-        9px;
+      border-radius: 9px;
 
-      transition:
-        .15s ease;
+      transition: .15s ease;
     }
 
     .course-mini-card:hover {
-      transform:
-        translateY(
-          -1px
-        );
+      transform: translateY(-1px);
 
-      border-color:
-        #cbd1d6;
+      border-color: #cbd1d6;
     }
 
     .course-mini-top {
-      display:
-        flex;
+      display: flex;
 
-      align-items:
-        flex-start;
+      align-items: flex-start;
 
-      gap:
-        9px;
+      gap: 9px;
     }
 
     .course-mini-icon {
-      width:
-        42px;
+      width: 42px;
+      height: 42px;
 
-      height:
-        42px;
+      flex-shrink: 0;
 
-      flex-shrink:
-        0;
+      display: flex;
 
-      display:
-        flex;
+      align-items: center;
+      justify-content: center;
 
-      align-items:
-        center;
+      background: var(--soft);
 
-      justify-content:
-        center;
+      border-radius: 8px;
 
-      background:
-        var(--soft);
-
-      border-radius:
-        8px;
-
-      color:
-        #5e6670;
+      color: #5e6670;
     }
 
     .course-mini-info {
-      min-width:
-        0;
+      min-width: 0;
     }
 
     .course-mini-name {
-      overflow:
-        hidden;
+      overflow: hidden;
 
-      text-overflow:
-        ellipsis;
+      text-overflow: ellipsis;
 
-      white-space:
-        nowrap;
+      white-space: nowrap;
 
-      font-family:
-        var(--font-heading);
+      font-family: var(--font-heading);
 
-      font-size:
-        14px;
+      font-size: 14px;
 
-      font-weight:
-        700;
+      font-weight: 700;
     }
 
     .course-mini-category {
-      margin-top:
-        2px;
+      margin-top: 2px;
 
-      color:
-        var(--muted);
+      color: var(--muted);
 
-      font-size:
-        9px;
+      font-size: 9px;
     }
 
     .course-mini-progress {
-      margin-top:
-        11px;
+      margin-top: 11px;
     }
 
     .course-mini-progress-line {
-      display:
-        flex;
+      display: flex;
 
-      justify-content:
-        space-between;
+      justify-content: space-between;
 
-      margin-bottom:
-        5px;
+      margin-bottom: 5px;
     }
 
     .course-mini-progress-label {
-      color:
-        var(--muted);
+      color: var(--muted);
 
-      font-size:
-        9px;
+      font-size: 9px;
     }
 
     .course-mini-progress-value {
-      font-family:
-        var(--font-heading);
+      font-family: var(--font-heading);
 
-      font-size:
-        10px;
+      font-size: 10px;
 
-      font-weight:
-        700;
+      font-weight: 700;
     }
 
     .mini-track {
-      height:
-        5px;
+      height: 5px;
 
-      background:
-        #e7eaed;
+      background: #e7eaed;
 
-      border-radius:
-        999px;
+      border-radius: 999px;
 
-      overflow:
-        hidden;
+      overflow: hidden;
     }
 
     .mini-fill {
-      width:
-        0%;
+      width: 0%;
 
-      height:
-        100%;
+      height: 100%;
 
-      background:
-        var(--black);
+      background: var(--black);
 
-      border-radius:
-        inherit;
+      border-radius: inherit;
     }
 
     .course-mini-count {
-      margin-top:
-        5px;
+      margin-top: 5px;
 
-      color:
-        var(--muted-2);
+      color: var(--muted-2);
 
-      font-size:
-        8px;
+      font-size: 8px;
     }
 
 
@@ -1294,97 +902,68 @@
     ========================================================== */
 
     .today-card {
-      min-height:
-        250px;
+      min-height: 250px;
     }
 
     .today-list {
-      display:
-        flex;
+      display: flex;
 
-      flex-direction:
-        column;
+      flex-direction: column;
     }
 
     .today-item {
-      min-height:
-        45px;
+      min-height: 45px;
 
-      display:
-        grid;
+      display: grid;
 
       grid-template-columns:
-        18px minmax(
-          0,
-          1fr
-        ) 15px;
+        18px minmax(0,1fr) 15px;
 
-      align-items:
-        center;
+      align-items: center;
 
-      gap:
-        9px;
+      gap: 9px;
 
       border-bottom:
-        1px solid
-        var(--border-light);
+        1px solid var(--border-light);
     }
 
     .today-item:last-child {
-      border-bottom:
-        none;
+      border-bottom: none;
     }
 
     .task-circle {
-      width:
-        15px;
+      width: 15px;
+      height: 15px;
 
-      height:
-        15px;
+      border: 1.5px solid #a2a9b0;
 
-      border:
-        1.5px solid
-        #a2a9b0;
-
-      border-radius:
-        50%;
+      border-radius: 50%;
     }
 
     .today-title {
-      font-size:
-        10px;
+      font-size: 10px;
 
-      font-weight:
-        700;
+      font-weight: 700;
 
-      overflow:
-        hidden;
+      overflow: hidden;
 
-      text-overflow:
-        ellipsis;
+      text-overflow: ellipsis;
 
-      white-space:
-        nowrap;
+      white-space: nowrap;
     }
 
     .today-meta {
-      margin-top:
-        2px;
+      margin-top: 2px;
 
-      color:
-        var(--muted);
+      color: var(--muted);
 
-      font-size:
-        8px;
+      font-size: 8px;
 
-      overflow:
-        hidden;
+      overflow: hidden;
 
-      text-overflow:
-        ellipsis;
+      text-overflow: ellipsis;
 
-      white-space:
-        nowrap;
+      white-space: nowrap;
     }
 
 
@@ -1393,147 +972,107 @@
     ========================================================== */
 
     .performance-card {
-      min-height:
-        246px;
+      min-height: 246px;
 
-      display:
-        flex;
+      display: flex;
 
-      flex-direction:
-        column;
+      flex-direction: column;
     }
 
     .performance-card .card-body {
-      flex:
-        1;
+      flex: 1;
 
-      display:
-        flex;
+      display: flex;
 
-      flex-direction:
-        column;
+      flex-direction: column;
 
-      justify-content:
-        center;
+      justify-content: center;
     }
 
     .performance-main {
-      margin-bottom:
-        10px;
+      margin-bottom: 10px;
     }
 
     .performance-label {
-      color:
-        var(--muted);
+      color: var(--muted);
 
-      font-size:
-        9px;
+      font-size: 9px;
     }
 
     .performance-number {
-      margin-top:
-        2px;
+      margin-top: 2px;
 
-      font-family:
-        var(--font-heading);
+      font-family: var(--font-heading);
 
-      font-size:
-        27px;
+      font-size: 27px;
 
-      font-weight:
-        700;
+      font-weight: 700;
     }
 
     .performance-row {
-      min-height:
-        34px;
+      min-height: 34px;
 
-      display:
-        flex;
+      display: flex;
 
-      align-items:
-        center;
+      align-items: center;
 
-      justify-content:
-        space-between;
+      justify-content: space-between;
 
-      gap:
-        8px;
+      gap: 8px;
 
       border-bottom:
-        1px solid
-        var(--border-light);
+        1px solid var(--border-light);
 
-      font-size:
-        9px;
+      font-size: 9px;
     }
 
     .performance-row:last-of-type {
-      border-bottom:
-        none;
+      border-bottom: none;
     }
 
     .performance-row-label {
-      color:
-        var(--muted);
+      color: var(--muted);
     }
 
     .performance-row-value {
-      max-width:
-        65%;
+      max-width: 65%;
 
-      text-align:
-        right;
+      text-align: right;
 
-      overflow:
-        hidden;
+      overflow: hidden;
 
-      text-overflow:
-        ellipsis;
+      text-overflow: ellipsis;
 
-      white-space:
-        nowrap;
+      white-space: nowrap;
 
-      font-weight:
-        700;
+      font-weight: 700;
     }
 
     .improvement {
-      margin-top:
-        10px;
+      margin-top: 10px;
 
-      width:
-        fit-content;
+      width: fit-content;
 
-      padding:
-        5px 7px;
+      padding: 5px 7px;
 
-      display:
-        inline-flex;
+      display: inline-flex;
 
-      align-items:
-        center;
+      align-items: center;
 
-      gap:
-        4px;
+      gap: 4px;
 
-      background:
-        var(--green-bg);
+      background: var(--green-bg);
 
-      color:
-        var(--green);
+      color: var(--green);
 
-      border-radius:
-        6px;
+      border-radius: 6px;
 
-      font-size:
-        8px;
+      font-size: 8px;
     }
 
 
     /* =========================================================
        UPCOMING
-       IMPORTANT: height equals TODAY + PERFORMANCE + gap
     ========================================================== */
 
     .upcoming-card {
@@ -1544,414 +1083,296 @@
           13px
         );
 
-      display:
-        flex;
+      display: flex;
 
-      flex-direction:
-        column;
+      flex-direction: column;
     }
 
     .upcoming-card .card-body {
-      flex:
-        1;
+      flex: 1;
 
-      display:
-        flex;
+      display: flex;
 
-      flex-direction:
-        column;
+      flex-direction: column;
     }
 
     .upcoming-list {
-      flex:
-        1;
+      flex: 1;
 
-      display:
-        flex;
+      display: flex;
 
-      flex-direction:
-        column;
+      flex-direction: column;
     }
 
     .upcoming-item {
-      min-height:
-        82px;
+      min-height: 82px;
 
-      display:
-        grid;
+      display: grid;
 
       grid-template-columns:
-        44px minmax(
-          0,
-          1fr
-        ) 15px;
+        44px minmax(0,1fr) 15px;
 
-      align-items:
-        center;
+      align-items: center;
 
-      gap:
-        9px;
+      gap: 9px;
 
       border-bottom:
-        1px solid
-        var(--border-light);
+        1px solid var(--border-light);
     }
 
     .upcoming-item:last-child {
-      border-bottom:
-        none;
+      border-bottom: none;
     }
 
     .date-box {
-      width:
-        44px;
+      width: 44px;
 
-      padding:
-        6px 3px;
+      padding: 6px 3px;
 
-      background:
-        var(--soft);
+      background: var(--soft);
 
-      border:
-        1px solid
-        var(--border);
+      border: 1px solid var(--border);
 
-      border-radius:
-        8px;
+      border-radius: 8px;
 
-      text-align:
-        center;
+      text-align: center;
     }
 
     .date-month {
-      color:
-        var(--muted);
+      color: var(--muted);
 
-      font-size:
-        8px;
+      font-size: 8px;
 
-      font-weight:
-        700;
+      font-weight: 700;
 
-      text-transform:
-        uppercase;
+      text-transform: uppercase;
     }
 
     .date-day {
-      margin-top:
-        2px;
+      margin-top: 2px;
 
-      font-family:
-        var(--font-heading);
+      font-family: var(--font-heading);
 
-      font-size:
-        17px;
+      font-size: 17px;
 
-      font-weight:
-        700;
+      font-weight: 700;
 
-      line-height:
-        1;
+      line-height: 1;
     }
 
     .upcoming-title {
-      overflow:
-        hidden;
+      overflow: hidden;
 
-      text-overflow:
-        ellipsis;
+      text-overflow: ellipsis;
 
-      white-space:
-        nowrap;
+      white-space: nowrap;
 
-      font-size:
-        10px;
+      font-size: 10px;
 
-      font-weight:
-        700;
+      font-weight: 700;
     }
 
     .upcoming-meta {
-      margin-top:
-        3px;
+      margin-top: 3px;
 
-      color:
-        var(--muted);
+      color: var(--muted);
 
-      font-size:
-        8px;
+      font-size: 8px;
     }
 
     .upcoming-meta .urgent {
-      color:
-        var(--red);
+      color: var(--red);
 
-      font-weight:
-        700;
+      font-weight: 700;
     }
 
 
     /* =========================================================
-       RECENT ACTIVITY
+       ACTIVITY
     ========================================================== */
 
     .activity-card {
-      min-height:
-        200px;
+      min-height: 200px;
     }
 
     .activity-list {
-      display:
-        flex;
+      display: flex;
 
-      flex-direction:
-        column;
+      flex-direction: column;
     }
 
     .activity-item {
-      min-height:
-        37px;
+      min-height: 37px;
 
-      display:
-        grid;
+      display: grid;
 
       grid-template-columns:
-        18px minmax(
-          0,
-          1fr
-        ) auto;
+        18px minmax(0,1fr) auto;
 
-      align-items:
-        center;
+      align-items: center;
 
-      gap:
-        8px;
+      gap: 8px;
 
       border-bottom:
-        1px solid
-        var(--border-light);
+        1px solid var(--border-light);
     }
 
     .activity-item:last-child {
-      border-bottom:
-        none;
+      border-bottom: none;
     }
 
     .activity-text {
-      overflow:
-        hidden;
+      overflow: hidden;
 
-      text-overflow:
-        ellipsis;
+      text-overflow: ellipsis;
 
-      white-space:
-        nowrap;
+      white-space: nowrap;
 
-      font-size:
-        9px;
+      font-size: 9px;
 
-      font-weight:
-        600;
+      font-weight: 600;
     }
 
     .activity-time {
-      color:
-        var(--muted-2);
+      color: var(--muted-2);
 
-      font-size:
-        7px;
+      font-size: 7px;
 
-      white-space:
-        nowrap;
+      white-space: nowrap;
     }
 
 
     /* =========================================================
-       LEARNING MOMENTUM
+       MOMENTUM
     ========================================================== */
 
     .momentum-card {
-      min-height:
-        200px;
+      min-height: 200px;
 
-      display:
-        flex;
+      display: flex;
 
-      flex-direction:
-        column;
+      flex-direction: column;
     }
 
     .momentum-card .card-body {
-      flex:
-        1;
+      flex: 1;
     }
 
     .momentum-content {
-      display:
-        grid;
+      display: grid;
 
       grid-template-columns:
-        68px 72px minmax(
-          0,
-          1fr
-        );
+        68px 72px minmax(0,1fr);
 
-      align-items:
-        center;
+      align-items: center;
 
-      gap:
-        14px;
+      gap: 14px;
     }
 
     .momentum-icon {
-      width:
-        68px;
+      width: 68px;
+      height: 68px;
 
-      height:
-        68px;
+      display: flex;
 
-      display:
-        flex;
+      align-items: center;
+      justify-content: center;
 
-      align-items:
-        center;
+      background: var(--soft);
 
-      justify-content:
-        center;
-
-      background:
-        var(--soft);
-
-      border-radius:
-        10px;
+      border-radius: 10px;
     }
 
     .momentum-number {
-      font-family:
-        var(--font-heading);
+      font-family: var(--font-heading);
 
-      font-size:
-        35px;
+      font-size: 35px;
 
-      line-height:
-        1;
+      line-height: 1;
 
-      font-weight:
-        700;
+      font-weight: 700;
     }
 
     .momentum-label {
-      margin-top:
-        4px;
+      margin-top: 4px;
 
-      color:
-        var(--muted);
+      color: var(--muted);
 
-      font-size:
-        8px;
+      font-size: 8px;
 
-      text-transform:
-        uppercase;
+      text-transform: uppercase;
 
-      letter-spacing:
-        .04em;
+      letter-spacing: .04em;
     }
 
     .momentum-message {
-      font-size:
-        10px;
+      font-size: 10px;
 
-      font-weight:
-        700;
+      font-weight: 700;
     }
 
     .momentum-message-sub {
-      margin-top:
-        4px;
+      margin-top: 4px;
 
-      color:
-        var(--muted);
+      color: var(--muted);
 
-      font-size:
-        8px;
+      font-size: 8px;
     }
 
     .week-chart {
-      height:
-        52px;
+      height: 52px;
 
-      margin-top:
-        15px;
+      margin-top: 15px;
 
-      display:
-        grid;
+      display: grid;
 
       grid-template-columns:
-        repeat(
-          7,
-          1fr
-        );
+        repeat(7,1fr);
 
-      align-items:
-        end;
+      align-items: end;
 
-      gap:
-        8px;
+      gap: 8px;
     }
 
     .day-column {
-      height:
-        100%;
+      height: 100%;
 
-      display:
-        flex;
+      display: flex;
 
-      flex-direction:
-        column;
+      flex-direction: column;
 
-      align-items:
-        center;
+      align-items: center;
 
-      justify-content:
-        flex-end;
+      justify-content: flex-end;
 
-      gap:
-        3px;
+      gap: 3px;
     }
 
     .day-bar-wrap {
-      height:
-        35px;
+      height: 35px;
 
-      display:
-        flex;
+      display: flex;
 
-      align-items:
-        flex-end;
+      align-items: flex-end;
     }
 
     .day-bar {
-      width:
-        8px;
+      width: 8px;
 
-      background:
-        #dfe3e7;
+      background: #dfe3e7;
 
       border-radius:
         5px 5px 2px 2px;
     }
 
     .day-bar.active {
-      background:
-        var(--black);
+      background: var(--black);
     }
 
     .day-label {
-      color:
-        var(--muted);
+      color: var(--muted);
 
-      font-size:
-        7px;
+      font-size: 7px;
     }
 
 
@@ -1960,26 +1381,19 @@
     ========================================================== */
 
     .view-all {
-      margin-top:
-        10px;
+      margin-top: 10px;
 
-      display:
-        flex;
+      display: flex;
 
-      align-items:
-        center;
+      align-items: center;
 
-      justify-content:
-        flex-end;
+      justify-content: flex-end;
 
-      gap:
-        4px;
+      gap: 4px;
 
-      font-size:
-        9px;
+      font-size: 9px;
 
-      font-weight:
-        600;
+      font-weight: 600;
     }
 
 
@@ -1989,26 +1403,19 @@
 
     .loading,
     .empty {
-      min-height:
-        90px;
+      min-height: 90px;
 
-      display:
-        flex;
+      display: flex;
 
-      align-items:
-        center;
+      align-items: center;
 
-      justify-content:
-        center;
+      justify-content: center;
 
-      text-align:
-        center;
+      text-align: center;
 
-      color:
-        var(--muted);
+      color: var(--muted);
 
-      font-size:
-        9px;
+      font-size: 9px;
     }
 
 
@@ -2021,14 +1428,8 @@
       .dashboard-grid {
 
         grid-template-columns:
-          minmax(
-            0,
-            1.35fr
-          )
-          minmax(
-            270px,
-            .8fr
-          );
+          minmax(0,1.35fr)
+          minmax(270px,.8fr);
 
         grid-template-areas:
 
@@ -2045,8 +1446,7 @@
 
 
       .upcoming-card {
-        min-height:
-          245px;
+        min-height: 245px;
       }
 
     }
@@ -2080,18 +1480,19 @@
           "momentum";
       }
 
+
       .course-mini-grid {
+
         grid-template-columns:
           repeat(
             2,
-            minmax(
-              0,
-              1fr
-            )
+            minmax(0,1fr)
           );
       }
 
+
       .hero-inner {
+
         flex-direction:
           column;
 
@@ -2099,7 +1500,9 @@
           flex-start;
       }
 
+
       .hero-actions {
+
         width:
           100%;
 
@@ -2110,49 +1513,54 @@
     }
 
 
-    @media (max-width: 560px) {
+    @media (max-width:560px) {
 
       .page,
       .topbar-inner {
+
         width:
           calc(
             100% - 28px
           );
       }
 
+
       .hero-title-area h1 {
-        font-size:
-          2.15rem;
+        font-size: 2.15rem;
       }
 
+
       .hero-actions {
+
         display:
           grid;
 
         grid-template-columns:
           repeat(
             2,
-            minmax(
-              0,
-              1fr
-            )
+            minmax(0,1fr)
           );
 
         width:
           100%;
       }
 
+
       .hero-action {
         width:
           100%;
       }
 
+
       .course-mini-grid {
+
         grid-template-columns:
           1fr;
       }
 
+
       .continue-content {
+
         grid-template-columns:
           60px minmax(
             0,
@@ -2160,7 +1568,9 @@
           );
       }
 
+
       .course-big-icon {
+
         width:
           60px;
 
@@ -2168,7 +1578,9 @@
           60px;
       }
 
+
       .momentum-content {
+
         grid-template-columns:
           56px 65px minmax(
             0,
@@ -2179,7 +1591,9 @@
           9px;
       }
 
+
       .momentum-icon {
+
         width:
           56px;
 
@@ -2187,13 +1601,17 @@
           56px;
       }
 
+
       .momentum-number {
+
         font-size:
           28px;
       }
 
+
       .profile-name,
       .header-divider {
+
         display:
           none;
       }
@@ -2205,6 +1623,7 @@
 
 
 <body>
+
 
   <!-- =========================================================
        HEADER
@@ -2304,9 +1723,11 @@
 
 
           <div class="profile-avatar">
+
             <span id="avatar-initials">
               —
             </span>
+
           </div>
 
 
@@ -2329,13 +1750,15 @@
 
 
   <!-- =========================================================
-       MAIN
+       PAGE
   ========================================================== -->
 
   <main class="page">
 
 
-    <!-- HERO -->
+    <!-- =======================================================
+         HERO
+    ======================================================== -->
 
     <section class="hero">
 
@@ -2346,6 +1769,7 @@
           <h1>
             Dashboard
           </h1>
+
 
           <p id="welcome-text">
             Welcome back. Continue your foundational studies in precision mechanics and logic.
@@ -2453,14 +1877,14 @@
 
 
     <!-- =======================================================
-         DASHBOARD GRID
+         DASHBOARD
     ======================================================== -->
 
     <section class="dashboard-grid">
 
 
       <!-- =====================================================
-           CONTINUE
+           CONTINUE LEARNING
       ====================================================== -->
 
       <section class="card continue-card">
@@ -2797,7 +2221,7 @@
           <div class="performance-row">
 
             <span class="performance-row-label">
-              Assessments completed
+              Graded assessments
             </span>
 
 
@@ -3104,8 +2528,10 @@
 
 
     if (!userToken) {
+
       window.location.href =
         'login.html';
+
     }
 
 
@@ -3113,17 +2539,13 @@
        STATE
     ========================================================== */
 
-    let currentUser =
-      null;
+    let currentUser = null;
 
-    let enrolledCourses =
-      [];
+    let enrolledCourses = [];
 
-    let assignments =
-      [];
+    let assignments = [];
 
-    let quizzes =
-      [];
+    let quizzes = [];
 
     let courseProgressMap =
       new Map();
@@ -3131,8 +2553,7 @@
     let courseGradeMap =
       new Map();
 
-    let activityEvents =
-      [];
+    let activityEvents = [];
 
 
     /* =========================================================
@@ -3244,9 +2665,7 @@
        HELPERS
     ========================================================== */
 
-    function escapeHtml(
-      value
-    ) {
+    function escapeHtml(value) {
 
       return String(
         value ?? ''
@@ -3284,13 +2703,17 @@
           value
         );
 
+
       if (
         !Number.isFinite(
           number
         )
       ) {
+
         return 0;
+
       }
+
 
       return Math.max(
         0,
@@ -3312,12 +2735,14 @@
           value
         );
 
+
       date.setHours(
         0,
         0,
         0,
         0
       );
+
 
       return date;
 
@@ -3333,14 +2758,14 @@
           new Date()
         );
 
+
       const due =
         startOfDay(
           new Date(
-            Number(
-              timestamp
-            ) * 1000
+            Number(timestamp) * 1000
           )
         );
+
 
       return Math.round(
         (
@@ -3362,23 +2787,33 @@
           timestamp
         );
 
+
       if (
         days < 0
       ) {
+
         return 'Overdue';
+
       }
+
 
       if (
         days === 0
       ) {
+
         return 'Due today';
+
       }
+
 
       if (
         days === 1
       ) {
+
         return 'Due tomorrow';
+
       }
+
 
       return `Due in ${days} days`;
 
@@ -3396,74 +2831,68 @@
 
 
       if (
-        name.includes(
-          'math'
-        ) ||
-        name.includes(
-          'calc'
-        )
+        name.includes('math') ||
+        name.includes('calc')
       ) {
 
         return {
+
           category:
             'Mathematics',
 
           icon:
             'calculator'
+
         };
 
       }
 
 
       if (
-        name.includes(
-          'engin'
-        ) ||
-        name.includes(
-          'mech'
-        ) ||
-        name.includes(
-          'c++'
-        )
+        name.includes('engin') ||
+        name.includes('mech') ||
+        name.includes('c++')
       ) {
 
         return {
+
           category:
             'Engineering',
 
           icon:
             'settings-2'
+
         };
 
       }
 
 
       if (
-        name.includes(
-          'python'
-        ) ||
-        name.includes(
-          'program'
-        )
+        name.includes('python') ||
+        name.includes('program')
       ) {
 
         return {
+
           category:
             'Programming',
 
           icon:
             'code-2'
+
         };
 
       }
 
 
       return {
+
         category:
           'General Foundation',
 
         icon:
           'book-open'
+
       };
 
     }
@@ -3487,10 +2916,12 @@
         userToken
       );
 
+
       body.append(
         'wsfunction',
         wsfunction
       );
+
 
       body.append(
         'moodlewsrestformat',
@@ -3501,16 +2932,17 @@
       Object.entries(
         params
       ).forEach(
-        ([key, value]) => {
+        ([key,value]) => {
 
           if (
-            value ===
-              undefined ||
-            value ===
-              null
+            value === undefined ||
+            value === null
           ) {
+
             return;
+
           }
+
 
           body.append(
             key,
@@ -3525,15 +2957,19 @@
         await fetch(
           `${MOODLE_URL}/webservice/rest/server.php`,
           {
+
             method:
               'POST',
 
             headers: {
+
               'Content-Type':
                 'application/x-www-form-urlencoded'
+
             },
 
             body
+
           }
         );
 
@@ -3586,6 +3022,7 @@
         currentUser.firstname ||
         'Student';
 
+
       const last =
         currentUser.lastname ||
         '';
@@ -3624,14 +3061,10 @@
 
 
       enrolledCourses =
-        Array.isArray(
-          courses
-        )
+        Array.isArray(courses)
           ? courses.filter(
               course =>
-                Number(
-                  course.id
-                ) !== 1
+                Number(course.id) !== 1
             )
           : [];
 
@@ -3667,11 +3100,13 @@
           await moodleRequest(
             'core_completion_get_activities_completion_status',
             {
+
               courseid:
                 courseId,
 
               userid:
                 currentUser.userid
+
             }
           );
 
@@ -3700,7 +3135,7 @@
 
                 if (
                   activity.tracking !==
-                  undefined &&
+                    undefined &&
                   Number(
                     activity.tracking
                   ) === 0
@@ -3709,6 +3144,7 @@
                   return false;
 
                 }
+
 
                 return true;
 
@@ -3723,18 +3159,15 @@
             const completed =
               tracked.filter(
                 activity =>
-
                   Number(
                     activity.state
                   ) === 1 ||
 
-                  activity.completed ===
-                    true ||
+                  activity.completed === true ||
 
                   Number(
                     activity.completed
                   ) === 1
-
               ).length;
 
 
@@ -3743,6 +3176,7 @@
                 courseId
               ),
               {
+
                 completed,
 
                 total:
@@ -3750,13 +3184,16 @@
 
                 percentage:
                   clamp(
-                    completed /
-                    tracked.length *
+                    (
+                      completed /
+                      tracked.length
+                    ) *
                     100
                   ),
 
                 source:
                   'moodle'
+
               }
             );
 
@@ -3785,6 +3222,7 @@
           courseId
         ),
         {
+
           completed:
             0,
 
@@ -3796,6 +3234,7 @@
 
           source:
             'unavailable'
+
         }
       );
 
@@ -3812,7 +3251,9 @@
             courseId
           )
         )
-        || {
+        ||
+        {
+
           completed:
             0,
 
@@ -3824,6 +3265,7 @@
 
           source:
             'unavailable'
+
         }
       );
 
@@ -3857,22 +3299,26 @@
 
 
               return (
+
                 progress.source ===
                   'moodle'
 
                 &&
+
                 progress.percentage >
                   0
 
                 &&
+
                 progress.percentage <
                   100
+
               );
 
             }
           )
           .sort(
-            (a, b) =>
+            (a,b) =>
               getProgressData(
                 b.id
               ).percentage -
@@ -3900,7 +3346,7 @@
               ) > 0
           )
           .sort(
-            (a, b) =>
+            (a,b) =>
               Number(
                 b.lastaccess
               ) -
@@ -3931,20 +3377,26 @@
         continueCourseName.textContent =
           'No course available';
 
+
         continueTopic.textContent =
           'Enroll in a course to begin learning.';
+
 
         continueProgressValue.textContent =
           '—';
 
+
         continueMeta.textContent =
           'No course data available.';
+
 
         continueProgressFill.style.width =
           '0%';
 
+
         continueButton.href =
           '#';
+
 
         return;
 
@@ -3977,8 +3429,10 @@
         continueTopic.textContent =
           'Continue your current coursework';
 
+
         continueProgressValue.textContent =
           `${progress.percentage}%`;
+
 
         continueMeta.textContent =
           `${progress.completed} / ${progress.total} activities completed`;
@@ -3989,8 +3443,10 @@
         continueTopic.textContent =
           'Completion tracking is not configured in Moodle yet';
 
+
         continueProgressValue.textContent =
           '—';
+
 
         continueMeta.textContent =
           'Enable Moodle activity completion to show real progress';
@@ -4030,8 +3486,7 @@
     ========================================================== */
 
     function renderCourses(
-      filter =
-        'all'
+      filter = 'all'
     ) {
 
       let courses =
@@ -4089,157 +3544,171 @@
 
 
       courseGrid.innerHTML =
-        courses.map(
-          course => {
+        courses
+          .map(
+            course => {
 
-            const metadata =
-              getCourseMetadata(
-                course.fullname
-              );
-
-
-            const progress =
-              getProgressData(
-                course.id
-              );
+              const metadata =
+                getCourseMetadata(
+                  course.fullname
+                );
 
 
-            const value =
-              progress.source ===
+              const progress =
+                getProgressData(
+                  course.id
+                );
+
+
+              const value =
+                progress.source ===
                 'moodle'
-                ? `${progress.percentage}%`
-                : '—';
+
+                  ? `${progress.percentage}%`
+
+                  : '—';
 
 
-            const text =
-              progress.source ===
+              const text =
+                progress.source ===
                 'moodle'
-                ? `${progress.completed} / ${progress.total} activities completed`
-                : 'Completion tracking not configured';
+
+                  ? `${progress.completed} / ${progress.total} activities completed`
+
+                  : 'Completion tracking not configured';
 
 
-            return `
-              <article
-                class="course-mini-card"
-              >
+              return `
 
-                <a
-                  href="course.html?id=${encodeURIComponent(course.id)}"
+                <article
+                  class="course-mini-card"
                 >
 
-                  <div
-                    class="course-mini-top"
+                  <a
+                    href="course.html?id=${encodeURIComponent(course.id)}"
                   >
 
                     <div
-                      class="course-mini-icon"
-                    >
-
-                      <i
-                        data-lucide="${metadata.icon}"
-                        style="
-                          width:21px;
-                          height:21px;
-                        "
-                      ></i>
-
-                    </div>
-
-
-                    <div
-                      class="course-mini-info"
+                      class="course-mini-top"
                     >
 
                       <div
-                        class="course-mini-name"
+                        class="course-mini-icon"
                       >
-                        ${escapeHtml(
-                          course.fullname ||
-                          course.shortname ||
-                          'Course'
-                        )}
+
+                        <i
+                          data-lucide="${metadata.icon}"
+                          style="
+                            width:21px;
+                            height:21px;
+                          "
+                        ></i>
+
                       </div>
 
 
                       <div
-                        class="course-mini-category"
+                        class="course-mini-info"
                       >
-                        ${escapeHtml(
-                          metadata.category
-                        )}
+
+                        <div
+                          class="course-mini-name"
+                        >
+
+                          ${escapeHtml(
+                            course.fullname ||
+                            course.shortname ||
+                            'Course'
+                          )}
+
+                        </div>
+
+
+                        <div
+                          class="course-mini-category"
+                        >
+
+                          ${escapeHtml(
+                            metadata.category
+                          )}
+
+                        </div>
+
                       </div>
 
                     </div>
 
-                  </div>
-
-
-                  <div
-                    class="course-mini-progress"
-                  >
 
                     <div
-                      class="
-                        course-mini-progress-line
-                      "
-                    >
-
-                      <span
-                        class="
-                          course-mini-progress-label
-                        "
-                      >
-                        Course progress
-                      </span>
-
-
-                      <span
-                        class="
-                          course-mini-progress-value
-                        "
-                      >
-                        ${value}
-                      </span>
-
-                    </div>
-
-
-                    <div
-                      class="mini-track"
+                      class="course-mini-progress"
                     >
 
                       <div
-                        class="mini-fill"
-                        style="
-                          width:${
-                            progress.source ===
+                        class="
+                          course-mini-progress-line
+                        "
+                      >
+
+                        <span
+                          class="
+                            course-mini-progress-label
+                          "
+                        >
+                          Course progress
+                        </span>
+
+
+                        <span
+                          class="
+                            course-mini-progress-value
+                          "
+                        >
+                          ${value}
+                        </span>
+
+                      </div>
+
+
+                      <div
+                        class="mini-track"
+                      >
+
+                        <div
+                          class="mini-fill"
+                          style="
+                            width:${
+                              progress.source ===
                               'moodle'
-                              ? progress.percentage
-                              : 0
-                          }%;
-                        "
-                      ></div>
+                                ? progress.percentage
+                                : 0
+                            }%;
+                          "
+                        ></div>
+
+                      </div>
+
+
+                      <div
+                        class="course-mini-count"
+                      >
+
+                        ${escapeHtml(
+                          text
+                        )}
+
+                      </div>
 
                     </div>
 
+                  </a>
 
-                    <div
-                      class="course-mini-count"
-                    >
-                      ${escapeHtml(
-                        text
-                      )}
-                    </div>
+                </article>
 
-                  </div>
+              `;
 
-                </a>
-
-              </article>
-            `;
-
-          }
-        ).join('');
+            }
+          )
+          .join('');
 
 
       lucide.createIcons();
@@ -4258,7 +3727,8 @@
 
 
       for (
-        const course of enrolledCourses
+        const course
+        of enrolledCourses
       ) {
 
         try {
@@ -4334,11 +3804,10 @@
             assignment =>
               Number(
                 assignment.duedate
-              ) >
-              0
+              ) > 0
           )
           .sort(
-            (a, b) =>
+            (a,b) =>
               Number(
                 a.duedate
               ) -
@@ -4361,7 +3830,8 @@
 
 
       for (
-        const course of enrolledCourses
+        const course
+        of enrolledCourses
       ) {
 
         try {
@@ -4449,10 +3919,12 @@
                 now.getFullYear()
 
               &&
+
               due.getMonth() ===
                 now.getMonth()
 
               &&
+
               due.getDate() ===
                 now.getDate()
             );
@@ -4488,10 +3960,12 @@
                 now.getFullYear()
 
               &&
+
               due.getMonth() ===
                 now.getMonth()
 
               &&
+
               due.getDate() ===
                 now.getDate()
             );
@@ -4562,11 +4036,13 @@
 
       todayTitle.textContent =
         tasks.length
+
           ? `${tasks.length} task${
               tasks.length === 1
                 ? ''
                 : 's'
             } requiring attention`
+
           : 'Nothing due today';
 
 
@@ -4594,6 +4070,7 @@
           )
           .map(
             task => `
+
               <a
                 class="today-item"
                 href="${task.url}"
@@ -4609,18 +4086,22 @@
                   <div
                     class="today-title"
                   >
+
                     ${escapeHtml(
                       task.title
                     )}
+
                   </div>
 
 
                   <div
                     class="today-meta"
                   >
+
                     ${escapeHtml(
                       task.course
                     )}
+
                   </div>
 
                 </div>
@@ -4636,6 +4117,7 @@
                 ></i>
 
               </a>
+
             `
           )
           .join('');
@@ -4725,6 +4207,7 @@
 
 
               return `
+
                 <a
                   class="upcoming-item"
                   href="
@@ -4747,16 +4230,20 @@
                     <div
                       class="date-month"
                     >
+
                       ${escapeHtml(
                         month
                       )}
+
                     </div>
 
 
                     <div
                       class="date-day"
                     >
+
                       ${day}
+
                     </div>
 
                   </div>
@@ -4767,9 +4254,11 @@
                     <div
                       class="upcoming-title"
                     >
+
                       ${escapeHtml(
                         assignment.name
                       )}
+
                     </div>
 
 
@@ -4790,11 +4279,13 @@
                             : ''
                         }"
                       >
+
                         ${escapeHtml(
                           relativeDue(
                             assignment.duedate
                           )
                         )}
+
                       </span>
 
                     </div>
@@ -4812,6 +4303,7 @@
                   ></i>
 
                 </a>
+
               `;
 
             }
@@ -4825,285 +4317,260 @@
 
 
     /* =========================================================
-       GRADES
+       GRADEBOOK
+       IMPORTANT:
+       Moodle's "gradeformatted" is NOT treated as a percentage.
+       We calculate:
+       
+           grade / grademax * 100
+
+       Course-level grade item:
+       
+           itemtype === "course"
+
+       is used as the official course grade.
     ========================================================== */
 
     async function loadGrades() {
 
-      courseGradeMap =
-        new Map();
+  courseGradeMap = new Map();
 
+  for (const course of enrolledCourses) {
 
-      for (
-        const course of enrolledCourses
-      ) {
+    try {
 
-        try {
-
-          const data =
-            await moodleRequest(
-              'gradereport_user_get_grade_items',
-              {
-                courseid:
-                  course.id,
-
-                userid:
-                  currentUser.userid
-              }
-            );
-
-
-          console.log(
-            'ATHENA DASHBOARD GRADE RESPONSE:',
-            course.id,
-            data
-          );
-
-
-          const items =
-            Array.isArray(
-              data?.usergrades?.[0]?.gradeitems
-            )
-              ? data.usergrades[0].gradeitems
-              : [];
-
-
-          let percentage =
-            null;
-
-
-          const courseItem =
-            items.find(
-              item =>
-                item.itemtype ===
-                'course'
-            );
-
-
-          if (
-            courseItem
-          ) {
-
-            percentage =
-              getPercentage(
-                courseItem
-              );
-
-          }
-
-
-          if (
-            percentage ===
-            null
-          ) {
-
-            const graded =
-              items
-                .filter(
-                  item =>
-                    item.itemtype !==
-                    'course'
-                )
-                .map(
-                  getPercentage
-                )
-                .filter(
-                  value =>
-                    value !==
-                    null
-                );
-
-
-            if (
-              graded.length
-            ) {
-
-              percentage =
-                graded.reduce(
-                  (
-                    total,
-                    value
-                  ) =>
-                    total +
-                    value,
-                  0
-                ) /
-                graded.length;
-
-            }
-
-          }
-
-
-          courseGradeMap.set(
-            Number(
-              course.id
-            ),
-            {
-              percentage,
-              items
-            }
-          );
-
+      const data = await moodleRequest(
+        'gradereport_user_get_grade_items',
+        {
+          courseid: course.id,
+          userid: currentUser.userid
         }
-        catch (
-          error
-        ) {
+      );
 
-          console.warn(
-            `Grade loading failed for ${course.id}:`,
-            error
-          );
-
-
-          courseGradeMap.set(
-            Number(
-              course.id
-            ),
-            {
-              percentage:
-                null,
-
-              items:
-                []
-            }
-          );
-
-        }
-
-      }
+      console.log(
+        'ATHENA DASHBOARD GRADE RESPONSE:',
+        course.id,
+        data
+      );
 
 
-      renderPerformance();
-
-    }
-
-
-    function getPercentage(
-      item
-    ) {
-
-      const percentage =
-        Number(
-          item?.percentage
-        );
-
-
-      if (
-        Number.isFinite(
-          percentage
+      const items =
+        Array.isArray(
+          data?.usergrades?.[0]?.gradeitems
         )
-      ) {
+          ? data.usergrades[0].gradeitems
+          : [];
 
-        return percentage;
+
+      /*
+       * Moodle's official course total.
+       */
+      const courseItem =
+        items.find(
+          item =>
+            item.itemtype === 'course'
+        );
+
+
+      let coursePercentage = null;
+
+
+      /*
+       * Calculate the course percentage.
+       */
+      if (courseItem) {
+
+        coursePercentage =
+          calculateGradePercentage(
+            courseItem
+          );
 
       }
 
 
-      const grade =
-        Number(
-          item?.grade
+      /*
+       * Find individual graded assessments.
+       * The course total itself is excluded.
+       */
+      const gradedItems =
+        items.filter(
+          item =>
+            item.itemtype !== 'course' &&
+            calculateGradePercentage(item) !== null
         );
 
 
-      const max =
-        Number(
-          item?.grademax
-        );
+      /*
+       * DEBUG LOG
+       *
+       * IMPORTANT:
+       * This is AFTER coursePercentage exists.
+       */
+      console.log(
+        'ATHENA PARSED COURSE:',
+        course.fullname,
+        coursePercentage
+      );
 
 
-      if (
-        Number.isFinite(
-          grade
-        ) &&
-        Number.isFinite(
-          max
-        ) &&
-        max > 0
-      ) {
-
-        return (
-          grade /
-          max
-        ) *
-        100;
-
-      }
+      console.log(
+        'ATHENA GRADED ASSESSMENTS:',
+        course.fullname,
+        gradedItems.length
+      );
 
 
-      return null;
+      courseGradeMap.set(
+        Number(course.id),
+        {
+          course: course,
+          percentage: coursePercentage,
+          gradedItems: gradedItems,
+          allItems: items
+        }
+      );
+
+    }
+    catch (error) {
+
+      console.warn(
+        `Grade loading failed for course ${course.id}:`,
+        error
+      );
+
+
+      courseGradeMap.set(
+        Number(course.id),
+        {
+          course: course,
+          percentage: null,
+          gradedItems: [],
+          allItems: []
+        }
+      );
 
     }
 
+  }
+
+
+  renderPerformance();
+
+}
+
+
+    /* =========================================================
+       CALCULATE GRADE PERCENTAGE
+    ========================================================== */
+
+    function calculateGradePercentage(item) {
+
+  if (!item) {
+    return null;
+  }
+
+  let grade = Number(item.grade);
+
+  /*
+   * Your Moodle installation returns:
+   * gradeformatted: "80.00"
+   * instead of a numeric `grade`.
+   */
+  if (!Number.isFinite(grade)) {
+
+    const formatted =
+      String(
+        item.gradeformatted ?? ''
+      ).trim();
+
+    const match =
+      formatted.match(
+        /-?\d+(?:\.\d+)/
+      );
+
+    if (match) {
+      grade = Number(match[0]);
+    }
+  }
+
+  const max =
+    Number(item.grademax);
+
+  if (
+    !Number.isFinite(grade) ||
+    !Number.isFinite(max) ||
+    max <= 0
+  ) {
+    return null;
+  }
+
+  return Math.max(
+    0,
+    Math.min(
+      100,
+      (grade / max) * 100
+    )
+  );
+}
+
+
+    /* =========================================================
+       PERFORMANCE
+    ========================================================== */
 
     function renderPerformance() {
 
-      const available =
-        enrolledCourses
-          .map(
-            course => ({
-              course,
-
-              grade:
-                courseGradeMap.get(
-                  Number(
-                    course.id
-                  )
-                )?.percentage ??
-                null
-            })
-          )
-          .filter(
-            item =>
-              item.grade !==
-              null
-          );
+      const results =
+        [
+          ...courseGradeMap.values()
+        ];
 
 
-      const completedAssessments =
-        enrolledCourses.reduce(
+      /*
+       * Only courses with a valid course total
+       * participate in the overall average.
+       */
+
+      const gradedCourses =
+        results.filter(
+          result =>
+            result.percentage !==
+            null
+        );
+
+
+      /*
+       * Total number of individual grade items
+       * that currently have a grade.
+       */
+
+      const gradedAssessmentCount =
+        results.reduce(
           (
             total,
-            course
-          ) => {
-
-            const items =
-              courseGradeMap.get(
-                Number(
-                  course.id
-                )
-              )?.items ||
-              [];
-
-
-            return (
-              total +
-              items.filter(
-                item =>
-                  item.itemtype !==
-                    'course' &&
-                  getPercentage(
-                    item
-                  ) !==
-                    null
-              ).length
-            );
-
-          },
+            result
+          ) =>
+            total +
+            result.gradedItems.length,
           0
         );
 
 
       assessmentCount.textContent =
-        completedAssessments;
+        gradedAssessmentCount;
 
+
+      /*
+       * No valid course totals.
+       */
 
       if (
-        !available.length
+        !gradedCourses.length
       ) {
 
         overallAverage.textContent =
           '—';
+
 
         bestCourse.textContent =
           '—';
@@ -5119,7 +4586,7 @@
               "
             ></i>
 
-            No graded assessments yet
+            No graded course totals yet
           `;
 
 
@@ -5130,75 +4597,90 @@
       }
 
 
-      const average =
-        available.reduce(
+      /*
+       * Equal-weight average of course totals.
+       *
+       * This matches the dashboard's purpose:
+       * overall average across enrolled courses.
+       */
+
+      const overallAverageValue =
+        gradedCourses.reduce(
           (
             total,
-            item
+            result
           ) =>
             total +
-            item.grade,
+            result.percentage,
           0
         ) /
-        available.length;
+        gradedCourses.length;
 
 
       overallAverage.textContent =
-        `${average.toFixed(
+        `${overallAverageValue.toFixed(
           1
         )}%`;
 
 
+      /*
+       * Highest-performing course.
+       */
+
       const best =
-        [...available]
+        [...gradedCourses]
           .sort(
-            (a, b) =>
-              b.grade -
-              a.grade
+            (a,b) =>
+              b.percentage -
+              a.percentage
           )[0];
 
 
+      const bestName =
+        best.course.fullname ||
+        best.course.shortname ||
+        'Course';
+
+
       bestCourse.textContent =
-        `${
-          best.course.fullname ||
-          best.course.shortname ||
-          'Course'
-        } · ${best.grade.toFixed(
-          0
-        )}%`;
+        `${bestName} · ${best.percentage.toFixed(1)}%`;
 
 
-      let status =
+      /*
+       * Status message.
+       */
+
+      let statusText =
         'Keep building your momentum.';
 
 
       if (
-        average >= 85
+        overallAverageValue >= 85
       ) {
 
-        status =
+        statusText =
           'Excellent academic performance.';
 
       }
       else if (
-        average >= 70
+        overallAverageValue >= 70
       ) {
 
-        status =
+        statusText =
           'Strong academic performance.';
 
       }
       else if (
-        average >= 50
+        overallAverageValue >= 50
       ) {
 
-        status =
+        statusText =
           'There is room to improve.';
 
       }
       else {
 
-        status =
+        statusText =
           'Review your current coursework.';
 
       }
@@ -5215,8 +4697,9 @@
           ></i>
 
           ${escapeHtml(
-            status
+            statusText
           )}
+
         `;
 
 
@@ -5236,7 +4719,8 @@
 
 
       for (
-        const course of enrolledCourses
+        const course
+        of enrolledCourses
       ) {
 
         try {
@@ -5348,7 +4832,7 @@
       activityEvents =
         activityEvents
           .sort(
-            (a, b) =>
+            (a,b) =>
               b.timestamp -
               a.timestamp
           )
@@ -5374,7 +4858,9 @@
         activityList.innerHTML =
           `
             <div class="empty">
+
               No verified recent student activity yet.
+
             </div>
           `;
 
@@ -5405,15 +4891,18 @@
                 <div
                   class="activity-text"
                 >
+
                   ${escapeHtml(
                     event.text
                   )}
+
                 </div>
 
 
                 <div
                   class="activity-time"
                 >
+
                   ${new Date(
                     event.timestamp *
                     1000
@@ -5427,6 +4916,7 @@
                         'numeric'
                     }
                   )}
+
                 </div>
 
               </div>
@@ -5542,7 +5032,7 @@
 
 
     /* =========================================================
-       FILTER BUTTONS
+       FILTERS
     ========================================================== */
 
     document
