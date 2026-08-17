@@ -3,226 +3,416 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Madar LMS | Course Viewer</title>
-  
+  <title>Athena | Course Stream</title>
+
+  <!-- =========================================================
+       FONTS & ICONS
+  ========================================================== -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
+    /* =========================================================
+       DESIGN SYSTEM
+    ========================================================== */
     :root {
-      --bg-primary: #ffffff;
-      --bg-secondary: #f8fafc;
-      --bg-tertiary: #f1f5f9;
-      --text-primary: #09090b;
-      --text-secondary: #52525b;
-      --border-color: #e2e8f0;
-      --brand-black: #000000;
+      --bg: #f7f8fa;
       --white: #ffffff;
-      --font-heading: 'Space Grotesk', sans-serif;
-      --font-body: 'Inter', sans-serif;
+      --black: #050505;
+      --text: #09090b;
+      --muted: #646b73;
+      --muted-2: #8b929a;
+      --border: #dfe3e8;
+      --border-light: #e9edf1;
+      --soft: #f3f5f7;
+      --green: #177245;
+      --green-bg: #edf8f1;
+      --font-heading: "Space Grotesk", sans-serif;
+      --font-body: "Inter", sans-serif;
+      --radius: 11px;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: var(--font-body); background-color: var(--bg-secondary); color: var(--text-primary); line-height: 1.6; }
+    /* =========================================================
+       RESET & BASE
+    ========================================================== */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.5; }
     a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; border: none; background: transparent; }
 
-    /* HEADER */
-    header { background-color: rgba(255, 255, 255, 0.95); border-bottom: 1px solid var(--border-color); position: fixed; top: 0; left: 0; right: 0; z-index: 100; backdrop-filter: blur(8px); }
-    .nav-container { max-width: 1000px; margin: 0 auto; padding: 0 24px; height: 70px; display: flex; justify-content: space-between; align-items: center; }
-    .back-link { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.95rem; color: var(--text-secondary); transition: color 0.2s; cursor: pointer; }
-    .back-link:hover { color: var(--brand-black); }
+    /* =========================================================
+       HEADER
+    ========================================================== */
+    .topbar {
+      position: fixed; top: 0; left: 0; right: 0; height: 64px;
+      background: rgba(255,255,255,.97); border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px); z-index: 100;
+    }
+    .topbar-inner {
+      width: min(1100px, calc(100% - 48px)); height: 100%; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .brand-mark {
+      width: 29px; height: 29px; display: flex; align-items: center; justify-content: center;
+      border-radius: 7px; background: var(--black); color: var(--white);
+      font-family: var(--font-heading); font-size: 11px; font-weight: 700;
+    }
+    .brand-name { font-family: var(--font-heading); font-size: 15px; font-weight: 700; }
     
-    /* HERO WITH BLACK ACCENTS */
-    .hero { margin-top: 70px; background-color: var(--bg-primary); padding: 80px 24px 60px; border-bottom: 1px solid var(--border-color); background-image: radial-gradient(var(--border-color) 1px, transparent 1px); background-size: 24px 24px; text-align: center; }
-    .course-badge { display: inline-flex; align-items: center; gap: 6px; background-color: var(--brand-black); color: var(--white); padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 16px; letter-spacing: 0.5px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
-    .hero-title { font-family: var(--font-heading); font-size: 2.75rem; font-weight: 700; max-width: 800px; margin: 0 auto; letter-spacing: -0.5px; color: var(--text-primary); }
+    .action-link { 
+      display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; color: var(--muted); 
+      padding: 6px 12px; border-radius: 6px; border: 1px solid var(--border); background: var(--white); transition: all .2s;
+    }
+    .action-link:hover { color: var(--black); border-color: #cfd4da; }
 
-    /* CONTENT LAYOUT */
-    .course-container { max-width: 800px; margin: -20px auto 60px; padding: 0 24px; position: relative; z-index: 10; }
+    /* =========================================================
+       PAGE LAYOUT (Max width optimized for stream view)
+    ========================================================== */
+    .page {
+      width: min(1100px, calc(100% - 48px)); margin: 0 auto;
+      padding-top: 95px; padding-bottom: 60px;
+    }
+
+    /* =========================================================
+       STREAM HERO HEADER
+    ========================================================== */
+    .stream-hero {
+      background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 30px; margin-bottom: 30px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+      display: flex; flex-direction: column; gap: 20px;
+    }
     
-    .section-block { background-color: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 12px; margin-bottom: 32px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.02); }
-    .section-header { background-color: var(--bg-primary); padding: 20px 24px; border-bottom: 1px solid var(--border-color); font-family: var(--font-heading); font-weight: 600; font-size: 1.15rem; display: flex; justify-content: space-between; align-items: center; }
-    .section-count { font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; color: var(--white); background: var(--text-primary); padding: 4px 10px; border-radius: 12px; }
-
-    .module-list { list-style: none; }
-    .module-item { display: flex; align-items: center; gap: 18px; padding: 20px 24px; border-bottom: 1px solid var(--border-color); transition: all 0.2s ease; }
-    .module-item:last-child { border-bottom: none; }
-    .module-item:hover { background-color: var(--bg-secondary); padding-left: 28px; }
+    .stream-meta-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .stream-tag { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); display: flex; align-items: center; gap: 6px; }
     
-    .module-icon { width: 44px; height: 44px; background-color: var(--bg-tertiary); color: var(--brand-black); border-radius: 8px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
-    /* High contrast hover invert */
-    .module-item:hover .module-icon { background-color: var(--brand-black); color: var(--white); transform: scale(1.05); }
-    
-    .module-details { flex: 1; }
-    .module-details h4 { font-size: 1.05rem; font-weight: 600; margin-bottom: 4px; color: var(--text-primary); }
-    .module-details p { font-size: 0.85rem; color: var(--text-secondary); text-transform: capitalize; }
+    .stream-title { font-family: var(--font-heading); font-size: clamp(1.8rem, 3vw, 2.4rem); line-height: 1.15; letter-spacing: -1px; }
 
-    .action-arrow { color: var(--border-color); transition: all 0.2s; }
-    .module-item:hover .action-arrow { color: var(--brand-black); transform: translateX(4px); }
+    .stream-progress-container {
+      display: flex; align-items: center; gap: 15px; padding-top: 15px; border-top: 1px solid var(--border-light);
+    }
+    .stream-progress-bar-wrap { flex: 1; height: 6px; background: var(--soft); border-radius: 99px; overflow: hidden; border: 1px solid var(--border-light); }
+    .stream-progress-fill { height: 100%; background: var(--black); width: 0%; transition: width 0.4s ease; }
+    .stream-progress-stats { font-family: var(--font-heading); font-size: 12px; font-weight: 700; white-space: nowrap; }
 
-    .loading-state, .error-state { padding: 60px; text-align: center; background-color: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-secondary); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
+    /* =========================================================
+       TIMELINE STREAM LAYOUT
+    ========================================================== */
+    .stream-timeline {
+      display: flex; flex-direction: column; gap: 20px; position: relative;
+    }
+
+    .timeline-milestone {
+      background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.03);
+      overflow: hidden; transition: border-color .2s ease, box-shadow .2s ease;
+    }
+    .timeline-milestone:hover {
+      border-color: #cfd4da; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08), 0 3px 6px rgba(0, 0, 0, 0.04);
+    }
+
+    .milestone-header {
+      padding: 16px 22px; background: #fafbfc; border-bottom: 1px solid var(--border-light);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .milestone-title { font-family: var(--font-heading); font-size: 14px; font-weight: 700; color: var(--black); }
+    .milestone-counter { font-size: 10px; font-weight: 700; color: var(--muted); background: var(--soft); border: 1px solid var(--border); padding: 3px 8px; border-radius: 99px; }
+
+    .milestone-body { padding: 8px 12px; display: flex; flex-direction: column; gap: 4px; }
+
+    /* Stream Activity Row */
+    .stream-item {
+      display: flex; align-items: center; justify-content: space-between; gap: 15px;
+      padding: 12px 14px; border-radius: 8px; border: 1px solid transparent; transition: all 0.15s ease;
+    }
+    .stream-item:hover { background: var(--soft); border-color: var(--border-light); }
+
+    .stream-item-left { display: flex; align-items: center; gap: 14px; min-width: 0; }
+    .stream-item-icon {
+      width: 32px; height: 32px; border-radius: 8px; background: var(--soft); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center; color: var(--muted); flex-shrink: 0;
+    }
+    .stream-item-info { min-width: 0; }
+    .stream-item-name { font-size: 13px; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .stream-item-type { font-size: 10px; font-weight: 600; color: var(--muted); text-transform: uppercase; margin-top: 1px; }
+
+    /* Status Badge */
+    .stream-status {
+      display: flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 700; color: var(--muted); padding: 4px 10px; border-radius: 6px; background: var(--soft); border: 1px solid var(--border); flex-shrink: 0;
+    }
+    .stream-status.done { background: var(--black); color: var(--white); border-color: var(--black); }
+
+    /* =========================================================
+       EMPTY / LOADING STATES
+    ========================================================== */
+    .system-message {
+      padding: 50px; text-align: center; color: var(--muted); font-size: 12px;
+      background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
+    }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="nav-container">
-      <a href="index.html" class="back-link">
-        <i data-lucide="arrow-left" style="width: 18px; height: 18px;"></i> Dashboard
+  <!-- HEADER -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="index.html" class="brand">
+        <div class="brand-mark">A</div>
+        <div class="brand-name">ATHENA</div>
       </a>
-      <div style="font-family: var(--font-heading); font-weight: 700; font-size: 1.1rem; letter-spacing: -0.5px; color: var(--brand-black);">MADAR LMS</div>
+      <div style="display: flex; gap: 10px;">
+        <a href="grades.html" class="action-link">
+          <i data-lucide="bar-chart-3" style="width:14px;height:14px;"></i> Grades
+        </a>
+        <a href="index.html" onclick="window.location.href='index.html'; return false;" class="action-link" style="background:var(--black); color:var(--white); border-color:var(--black);">
+          <i data-lucide="arrow-left" style="width:14px;height:14px;"></i> Dashboard
+        </a>
+      </div>
     </div>
   </header>
 
-  <section class="hero">
-    <div class="hero-content">
-      <div class="course-badge" id="course-meta">
-        <i data-lucide="book-open" style="width: 14px; height: 14px;"></i> Initializing
+  <!-- PAGE CONTENT -->
+  <main class="page">
+    
+    <!-- STREAM HERO -->
+    <section class="stream-hero">
+      <div class="stream-meta-top">
+        <div class="stream-tag" id="course-category">
+          <i data-lucide="terminal" style="width:13px;height:13px;"></i> Loading Category...
+        </div>
+        <a href="#" id="moodle-native-link" target="_blank" class="action-link">
+          <i data-lucide="external-link" style="width:14px;height:14px;"></i> Open in Moodle
+        </a>
       </div>
-      <h1 class="hero-title" id="course-title">Loading Module...</h1>
-    </div>
-  </section>
+      <h1 class="stream-title" id="course-title">Initializing Stream...</h1>
+      
+      <div class="stream-progress-container">
+        <div class="stream-progress-bar-wrap">
+          <div class="stream-progress-fill" id="progress-fill"></div>
+        </div>
+        <div class="stream-progress-stats" id="progress-stats">0% Completed</div>
+      </div>
+    </section>
 
-  <div class="course-container" id="syllabus-container">
-    <div class="loading-state">
-      <i data-lucide="loader-2" style="animation: spin 2s linear infinite; margin: 0 auto 12px; display: block; width: 32px; height: 32px; color: var(--brand-black);"></i>
-      Fetching curriculum data...
-    </div>
-  </div>
+    <!-- TIMELINE STREAM CONTAINER -->
+    <section class="stream-timeline" id="timeline-container">
+      <div class="system-message">Syncing course milestones from Moodle...</div>
+    </section>
+
+  </main>
 
   <script>
-    lucide.createIcons();
-    
+    /* =========================================================
+       CONFIG & SETUP
+    ========================================================== */
     const MOODLE_URL = 'http://localhost:8000';
     const userToken = localStorage.getItem('madar_user_token');
     
     if (!userToken) window.location.href = 'login.html';
 
     const urlParams = new URLSearchParams(window.location.search);
-    const courseId = urlParams.get('id');
+    const courseId = urlParams.get('id') || urlParams.get('courseid');
 
-    if (!courseId) window.location.href = 'index.html';
+    lucide.createIcons();
 
-    function getModuleIcon(modname) {
-      const icons = {
-        'resource': 'file-text', 'assign': 'upload-cloud', 
-        'quiz': 'help-circle', 'url': 'link', 'page': 'layout-template', 'forum': 'message-square'
-      };
-      return icons[modname] || 'file';
+    if (!courseId) {
+      document.getElementById('course-title').textContent = "ERROR: Course ID Missing";
+      document.getElementById('timeline-container').innerHTML = `
+        <div class='system-message'>
+          Invalid navigation parameter. 
+          <br><br>
+          <a href="index.html" class="action-link" style="display:inline-flex; background:var(--black); color:var(--white);">
+            <i data-lucide="arrow-left" style="width:14px;height:14px;"></i> Return to Dashboard
+          </a>
+        </div>
+      `;
+      setTimeout(() => lucide.createIcons(), 50);
     }
 
-    async function loadCourseContent() {
-      const container = document.getElementById('syllabus-container');
-      const titleEl = document.getElementById('course-title');
-      const metaEl = document.getElementById('course-meta');
+    let completionData = [];
+
+    /* =========================================================
+       API HELPER
+    ========================================================== */
+    async function moodleRequest(wsfunction, params = {}) {
+      const body = new URLSearchParams();
+      body.append('wstoken', userToken);
+      body.append('wsfunction', wsfunction);
+      body.append('moodlewsrestformat', 'json');
+      
+      for (const [key, value] of Object.entries(params)) {
+        body.append(key, value);
+      }
+
+      const response = await fetch(`${MOODLE_URL}/webservice/rest/server.php`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body
+      });
+      const data = await response.json();
+      if (data.exception) throw new Error(data.message);
+      return data;
+    }
+
+    /* =========================================================
+       MAP ICONS & URLS
+    ========================================================== */
+    function getModuleConfig(module) {
+      const modname = module.modname.toLowerCase();
+      let icon = 'file-text';
+      let url = `${MOODLE_URL}/mod/${modname}/view.php?id=${module.id}`; 
+      let typeLabel = 'Activity';
+
+      if (modname === 'resource') { 
+        icon = 'file-check'; 
+        url = `resource.html?resourceid=${module.instance}&courseid=${courseId}`; 
+        typeLabel = 'Document'; 
+      }
+      else if (modname === 'assign') { 
+        icon = 'clipboard-list'; 
+        url = `assignment.html?assignid=${module.instance}&courseid=${courseId}`; 
+        typeLabel = 'Assignment'; 
+      }
+      else if (modname === 'quiz') { 
+        icon = 'check-square'; 
+        url = `quiz.html?quizid=${module.instance}&courseid=${courseId}`; 
+        typeLabel = 'Assessment'; 
+      }
+      else if (modname === 'forum') { 
+        icon = 'message-square'; 
+        typeLabel = 'Discussion'; 
+      }
+      
+      return { icon, url, typeLabel };
+    }
+
+    /* =========================================================
+       CORE LOGIC
+    ========================================================== */
+    async function initStream() {
+      if (!courseId) return;
+      document.getElementById('moodle-native-link').href = `${MOODLE_URL}/course/view.php?id=${courseId}`;
 
       try {
-        const infoRes = await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=core_webservice_get_site_info&moodlewsrestformat=json`);
-        const siteInfo = await infoRes.json();
+        const [siteInfo, courses] = await Promise.all([
+          moodleRequest('core_webservice_get_site_info'),
+          moodleRequest('core_course_get_courses_by_field', { field: 'id', value: courseId })
+        ]);
+
+        const course = courses.courses ? courses.courses[0] : courses[0];
+        document.getElementById('course-title').textContent = course.fullname || "Course Stream";
         
-        const coursesRes = await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=core_enrol_get_users_courses&userid=${siteInfo.userid}&moodlewsrestformat=json`);
-        const courses = await coursesRes.json();
-        const currentCourse = courses.find(c => c.id == courseId);
-        
-        if (currentCourse) {
-          titleEl.textContent = currentCourse.fullname;
-          metaEl.innerHTML = `<i data-lucide="hash" style="width: 14px; height: 14px;"></i> Course ID: ${currentCourse.id}`;
+        const nameLower = (course.fullname || '').toLowerCase();
+        let catText = "General Foundation";
+        if (nameLower.includes('math') || nameLower.includes('calc')) catText = "Mathematics";
+        if (nameLower.includes('engin') || nameLower.includes('mech')) catText = "Engineering";
+        if (nameLower.includes('python') || nameLower.includes('program')) catText = "Programming";
+        document.getElementById('course-category').innerHTML = `<i data-lucide="terminal" style="width:13px;height:13px;"></i> ${catText}`;
+
+        try {
+          const compResp = await moodleRequest('core_completion_get_activities_completion_status', { courseid: courseId, userid: siteInfo.userid });
+          completionData = compResp.statuses || [];
+        } catch (e) {
+          console.warn("Completion unavailable.");
         }
 
-        const contentRes = await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=core_course_get_contents&courseid=${courseId}&moodlewsrestformat=json`);
-        const sections = await contentRes.json();
+        const tracked = completionData.filter(act => act.tracking !== 0 && act.tracking !== undefined);
+        let completedCount = 0;
+        
+        if (tracked.length > 0) {
+          completedCount = tracked.filter(act => Number(act.state) > 0 || act.completed === true || Number(act.completed) === 1).length;
+          const percentage = Math.round((completedCount / tracked.length) * 100);
+          
+          document.getElementById('progress-fill').style.width = `${percentage}%`;
+          document.getElementById('progress-stats').textContent = `${completedCount} / ${tracked.length} Completed (${percentage}%)`;
+        } else {
+          document.getElementById('progress-stats').textContent = "Tracking Unavailable";
+        }
 
-        if (sections.exception) throw new Error(sections.message);
-
-        container.innerHTML = '';
-
-        sections.forEach(section => {
-          if (section.modules.length === 0 && !section.summary) return;
-
-          let modulesHTML = section.modules.map(mod => {
-            const isAssign = mod.modname === 'assign';
-            const isForum = mod.modname === 'forum';
-            const isResource = mod.modname === 'resource';
-            const isQuiz = mod.modname === 'quiz';
-            
-            let hrefAttr = ''; let linkIcon = '';
-            
-            if (isAssign) hrefAttr = `href="assignment.html?assignid=${mod.instance}&courseid=${courseId}"`;
-            else if (isForum) hrefAttr = `href="forum.html?forumid=${mod.instance}&courseid=${courseId}"`;
-            else if (isResource) hrefAttr = `href="resource.html?resourceid=${mod.instance}&courseid=${courseId}"`;
-            else if (isQuiz) hrefAttr = `href="quiz.html?quizid=${mod.instance}&courseid=${courseId}"`;
-            else if (mod.url) hrefAttr = `href="${mod.url}" target="_blank"`;
-
-            const isInteractive = isAssign || isForum || isResource || isQuiz || mod.url;
-            const tag = isInteractive ? 'a' : 'div';
-            const interactiveStyle = isInteractive ? 'cursor: pointer; text-decoration: none; color: inherit;' : '';
-            
-            linkIcon = isInteractive ? `<div class="action-arrow"><i data-lucide="chevron-right" style="width: 20px; height: 20px;"></i></div>` : '';
-
-            return `
-              <${tag} ${hrefAttr} class="module-item" style="${interactiveStyle}">
-                <div class="module-icon"><i data-lucide="${getModuleIcon(mod.modname)}"></i></div>
-                <div class="module-details">
-                  <h4>${mod.name}</h4>
-                  <p>${mod.modname === 'assign' ? 'Assignment' : mod.modname === 'resource' ? 'Document' : mod.modname === 'quiz' ? 'Quiz' : mod.modplural}</p>
-                </div>
-                ${linkIcon}
-              </${tag}>
-            `;
-          }).join('');
-
-          container.innerHTML += `
-            <div class="section-block">
-              <div class="section-header">
-                <span>${section.name}</span>
-                <span class="section-count">${section.modules.length} Items</span>
-              </div>
-              <ul class="module-list">
-                ${modulesHTML}
-              </ul>
-            </div>
-          `;
-        });
-
+        const contents = await moodleRequest('core_course_get_contents', { courseid: courseId });
+        renderTimeline(contents);
         lucide.createIcons();
 
       } catch (error) {
-        container.innerHTML = `
-          <div class="error-state">
-            <i data-lucide="alert-circle" style="width: 32px; height: 32px; color: var(--brand-black); margin-bottom: 12px;"></i>
-            <h4 style="margin-bottom: 8px; color: var(--text-primary); font-weight: 600;">Content Error</h4>
-            <p style="font-size: 0.95rem;">Could not load course syllabus.</p>
+        console.error("Stream Load Error:", error);
+        document.getElementById('timeline-container').innerHTML = `<div class='system-message'>Error loading course stream: ${error.message}</div>`;
+      }
+    }
+
+    /* =========================================================
+       RENDER TIMELINE STREAM
+    ========================================================== */
+    function renderTimeline(sections) {
+      const container = document.getElementById('timeline-container');
+      const validSections = sections.filter(sec => sec.modules && sec.modules.length > 0);
+
+      if (validSections.length === 0) {
+        container.innerHTML = `<div class="system-message">No timeline entries found for this course.</div>`;
+        return;
+      }
+
+      let html = '';
+
+      validSections.forEach((section, index) => {
+        let itemsHtml = section.modules.map(mod => {
+          const config = getModuleConfig(mod);
+          const statusObj = completionData.find(c => Number(c.cmid) === Number(mod.id));
+          const isTracked = statusObj && statusObj.tracking !== 0;
+          const isCompleted = isTracked && (Number(statusObj.state) > 0 || statusObj.completed === true || Number(statusObj.completed) === 1);
+
+          return `
+            <a href="${config.url}" class="stream-item">
+              <div class="stream-item-left">
+                <div class="stream-item-icon">
+                  <i data-lucide="${config.icon}" style="width:15px;height:15px;"></i>
+                </div>
+                <div class="stream-item-info">
+                  <div class="stream-item-name">${mod.name}</div>
+                  <div class="stream-item-type">${config.typeLabel}</div>
+                </div>
+              </div>
+              ${isTracked ? `
+                <div class="stream-status ${isCompleted ? 'done' : ''}">
+                  ${isCompleted ? 'Completed' : 'Pending'}
+                </div>
+              ` : ''}
+            </a>
+          `;
+        }).join('');
+
+        html += `
+          <div class="timeline-milestone">
+            <div class="milestone-header">
+              <div class="milestone-title">${section.name || `Phase ${index + 1}`}</div>
+              <div class="milestone-counter">${section.modules.length} items</div>
+            </div>
+            <div class="milestone-body">
+              ${itemsHtml}
+            </div>
           </div>
         `;
-        titleEl.textContent = "Error Loading Course";
-        metaEl.innerHTML = `<i data-lucide="x-circle" style="width: 14px; height: 14px;"></i> Disconnected`;
-        lucide.createIcons();
-      }
+      });
+
+      container.innerHTML = html;
     }
 
-    loadCourseContent();
+    initStream();
+
     /* =======================================================
-   SILENT TRIGGER: MARK COURSE AS VIEWED
-   ======================================================= */
-setTimeout(() => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const currentCourseId = urlParams.get('id') || urlParams.get('courseid');
-
-  if (currentCourseId && userToken) {
-    async function markCourseAsViewed(cId) {
-      try {
-        const response = await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=core_course_view_course&courseid=${cId}&moodlewsrestformat=json`);
-        const data = await response.json();
-        if (data.status) console.log("✅ Moodle completion updated: Course viewed.");
-      } catch (error) {
-        console.error("Silent trigger failed:", error);
+       SILENT TRIGGER: MARK COURSE AS VIEWED
+       ======================================================= */
+    setTimeout(() => {
+      if (courseId && userToken) {
+        async function markCourseAsViewed(cId) {
+          try { await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=core_course_view_course&courseid=${cId}&moodlewsrestformat=json`); } catch (e) {}
+        }
+        markCourseAsViewed(courseId);
       }
-    }
-    markCourseAsViewed(currentCourseId);
-  }
-}, 500); // Slight delay to let the main page load first
+    }, 1000);
+
   </script>
 </body>
 </html>

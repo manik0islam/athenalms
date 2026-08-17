@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Athena | Master Task Directory</title>
+
+  <!-- =========================================================
+       FONTS & ICONS
+  ========================================================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* =========================================================
+       DESIGN SYSTEM
+    ========================================================== */
+    :root {
+      --bg: #f7f8fa;
+      --white: #ffffff;
+      --black: #050505;
+      --text: #09090b;
+      --muted: #646b73;
+      --muted-2: #8b929a;
+      --border: #dfe3e8;
+      --border-light: #e9edf1;
+      --soft: #f3f5f7;
+      --red: #c73a32;
+      --green: #177245;
+      --green-bg: #edf8f1;
+      --font-heading: "Space Grotesk", sans-serif;
+      --font-body: "Inter", sans-serif;
+      --radius: 11px;
+    }
+
+    /* =========================================================
+       RESET & BASE
+    ========================================================== */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.5; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; border: none; background: transparent; }
+
+    /* =========================================================
+       HEADER
+    ========================================================== */
+    .topbar {
+      position: fixed; top: 0; left: 0; right: 0; height: 64px;
+      background: rgba(255,255,255,.97); border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px); z-index: 100;
+    }
+    .topbar-inner {
+      width: min(1100px, calc(100% - 48px)); height: 100%; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .brand-mark {
+      width: 29px; height: 29px; display: flex; align-items: center; justify-content: center;
+      border-radius: 7px; background: var(--black); color: var(--white);
+      font-family: var(--font-heading); font-size: 11px; font-weight: 700;
+    }
+    .brand-name { font-family: var(--font-heading); font-size: 15px; font-weight: 700; }
+    
+    .action-link { 
+      display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; color: var(--muted); 
+      padding: 6px 12px; border-radius: 6px; border: 1px solid var(--border); background: var(--white); transition: all .2s;
+    }
+    .action-link:hover { color: var(--black); border-color: #cfd4da; }
+
+    /* =========================================================
+       PAGE LAYOUT
+    ========================================================== */
+    .page {
+      width: min(1100px, calc(100% - 48px)); margin: 0 auto;
+      padding-top: 95px; padding-bottom: 60px;
+    }
+
+    /* =========================================================
+       HERO HEADER
+    ========================================================== */
+    .assignments-hero {
+      background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 30px; margin-bottom: 25px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+      display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px;
+    }
+    .hero-title h1 { font-family: var(--font-heading); font-size: clamp(2rem, 3vw, 2.6rem); line-height: 1.1; letter-spacing: -1px; margin-bottom: 6px; }
+    .hero-title p { color: var(--muted); font-size: 12px; }
+
+    /* Filter Tabs */
+    .filter-tabs { display: flex; gap: 6px; }
+    .filter-tab {
+      height: 32px; padding: 0 12px; border: 1px solid var(--border); border-radius: 6px;
+      background: var(--white); color: var(--muted); font-size: 10px; font-weight: 600; transition: all 0.15s;
+    }
+    .filter-tab.active { background: var(--black); color: var(--white); border-color: var(--black); }
+
+    /* =========================================================
+       TASK LIST CONTAINER
+    ========================================================== */
+    .task-card {
+      background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+      overflow: hidden;
+    }
+    .task-list { display: flex; flex-direction: column; }
+
+    .task-item {
+      display: grid; grid-template-columns: 50px minmax(0, 1fr) auto; align-items: center; gap: 16px;
+      padding: 16px 20px; border-bottom: 1px solid var(--border-light); transition: background 0.15s ease;
+    }
+    .task-item:last-child { border-bottom: none; }
+    .task-item:hover { background: var(--soft); }
+
+    /* Date Box */
+    .date-box {
+      width: 50px; padding: 6px 4px; background: var(--soft); border: 1px solid var(--border); border-radius: 8px; text-align: center; flex-shrink: 0;
+    }
+    .date-month { color: var(--muted); font-size: 8px; font-weight: 700; text-transform: uppercase; }
+    .date-day { margin-top: 2px; font-family: var(--font-heading); font-size: 18px; font-weight: 700; line-height: 1; }
+
+    /* Task Info */
+    .task-info { min-width: 0; }
+    .task-name { font-family: var(--font-heading); font-size: 14px; font-weight: 700; color: var(--black); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .task-meta { margin-top: 3px; color: var(--muted); font-size: 11px; display: flex; align-items: center; gap: 6px; }
+    .task-meta .urgent { color: var(--red); font-weight: 700; }
+
+    /* Action Arrow Button */
+    .task-action {
+      width: 32px; height: 32px; border-radius: 50%; background: var(--soft); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center; color: var(--muted); transition: all 0.2s; flex-shrink: 0;
+    }
+    .task-item:hover .task-action { background: var(--black); color: var(--white); border-color: var(--black); }
+
+    /* Empty / Loading */
+    .system-message { padding: 60px; text-align: center; color: var(--muted); font-size: 12px; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="index.html" class="brand">
+        <div class="brand-mark">A</div>
+        <div class="brand-name">ATHENA</div>
+      </a>
+      <a href="index.html" onclick="window.location.href='index.html'; return false;" class="action-link" style="background:var(--black); color:var(--white); border-color:var(--black);">
+        <i data-lucide="arrow-left" style="width:14px;height:14px;"></i> Dashboard
+      </a>
+    </div>
+  </header>
+
+  <!-- PAGE CONTENT -->
+  <main class="page">
+    
+    <!-- HERO -->
+    <section class="assignments-hero">
+      <div class="hero-title">
+        <h1>Master Task Directory</h1>
+        <p>Aggregated deliverables and assessments across all active Moodle enrollments.</p>
+      </div>
+      
+      <div class="filter-tabs">
+        <button class="filter-tab active" data-filter="all">All Tasks</button>
+        <button class="filter-tab" data-filter="upcoming">Upcoming</button>
+        <button class="filter-tab" data-filter="urgent">Urgent (&le; 2 Days)</button>
+      </div>
+    </section>
+
+    <!-- TASK LIST CARD -->
+    <section class="task-card">
+      <div class="task-list" id="master-task-container">
+        <div class="system-message">Aggregating tasks from Moodle server...</div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    /* =========================================================
+       CONFIG & SETUP
+    ========================================================== */
+    const MOODLE_URL = 'http://localhost:8000';
+    const userToken = localStorage.getItem('madar_user_token');
+    
+    if (!userToken) window.location.href = 'login.html';
+    lucide.createIcons();
+
+    let allTasks = [];
+
+    async function moodleRequest(wsfunction, params = {}) {
+      const body = new URLSearchParams();
+      body.append('wstoken', userToken);
+      body.append('wsfunction', wsfunction);
+      body.append('moodlewsrestformat', 'json');
+      for (const [key, value] of Object.entries(params)) body.append(key, value);
+
+      const response = await fetch(`${MOODLE_URL}/webservice/rest/server.php`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body
+      });
+      const data = await response.json();
+      if (data.exception) throw new Error(data.message);
+      return data;
+    }
+
+    function startOfDay(value) {
+      const date = new Date(value);
+      date.setHours(0, 0, 0, 0);
+      return date;
+    }
+
+    function differenceInDays(timestamp) {
+      const today = startOfDay(new Date());
+      const due = startOfDay(new Date(Number(timestamp) * 1000));
+      return Math.round((due.getTime() - today.getTime()) / 86400000);
+    }
+
+    function relativeDue(timestamp) {
+      const days = differenceInDays(timestamp);
+      if (days < 0) return 'Overdue';
+      if (days === 0) return 'Due today';
+      if (days === 1) return 'Due tomorrow';
+      return `Due in ${days} days`;
+    }
+
+    /* =========================================================
+       LOAD MASTER ASSIGNMENTS
+    ========================================================== */
+    async function loadMasterTasks() {
+      try {
+        const userInfo = await moodleRequest('core_webservice_get_site_info');
+        const courses = await moodleRequest('core_enrol_get_users_courses', { userid: userInfo.userid });
+        const validCourses = Array.isArray(courses) ? courses.filter(c => Number(c.id) !== 1) : [];
+
+        allTasks = [];
+
+        for (const course of validCourses) {
+          try {
+            const data = await moodleRequest('mod_assign_get_assignments', { 'courseids[0]': course.id });
+            const courseData = data?.courses?.find(item => Number(item.id) === Number(course.id));
+            const list = Array.isArray(courseData?.assignments) ? courseData.assignments : [];
+
+            list.forEach(assign => {
+              if (Number(assign.duedate) > 0) {
+                allTasks.push({
+                  id: assign.id,
+                  name: assign.name,
+                  duedate: Number(assign.duedate),
+                  courseId: course.id,
+                  courseName: course.fullname || course.shortname || 'Course',
+                  type: 'Assignment',
+                  url: `assignment.html?assignid=${assign.id}&courseid=${course.id}`
+                });
+              }
+            });
+          } catch (e) {
+            console.warn(`Failed loading assignments for course ${course.id}`);
+          }
+        }
+
+        // Sort chronologically by due date
+        allTasks.sort((a, b) => a.duedate - b.duedate);
+
+        renderTasks('all');
+      } catch (error) {
+        console.error("Master Task Loading Error:", error);
+        document.getElementById('master-task-container').innerHTML = `<div class="system-message">Failed to load task directory: ${error.message}</div>`;
+      }
+    }
+
+    /* =========================================================
+       RENDER TASKS
+    ========================================================== */
+    function renderTasks(filter) {
+      const container = document.getElementById('master-task-container');
+      const now = Math.floor(Date.now() / 1000);
+
+      let filtered = [...allTasks];
+      if (filter === 'upcoming') {
+        filtered = filtered.filter(t => t.duedate >= now);
+      } else if (filter === 'urgent') {
+        filtered = filtered.filter(t => {
+          const days = differenceInDays(t.duedate);
+          return days >= 0 && days <= 2;
+        });
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div class="system-message">No tasks match this filter parameter.</div>`;
+        return;
+      }
+
+      container.innerHTML = filtered.map(task => {
+        const date = new Date(task.duedate * 1000);
+        const month = date.toLocaleDateString('en-US', { month: 'short' });
+        const day = date.getDate();
+        const daysLeft = differenceInDays(task.duedate);
+
+        return `
+          <a href="${task.url}" class="task-item">
+            <div class="date-box">
+              <div class="date-month">${month}</div>
+              <div class="date-day">${day}</div>
+            </div>
+            <div class="task-info">
+              <div class="task-name">${task.name}</div>
+              <div class="task-meta">
+                <span>${task.courseName}</span>
+                <span>·</span>
+                <span class="${daysLeft <= 2 && daysLeft >= 0 ? 'urgent' : ''}">${relativeDue(task.duedate)}</span>
+              </div>
+            </div>
+            <div class="task-action">
+              <i data-lucide="chevron-right" style="width:16px;height:16px;"></i>
+            </div>
+          </a>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    /* =========================================================
+       FILTER TABS INTERACTIVITY
+    ========================================================== */
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        renderTasks(tab.dataset.filter);
+      });
+    });
+
+    loadMasterTasks();
+  </script>
+</body>
+</html>
