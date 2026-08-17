@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Athena | Master Resource Directory</title>
+
+  <!-- =========================================================
+       FONTS & ICONS
+  ========================================================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* =========================================================
+       DESIGN SYSTEM
+    ========================================================== */
+    :root {
+      --bg: #f7f8fa;
+      --white: #ffffff;
+      --black: #050505;
+      --text: #09090b;
+      --muted: #646b73;
+      --muted-2: #8b929a;
+      --border: #dfe3e8;
+      --border-light: #e9edf1;
+      --soft: #f3f5f7;
+      --font-heading: "Space Grotesk", sans-serif;
+      --font-body: "Inter", sans-serif;
+      --radius: 11px;
+    }
+
+    /* =========================================================
+       RESET & BASE
+    ========================================================== */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.5; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; border: none; background: transparent; }
+
+    /* =========================================================
+       HEADER
+    ========================================================== */
+    .topbar {
+      position: fixed; top: 0; left: 0; right: 0; height: 64px;
+      background: rgba(255,255,255,.97); border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px); z-index: 100;
+    }
+    .topbar-inner {
+      width: min(1100px, calc(100% - 48px)); height: 100%; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .brand-mark {
+      width: 29px; height: 29px; display: flex; align-items: center; justify-content: center;
+      border-radius: 7px; background: var(--black); color: var(--white);
+      font-family: var(--font-heading); font-size: 11px; font-weight: 700;
+    }
+    .brand-name { font-family: var(--font-heading); font-size: 15px; font-weight: 700; }
+    
+    .action-link { 
+      display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; color: var(--muted); 
+      padding: 6px 12px; border-radius: 6px; border: 1px solid var(--border); background: var(--white); transition: all .2s;
+    }
+    .action-link:hover { color: var(--black); border-color: #cfd4da; }
+
+    /* =========================================================
+       PAGE LAYOUT
+    ========================================================== */
+    .page {
+      width: min(1100px, calc(100% - 48px)); margin: 0 auto;
+      padding-top: 95px; padding-bottom: 60px;
+    }
+
+    /* =========================================================
+       HERO HEADER & SEARCH
+    ========================================================== */
+    .resources-hero {
+      background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 30px; margin-bottom: 25px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+      display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px;
+    }
+    .hero-title h1 { font-family: var(--font-heading); font-size: clamp(2rem, 3vw, 2.6rem); line-height: 1.1; letter-spacing: -1px; margin-bottom: 6px; }
+    .hero-title p { color: var(--muted); font-size: 12px; }
+
+    /* Search Input */
+    .search-wrap { position: relative; width: 300px; }
+    .search-input {
+      width: 100%; height: 38px; padding: 0 12px 0 34px; border: 1px solid var(--border); border-radius: 8px;
+      background: var(--soft); font-size: 12px; color: var(--text); outline: none; transition: border-color .2s;
+    }
+    .search-input:focus { border-color: var(--black); background: var(--white); }
+    .search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+
+    /* =========================================================
+       RESOURCE LIST CONTAINER
+    ========================================================== */
+    .resource-card {
+      background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+      overflow: hidden;
+    }
+    .resource-list { display: flex; flex-direction: column; }
+
+    .resource-item {
+      display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; align-items: center; gap: 16px;
+      padding: 16px 20px; border-bottom: 1px solid var(--border-light); transition: background 0.15s ease;
+    }
+    .resource-item:last-child { border-bottom: none; }
+    .resource-item:hover { background: var(--soft); }
+
+    /* File Icon Box */
+    .file-icon-box {
+      width: 40px; height: 40px; background: var(--soft); border: 1px solid var(--border); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center; color: var(--black); flex-shrink: 0;
+    }
+
+    /* Resource Info */
+    .resource-info { min-width: 0; }
+    .resource-name { font-family: var(--font-heading); font-size: 14px; font-weight: 700; color: var(--black); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .resource-meta { margin-top: 3px; color: var(--muted); font-size: 11px; display: flex; align-items: center; gap: 6px; }
+
+    /* Action Button */
+    .resource-action {
+      width: 32px; height: 32px; border-radius: 50%; background: var(--soft); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center; color: var(--muted); transition: all 0.2s; flex-shrink: 0;
+    }
+    .resource-item:hover .resource-action { background: var(--black); color: var(--white); border-color: var(--black); }
+
+    /* Empty / Loading */
+    .system-message { padding: 60px; text-align: center; color: var(--muted); font-size: 12px; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="index.html" class="brand">
+        <div class="brand-mark">A</div>
+        <div class="brand-name">ATHENA</div>
+      </a>
+      <a href="index.html" onclick="window.location.href='index.html'; return false;" class="action-link" style="background:var(--black); color:var(--white); border-color:var(--black);">
+        <i data-lucide="arrow-left" style="width:14px;height:14px;"></i> Dashboard
+      </a>
+    </div>
+  </header>
+
+  <!-- PAGE CONTENT -->
+  <main class="page">
+    
+    <!-- HERO -->
+    <section class="resources-hero">
+      <div class="hero-title">
+        <h1>Master Resource Directory</h1>
+        <p>Centralized documentation and PDF assets across all active Moodle enrollments.</p>
+      </div>
+      
+      <div class="search-wrap">
+        <i data-lucide="search" class="search-icon" style="width:15px;height:15px;"></i>
+        <input type="text" id="search-input" class="search-input" placeholder="Search documents...">
+      </div>
+    </section>
+
+    <!-- RESOURCE LIST CARD -->
+    <section class="resource-card">
+      <div class="resource-list" id="master-resource-container">
+        <div class="system-message">Indexing documents from Moodle server...</div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    /* =========================================================
+       CONFIG & SETUP
+    ========================================================== */
+    const MOODLE_URL = 'http://localhost:8000';
+    const userToken = localStorage.getItem('madar_user_token');
+    
+    if (!userToken) window.location.href = 'login.html';
+    lucide.createIcons();
+
+    let allResources = [];
+
+    async function moodleRequest(wsfunction, params = {}) {
+      const body = new URLSearchParams();
+      body.append('wstoken', userToken);
+      body.append('wsfunction', wsfunction);
+      body.append('moodlewsrestformat', 'json');
+      for (const [key, value] of Object.entries(params)) body.append(key, value);
+
+      const response = await fetch(`${MOODLE_URL}/webservice/rest/server.php`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body
+      });
+      const data = await response.json();
+      if (data.exception) throw new Error(data.message);
+      return data;
+    }
+
+    /* =========================================================
+       LOAD MASTER RESOURCES
+    ========================================================== */
+    async function loadMasterResources() {
+      try {
+        const userInfo = await moodleRequest('core_webservice_get_site_info');
+        const courses = await moodleRequest('core_enrol_get_users_courses', { userid: userInfo.userid });
+        const validCourses = Array.isArray(courses) ? courses.filter(c => Number(c.id) !== 1) : [];
+
+        allResources = [];
+
+        for (const course of validCourses) {
+          try {
+            const contents = await moodleRequest('core_course_get_contents', { courseid: course.id });
+            
+            contents.forEach(section => {
+              if (section.modules) {
+                section.modules.forEach(mod => {
+                  if (mod.modname.toLowerCase() === 'resource') {
+                    allResources.push({
+                      id: mod.instance,
+                      name: mod.name,
+                      courseId: course.id,
+                      courseName: course.fullname || course.shortname || 'Course',
+                      sectionName: section.name || 'General',
+                      url: `resource.html?resourceid=${mod.instance}&courseid=${course.id}`
+                    });
+                  }
+                });
+              }
+            });
+          } catch (e) {
+            console.warn(`Failed loading contents for course ${course.id}`);
+          }
+        }
+
+        renderResources(allResources);
+      } catch (error) {
+        console.error("Master Resource Loading Error:", error);
+        document.getElementById('master-resource-container').innerHTML = `<div class="system-message">Failed to load resource directory: ${error.message}</div>`;
+      }
+    }
+
+    /* =========================================================
+       RENDER RESOURCES
+    ========================================================== */
+    function renderResources(resources) {
+      const container = document.getElementById('master-resource-container');
+
+      if (resources.length === 0) {
+        container.innerHTML = `<div class="system-message">No documents found matching your search.</div>`;
+        return;
+      }
+
+      container.innerHTML = resources.map(res => `
+        <a href="${res.url}" class="resource-item">
+          <div class="file-icon-box">
+            <i data-lucide="file-text" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="resource-info">
+            <div class="resource-name">${res.name}</div>
+            <div class="resource-meta">
+              <span>${res.courseName}</span>
+              <span>·</span>
+              <span>${res.sectionName}</span>
+            </div>
+          </div>
+          <div class="resource-action">
+            <i data-lucide="chevron-right" style="width:16px;height:16px;"></i>
+          </div>
+        </a>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    /* =========================================================
+       SEARCH FILTER INTERACTIVITY
+    ========================================================== */
+    document.getElementById('search-input').addEventListener('input', (e) => {
+      const term = e.target.value.toLowerCase().trim();
+      const filtered = allResources.filter(res => 
+        res.name.toLowerCase().includes(term) || 
+        res.courseName.toLowerCase().includes(term)
+      );
+      renderResources(filtered);
+    });
+
+    loadMasterResources();
+  </script>
+</body>
+</html>
