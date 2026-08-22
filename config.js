@@ -2,7 +2,7 @@
 
 const ENV = {
   // Toggle this to 'production' when deploying to a live server
-  mode: 'development', 
+  mode: 'production', 
   
   development: {
     MOODLE_URL: 'http://localhost:8000',
@@ -10,7 +10,7 @@ const ENV = {
   },
   
   production: {
-    MOODLE_URL: 'https://moodle.your-live-domain.com', // We will set this in Stage 5.4
+    MOODLE_URL: 'https://frail-rework-mobile.ngrok-free.dev ', // We will set this in Stage 5.4
     SERVICE: 'moodle_mobile_app' // We will secure this in Stage 5.6
   }
 };
