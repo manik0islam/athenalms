@@ -93,7 +93,19 @@
       loginBtn.textContent = 'Authenticating...';
 
       try {
-        const response = await fetch(`${MOODLE_URL}/login/token.php?service=moodle_mobile_app&username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`);
+        // Secure POST request: credentials are in the body, not the URL
+        const response = await fetch(`${MOODLE_URL}/login/token.php`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: new URLSearchParams({
+            username: username,
+            password: password,
+            service: 'moodle_mobile_app'
+          })
+        });
+        
         const data = await response.json();
 
         if (data.token) {
