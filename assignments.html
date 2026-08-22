@@ -185,7 +185,7 @@
     /* =========================================================
        CONFIG & SETUP
     ========================================================== */
-    const MOODLE_URL = 'http://localhost:8000';
+    const MOODLE_URL = window.ATHENA_CONFIG.MOODLE_URL;
     const userToken = localStorage.getItem('madar_user_token');
     
     if (!userToken) window.location.href = 'login.html';
