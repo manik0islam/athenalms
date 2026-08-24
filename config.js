@@ -2,16 +2,19 @@
 
 const ENV = {
   // Toggle this to 'production' when deploying to a live server
-  mode: 'production', 
-  
+  mode: 'development',
+
+  // Local Docker Moodle (backend moved off the public ngrok tunnel)
   development: {
     MOODLE_URL: 'http://localhost:8000',
     SERVICE: 'moodle_mobile_app'
   },
-  
+
+  // NOTE: the frail-rework-mobile ngrok tunnel has been retired.
+  // Update this before the next Vercel deploy, or production calls will fail.
   production: {
-    MOODLE_URL: 'https://frail-rework-mobile.ngrok-free.dev ', // We will set this in Stage 5.4
-    SERVICE: 'moodle_mobile_app' // We will secure this in Stage 5.6
+    MOODLE_URL: '',
+    SERVICE: 'moodle_mobile_app'
   }
 };
 

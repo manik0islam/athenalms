@@ -2317,135 +2317,8 @@
           </div>
 
 
-          <div class="week-chart">
+          <div class="week-chart" id="week-chart"></div>
 
-            <div class="day-column">
-
-              <div class="day-bar-wrap">
-                <div
-                  class="day-bar"
-                  style="height:10px;"
-                ></div>
-              </div>
-
-              <div class="day-label">
-                S
-              </div>
-
-            </div>
-
-
-            <div class="day-column">
-
-              <div class="day-bar-wrap">
-                <div
-                  class="day-bar"
-                  style="height:17px;"
-                ></div>
-              </div>
-
-              <div class="day-label">
-                M
-              </div>
-
-            </div>
-
-
-            <div class="day-column">
-
-              <div class="day-bar-wrap">
-                <div
-                  class="day-bar"
-                  style="height:24px;"
-                ></div>
-              </div>
-
-              <div class="day-label">
-                T
-              </div>
-
-            </div>
-
-
-            <div class="day-column">
-
-              <div class="day-bar-wrap">
-                <div
-                  class="day-bar active"
-                  style="height:34px;"
-                ></div>
-              </div>
-
-              <div class="day-label">
-                W
-              </div>
-
-            </div>
-
-
-            <div class="day-column">
-
-              <div class="day-bar-wrap">
-                <div
-                  class="day-bar active"
-                  style="height:27px;"
-                ></div>
-              </div>
-
-              <div class="day-label">
-                T
-              </div>
-
-            </div>
-
-
-            <div class="day-column">
-
-              <div class="day-bar-wrap">
-                <div
-                  class="day-bar active"
-                  style="height:35px;"
-                ></div>
-              </div>
-
-              <div class="day-label">
-                F
-              </div>
-
-            </div>
-
-
-            <div class="day-column">
-
-              <div class="day-bar-wrap">
-                <div
-                  class="day-bar"
-                  style="height:10px;"
-                ></div>
-              </div>
-
-              <div class="day-label">
-                S
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <div class="view-all">
-
-            View momentum
-
-            <i
-              data-lucide="arrow-right"
-              style="
-                width:12px;
-                height:12px;
-              "
-            ></i>
-
-          </div>
 
         </div>
 
@@ -2605,6 +2478,11 @@
     const momentumMessage =
       document.getElementById(
         'momentum-message'
+      );
+
+    const weekChart =
+      document.getElementById(
+        'week-chart'
       );
 
 
@@ -4763,6 +4641,80 @@
               // Ignore individual failures.
 
             }
+          }
+
+
+          const courseQuizzes =
+            quizzes.filter(
+              quiz =>
+                Number(quiz.courseId) ===
+                Number(course.id)
+            );
+
+
+          for (
+            const quiz
+            of courseQuizzes
+          ) {
+
+            try {
+
+              const attemptsData =
+                await moodleRequest(
+                  'mod_quiz_get_user_attempts',
+                  {
+                    quizid: quiz.id,
+
+                    userid:
+                      currentUser.userid
+                  }
+                );
+
+
+              const attempts =
+                Array.isArray(attemptsData?.attempts)
+                  ? attemptsData.attempts
+                  : [];
+
+
+              for (
+                const attempt
+                of attempts
+              ) {
+
+                if (
+                  Number(attempt.timefinish) <= 0
+                ) {
+
+                  continue;
+
+                }
+
+
+                activityEvents.push({
+
+                  timestamp:
+                    Number(
+                      attempt.timemodified ||
+                        attempt.timefinish
+                    ),
+
+                  icon:
+                    'circle-check',
+
+                  text:
+                    `Completed quiz ${quiz.name || 'Quiz'}`
+
+                });
+
+              }
+
+            }
+            catch {
+
+              // Ignore individual failures.
+
+            }
 
           }
 
@@ -4782,14 +4734,11 @@
             (a,b) =>
               b.timestamp -
               a.timestamp
-          )
-          .slice(
-            0,
-            6
           );
 
-
       renderActivity();
+
+      renderWeekChart();
 
       calculateMomentum();
 
@@ -4818,6 +4767,10 @@
 
       activityList.innerHTML =
         activityEvents
+          .slice(
+            0,
+            6
+          )
           .map(
             event => `
 
@@ -4878,6 +4831,105 @@
     }
 
 
+    function renderWeekChart() {
+
+      const counts =
+        new Map();
+
+
+      for (
+        let offset = 6;
+        offset >= 0;
+        offset--
+      ) {
+
+        const date =
+          startOfDay(new Date());
+
+
+        date.setDate(
+          date.getDate() - offset
+        );
+
+
+        counts.set(
+          date.toDateString(),
+          0
+        );
+
+      }
+
+
+      activityEvents.forEach(
+        event => {
+
+          const key =
+            new Date(
+              event.timestamp * 1000
+            ).toDateString();
+
+
+          if (
+            counts.has(key)
+          ) {
+
+            counts.set(
+              key,
+              counts.get(key) + 1
+            );
+
+          }
+
+        }
+      );
+
+
+      const maxCount =
+        Math.max(
+          ...counts.values(),
+          1
+        );
+
+
+      weekChart.innerHTML =
+        [...counts.entries()]
+          .map(
+            ([key, count]) => {
+
+              const height =
+                count > 0
+                  ? Math.round(
+                      10 +
+                        (count / maxCount) *
+                          25
+                    )
+                  : 6;
+
+
+              return `
+                <div class="day-column">
+
+                  <div class="day-bar-wrap">
+                    <div
+                      class="day-bar${count > 0 ? ' active' : ''}"
+                      style="height:${height}px;"
+                    ></div>
+                  </div>
+
+                  <div class="day-label">
+                    ${new Date(key).toLocaleDateString('en-US', { weekday: 'narrow' })}
+                  </div>
+
+                </div>
+              `;
+
+            }
+          )
+          .join('');
+
+    }
+
+
     /* =========================================================
        MOMENTUM
     ========================================================== */
@@ -4923,6 +4975,23 @@
         );
 
 
+      const todayActive =
+        dates.has(
+          cursor.toDateString()
+        );
+
+
+      if (
+        !todayActive
+      ) {
+
+        cursor.setDate(
+          cursor.getDate() - 1
+        );
+
+      }
+
+
       while (
         dates.has(
           cursor.toDateString()
@@ -4945,6 +5014,15 @@
 
 
       if (
+        !todayActive &&
+        streak > 0
+      ) {
+
+        momentumMessage.textContent =
+          `Complete an activity today to continue your ${streak}-day streak.`;
+
+      }
+      else if (
         streak >= 7
       ) {
 
