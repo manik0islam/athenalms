@@ -126,30 +126,21 @@
   </div>
 
   <script src="config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/api.js"></script>
 
   <script>
     lucide.createIcons();
-    const MOODLE_URL = window.ATHENA_CONFIG.MOODLE_URL; 
-    const userToken = localStorage.getItem('madar_user_token');
-    
-    if (!userToken) window.location.href = 'login.html';
+    const userToken = getUserToken();
 
-    function logout() {
-      localStorage.removeItem('madar_user_token');
-      localStorage.removeItem('madar_username');
-      window.location.href = 'login.html';
-    }
+    requireAuth();
 
     async function syncWithMoodle() {
       const syncIcon = document.getElementById('sync-icon');
       syncIcon.style.animation = 'spin 1s linear infinite';
       
       try {
-        const infoEndpoint = `${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=core_webservice_get_site_info&moodlewsrestformat=json`;
-        const response = await fetch(infoEndpoint);
-        const siteInfo = await response.json();
-        
-        if (siteInfo.exception) throw new Error(siteInfo.message);
+        const siteInfo = await moodleRequest('core_webservice_get_site_info');
 
         if (siteInfo.fullname) {
           document.getElementById('main-username').textContent = siteInfo.fullname;
@@ -167,9 +158,10 @@
 
         // Detailed Data Sync
         try {
-          const userEndpoint = `${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=core_user_get_users_by_field&field=id&values[0]=${siteInfo.userid}&moodlewsrestformat=json`;
-          const userRes = await fetch(userEndpoint);
-          const userData = await userRes.json();
+          const userData = await moodleRequest('core_user_get_users_by_field', {
+            field: 'id',
+            'values[0]': siteInfo.userid
+          });
 
           if (Array.isArray(userData) && userData.length > 0) {
             const user = userData[0];

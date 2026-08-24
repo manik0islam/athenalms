@@ -180,35 +180,19 @@
   </main>
 
   <script src="config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/api.js"></script>
 
   <script>
     /* =========================================================
        CONFIG & SETUP
     ========================================================== */
-    const MOODLE_URL = window.ATHENA_CONFIG.MOODLE_URL;
-    const userToken = localStorage.getItem('madar_user_token');
-    
-    if (!userToken) window.location.href = 'login.html';
+    const userToken = getUserToken();
+
+    requireAuth();
     lucide.createIcons();
 
     let allTasks = [];
-
-    async function moodleRequest(wsfunction, params = {}) {
-      const body = new URLSearchParams();
-      body.append('wstoken', userToken);
-      body.append('wsfunction', wsfunction);
-      body.append('moodlewsrestformat', 'json');
-      for (const [key, value] of Object.entries(params)) body.append(key, value);
-
-      const response = await fetch(`${MOODLE_URL}/webservice/rest/server.php`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body
-      });
-      const data = await response.json();
-      if (data.exception) throw new Error(data.message);
-      return data;
-    }
 
     function startOfDay(value) {
       const date = new Date(value);

@@ -1035,6 +1035,8 @@
   </main>
 
   <script src="config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/api.js"></script>
 
 
   <script>
@@ -1053,12 +1055,10 @@
     ========================================================== */
 
     const userToken =
-      localStorage.getItem('madar_user_token');
+      getUserToken();
 
 
-    if (!userToken) {
-      window.location.href = 'login.html';
-    }
+    requireAuth();
 
 
     /* ==========================================================
@@ -1161,97 +1161,6 @@
     ========================================================== */
 
     lucide.createIcons();
-
-
-    /* ==========================================================
-       MOODLE REQUEST
-    ========================================================== */
-
-    async function moodleRequest(
-      wsfunction,
-      params = {}
-    ) {
-
-      const body =
-        new URLSearchParams();
-
-      body.append(
-        'wstoken',
-        userToken
-      );
-
-      body.append(
-        'wsfunction',
-        wsfunction
-      );
-
-      body.append(
-        'moodlewsrestformat',
-        'json'
-      );
-
-
-      Object.entries(params).forEach(
-        ([key, value]) => {
-
-          if (
-            value !== undefined &&
-            value !== null
-          ) {
-
-            body.append(
-              key,
-              value
-            );
-
-          }
-
-        }
-      );
-
-
-      const response =
-        await fetch(
-          `${MOODLE_URL}/webservice/rest/server.php`,
-          {
-            method: 'POST',
-
-            headers: {
-              'Content-Type':
-                'application/x-www-form-urlencoded'
-            },
-
-            body
-          }
-        );
-
-
-      if (!response.ok) {
-
-        throw new Error(
-          `Moodle returned HTTP ${response.status}`
-        );
-
-      }
-
-
-      const data =
-        await response.json();
-
-
-      if (data.exception) {
-
-        throw new Error(
-          data.message ||
-          'Moodle API error'
-        );
-
-      }
-
-
-      return data;
-
-    }
 
 
     /* ==========================================================
@@ -2441,8 +2350,9 @@ setTimeout(() => {
   if (currentAssignId && userToken) {
     async function markAssignAsViewed(aId) {
       try {
-        const response = await fetch(`${MOODLE_URL}/webservice/rest/server.php?wstoken=${userToken}&wsfunction=mod_assign_view_assign&assignid=${aId}&moodlewsrestformat=json`);
-        const data = await response.json();
+        const data = await moodleRequest('mod_assign_view_assign', {
+          assignid: aId
+        });
         if (data.status) console.log("✅ Moodle completion updated: Assignment viewed.");
       } catch (error) {
         console.error("Silent trigger failed:", error);

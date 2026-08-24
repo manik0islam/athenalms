@@ -11,7 +11,11 @@ Athena: static, no-build LMS dashboard frontend for Moodle. Each page is one sel
 
 ## Conventions
 
-- No shared JS/CSS: the auth guard, `moodleRequest()` helper, header markup, and design tokens (`:root` variables) are duplicated per page. Any change to these patterns must be applied to every affected HTML file.
+- Shared JS layer (classic scripts, no build step). Load order per page: `config.js` → `js/auth.js` → `js/api.js`.
+  - `js/auth.js`: `getUserToken()`, `requireAuth()` (redirects to login), `logout()`.
+  - `js/api.js`: single canonical `moodleRequest(wsfunction, params)` — POST form-urlencoded with `wstoken` + `moodlewsrestformat=json`; throws on HTTP errors AND on Moodle `{exception}` payloads (Moodle returns HTTP 200 for web-service errors).
+  - Migrated so far: `index`, `courses`, `course`, `assignments`, `assignment`, `quiz`, `grades`, `resources`, `resource`, `forum`, `profile`. Only `login.html` and `register.html` intentionally stay inline (`/login/token.php` is unauthenticated; register uses a local admin master token).
+- Header markup and CSS design tokens (`:root` variables) remain duplicated per page; keep them in sync manually when changing shared visual patterns.
 - Icons use Lucide from the unpkg CDN. After dynamically injecting DOM, call `lucide.createIcons()` again or new icons won't render.
 
 ## Verifying changes

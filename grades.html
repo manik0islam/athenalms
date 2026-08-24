@@ -754,6 +754,8 @@
 </main>
 
 <script src="config.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/api.js"></script>
 
 <script>
 
@@ -764,23 +766,15 @@
      CONFIGURATION
   ========================================== */
 
-  const MOODLE_URL =
-    'http://localhost:8000';
-
   const userToken =
-    localStorage.getItem('madar_user_token');
+    getUserToken();
 
 
   /* ==========================================
      AUTHENTICATION
   ========================================== */
 
-  if (!userToken) {
-
-    window.location.href =
-      'login.html';
-
-  }
+  requireAuth();
 
 
   /* ==========================================
@@ -802,97 +796,6 @@
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#039;');
-
-  }
-
-
-  /* ==========================================
-     MOODLE REQUEST
-  ========================================== */
-
-  async function moodleRequest(
-    functionName,
-    params = {}
-  ) {
-
-    const body =
-      new URLSearchParams();
-
-    body.append(
-      'wstoken',
-      userToken
-    );
-
-    body.append(
-      'wsfunction',
-      functionName
-    );
-
-    body.append(
-      'moodlewsrestformat',
-      'json'
-    );
-
-
-    Object.entries(params).forEach(
-      ([key, value]) => {
-
-        if (
-          value !== undefined &&
-          value !== null
-        ) {
-
-          body.append(
-            key,
-            value
-          );
-
-        }
-
-      }
-    );
-
-
-    const response =
-      await fetch(
-        `${MOODLE_URL}/webservice/rest/server.php`,
-        {
-          method: 'POST',
-
-          headers: {
-            'Content-Type':
-              'application/x-www-form-urlencoded'
-          },
-
-          body
-        }
-      );
-
-
-    if (!response.ok) {
-
-      throw new Error(
-        `HTTP ${response.status}`
-      );
-
-    }
-
-
-    const data =
-      await response.json();
-
-
-    if (data.exception) {
-
-      throw new Error(
-        data.message ||
-        'Moodle API request failed.'
-      );
-
-    }
-
-
-    return data;
 
   }
 
