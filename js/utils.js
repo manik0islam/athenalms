@@ -110,6 +110,23 @@ function hideMessageFrom(element) {
   element.textContent = '';
 }
 
+/**
+ * Show a message in the page's #message element.
+ * Convenience wrapper for pages that have a <div class="message" id="message">.
+ */
+function showMessage(text, type = 'error') {
+  const el = document.getElementById('message');
+  if (el) showMessageTo(el, text, type);
+}
+
+/**
+ * Hide the page's #message element.
+ */
+function hideMessage() {
+  const el = document.getElementById('message');
+  if (el) hideMessageFrom(el);
+}
+
 
 /**
  * Show a slide-in toast notification.
