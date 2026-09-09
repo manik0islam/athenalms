@@ -72,10 +72,12 @@
 
 /* =========================================================
    DARK MODE — warm dark palette
+   Activated by: prefers-color-scheme: dark (system default)
+                 OR data-theme="dark" on <html> (manual toggle)
    ========================================================= */
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     /* --- Page background --- */
     --bg: #1c1917;
     --bg-secondary: #1c1917;
@@ -148,6 +150,112 @@
   img {
     opacity: 0.92;
   }
+}
+
+/* Manual dark mode override (user toggled explicitly) */
+html[data-theme="dark"] {
+  --bg: #1c1917;
+  --bg-secondary: #1c1917;
+  --white: #292524;
+  --bg-primary: #292524;
+  --soft: #33302d;
+  --bg-tertiary: #33302d;
+  --text: #f5f0eb;
+  --text-primary: #f5f0eb;
+  --muted: #a8a09a;
+  --text-secondary: #c4bdb6;
+  --muted-2: #8a8379;
+  --text-tertiary: #9e968e;
+  --border: #44403c;
+  --border-color: #3d3a36;
+  --border-light: #353230;
+  --black: #f5f0eb;
+  --brand-black: #f5f0eb;
+  --success: #4ade80;
+  --success-bg: #14352a;
+  --success-border: #166534;
+  --success-text: #4ade80;
+  --warning: #fbbf24;
+  --warning-bg: #3b2f10;
+  --warning-border: #854d0e;
+  --warning-text: #fbbf24;
+  --danger: #f87171;
+  --danger-bg: #3b1515;
+  --danger-border: #991b1b;
+  --danger-text: #f87171;
+  --green: #4ade80;
+  --green-bg: #14352a;
+  --red: #f87171;
+}
+
+html[data-theme="dark"] .topbar,
+html[data-theme="dark"] header {
+  background: rgba(28, 25, 23, 0.95);
+  border-bottom-color: var(--border);
+}
+
+html[data-theme="dark"] .brand-mark {
+  background: var(--white);
+  color: var(--bg);
+}
+
+html[data-theme="dark"] .form-input {
+  background: var(--bg);
+}
+
+html[data-theme="dark"] .form-input:focus {
+  background: var(--soft);
+}
+
+html[data-theme="dark"] img {
+  opacity: 0.92;
+}
+
+/* Manual light mode override (user toggled explicitly in light system) */
+html[data-theme="light"] {
+  --bg: #f9f7f2;
+  --bg-secondary: #f9f7f2;
+  --white: #ffffff;
+  --bg-primary: #ffffff;
+  --soft: #eee9e0;
+  --bg-tertiary: #eee9e0;
+  --text: #1a1814;
+  --text-primary: #1a1814;
+  --muted: #6b6359;
+  --text-secondary: #524e47;
+  --muted-2: #8a8379;
+  --text-tertiary: #706a61;
+  --border: #ddd5c8;
+  --border-color: #ded6ca;
+  --border-light: #e8e2d6;
+  --black: #1a1814;
+  --brand-black: #1a1814;
+  --success: #166534;
+  --success-bg: #f0fdf4;
+  --success-border: #bbf7d0;
+  --success-text: #166534;
+  --warning: #854d0e;
+  --warning-bg: #fefce8;
+  --warning-border: #fde68a;
+  --warning-text: #92400e;
+  --danger: #991b1b;
+  --danger-bg: #fef2f2;
+  --danger-border: #fecaca;
+  --danger-text: #991b1b;
+  --green: #177245;
+  --green-bg: #edf8f1;
+  --red: #c73a32;
+}
+
+html[data-theme="light"] .topbar,
+html[data-theme="light"] header {
+  background: rgba(255, 255, 255, 0.97);
+  border-bottom-color: var(--border);
+}
+
+html[data-theme="light"] .brand-mark {
+  background: var(--black);
+  color: var(--white);
 }
 
 
@@ -299,6 +407,53 @@ header {
 
 .back-link:hover {
   color: var(--brand-black);
+}
+
+
+/* =========================================================
+   THEME TOGGLE
+   ========================================================= */
+
+.theme-toggle {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--soft);
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.theme-toggle .icon-sun,
+.theme-toggle .icon-moon {
+  width: 16px;
+  height: 16px;
+}
+
+html[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+html[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+html[data-theme="light"] .theme-toggle .icon-sun { display: none; }
+html[data-theme="light"] .theme-toggle .icon-moon { display: block; }
+
+/* Follow system by default */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle .icon-sun { display: block; }
+  :root:not([data-theme="light"]) .theme-toggle .icon-moon { display: none; }
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) .theme-toggle .icon-sun { display: none; }
+  :root:not([data-theme="dark"]) .theme-toggle .icon-moon { display: block; }
 }
 
 

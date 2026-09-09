@@ -1,6 +1,29 @@
 // utils.js - Shared utility functions for Athena
 // Load after: config.js, auth.js, api.js
 
+
+/* =========================================================
+   THEME TOGGLE
+   ========================================================= */
+
+(function initTheme() {
+  const saved = localStorage.getItem('athena_theme');
+  if (saved === 'dark' || saved === 'light') {
+    document.documentElement.setAttribute('data-theme', saved);
+  }
+})();
+
+function toggleTheme() {
+  const html = document.documentElement;
+  const current = html.getAttribute('data-theme');
+  const isDark = current === 'dark' ||
+    (!current && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  const next = isDark ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('athena_theme', next);
+}
+
+
 /**
  * Escape HTML entities to prevent XSS when injecting text into innerHTML.
  */
