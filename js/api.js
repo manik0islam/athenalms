@@ -1,7 +1,9 @@
 // api.js - Shared Moodle Web Services API wrapper for Athena
-// Requires: config.js (window.ATHENA_CONFIG) and auth.js (getUserToken)
+// Requires: config.js (window.ATHENA_CONFIG), auth.js (getUserToken, handleAuthError)
 
-async function moodleRequest(wsfunction, params = {}) {
+const DEFAULT_TIMEOUT_MS = 30000;
+
+async function moodleRequest(wsfunction, params = {}, options = {}) {
   const token = getUserToken();
 
   if (!token) {
@@ -18,21 +20,34 @@ async function moodleRequest(wsfunction, params = {}) {
     body.append(key, value);
   }
 
-  const response = await fetch(`${window.ATHENA_CONFIG.MOODLE_URL}/webservice/rest/server.php`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body
-  });
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), options.timeout || DEFAULT_TIMEOUT_MS);
 
-  if (!response.ok) {
-    throw new Error(`Moodle returned HTTP ${response.status}`);
+  try {
+    const response = await fetch(`${window.ATHENA_CONFIG.MOODLE_URL}/webservice/rest/server.php`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body,
+      signal: controller.signal
+    });
+
+    if (!response.ok) {
+      throw new Error(`Moodle returned HTTP ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    if (data && data.exception) {
+      throw new Error(data.message || 'Moodle web service error');
+    }
+
+    return data;
+  } catch (error) {
+    if (error.name === 'AbortError') {
+      throw new Error('Request timed out. Please check your connection and try again.');
+    }
+    throw error;
+  } finally {
+    clearTimeout(timeout);
   }
-
-  const data = await response.json();
-
-  if (data && data.exception) {
-    throw new Error(data.message || 'Moodle web service error');
-  }
-
-  return data;
 }

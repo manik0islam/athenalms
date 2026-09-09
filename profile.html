@@ -31,6 +31,7 @@
   </style>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
   <header>
     <div class="nav-container">
       <a href="index.html" class="back-link"><i data-lucide="arrow-left" style="width: 18px; height: 18px;"></i> Back to Dashboard</a>
@@ -38,7 +39,7 @@
     </div>
   </header>
 
-  <div class="profile-container">
+  <div class="profile-container" id="main-content">
     <!-- LEFT COLUMN: Identity -->
     <div>
       <div class="moodle-block">
@@ -102,6 +103,7 @@
   <script src="config.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/api.js"></script>
+  <script src="js/utils.js"></script>
 
   <script>
     lucide.createIcons();
@@ -139,27 +141,37 @@
 
           if (Array.isArray(userData) && userData.length > 0) {
             const user = userData[0];
-            
+
+            function esc(str) {
+              const el = document.createElement('span');
+              el.textContent = str || '';
+              return el.innerHTML;
+            }
+
             // Email
-            document.getElementById('profile-email').innerHTML = user.email 
-              ? `<i data-lucide="mail" style="width: 16px; height: 16px; color: var(--text-tertiary);"></i> ${user.email}` 
+            document.getElementById('profile-email').innerHTML = user.email
+              ? `<i data-lucide="mail" style="width: 16px; height: 16px; color: var(--text-tertiary);"></i> ${esc(user.email)}`
               : `<i data-lucide="mail" style="width: 16px; height: 16px; color: var(--text-tertiary);"></i> Not set in Moodle`;
 
             // Phone
-            document.getElementById('profile-phone').innerHTML = (user.phone1 || user.phone2) 
-              ? `<i data-lucide="phone" style="width: 16px; height: 16px; color: var(--text-tertiary);"></i> ${user.phone1 || user.phone2}` 
+            document.getElementById('profile-phone').innerHTML = (user.phone1 || user.phone2)
+              ? `<i data-lucide="phone" style="width: 16px; height: 16px; color: var(--text-tertiary);"></i> ${esc(user.phone1 || user.phone2)}`
               : `<i data-lucide="phone" style="width: 16px; height: 16px; color: var(--text-tertiary);"></i> Not set in Moodle`;
 
             // Location
-            document.getElementById('profile-location').innerHTML = (user.city || user.country) 
-              ? `<i data-lucide="map-pin" style="width: 16px; height: 16px; color: var(--text-tertiary);"></i> ${user.city || ''} ${user.country || ''}` 
+            document.getElementById('profile-location').innerHTML = (user.city || user.country)
+              ? `<i data-lucide="map-pin" style="width: 16px; height: 16px; color: var(--text-tertiary);"></i> ${esc(user.city || '')} ${esc(user.country || '')}`
               : `<i data-lucide="map-pin" style="width: 16px; height: 16px; color: var(--text-tertiary);"></i> Not set in Moodle`;
 
             // Institution
-            document.getElementById('profile-institution').innerHTML = user.institution || `<span style="color: var(--text-tertiary);">Not set in Moodle</span>`;
-            
+            document.getElementById('profile-institution').innerHTML = user.institution
+              ? esc(user.institution)
+              : `<span style="color: var(--text-tertiary);">Not set in Moodle</span>`;
+
             // Department
-            document.getElementById('profile-department').innerHTML = user.department || `<span style="color: var(--text-tertiary);">Not set in Moodle</span>`;
+            document.getElementById('profile-department').innerHTML = user.department
+              ? esc(user.department)
+              : `<span style="color: var(--text-tertiary);">Not set in Moodle</span>`;
           }
         } catch (detailError) {
           console.warn("Detailed profile data restricted by Moodle permissions.");

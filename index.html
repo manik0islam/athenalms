@@ -755,7 +755,7 @@
 
       color: var(--muted-2);
 
-      font-size: 8px;
+      font-size: 9px;
     }
 
 
@@ -819,7 +819,7 @@
 
       color: var(--muted);
 
-      font-size: 8px;
+      font-size: 9px;
 
       overflow: hidden;
 
@@ -929,7 +929,7 @@
 
       border-radius: 6px;
 
-      font-size: 8px;
+      font-size: 9px;
     }
 
 
@@ -1003,7 +1003,7 @@
     .date-month {
       color: var(--muted);
 
-      font-size: 8px;
+      font-size: 9px;
 
       font-weight: 700;
 
@@ -1039,7 +1039,7 @@
 
       color: var(--muted);
 
-      font-size: 8px;
+      font-size: 9px;
     }
 
     .upcoming-meta .urgent {
@@ -1098,7 +1098,7 @@
     .activity-time {
       color: var(--muted-2);
 
-      font-size: 7px;
+      font-size: 9px;
 
       white-space: nowrap;
     }
@@ -1160,7 +1160,7 @@
 
       color: var(--muted);
 
-      font-size: 8px;
+      font-size: 9px;
 
       text-transform: uppercase;
 
@@ -1178,7 +1178,7 @@
 
       color: var(--muted);
 
-      font-size: 8px;
+      font-size: 9px;
     }
 
     .week-chart {
@@ -1234,7 +1234,7 @@
     .day-label {
       color: var(--muted);
 
-      font-size: 7px;
+      font-size: 9px;
     }
 
 
@@ -1485,6 +1485,7 @@
 
 
 <body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
 
 
   <!-- =========================================================
@@ -1517,6 +1518,7 @@
           class="header-icon"
           type="button"
           title="Search"
+          aria-label="Search"
         >
 
           <i
@@ -1534,6 +1536,7 @@
           class="header-icon"
           type="button"
           title="Notifications"
+          aria-label="Notifications"
         >
 
           <i
@@ -1555,6 +1558,7 @@
           class="header-icon"
           type="button"
           title="Messages"
+          aria-label="Messages"
         >
 
           <i
@@ -1615,7 +1619,7 @@
        PAGE
   ========================================================== -->
 
-  <main class="page">
+  <main class="page" id="main-content">
 
 
     <!-- =======================================================
@@ -2194,7 +2198,7 @@
   <script src="config.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/api.js"></script>
-
+  <script src="js/utils.js"></script>
 
   <script>
 
@@ -2343,34 +2347,6 @@
     /* =========================================================
        HELPERS
     ========================================================== */
-
-    function escapeHtml(value) {
-
-      return String(
-        value ?? ''
-      )
-        .replace(
-          /&/g,
-          '&amp;'
-        )
-        .replace(
-          /</g,
-          '&lt;'
-        )
-        .replace(
-          />/g,
-          '&gt;'
-        )
-        .replace(
-          /"/g,
-          '&quot;'
-        )
-        .replace(
-          /'/g,
-          '&#039;'
-        );
-
-    }
 
 
     function clamp(

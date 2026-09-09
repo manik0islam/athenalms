@@ -21,6 +21,7 @@
   </style>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
   <header>
     <div class="nav-container">
       <div class="back-link" onclick="history.back()"><i data-lucide="arrow-left" style="width: 18px; height: 18px;"></i> Back to Modules</div>
@@ -35,7 +36,7 @@
     </section>
   </div>
 
-  <div class="portal-container" id="main-container">
+  <div class="portal-container" id="main-content">
     <div class="loading-state">
       <i data-lucide="loader-2" style="animation: spin 2s linear infinite; margin: 0 auto 12px; display: block; width: 32px; height: 32px; color: var(--brand-black);"></i>
       Fetching announcements...
@@ -45,6 +46,7 @@
   <script src="config.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/api.js"></script>
+  <script src="js/utils.js"></script>
 
   <script>
     lucide.createIcons();

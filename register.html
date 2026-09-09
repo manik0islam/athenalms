@@ -125,8 +125,9 @@
   </style>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
 
-  <div class="register-container">
+  <div class="register-container" id="main-content">
     <div class="brand">
       <i data-lucide="triangle" style="width: 32px; height: 32px; fill: var(--black);"></i>
       <span class="brand-text">Madar LMS</span>
@@ -175,75 +176,76 @@
   </div>
 
   <script src="config.js"></script>
+  <script src="js/utils.js"></script>
 
   <script>
     lucide.createIcons();
 
     // Configuration
     const MOODLE_URL = window.ATHENA_CONFIG.MOODLE_URL;
-    // VERY IMPORTANT: Paste your master admin token from Phase 1 here.
-    const ADMIN_TOKEN = '8d84d68985a2c62a0de3c3015677c741'; 
+
+    // NOTE: User registration must be handled by a server-side endpoint.
+    // Exposing an admin token in client-side code is a security risk.
+    // Contact your administrator to set up a registration API endpoint.
 
     document.getElementById('registerForm').addEventListener('submit', async (e) => {
-      e.preventDefault(); 
-      
+      e.preventDefault();
+
       const submitBtn = document.getElementById('submitBtn');
       const feedbackDiv = document.getElementById('feedbackMessage');
-      
-      // Collect user data
-      const fname = document.getElementById('firstname').value;
-      const lname = document.getElementById('lastname').value;
-      const email = document.getElementById('email').value;
-      const uname = document.getElementById('username').value.toLowerCase(); // Moodle prefers lowercase usernames
-      const pword = document.getElementById('password').value;
 
       // UI Loading State
       feedbackDiv.style.display = 'none';
       feedbackDiv.className = 'feedback-msg';
+
+      // Collect user data
+      const fname = document.getElementById('firstname').value;
+      const lname = document.getElementById('lastname').value;
+      const email = document.getElementById('email').value;
+      const uname = document.getElementById('username').value.toLowerCase();
+      const pword = document.getElementById('password').value;
+
       submitBtn.innerHTML = '<i data-lucide="loader-2" style="animation: spin 2s linear infinite;"></i> Processing...';
       lucide.createIcons();
 
       try {
-        // Build Moodle REST parameters for core_user_create_users
-        const url = new URL(`${MOODLE_URL}/webservice/rest/server.php`);
-        url.searchParams.append('wstoken', ADMIN_TOKEN);
-        url.searchParams.append('wsfunction', 'core_user_create_users');
-        url.searchParams.append('moodlewsrestformat', 'json');
-        
-        // Moodle requires user data as an indexed array in the URL
-        url.searchParams.append('users[0][username]', uname);
-        url.searchParams.append('users[0][password]', pword);
-        url.searchParams.append('users[0][firstname]', fname);
-        url.searchParams.append('users[0][lastname]', lname);
-        url.searchParams.append('users[0][email]', email);
+        const response = await fetch(`${MOODLE_URL}/auth/signup.php`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username: uname,
+            password: pword,
+            firstname: fname,
+            lastname: lname,
+            email: email
+          })
+        });
 
-        const response = await fetch(url, { method: 'POST' });
+        if (!response.ok) {
+          throw new Error('Registration is not available. Please contact your administrator.');
+        }
+
         const data = await response.json();
 
-        // Moodle returns an array of created users on success, or an exception object on failure
         if (data.exception) {
           throw new Error(data.message);
         }
 
-        // SUCCESS STATE
         feedbackDiv.className = 'feedback-msg success';
         feedbackDiv.innerHTML = 'Account created successfully! Redirecting to login...';
         feedbackDiv.style.display = 'block';
-        
-        // Redirect to login page after 2 seconds
+
         setTimeout(() => {
           window.location.href = 'login.html';
         }, 2000);
 
       } catch (error) {
         console.error('Registration Error:', error);
-        
-        // ERROR STATE
+
         feedbackDiv.className = 'feedback-msg error';
-        feedbackDiv.innerHTML = error.message;
+        feedbackDiv.innerHTML = error.message || 'Registration is not available. Please contact your administrator.';
         feedbackDiv.style.display = 'block';
-        
-        // Reset Button UI
+
         submitBtn.innerHTML = '<span>Create Account</span><i data-lucide="user-plus" style="width: 18px; height: 18px;"></i>';
         lucide.createIcons();
       }
