@@ -13,95 +13,9 @@
 
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <link rel="stylesheet" href="css/style.css">
+
   <style>
-    :root {
-      --bg-primary: #ffffff;
-      --bg-secondary: #faf9f7;
-      --bg-tertiary: #f0efed;
-
-      --text-primary: #09090b;
-      --text-secondary: #52525b;
-      --text-tertiary: #71717a;
-
-      --border-color: #e2e8f0;
-      --brand-black: #000000;
-      --white: #ffffff;
-
-      --danger: #dc2626;
-
-      --font-heading: 'Space Grotesk', sans-serif;
-      --font-body: 'Inter', sans-serif;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: var(--font-body);
-      background: var(--bg-secondary);
-      color: var(--text-primary);
-      line-height: 1.6;
-    }
-
-    /* ================================
-       HEADER
-    ================================= */
-
-    header {
-      background: rgba(255, 255, 255, 0.96);
-      border-bottom: 1px solid var(--border-color);
-
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-
-      z-index: 100;
-
-      backdrop-filter: blur(10px);
-    }
-
-    .nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
-
-      padding: 0 24px;
-
-      height: 70px;
-
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      gap: 20px;
-    }
-
-    .back-link {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-
-      font-weight: 600;
-      font-size: 0.95rem;
-
-      color: var(--text-secondary);
-
-      cursor: pointer;
-
-      transition: color 0.2s ease;
-    }
-
-    .back-link:hover {
-      color: var(--brand-black);
-    }
-
     .header-label {
       font-family: var(--font-heading);
 
@@ -217,19 +131,6 @@
     /* ================================
        VIEWER
     ================================= */
-
-    .viewer-card {
-      background: var(--white);
-
-      border: 1px solid var(--border-color);
-
-      border-radius: 12px;
-
-      overflow: hidden;
-
-      box-shadow:
-        0 4px 12px rgba(0, 0, 0, 0.1);
-    }
 
     .viewer-toolbar {
       min-height: 58px;
@@ -476,18 +377,6 @@
       justify-content: center;
 
       color: var(--text-secondary);
-    }
-
-    .loading-icon {
-      animation: spin 1s linear infinite;
-
-      margin-bottom: 14px;
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
     }
 
     /* ================================

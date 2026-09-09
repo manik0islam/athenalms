@@ -6,34 +6,18 @@
   <title>Madar LMS | Announcements</title>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/style.css">
   <style>
-    :root {
-      --bg-primary: #ffffff; --bg-secondary: #faf9f7; --bg-tertiary: #f0efed;
-      --text-primary: #09090b; --text-secondary: #52525b;
-      --border-color: #e2e8f0; --brand-black: #000000; --white: #ffffff;
-      --font-heading: 'Space Grotesk', sans-serif; --font-body: 'Inter', sans-serif;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: var(--font-body); background-color: var(--bg-secondary); color: var(--text-primary); line-height: 1.6; }
-    
-    header { background-color: rgba(255, 255, 255, 0.95); border-bottom: 1px solid var(--border-color); position: fixed; top: 0; left: 0; right: 0; z-index: 100; backdrop-filter: blur(8px); }
-    .nav-container { max-width: 1000px; margin: 0 auto; padding: 0 24px; height: 70px; display: flex; justify-content: space-between; align-items: center; }
-    .back-link { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.95rem; color: var(--text-secondary); cursor: pointer; transition: color 0.2s; }
-    .back-link:hover { color: var(--brand-black); }
-
     .hero { margin-top: 70px; background-color: var(--bg-primary); padding: 80px 24px 60px; border-bottom: 1px solid var(--border-color); background-image: radial-gradient(var(--border-color) 1px, transparent 1px); background-size: 24px 24px; text-align: center; }
     .hero-title { font-family: var(--font-heading); font-size: 2.75rem; font-weight: 700; margin-bottom: 16px; letter-spacing: -0.5px; }
     .forum-badge { display: inline-flex; align-items: center; gap: 6px; background-color: var(--brand-black); color: var(--white); padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); }
 
     .portal-container { max-width: 800px; margin: -20px auto 60px; padding: 0 24px; position: relative; z-index: 10; }
-    
-    .post-card { background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 12px; padding: 24px 32px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); }
+
     .post-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--bg-tertiary); }
     .post-subject { font-family: var(--font-heading); font-weight: 600; font-size: 1.2rem; }
     .post-meta { font-size: 0.85rem; color: var(--text-secondary); display: flex; align-items: center; gap: 6px; }
     .post-body { font-size: 0.95rem; color: var(--text-secondary); white-space: pre-wrap; }
-
-    .loading-state { padding: 60px; text-align: center; background-color: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-secondary); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); }
   </style>
 </head>
 <body>

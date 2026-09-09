@@ -18,123 +18,9 @@
 
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <link rel="stylesheet" href="css/style.css">
+
   <style>
-    :root {
-      --bg-primary: #ffffff;
-      --bg-secondary: #faf9f7;
-      --bg-tertiary: #f0efed;
-
-      --text-primary: #09090b;
-      --text-secondary: #52525b;
-      --text-tertiary: #71717a;
-
-      --border-color: #e2e8f0;
-
-      --black: #000000;
-      --white: #ffffff;
-
-      --success-bg: #f0fdf4;
-      --success-border: #bbf7d0;
-      --success-text: #166534;
-
-      --warning-bg: #fffbeb;
-      --warning-border: #fde68a;
-      --warning-text: #92400e;
-
-      --danger-bg: #fef2f2;
-      --danger-border: #fecaca;
-      --danger-text: #991b1b;
-
-      --font-heading: 'Space Grotesk', sans-serif;
-      --font-body: 'Inter', sans-serif;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: var(--font-body);
-      background: var(--bg-secondary);
-      color: var(--text-primary);
-      line-height: 1.6;
-    }
-
-    button,
-    input,
-    textarea,
-    select {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    /* =========================================
-       HEADER
-    ========================================== */
-
-    header {
-      height: 70px;
-
-      position: fixed;
-      inset: 0 0 auto 0;
-
-      z-index: 100;
-
-      background: rgba(255,255,255,0.96);
-
-      border-bottom:
-        1px solid var(--border-color);
-
-      backdrop-filter: blur(10px);
-    }
-
-    .nav-container {
-      max-width: 1100px;
-
-      height: 70px;
-
-      margin: 0 auto;
-
-      padding: 0 24px;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: space-between;
-
-      gap: 20px;
-    }
-
-    .back-link {
-      display: inline-flex;
-
-      align-items: center;
-
-      gap: 8px;
-
-      color: var(--text-secondary);
-
-      font-size: 0.9rem;
-
-      font-weight: 600;
-
-      cursor: pointer;
-    }
-
-    .back-link:hover {
-      color: var(--black);
-    }
-
     .quiz-label {
       font-family: var(--font-heading);
 
@@ -205,44 +91,6 @@
     }
 
     /* =========================================
-       MESSAGE
-    ========================================== */
-
-    .message {
-      display: none;
-
-      padding: 13px 15px;
-
-      margin-bottom: 20px;
-
-      border-radius: 12px;
-
-      font-size: 0.86rem;
-    }
-
-    .message.visible {
-      display: block;
-    }
-
-    .message.error {
-      color: var(--danger-text);
-
-      background: var(--danger-bg);
-
-      border:
-        1px solid var(--danger-border);
-    }
-
-    .message.success {
-      color: var(--success-text);
-
-      background: var(--success-bg);
-
-      border:
-        1px solid var(--success-border);
-    }
-
-    /* =========================================
        STATUS
     ========================================== */
 
@@ -255,17 +103,6 @@
       gap: 12px;
 
       margin-bottom: 24px;
-    }
-
-    .status-card {
-      background: var(--white);
-
-      border:
-        1px solid var(--border-color);
-
-      border-radius: 12px;
-
-      padding: 15px 17px;
     }
 
     .status-label {
@@ -313,24 +150,6 @@
     /* =========================================
        START / HISTORY / RESULT
     ========================================== */
-
-    .start-card,
-    .history-card,
-    .result-card {
-
-      background: var(--white);
-
-      border:
-        1px solid var(--border-color);
-
-      border-radius: 12px;
-
-      padding: 40px 30px;
-
-      box-shadow:
-        0 4px 12px
-        rgba(0,0,0,0.1);
-    }
 
     .start-card {
       text-align: center;
@@ -385,17 +204,6 @@
       gap: 12px;
 
       margin-bottom: 24px;
-    }
-
-    .best-stat {
-      background: var(--white);
-
-      border:
-        1px solid var(--border-color);
-
-      border-radius: 12px;
-
-      padding: 18px;
     }
 
     .best-stat-label {
@@ -487,8 +295,6 @@
       border:
         1px solid var(--border-color);
 
-      border-radius: 12px;
-
       background:
         var(--bg-primary);
     }
@@ -521,8 +327,6 @@
       gap: 5px;
 
       padding: 4px 8px;
-
-      border-radius: 6px;
 
       font-size: 0.7rem;
 
@@ -599,40 +403,18 @@
 
       grid-area: question;
 
-      background: var(--white);
-
-      border:
-        1px solid var(--border-color);
-
-      border-radius: 12px;
-
       overflow: hidden;
-
-      box-shadow:
-        0 4px 12px
-        rgba(0,0,0,0.1);
     }
 
     .navigator-card {
 
       grid-area: navigator;
 
-      background: var(--white);
-
-      border:
-        1px solid var(--border-color);
-
-      border-radius: 12px;
-
       padding: 18px;
 
       position: sticky;
 
       top: 90px;
-
-      box-shadow:
-        0 4px 12px
-        rgba(0,0,0,0.1);
     }
 
     /* =========================================
@@ -1005,81 +787,6 @@
         10px;
     }
 
-    .button {
-
-      display:
-        inline-flex;
-
-      align-items:
-        center;
-
-      justify-content:
-        center;
-
-      gap:
-        8px;
-
-      min-height:
-        44px;
-
-      padding:
-        10px 16px;
-
-      border:
-        1px solid var(--border-color);
-
-      border-radius:
-        6px;
-
-      background:
-        var(--white);
-
-      color:
-        var(--text-primary);
-
-      font-family:
-        var(--font-heading);
-
-      font-weight:
-        600;
-    }
-
-    .button:hover:not(:disabled) {
-
-      background:
-        var(--bg-secondary);
-    }
-
-    .button:disabled {
-
-      opacity:
-        0.4;
-
-      cursor:
-        not-allowed;
-    }
-
-    .button.primary {
-
-      background:
-        var(--black);
-
-      color:
-        var(--white);
-
-      border-color:
-        var(--black);
-    }
-
-    .button.primary:hover:not(:disabled) {
-
-      background:
-        var(--black);
-
-      opacity:
-        0.9;
-    }
-
     .button.danger {
 
       background:
@@ -1121,26 +828,6 @@
 
       margin-bottom:
         25px;
-    }
-
-    .loading-icon {
-
-      animation:
-        spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-
-      from {
-        transform:
-          rotate(0deg);
-      }
-
-      to {
-        transform:
-          rotate(360deg);
-      }
-
     }
 
     /* =========================================

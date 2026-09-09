@@ -9,28 +9,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/style.css">
 
   <style>
-    :root {
-      --bg-primary: #ffffff;
-      --bg-secondary: #faf9f7;
-      --bg-tertiary: #f0efed;
-      --text-primary: #09090b;
-      --text-secondary: #52525b;
-      --text-tertiary: #71717a;
-      --border-color: #e2e8f0;
-      --black: #09090b;
-      --white: #ffffff;
-      --font-heading: 'Space Grotesk', sans-serif;
-      --font-body: 'Inter', sans-serif;
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
-      font-family: var(--font-body);
-      background-color: var(--bg-secondary);
-      color: var(--text-primary);
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -43,13 +25,9 @@
     }
 
     .register-container {
-      background-color: var(--bg-primary);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
       padding: 40px;
       width: 100%;
       max-width: 450px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
     .brand {
@@ -90,10 +68,6 @@
       width: 100%;
       padding: 12px;
       border: 1px solid var(--border-color);
-      border-radius: 6px;
-      font-family: var(--font-body);
-      font-size: 1rem;
-      transition: border-color 0.2s;
     }
 
     input:focus {
@@ -110,19 +84,6 @@
     .register-btn {
       width: 100%;
       padding: 12px;
-      background-color: var(--black);
-      color: var(--white);
-      border: none;
-      border-radius: 6px;
-      font-family: var(--font-heading);
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-      transition: opacity 0.2s;
     }
 
     .register-btn:hover {
@@ -135,7 +96,6 @@
       text-align: center;
       display: none;
       padding: 10px;
-      border-radius: 6px;
     }
 
     .feedback-msg.error {

@@ -13,118 +13,9 @@
 
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <link rel="stylesheet" href="css/style.css">
+
   <style>
-    :root {
-      --bg-primary: #ffffff;
-      --bg-secondary: #faf9f7;
-      --bg-tertiary: #f0efed;
-
-      --text-primary: #09090b;
-      --text-secondary: #52525b;
-      --text-tertiary: #71717a;
-
-      --border-color: #e2e8f0;
-
-      --brand-black: #000000;
-      --white: #ffffff;
-
-      --success-bg: #f0fdf4;
-      --success-border: #bbf7d0;
-      --success-text: #166534;
-
-      --warning-bg: #fffbeb;
-      --warning-border: #fde68a;
-      --warning-text: #92400e;
-
-      --danger-bg: #fef2f2;
-      --danger-border: #fecaca;
-      --danger-text: #991b1b;
-
-      --font-heading: 'Space Grotesk', sans-serif;
-      --font-body: 'Inter', sans-serif;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: var(--font-body);
-      background-color: var(--bg-secondary);
-      color: var(--text-primary);
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button,
-    input {
-      font: inherit;
-    }
-
-    /* =========================
-       HEADER
-    ========================= */
-
-    header {
-      background-color: rgba(255, 255, 255, 0.95);
-      border-bottom: 1px solid var(--border-color);
-
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-
-      z-index: 100;
-
-      backdrop-filter: blur(8px);
-    }
-
-    .nav-container {
-      max-width: 1000px;
-      margin: 0 auto;
-
-      padding: 0 24px;
-
-      height: 70px;
-
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .back-link {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-
-      font-weight: 600;
-      font-size: 0.95rem;
-
-      color: var(--text-secondary);
-
-      cursor: pointer;
-
-      transition: color 0.2s;
-    }
-
-    .back-link:hover {
-      color: var(--brand-black);
-    }
-
-    .portal-label {
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 1.1rem;
-
-      letter-spacing: -0.5px;
-    }
-
     /* =========================
        HERO
     ========================= */
@@ -218,21 +109,6 @@
 
       position: relative;
       z-index: 10;
-    }
-
-    .panel {
-      background: var(--bg-primary);
-
-      border: 1px solid var(--border-color);
-
-      border-radius: 12px;
-
-      padding: 32px;
-
-      margin-bottom: 24px;
-
-      box-shadow:
-        0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
     .panel-title {
@@ -451,47 +327,6 @@
        BUTTON
     ========================= */
 
-    .submit-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-
-      width: 100%;
-
-      padding: 16px;
-
-      background-color: var(--brand-black);
-      color: var(--white);
-
-      border: none;
-      border-radius: 6px;
-
-      font-family: var(--font-heading);
-
-      font-weight: 600;
-      font-size: 1rem;
-
-      cursor: pointer;
-
-      transition:
-        transform 0.1s,
-        opacity 0.2s;
-    }
-
-    .submit-btn:hover:not(:disabled) {
-      opacity: 0.9;
-    }
-
-    .submit-btn:active:not(:disabled) {
-      transform: scale(0.99);
-    }
-
-    .submit-btn:disabled {
-      opacity: 0.45;
-      cursor: not-allowed;
-    }
-
     /* =========================
        PROGRESS
     ========================= */
@@ -578,34 +413,6 @@
        MESSAGE
     ========================= */
 
-    .message {
-      display: none;
-
-      padding: 14px 16px;
-
-      border-radius: 12px;
-
-      margin-bottom: 20px;
-
-      font-size: 0.88rem;
-    }
-
-    .message.visible {
-      display: block;
-    }
-
-    .message.success {
-      background: var(--success-bg);
-      color: var(--success-text);
-      border: 1px solid var(--success-border);
-    }
-
-    .message.error {
-      background: var(--danger-bg);
-      color: var(--danger-text);
-      border: 1px solid var(--danger-border);
-    }
-
     /* =========================
        LOADING
     ========================= */
@@ -615,33 +422,11 @@
       pointer-events: none;
     }
 
-    .spinner {
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      from {
-        transform: rotate(0deg);
-      }
-
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
     /* =========================
        MOBILE
     ========================= */
 
     @media (max-width: 600px) {
-
-      .nav-container {
-        padding: 0 16px;
-      }
-
-      .portal-label {
-        font-size: 0.9rem;
-      }
 
       .hero {
         padding: 55px 18px 35px;
@@ -653,10 +438,6 @@
 
       .portal-container {
         padding: 0 16px;
-      }
-
-      .panel {
-        padding: 22px;
       }
 
       .upload-zone {
