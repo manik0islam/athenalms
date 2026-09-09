@@ -49,10 +49,29 @@ function escapeHtml(value) {
 /**
  * Sanitize HTML by removing dangerous elements and event handlers.
  * Use this when you need to render rich HTML from untrusted sources.
+ * WARNING: This strips form elements (input, textarea, select, button).
+ * For quiz questions, use sanitizeQuizHtml() instead.
  */
 function sanitizeHtml(html) {
   const doc = new DOMParser().parseFromString(html || '', 'text/html');
   doc.querySelectorAll('script, iframe, object, embed, form, input, textarea, select, button').forEach(el => el.remove());
+  doc.querySelectorAll('*').forEach(el => {
+    for (const attr of [...el.attributes]) {
+      if (attr.name.startsWith('on') || attr.value.trim().toLowerCase().startsWith('javascript:')) {
+        el.removeAttribute(attr.name);
+      }
+    }
+  });
+  return doc.body.innerHTML;
+}
+
+/**
+ * Sanitize HTML for quiz questions — keeps form elements but removes
+ * dangerous tags (script, iframe, object, embed) and event handlers.
+ */
+function sanitizeQuizHtml(html) {
+  const doc = new DOMParser().parseFromString(html || '', 'text/html');
+  doc.querySelectorAll('script, iframe, object, embed').forEach(el => el.remove());
   doc.querySelectorAll('*').forEach(el => {
     for (const attr of [...el.attributes]) {
       if (attr.name.startsWith('on') || attr.value.trim().toLowerCase().startsWith('javascript:')) {

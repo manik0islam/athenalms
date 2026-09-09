@@ -105,6 +105,10 @@
       margin-bottom: 24px;
     }
 
+    .status-card {
+      padding: 18px 20px;
+    }
+
     .status-label {
       color: var(--text-tertiary);
 
@@ -153,6 +157,7 @@
 
     .start-card {
       text-align: center;
+      padding: 50px 30px;
     }
 
     .big-icon {
@@ -206,6 +211,10 @@
       margin-bottom: 24px;
     }
 
+    .best-stat {
+      padding: 20px;
+    }
+
     .best-stat-label {
       display: flex;
 
@@ -250,6 +259,7 @@
 
     .history-card {
       margin-bottom: 24px;
+      padding: 24px;
     }
 
     .history-title {
@@ -294,6 +304,8 @@
 
       border:
         1px solid var(--border-color);
+
+      border-radius: 8px;
 
       background:
         var(--bg-primary);
@@ -404,6 +416,7 @@
       grid-area: question;
 
       overflow: hidden;
+      padding: 0;
     }
 
     .navigator-card {
@@ -802,6 +815,11 @@
     /* =========================================
        RESULT
     ========================================== */
+
+    .result-card {
+      text-align: center;
+      padding: 50px 30px;
+    }
 
     .result-score {
 
@@ -3589,12 +3607,12 @@
       formulation
     ) {
 
-      return sanitizeHtml(formulation.innerHTML);
+      return sanitizeQuizHtml(formulation.innerHTML);
 
     }
 
 
-    return sanitizeHtml(doc.body.innerHTML);
+    return sanitizeQuizHtml(doc.body.innerHTML);
 
   }
 
