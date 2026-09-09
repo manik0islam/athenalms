@@ -12,34 +12,34 @@
    ========================================================= */
 
 :root {
-  /* --- Page background (warm off-white) --- */
-  --bg: #faf9f7;
-  --bg-secondary: #faf9f7;
+  /* --- Page background (warm cream) --- */
+  --bg: #f9f7f2;
+  --bg-secondary: #f9f7f2;
 
   /* --- Card / surface background --- */
   --white: #ffffff;
   --bg-primary: #ffffff;
 
   /* --- Soft / tertiary background --- */
-  --soft: #f0efed;
-  --bg-tertiary: #f0efed;
+  --soft: #eee9e0;
+  --bg-tertiary: #eee9e0;
 
   /* --- Text --- */
-  --text: #09090b;
-  --text-primary: #09090b;
-  --muted: #646b73;
-  --text-secondary: #52525b;
-  --muted-2: #8b929a;
-  --text-tertiary: #71717a;
+  --text: #1a1814;
+  --text-primary: #1a1814;
+  --muted: #6b6359;
+  --text-secondary: #524e47;
+  --muted-2: #8a8379;
+  --text-tertiary: #706a61;
 
   /* --- Borders --- */
-  --border: #dfe3e8;
-  --border-color: #e2e8f0;
-  --border-light: #e9edf1;
+  --border: #ddd5c8;
+  --border-color: #ded6ca;
+  --border-light: #e8e2d6;
 
   /* --- Black (brand) --- */
-  --black: #050505;
-  --brand-black: #000000;
+  --black: #1a1814;
+  --brand-black: #1a1814;
 
   /* --- Semantic colors --- */
   --green: #177245;
@@ -267,7 +267,7 @@ header {
   background: var(--white);
   border: 1px solid var(--border-color);
   border-radius: var(--radius);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(60, 50, 30, 0.1);
 }
 
 
@@ -284,7 +284,7 @@ header {
   border-radius: var(--radius);
   padding: 30px;
   margin-bottom: 25px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(60, 50, 30, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
