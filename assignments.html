@@ -18,7 +18,7 @@
        DESIGN SYSTEM
     ========================================================== */
     :root {
-      --bg: #f7f8fa;
+      --bg: #faf9f7;
       --white: #ffffff;
       --black: #050505;
       --text: #09090b;
@@ -26,13 +26,10 @@
       --muted-2: #8b929a;
       --border: #dfe3e8;
       --border-light: #e9edf1;
-      --soft: #f3f5f7;
-      --red: #c73a32;
-      --green: #177245;
-      --green-bg: #edf8f1;
+      --soft: #f0efed;
       --font-heading: "Space Grotesk", sans-serif;
       --font-body: "Inter", sans-serif;
-      --radius: 11px;
+      --radius: 12px;
     }
 
     /* =========================================================
@@ -58,7 +55,7 @@
     .brand { display: flex; align-items: center; gap: 10px; }
     .brand-mark {
       width: 29px; height: 29px; display: flex; align-items: center; justify-content: center;
-      border-radius: 7px; background: var(--black); color: var(--white);
+      border-radius: 10px; background: var(--black); color: var(--white);
       font-family: var(--font-heading); font-size: 11px; font-weight: 700;
     }
     .brand-name { font-family: var(--font-heading); font-size: 15px; font-weight: 700; }
@@ -83,7 +80,7 @@
     .assignments-hero {
       background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
       padding: 30px; margin-bottom: 25px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px;
     }
     .hero-title h1 { font-family: var(--font-heading); font-size: clamp(2rem, 3vw, 2.6rem); line-height: 1.1; letter-spacing: -1px; margin-bottom: 6px; }
@@ -102,7 +99,7 @@
     ========================================================== */
     .task-card {
       background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       overflow: hidden;
     }
     .task-list { display: flex; flex-direction: column; }
@@ -116,7 +113,7 @@
 
     /* Date Box */
     .date-box {
-      width: 50px; padding: 6px 4px; background: var(--soft); border: 1px solid var(--border); border-radius: 8px; text-align: center; flex-shrink: 0;
+      width: 50px; padding: 6px 4px; background: var(--soft); border: 1px solid var(--border); border-radius: 12px; text-align: center; flex-shrink: 0;
     }
     .date-month { color: var(--muted); font-size: 8px; font-weight: 700; text-transform: uppercase; }
     .date-day { margin-top: 2px; font-family: var(--font-heading); font-size: 18px; font-weight: 700; line-height: 1; }

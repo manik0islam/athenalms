@@ -18,7 +18,7 @@
        DESIGN SYSTEM
     ========================================================== */
     :root {
-      --bg: #f7f8fa;
+      --bg: #faf9f7;
       --white: #ffffff;
       --black: #050505;
       --text: #09090b;
@@ -26,12 +26,12 @@
       --muted-2: #8b929a;
       --border: #dfe3e8;
       --border-light: #e9edf1;
-      --soft: #f3f5f7;
+      --soft: #f0efed;
       --green: #177245;
       --green-bg: #edf8f1;
       --font-heading: "Space Grotesk", sans-serif;
       --font-body: "Inter", sans-serif;
-      --radius: 11px;
+      --radius: 12px;
     }
 
     /* =========================================================
@@ -57,7 +57,7 @@
     .brand { display: flex; align-items: center; gap: 10px; }
     .brand-mark {
       width: 29px; height: 29px; display: flex; align-items: center; justify-content: center;
-      border-radius: 7px; background: var(--black); color: var(--white);
+      border-radius: 10px; background: var(--black); color: var(--white);
       font-family: var(--font-heading); font-size: 11px; font-weight: 700;
     }
     .brand-name { font-family: var(--font-heading); font-size: 15px; font-weight: 700; }
@@ -82,7 +82,7 @@
     .stream-hero {
       background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
       padding: 30px; margin-bottom: 30px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       display: flex; flex-direction: column; gap: 20px;
     }
     
@@ -107,11 +107,11 @@
 
     .timeline-milestone {
       background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.03);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       overflow: hidden; transition: border-color .2s ease, box-shadow .2s ease;
     }
     .timeline-milestone:hover {
-      border-color: #cfd4da; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08), 0 3px 6px rgba(0, 0, 0, 0.04);
+      border-color: #cfd4da; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14);
     }
 
     .milestone-header {
@@ -126,13 +126,13 @@
     /* Stream Activity Row */
     .stream-item {
       display: flex; align-items: center; justify-content: space-between; gap: 15px;
-      padding: 12px 14px; border-radius: 8px; border: 1px solid transparent; transition: all 0.15s ease;
+      padding: 12px 14px; border-radius: 12px; border: 1px solid transparent; transition: all 0.15s ease;
     }
     .stream-item:hover { background: var(--soft); border-color: var(--border-light); }
 
     .stream-item-left { display: flex; align-items: center; gap: 14px; min-width: 0; }
     .stream-item-icon {
-      width: 32px; height: 32px; border-radius: 8px; background: var(--soft); border: 1px solid var(--border);
+      width: 32px; height: 32px; border-radius: 12px; background: var(--soft); border: 1px solid var(--border);
       display: flex; align-items: center; justify-content: center; color: var(--muted); flex-shrink: 0;
     }
     .stream-item-info { min-width: 0; }

@@ -18,7 +18,7 @@
        DESIGN SYSTEM
     ========================================================== */
     :root {
-      --bg: #f7f8fa;
+      --bg: #faf9f7;
       --white: #ffffff;
       --black: #050505;
       --text: #09090b;
@@ -26,10 +26,10 @@
       --muted-2: #8b929a;
       --border: #dfe3e8;
       --border-light: #e9edf1;
-      --soft: #f3f5f7;
+      --soft: #f0efed;
       --font-heading: "Space Grotesk", sans-serif;
       --font-body: "Inter", sans-serif;
-      --radius: 11px;
+      --radius: 12px;
     }
 
     /* =========================================================
@@ -55,7 +55,7 @@
     .brand { display: flex; align-items: center; gap: 10px; }
     .brand-mark {
       width: 29px; height: 29px; display: flex; align-items: center; justify-content: center;
-      border-radius: 7px; background: var(--black); color: var(--white);
+      border-radius: 10px; background: var(--black); color: var(--white);
       font-family: var(--font-heading); font-size: 11px; font-weight: 700;
     }
     .brand-name { font-family: var(--font-heading); font-size: 15px; font-weight: 700; }
@@ -80,7 +80,7 @@
     .resources-hero {
       background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
       padding: 30px; margin-bottom: 25px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px;
     }
     .hero-title h1 { font-family: var(--font-heading); font-size: clamp(2rem, 3vw, 2.6rem); line-height: 1.1; letter-spacing: -1px; margin-bottom: 6px; }
@@ -89,7 +89,7 @@
     /* Search Input */
     .search-wrap { position: relative; width: 300px; }
     .search-input {
-      width: 100%; height: 38px; padding: 0 12px 0 34px; border: 1px solid var(--border); border-radius: 8px;
+      width: 100%; height: 38px; padding: 0 12px 0 34px; border: 1px solid var(--border); border-radius: 12px;
       background: var(--soft); font-size: 12px; color: var(--text); outline: none; transition: border-color .2s;
     }
     .search-input:focus { border-color: var(--black); background: var(--white); }
@@ -100,7 +100,7 @@
     ========================================================== */
     .resource-card {
       background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       overflow: hidden;
     }
     .resource-list { display: flex; flex-direction: column; }
@@ -114,7 +114,7 @@
 
     /* File Icon Box */
     .file-icon-box {
-      width: 40px; height: 40px; background: var(--soft); border: 1px solid var(--border); border-radius: 8px;
+      width: 40px; height: 40px; background: var(--soft); border: 1px solid var(--border); border-radius: 12px;
       display: flex; align-items: center; justify-content: center; color: var(--black); flex-shrink: 0;
     }
 

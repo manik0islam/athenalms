@@ -13,10 +13,12 @@
   <style>
     :root {
       --bg-primary: #ffffff;
-      --bg-secondary: #f4f4f5;
-      --text-primary: #000000;
+      --bg-secondary: #faf9f7;
+      --bg-tertiary: #f0efed;
+      --text-primary: #09090b;
       --text-secondary: #52525b;
-      --border-color: #d4d4d8;
+      --text-tertiary: #71717a;
+      --border-color: #e2e8f0;
       --black: #09090b;
       --white: #ffffff;
       --font-heading: 'Space Grotesk', sans-serif;
@@ -43,11 +45,11 @@
     .register-container {
       background-color: var(--bg-primary);
       border: 1px solid var(--border-color);
-      border-radius: 8px;
+      border-radius: 12px;
       padding: 40px;
       width: 100%;
       max-width: 450px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
     .brand {
@@ -88,7 +90,7 @@
       width: 100%;
       padding: 12px;
       border: 1px solid var(--border-color);
-      border-radius: 4px;
+      border-radius: 6px;
       font-family: var(--font-body);
       font-size: 1rem;
       transition: border-color 0.2s;
@@ -111,7 +113,7 @@
       background-color: var(--black);
       color: var(--white);
       border: none;
-      border-radius: 4px;
+      border-radius: 6px;
       font-family: var(--font-heading);
       font-size: 1rem;
       font-weight: 600;
@@ -133,7 +135,7 @@
       text-align: center;
       display: none;
       padding: 10px;
-      border-radius: 4px;
+      border-radius: 6px;
     }
 
     .feedback-msg.error {

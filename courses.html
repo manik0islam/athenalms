@@ -18,7 +18,7 @@
        DESIGN SYSTEM
     ========================================================== */
     :root {
-      --bg: #f7f8fa;
+      --bg: #faf9f7;
       --white: #ffffff;
       --black: #050505;
       --text: #09090b;
@@ -26,10 +26,10 @@
       --muted-2: #8b929a;
       --border: #dfe3e8;
       --border-light: #e9edf1;
-      --soft: #f3f5f7;
+      --soft: #f0efed;
       --font-heading: "Space Grotesk", sans-serif;
       --font-body: "Inter", sans-serif;
-      --radius: 11px;
+      --radius: 12px;
     }
 
     /* =========================================================
@@ -55,7 +55,7 @@
     .brand { display: flex; align-items: center; gap: 10px; }
     .brand-mark {
       width: 29px; height: 29px; display: flex; align-items: center; justify-content: center;
-      border-radius: 7px; background: var(--black); color: var(--white);
+      border-radius: 10px; background: var(--black); color: var(--white);
       font-family: var(--font-heading); font-size: 11px; font-weight: 700;
     }
     .brand-name { font-family: var(--font-heading); font-size: 15px; font-weight: 700; }
@@ -80,7 +80,7 @@
     .courses-hero {
       background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
       padding: 30px; margin-bottom: 25px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;
     }
     .hero-title h1 { font-family: var(--font-heading); font-size: clamp(2rem, 3vw, 2.6rem); line-height: 1.1; letter-spacing: -1px; margin-bottom: 6px; }
@@ -99,7 +99,7 @@
       font-size: 13px;
       font-family: var(--font-body);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 6px;
       background: var(--bg);
       color: var(--text);
       outline: none;
@@ -134,7 +134,7 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 24px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -143,7 +143,7 @@
     }
     .course-card:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14);
     }
 
     .course-header {
@@ -160,7 +160,7 @@
       font-size: 10px;
       font-weight: 700;
       padding: 3px 8px;
-      border-radius: 4px;
+      border-radius: 6px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
@@ -231,7 +231,7 @@
       background: var(--white);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
     .spinner {
       animation: spin 1s linear infinite;
