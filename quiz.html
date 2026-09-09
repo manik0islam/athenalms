@@ -1975,24 +1975,6 @@
       }
 
 
-      console.log(
-        'ATHENA QUIZ SETTINGS:',
-        {
-          attempts:
-            maxAttempts,
-
-          sumgrades:
-            quizMaxPoints,
-
-          grade:
-            quizMaxGrade,
-
-          timelimit:
-            quizTimeLimit
-        }
-      );
-
-
       return quiz;
 
     }
@@ -4086,21 +4068,6 @@
     );
 
 
-    console.log(
-      'ATHENA PROCESS PAGE:',
-      {
-        from:
-          currentPage,
-
-        to:
-          targetPage,
-
-        data:
-          responseData
-      }
-    );
-
-
     const result =
       await moodleRequest(
         'mod_quiz_process_attempt',
@@ -4577,12 +4544,6 @@
     );
 
 
-    console.log(
-      'ATHENA FINAL SUBMISSION:',
-      params
-    );
-
-
     return await moodleRequest(
       'mod_quiz_process_attempt',
       params
@@ -4763,12 +4724,6 @@
 
       const result =
         await processFinalAttempt();
-
-
-      console.log(
-        'ATHENA SUBMISSION RESPONSE:',
-        result
-      );
 
 
       if (
@@ -5063,9 +5018,6 @@
     setNavigatorDisabled(
       isProcessing
     );
-
-
-    lucide.createIcons();
 
   }
 
@@ -5619,7 +5571,7 @@ setTimeout(() => {
         });
         
         if (data.status) {
-          console.log("✅ Moodle completion updated: Quiz viewed.");
+          // Completion updated silently
         }
       } catch (error) {
         console.error("Silent trigger failed:", error);

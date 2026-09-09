@@ -1207,7 +1207,7 @@ setTimeout(() => {
         const data = await moodleRequest('mod_resource_view_resource', {
           resourceid: rId
         });
-        if (data.status) console.log("✅ Moodle completion updated: Resource viewed.");
+        if (data.status) /* completion updated */
       } catch (error) {
         console.error("Silent trigger failed:", error);
       }

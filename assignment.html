@@ -1253,12 +1253,6 @@
           );
 
 
-        console.log(
-          'Submission status:',
-          data
-        );
-
-
         renderSubmissionStatus(
           data
         );
@@ -1613,9 +1607,6 @@
       submitBtn.disabled =
         false;
 
-
-      lucide.createIcons();
-
     }
 
 
@@ -1907,12 +1898,6 @@
           );
 
 
-        console.log(
-          'Moodle upload response:',
-          uploaded
-        );
-
-
         if (!uploaded.itemid) {
 
           throw new Error(
@@ -2029,7 +2014,7 @@ setTimeout(() => {
         const data = await moodleRequest('mod_assign_view_assign', {
           assignid: aId
         });
-        if (data.status) console.log("✅ Moodle completion updated: Assignment viewed.");
+        if (data.status) {}
       } catch (error) {
         console.error("Silent trigger failed:", error);
       }

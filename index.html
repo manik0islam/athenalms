@@ -2658,10 +2658,7 @@
           );
 
 
-        console.log(
-          `ATHENA COMPLETION RESPONSE ${courseId}:`,
-          result
-        );
+
 
 
         const statuses =
@@ -3273,76 +3270,82 @@
         [];
 
 
-      for (
-        const course
-        of enrolledCourses
-      ) {
+      const results =
+        await Promise.all(
+          enrolledCourses.map(
+            async (course) => {
 
-        try {
+              try {
 
-          const data =
-            await moodleRequest(
-              'mod_assign_get_assignments',
-              {
-                'courseids[0]':
-                  course.id
+                const data =
+                  await moodleRequest(
+                    'mod_assign_get_assignments',
+                    {
+                      'courseids[0]':
+                        course.id
+                    }
+                  );
+
+
+                const courseData =
+                  data?.courses?.find(
+                    item =>
+                      Number(
+                        item.id
+                      ) ===
+                      Number(
+                        course.id
+                      )
+                  );
+
+
+                const list =
+                  Array.isArray(
+                    courseData?.assignments
+                  )
+                    ? courseData.assignments
+                    : [];
+
+
+                return list.map(
+                  assignment => ({
+
+                    ...assignment,
+
+                    courseId:
+                      course.id,
+
+                    courseName:
+                      course.fullname ||
+                      course.shortname ||
+                      'Course'
+
+                  })
+                );
+
               }
-            );
+              catch (
+                error
+              ) {
 
+                console.warn(
+                  `Assignment loading failed for ${course.id}:`,
+                  error
+                );
 
-          const courseData =
-            data?.courses?.find(
-              item =>
-                Number(
-                  item.id
-                ) ===
-                Number(
-                  course.id
-                )
-            );
+                return [];
 
-
-          const list =
-            Array.isArray(
-              courseData?.assignments
-            )
-              ? courseData.assignments
-              : [];
-
-
-          list.forEach(
-            assignment => {
-
-              assignments.push({
-
-                ...assignment,
-
-                courseId:
-                  course.id,
-
-                courseName:
-                  course.fullname ||
-                  course.shortname ||
-                  'Course'
-
-              });
+              }
 
             }
-          );
+          )
+        );
 
-        }
-        catch (
-          error
-        ) {
 
-          console.warn(
-            `Assignment loading failed for ${course.id}:`,
-            error
-          );
-
-        }
-
-      }
+      results.forEach(
+        items =>
+          assignments.push(...items)
+      );
 
 
       assignments =
@@ -3376,64 +3379,70 @@
         [];
 
 
-      for (
-        const course
-        of enrolledCourses
-      ) {
+      const results =
+        await Promise.all(
+          enrolledCourses.map(
+            async (course) => {
 
-        try {
+              try {
 
-          const data =
-            await moodleRequest(
-              'mod_quiz_get_quizzes_by_courses',
-              {
-                'courseids[0]':
-                  course.id
+                const data =
+                  await moodleRequest(
+                    'mod_quiz_get_quizzes_by_courses',
+                    {
+                      'courseids[0]':
+                        course.id
+                    }
+                  );
+
+
+                const list =
+                  Array.isArray(
+                    data?.quizzes
+                  )
+                    ? data.quizzes
+                    : [];
+
+
+                return list.map(
+                  quiz => ({
+
+                    ...quiz,
+
+                    courseId:
+                      course.id,
+
+                    courseName:
+                      course.fullname ||
+                      course.shortname ||
+                      'Course'
+
+                  })
+                );
+
               }
-            );
+              catch (
+                error
+              ) {
 
+                console.warn(
+                  `Quiz loading failed for ${course.id}:`,
+                  error
+                );
 
-          const list =
-            Array.isArray(
-              data?.quizzes
-            )
-              ? data.quizzes
-              : [];
+                return [];
 
-
-          list.forEach(
-            quiz => {
-
-              quizzes.push({
-
-                ...quiz,
-
-                courseId:
-                  course.id,
-
-                courseName:
-                  course.fullname ||
-                  course.shortname ||
-                  'Course'
-
-              });
+              }
 
             }
-          );
+          )
+        );
 
-        }
-        catch (
-          error
-        ) {
 
-          console.warn(
-            `Quiz loading failed for ${course.id}:`,
-            error
-          );
-
-        }
-
-      }
+      results.forEach(
+        items =>
+          quizzes.push(...items)
+      );
 
     }
 
@@ -3882,124 +3891,47 @@
 
   courseGradeMap = new Map();
 
-  for (const course of enrolledCourses) {
-
-    try {
-
-      const data = await moodleRequest(
-        'gradereport_user_get_grade_items',
-        {
-          courseid: course.id,
-          userid: currentUser.userid
-        }
-      );
-
-      console.log(
-        'ATHENA DASHBOARD GRADE RESPONSE:',
-        course.id,
-        data
-      );
-
-
-      const items =
-        Array.isArray(
-          data?.usergrades?.[0]?.gradeitems
-        )
-          ? data.usergrades[0].gradeitems
-          : [];
-
-
-      /*
-       * Moodle's official course total.
-       */
-      const courseItem =
-        items.find(
-          item =>
-            item.itemtype === 'course'
+  const results = await Promise.all(
+    enrolledCourses.map(async (course) => {
+      try {
+        const data = await moodleRequest(
+          'gradereport_user_get_grade_items',
+          {
+            courseid: course.id,
+            userid: currentUser.userid
+          }
         );
 
+        const items =
+          Array.isArray(data?.usergrades?.[0]?.gradeitems)
+            ? data.usergrades[0].gradeitems
+            : [];
 
-      let coursePercentage = null;
+        const courseItem = items.find(item => item.itemtype === 'course');
+        let coursePercentage = null;
+        if (courseItem) {
+          coursePercentage = calculateGradePercentage(courseItem);
+        }
 
+        const gradedItems = items.filter(
+          item => item.itemtype !== 'course' && calculateGradePercentage(item) !== null
+        );
 
-      /*
-       * Calculate the course percentage.
-       */
-      if (courseItem) {
-
-        coursePercentage =
-          calculateGradePercentage(
-            courseItem
-          );
-
+        return {
+          courseId: Number(course.id),
+          data: { course, percentage: coursePercentage, gradedItems, allItems: items }
+        };
+      } catch (error) {
+        console.warn(`Grade loading failed for course ${course.id}:`, error);
+        return {
+          courseId: Number(course.id),
+          data: { course, percentage: null, gradedItems: [], allItems: [] }
+        };
       }
+    })
+  );
 
-
-      /*
-       * Find individual graded assessments.
-       * The course total itself is excluded.
-       */
-      const gradedItems =
-        items.filter(
-          item =>
-            item.itemtype !== 'course' &&
-            calculateGradePercentage(item) !== null
-        );
-
-
-      /*
-       * DEBUG LOG
-       *
-       * IMPORTANT:
-       * This is AFTER coursePercentage exists.
-       */
-      console.log(
-        'ATHENA PARSED COURSE:',
-        course.fullname,
-        coursePercentage
-      );
-
-
-      console.log(
-        'ATHENA GRADED ASSESSMENTS:',
-        course.fullname,
-        gradedItems.length
-      );
-
-
-      courseGradeMap.set(
-        Number(course.id),
-        {
-          course: course,
-          percentage: coursePercentage,
-          gradedItems: gradedItems,
-          allItems: items
-        }
-      );
-
-    }
-    catch (error) {
-
-      console.warn(
-        `Grade loading failed for course ${course.id}:`,
-        error
-      );
-
-
-      courseGradeMap.set(
-        Number(course.id),
-        {
-          course: course,
-          percentage: null,
-          gradedItems: [],
-          allItems: []
-        }
-      );
-
-    }
-
-  }
-
+  results.forEach(r => courseGradeMap.set(r.courseId, r.data));
 
   renderPerformance();
 
@@ -4850,9 +4782,6 @@
 
 
         await loadRecentActivity();
-
-
-        lucide.createIcons();
 
       }
       catch (
