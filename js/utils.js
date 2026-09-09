@@ -10,6 +10,16 @@
   const saved = localStorage.getItem('athena_theme');
   if (saved === 'dark' || saved === 'light') {
     document.documentElement.setAttribute('data-theme', saved);
+  } else {
+    // Follow system preference
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+    // Listen for system changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (!localStorage.getItem('athena_theme')) {
+        document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+      }
+    });
   }
 })();
 

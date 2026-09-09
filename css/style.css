@@ -74,144 +74,289 @@
    DARK MODE — warm dark palette
    Activated by: prefers-color-scheme: dark (system default)
                  OR data-theme="dark" on <html> (manual toggle)
+   Surface hierarchy: bg → surface → card → elevated
    ========================================================= */
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    /* --- Page background --- */
-    --bg: #1c1917;
-    --bg-secondary: #1c1917;
-
-    /* --- Card / surface --- */
-    --white: #292524;
-    --bg-primary: #292524;
-
-    /* --- Soft / tertiary --- */
-    --soft: #33302d;
-    --bg-tertiary: #33302d;
-
-    /* --- Text --- */
-    --text: #f5f0eb;
-    --text-primary: #f5f0eb;
-    --muted: #a8a09a;
-    --text-secondary: #c4bdb6;
-    --muted-2: #8a8379;
-    --text-tertiary: #9e968e;
-
-    /* --- Borders --- */
-    --border: #44403c;
-    --border-color: #3d3a36;
-    --border-light: #353230;
-
-    /* --- Black (brand) --- */
-    --black: #f5f0eb;
-    --brand-black: #f5f0eb;
-
-    /* --- Semantic colors --- */
-    --success: #4ade80;
-    --success-bg: #14352a;
-    --success-border: #166534;
-    --success-text: #4ade80;
-
-    --warning: #fbbf24;
-    --warning-bg: #3b2f10;
-    --warning-border: #854d0e;
-    --warning-text: #fbbf24;
-
-    --danger: #f87171;
-    --danger-bg: #3b1515;
-    --danger-border: #991b1b;
-    --danger-text: #f87171;
-
-    --green: #4ade80;
-    --green-bg: #14352a;
-    --red: #f87171;
-  }
-
-  .topbar,
-  header {
-    background: rgba(28, 25, 23, 0.95);
-    border-bottom-color: var(--border);
-  }
-
-  .brand-mark {
-    background: var(--white);
-    color: var(--bg);
-  }
-
-  .form-input {
-    background: var(--bg);
-  }
-
-  .form-input:focus {
-    background: var(--soft);
-  }
-
-  img {
-    opacity: 0.92;
-  }
-}
-
-/* Manual dark mode override (user toggled explicitly) */
+html[data-theme="dark"],
 html[data-theme="dark"] {
-  --bg: #1c1917;
-  --bg-secondary: #1c1917;
-  --white: #292524;
-  --bg-primary: #292524;
-  --soft: #33302d;
-  --bg-tertiary: #33302d;
-  --text: #f5f0eb;
-  --text-primary: #f5f0eb;
-  --muted: #a8a09a;
-  --text-secondary: #c4bdb6;
-  --muted-2: #8a8379;
-  --text-tertiary: #9e968e;
-  --border: #44403c;
-  --border-color: #3d3a36;
-  --border-light: #353230;
-  --black: #f5f0eb;
-  --brand-black: #f5f0eb;
-  --success: #4ade80;
-  --success-bg: #14352a;
-  --success-border: #166534;
-  --success-text: #4ade80;
-  --warning: #fbbf24;
-  --warning-bg: #3b2f10;
-  --warning-border: #854d0e;
-  --warning-text: #fbbf24;
-  --danger: #f87171;
-  --danger-bg: #3b1515;
-  --danger-border: #991b1b;
-  --danger-text: #f87171;
-  --green: #4ade80;
-  --green-bg: #14352a;
-  --red: #f87171;
+  /* --- Page background (deep warm charcoal) --- */
+  --bg: #171412;
+  --bg-secondary: #171412;
+
+  /* --- Card / surface (elevated one step) --- */
+  --white: #211e1b;
+  --bg-primary: #211e1b;
+
+  /* --- Soft / tertiary (hover states, subtle fills) --- */
+  --soft: #2a2623;
+  --bg-tertiary: #2a2623;
+
+  /* --- Elevated surfaces (tooltips, dropdowns, popovers) --- */
+  --elevated: #33302d;
+
+  /* --- Text --- */
+  --text: #e8e2dc;
+  --text-primary: #e8e2dc;
+  --muted: #9e968e;
+  --text-secondary: #b5ada5;
+  --muted-2: #7a736b;
+  --text-tertiary: #877f77;
+
+  /* --- Borders (barely visible, warm) --- */
+  --border: #2e2a27;
+  --border-color: #2e2a27;
+  --border-light: #262220;
+
+  /* --- Brand / interactive --- */
+  --black: #e8e2dc;
+  --brand-black: #e8e2dc;
+
+  /* --- Semantic colors (muted for dark bg) --- */
+  --success: #6ee7a0;
+  --success-bg: #0f2a1e;
+  --success-border: #1a4d33;
+  --success-text: #6ee7a0;
+
+  --warning: #fcd564;
+  --warning-bg: #2a2208;
+  --warning-border: #5c4a10;
+  --warning-text: #fcd564;
+
+  --danger: #fca5a5;
+  --danger-bg: #2d1212;
+  --danger-border: #5c1f1f;
+  --danger-text: #fca5a5;
+
+  --green: #6ee7a0;
+  --green-bg: #0f2a1e;
+  --red: #fca5a5;
+
+  /* --- Shadows (stronger for dark, warm tint) --- */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.4);
 }
 
+/* Header: glassmorphism on dark */
 html[data-theme="dark"] .topbar,
 html[data-theme="dark"] header {
-  background: rgba(28, 25, 23, 0.95);
+  background: rgba(23, 20, 18, 0.92);
+  backdrop-filter: blur(16px);
   border-bottom-color: var(--border);
 }
 
+/* Brand mark: inverted */
 html[data-theme="dark"] .brand-mark {
-  background: var(--white);
-  color: var(--bg);
+  background: var(--elevated);
+  color: var(--text);
 }
 
+/* Cards: subtle elevation difference */
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .panel,
+html[data-theme="dark"] .moodle-block,
+html[data-theme="dark"] .post-card,
+html[data-theme="dark"] .viewer-card,
+html[data-theme="dark"] .task-card,
+html[data-theme="dark"] .resource-card,
+html[data-theme="dark"] .course-card,
+html[data-theme="dark"] .summary-card,
+html[data-theme="dark"] .status-card,
+html[data-theme="dark"] .best-stat,
+html[data-theme="dark"] .start-card,
+html[data-theme="dark"] .history-card,
+html[data-theme="dark"] .result-card,
+html[data-theme="dark"] .question-card,
+html[data-theme="dark"] .navigator-card,
+html[data-theme="dark"] .state-card {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+html[data-theme="dark"] .card:hover,
+html[data-theme="dark"] .panel:hover,
+html[data-theme="dark"] .moodle-block:hover,
+html[data-theme="dark"] .resource-card:hover,
+html[data-theme="dark"] .course-card:hover,
+html[data-theme="dark"] .summary-card:hover,
+html[data-theme="dark"] .start-card:hover,
+html[data-theme="dark"] .history-card:hover,
+html[data-theme="dark"] .result-card:hover,
+html[data-theme="dark"] .question-card:hover,
+html[data-theme="dark"] .navigator-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Hero cards */
+html[data-theme="dark"] .courses-hero,
+html[data-theme="dark"] .assignments-hero,
+html[data-theme="dark"] .resources-hero {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Forms */
 html[data-theme="dark"] .form-input {
   background: var(--bg);
+  border-color: var(--border);
 }
 
 html[data-theme="dark"] .form-input:focus {
+  background: var(--bg);
+  border-color: var(--elevated);
+}
+
+/* Buttons */
+html[data-theme="dark"] .button {
+  background: var(--white);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+html[data-theme="dark"] .button:hover {
   background: var(--soft);
 }
 
-html[data-theme="dark"] img {
-  opacity: 0.92;
+html[data-theme="dark"] .button.primary,
+html[data-theme="dark"] .submit-btn {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
 }
 
-/* Manual light mode override (user toggled explicitly in light system) */
+/* Filter tabs */
+html[data-theme="dark"] .filter-tab {
+  background: var(--white);
+  border-color: var(--border);
+  color: var(--muted);
+}
+
+html[data-theme="dark"] .filter-tab:hover {
+  border-color: var(--elevated);
+}
+
+html[data-theme="dark"] .filter-tab.active {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
+}
+
+/* List items */
+html[data-theme="dark"] .task-item,
+html[data-theme="dark"] .resource-item,
+html[data-theme="dark"] .stream-item {
+  border-bottom-color: var(--border-light);
+}
+
+html[data-theme="dark"] .task-item:hover,
+html[data-theme="dark"] .resource-item:hover {
+  background: var(--soft);
+}
+
+/* Action buttons */
+html[data-theme="dark"] .task-action,
+html[data-theme="dark"] .resource-action {
+  background: var(--soft);
+  border-color: var(--border);
+  color: var(--muted);
+}
+
+html[data-theme="dark"] .task-item:hover .task-action,
+html[data-theme="dark"] .resource-item:hover .resource-action {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
+}
+
+/* Progress bars */
+html[data-theme="dark"] .progress-track {
+  background: var(--soft);
+}
+
+html[data-theme="dark"] .progress-fill {
+  background: var(--text);
+}
+
+/* Date boxes */
+html[data-theme="dark"] .date-box {
+  background: var(--soft);
+  border-color: var(--border);
+}
+
+/* Toast notifications */
+html[data-theme="dark"] .toast {
+  background: var(--white);
+  border-color: var(--border);
+  color: var(--text);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* Images: slight dim for comfort */
+html[data-theme="dark"] img {
+  opacity: 0.88;
+  transition: opacity 0.3s;
+}
+
+html[data-theme="dark"] img:hover {
+  opacity: 1;
+}
+
+/* Status badges: softer on dark */
+html[data-theme="dark"] .status.pass {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+html[data-theme="dark"] .status.fail {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+/* Skeleton loading */
+html[data-theme="dark"] .skeleton {
+  background: linear-gradient(90deg, var(--soft) 25%, var(--elevated) 37%, var(--soft) 63%);
+  background-size: 800px 100%;
+}
+
+/* Theme toggle */
+html[data-theme="dark"] .theme-toggle {
+  background: var(--soft);
+  border-color: var(--border);
+  color: var(--muted);
+}
+
+html[data-theme="dark"] .theme-toggle:hover {
+  background: var(--elevated);
+  color: var(--text);
+  border-color: var(--elevated);
+}
+
+/* Scrollbar */
+html[data-theme="dark"]::-webkit-scrollbar {
+  width: 8px;
+}
+
+html[data-theme="dark"]::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+html[data-theme="dark"]::-webkit-scrollbar-thumb {
+  background: var(--elevated);
+  border-radius: 4px;
+}
+
+html[data-theme="dark"]::-webkit-scrollbar-thumb:hover {
+  background: var(--border);
+}
+
+/* Selection */
+html[data-theme="dark"] ::selection {
+  background: rgba(232, 226, 220, 0.2);
+}
+
+/* Skip link */
+html[data-theme="dark"] .skip-link {
+  background: var(--text);
+  color: var(--bg);
+}
 html[data-theme="light"] {
   --bg: #f9f7f2;
   --bg-secondary: #f9f7f2;
@@ -503,7 +648,7 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: block; }
   background: var(--white);
   border: 1px solid var(--border-color);
   border-radius: var(--radius);
-  box-shadow: 0 4px 12px rgba(60, 50, 30, 0.1);
+  box-shadow: var(--shadow-sm, 0 4px 12px rgba(60, 50, 30, 0.1));
 }
 
 
@@ -520,7 +665,7 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: block; }
   border-radius: var(--radius);
   padding: 30px;
   margin-bottom: 25px;
-  box-shadow: 0 4px 12px rgba(60, 50, 30, 0.1);
+  box-shadow: var(--shadow-sm, 0 4px 12px rgba(60, 50, 30, 0.1));
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -813,7 +958,7 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: block; }
   .question-card:hover,
   .navigator-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 32px rgba(60, 50, 30, 0.14);
+    box-shadow: var(--shadow-lg, 0 12px 32px rgba(60, 50, 30, 0.14));
   }
 }
 
